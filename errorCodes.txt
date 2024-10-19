@@ -1,0 +1,25 @@
+** last edit: 19.10.2024 **
+
+File to sum up all error codes for project
+
+syntax = error - error code
+
+missing function MAIN                                                       - 3
+MAIN with PARAMETER or RETURN type    (has to be void)                      - 4
+using return "expression" in MAIN (can use just return;)                    - 6
+nondefined FUNCTION                                                         - 3
+function with defined return type without RETURN or without retrun value    - 6
+redefinition of variable in same or child block( body - {} )                - 5
+undefined VARIABLE                                                          - 3
+unused defined VARIABLE                                                     - 9
+missing expression in variable definition                                   syntactic error(idk code)
+cant identify data type out of expression during definition (from NULL)     -8
+incompatible type of expression in variable definition                      -7
+ncompatible type of expression in Variable initialization                   -7
+if initilizing STRING without using  "ifj.string"                           -7
+if output of expression in IF statement is not true or false                -7
+wrong type/number of function parameter during calling                      -4
+assignment of void function to variable                                     -7
+calling function without assignment to wariable                             -4
+using RETURN in VOID function with something to return                      -6 (can call void with just return;)
+wrong DATATYPE of return in function                                        -4
