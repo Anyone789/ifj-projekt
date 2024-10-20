@@ -1,4 +1,5 @@
-** last edit: 19.10.2024 **
+** last edit: 20.10.2024 **
+** till page: 14 **
 
 File to sum up all error codes for project
 
@@ -23,3 +24,7 @@ assignment of void function to variable                                     -7
 calling function without assignment to wariable                             -4
 using RETURN in VOID function with something to return                      -6 (can call void with just return;)
 wrong DATATYPE of return in function                                        -4
+comparing two operadns without knowing their both values   (with ==)        -7
+comparing two values, that cant be implicitly converted to same DATATYPE    -7
+all DATATYPE incompatibilities in expressions                               -7
+using wrong type of TERM in parameters of built in functions                -4
