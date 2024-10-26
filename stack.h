@@ -9,7 +9,7 @@
 typedef struct stackItemStructure
 {
     int *value;
-    stackItemStructure *next; 
+    struct stackItemStructure *next; 
 }TStackItem;
 
 // struktura zasobinka
@@ -17,6 +17,7 @@ typedef struct stackItemStructure
 typedef struct stackStructure
 {
    TStackItem *stackTop;
+   int stackSize;
 }TStack;
 
 // deklaracia funkcii
