@@ -1,4 +1,4 @@
-#include <stack.h>
+#include "stack.h"
 
 // inicializacia zasobnika
 void stackInit(TStack *stack){
@@ -28,7 +28,7 @@ void stackPop(TStack *stack){
     }
 }
 // ziskanie hodnoty vrcholu zasobnika
-int stackTop(TStack *stack){
+int *stackTop(TStack *stack){
     return (stack->stackTop->value);
 }
 // odstranenie prvkov zo zasobnika

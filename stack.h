@@ -24,6 +24,6 @@ typedef struct stackStructure
 void stackInit(TStack *stack);
 void stackPush(TStack *stack, int *value);
 void stackPop(TStack *stack);
-int stackTop(TStack *stack);
+int *stackTop(TStack *stack);
 bool stackIsEmpty(TStack *stack);
 void stackDispose(TStack *stack);
