@@ -1,7 +1,10 @@
 // scanner.h
 // Interface for the scanner
-// Author(s): Václav Bergman
-// Last Edited: 18.10.2024
+// Author(s): VÃ¡clav Bergman
+// Last Edited: 27.10.2024
+
+#ifndef SCANNER_H
+#define SCANNER_H
 
 
 // Enum of token types
@@ -25,7 +28,7 @@ typedef union
 } TOKEN_ATTRIBUTE;
 
 // The token
-typedef struct token_struct
+typedef struct tokenStruct
 {
     TOKEN_TYPE type;
     TOKEN_ATTRIBUTE atribute;
@@ -37,3 +40,5 @@ const char* keywords[]
     = { "const", "else", "fn", "if", "i32", "f64", 
         "null", "pub", "return","u8", "[]u8", "var",
         "void", "while" };
+
+#endif
