@@ -23,7 +23,7 @@ typedef union
 {
     int i;
     float f;
-    char *str;
+    DSTRING *dStr;
     // ptr *kwrd - Pointer to a keyword in keyword table?
 } TOKEN_ATTRIBUTE;
 
