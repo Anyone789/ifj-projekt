@@ -1,0 +1,25 @@
+// errorCodes.h
+// Symbolic constats representing error codes
+// Author(s): Václav Bergman
+// Last Edited: 28.10.2024
+
+#ifndef ERRORCODES_H
+#define ERRORCODES_H
+
+#define LEXICAL_ERROR 1
+#define SYNTAX_ERROR 2
+#define UNDEFINED_VARIABLE_ERROR 3
+#define WRONG_ARGUMENTS_ERROR 4
+#define WRONG_RETURN_VAL_ERROR 4
+#define RETURN_VAL_DISPOSAL_ERROR 4
+#define REDEFINITION_ERROR 5
+#define CONST_ASIGNMENT_ERROR 5
+#define INCORRECT_RETURN_ERROR 6
+#define INCOMPATIBLE_TYPE_ERROR 7
+#define UNDEFINED_TYPE_ERROR 8
+#define UNUSED_VARIABLE_ERROR 9
+#define NON_MODIFIABLE_VAR_ERROR 9
+#define GENERIC_SEMANTIC_ERROR 10
+#define INTERNAL_ERROR 99
+
+#endif
