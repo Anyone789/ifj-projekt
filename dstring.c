@@ -1,7 +1,7 @@
 // dstring.c
 // Module for manipulating with strings dynamically
 // Author(s): Václav Bergman
-// Last Edited: 28.10.2024
+// Last Edited: 29.10.2024
 
 #include <string.h>
 #include <stdlib.h>
@@ -15,14 +15,14 @@ DSTRING *dStringCreate()
     DSTRING *dStr = malloc(sizeof(DSTRING));
     if (dStr == NULL)
     {
-        fprint(stderr, "Dynamic string allocation error");
+        fprintf(stderr, "Dynamic string allocation error");
         exit(INTERNAL_ERROR);
     }
 
     dStr->str = malloc(DSTRING_BASE_LEN);
     if (dStr->str == NULL)
     {
-        fprint(stderr, "Dynamic string allocation error");
+        fprintf(stderr, "Dynamic string allocation error");
         exit(INTERNAL_ERROR);
     }
 
@@ -57,7 +57,7 @@ void dStringAddChar(DSTRING *dStr, char c)
         dStr->str = realloc(dStr->str, dStr->length + DSTRING_BASE_LEN);
         if (dStr == NULL)
         {
-            fprint(stderr, "Dynamic string reallocation error");
+            fprintf(stderr, "Dynamic string reallocation error");
             exit(INTERNAL_ERROR);
         }
         
@@ -78,7 +78,7 @@ void dStringCopy(DSTRING *dest, DSTRING *src)
       dest->str = malloc(src->allocSize);
       if (dest->str == NULL)
       {
-        fprint(stderr, "Dynamic string allocation error");
+        fprintf(stderr, "Dynamic string allocation error");
         exit(INTERNAL_ERROR);
       }
    }
