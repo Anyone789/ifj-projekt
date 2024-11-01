@@ -1,8 +1,7 @@
 // dstring.h
 // Module for manipulating with strings dynamically
-// Author(s): Václav Bergman
-// Last Edited: 28.10.2024
-
+// Author(s): Václav Bergman, Tomáš Hrbáč
+// Last Edited: 31.10.2024
 
 #ifndef DSTRING_H
 #define DSTRING_H
@@ -30,10 +29,14 @@ void dStringCopy(DSTRING *dest, DSTRING *src);
 
 int dStringCmp(DSTRING *dStr1, DSTRING *dStr2);
 
-int dStringCmpConst(DSTRING *dStr, char *cStr);
+int dStringCmpConst(DSTRING *dStr, const char *cStr);
 
 char *dStringGetStr(DSTRING *dStr);
 
 int dStringGetLength(DSTRING *dStr);
+
+int dStringToInt(DSTRING *dStr);
+
+double dStringToDouble(DSTRING *dStr);
 
 #endif

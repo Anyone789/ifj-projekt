@@ -1,7 +1,7 @@
 // dstring.c
 // Module for manipulating with strings dynamically
-// Author(s): Václav Bergman
-// Last Edited: 29.10.2024
+// Author(s): Václav Bergman, Tomáš Hrbáč
+// Last Edited: 31.10.2024
 
 #include <string.h>
 #include <stdlib.h>
@@ -94,7 +94,7 @@ int dStringCmp(DSTRING *dStr1, DSTRING *dStr2)
 }
 
 // Compares a dynamic string with a constant string
-int dStringCmpConst(DSTRING *dStr, char *cStr)
+int dStringCmpConst(DSTRING *dStr, const char *cStr)
 {
    return strcmp(dStr->str, cStr);
 }
@@ -109,4 +109,16 @@ char *dStringGetStr(DSTRING *dStr)
 int dStringGetLength(DSTRING *dStr)
 {
    return dStr->length;
+}
+
+// Converts dynamic string to int
+int dStringToInt(DSTRING *dStr)
+{
+    return atoi(dStr->str);
+}
+
+// Converts dynamic string to double
+double dStringToDouble(DSTRING *dStr)
+{
+    return atof(dStr->str);
 }
