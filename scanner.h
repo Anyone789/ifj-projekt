@@ -46,7 +46,7 @@ typedef enum attributeType
 typedef union tokenAtribute
 {
     int i;
-    float f;
+    double f;
     DSTRING *dStr;
 } TOKEN_ATTRIBUTE;
 
