@@ -10,4 +10,4 @@ Autoři:
 - Tomáš Hrbáč xhrbact00@stud.fit.vut.cz
 - Václav Bergman xbergmv00@stud.fit.vut.cz
 - Marián Šuľa xsulama00@stud.fit.vut.cz
-- Samuel Kumdrát xkundrs00@stud.fit.vut.cz
+- Samuel Kundrát xkundrs00@stud.fit.vut.cz
