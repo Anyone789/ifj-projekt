@@ -7,7 +7,7 @@ moderní a silně typovaný jazyk navržený jako alternativa jazyka C, jehož c
 robustního, znovupoužitelného, udržovatelného a bezpečného software.
 
 Autoři:
-Tomáš Hrbáč xhrbact00@stud.fit.vut.cz
-Václav Bergman xbergmv00@stud.fit.vut.cz
-Marián Šuľa xsulama00@stud.fit.vut.cz
-Samuel Kumdrát xkundrs00@stud.fit.vut.cz
+- Tomáš Hrbáč xhrbact00@stud.fit.vut.cz
+- Václav Bergman xbergmv00@stud.fit.vut.cz
+- Marián Šuľa xsulama00@stud.fit.vut.cz
+- Samuel Kumdrát xkundrs00@stud.fit.vut.cz
