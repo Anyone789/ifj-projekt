@@ -158,7 +158,7 @@ TOKEN *getToken()
                 else if (c == '<')
                 {
                     state = LESS_THAN;
-                    token->type = T_LE;
+                    token->type = T_LT;
                 }
                 else if (c == '>')
                 {
