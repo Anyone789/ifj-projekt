@@ -1,16 +1,25 @@
-#include <stdio.h>
+// errorCodes.h
+// Symbolic constats representing error codes
+// Author(s): Václav Bergman
+// Last Edited: 28.10.2024
 
-typedef enum errorCodes{
-    ErrorCodeOk = 0, // preklad prebeho bez chyby
-    ErrorCodeLex = 1, // chyba programu v ramci lexikalnej analyzy
-    ErrorCodeSyn = 2, // chyba programu v ramci syntaktickej analyzy
-    ErrorCodeSemUndf = 3, // chyba programu v ramci semantickej analyzy, nedefinovana funkcia/premenna
-    ErrorCodeSemParam = 4, // chyba programu v ramci semantickej analyzy, nespravny pocet/typ parametru pri volani funkcie
-    ErrorCodeSemRedef = 5, // chyba programu v ramci semantickej analyzy, redefinicia premennej/funkcie
-    ErrorCodeSemRetExp = 6, // chyba programu v ramci semantickej analyzy, chybajuci/nadbytocny vyraz v navrate funkcie
-    ErrorCodeSemComp = 7, // chyba programu v ramci semantickej analyzy, nekompatibilny typ vyrazu
-    ErrorCodeSemNoType = 8, // chyba programu v ramci semantickej analyzy, nie je uvedeny/neda sa urcit typ premennej
-    ErrorCodeSemUnuserVar = 9, // chyba programu v ramci semantickej analyzy, nevyuzita premenna
-    ErrorCodeSemOther = 10, // chyba programu v ramci semantickej analyzy, ostatne chyby
-    ErrorCodeInternal = 99, // chyba programu v ramci prekladaca, interne chyby
-} ErrorCodes;
+#ifndef ERRORCODES_H
+#define ERRORCODES_H
+
+#define LEXICAL_ERROR 1
+#define SYNTAX_ERROR 2
+#define UNDEFINED_VARIABLE_ERROR 3
+#define WRONG_ARGUMENTS_ERROR 4
+#define WRONG_RETURN_VAL_ERROR 4
+#define RETURN_VAL_DISPOSAL_ERROR 4
+#define REDEFINITION_ERROR 5
+#define CONST_ASIGNMENT_ERROR 5
+#define INCORRECT_RETURN_ERROR 6
+#define INCOMPATIBLE_TYPE_ERROR 7
+#define UNDEFINED_TYPE_ERROR 8
+#define UNUSED_VARIABLE_ERROR 9
+#define NON_MODIFIABLE_VAR_ERROR 9
+#define GENERIC_SEMANTIC_ERROR 10
+#define INTERNAL_ERROR 99
+
+#endif

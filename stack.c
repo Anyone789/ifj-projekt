@@ -3,13 +3,14 @@
 // inicializacia zasobnika
 void stackInit(TStack *stack){
     stack->stackTop = NULL;
+    stack->stackSize = 0;
 }
 // zistenie prazdneho zasobnika
 bool stackIsEmpty(TStack *stack){
     return (stack->stackTop == NULL);
 }
 // vlozenie prvku do zasobnika
-void stackPush(TStack *stack, int *value){
+void stackPush(TStack *stack, void *value){
     TStackItem *newItem = (TStackItem *)malloc(sizeof(struct stackItemStructure));
     newItem->value = value;
     newItem->next = stack->stackTop;

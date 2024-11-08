@@ -1,0 +1,9 @@
+f + f / f + f;
+
+$E+E 
+
+stackPush(=);
+if (analyzeExp(stack, token)!= 0)
+        {
+            return SYNTAX_ERROR;
+        }

@@ -1,4 +1,6 @@
 // inicializacia zasobnika
+#ifndef STACK_H
+#define STACK_H
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -8,7 +10,7 @@
 
 typedef struct stackItemStructure
 {
-    int *value;
+    void *value;
     struct stackItemStructure *next; 
 }TStackItem;
 
@@ -22,8 +24,9 @@ typedef struct stackStructure
 
 // deklaracia funkcii
 void stackInit(TStack *stack);
-void stackPush(TStack *stack, int *value);
+void stackPush(TStack *stack, void *value);
 void stackPop(TStack *stack);
 int *stackTop(TStack *stack);
 bool stackIsEmpty(TStack *stack);
 void stackDispose(TStack *stack);
+#endif
