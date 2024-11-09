@@ -1,9 +1,1 @@
-5 + f / f + 5;
-
-$E+E 
-
-stackPush(=);
-if (analyzeExp(stack, token)!= 0)
-        {
-            return SYNTAX_ERROR;
-        }
+(f + f );

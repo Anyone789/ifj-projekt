@@ -1,6 +1,9 @@
 #include "expression.h"
 //vyriesit zatvorky
 int dolarValue = tableDollar;
+// nastav premennu inFce na true ked sme vo while alebo v if inak bude false
+//bool inFce = false;
+bool lBracketInStack = false;
 // na oddelenie v stacku
 // v scanner treba urobit tak aby ked uz ma zistene ze aky to je typ, tak konci
 int sep = 44;
@@ -85,11 +88,7 @@ int analyzeExp(TStack *expStack, TOKEN *token)
         printf("\nstack size:%d\n", expStack->stackSize);
 
         sign = getSign(expStack);
-        if (token->type == 14)
-        {
-            token->type = dolarValue;
-            sign = '>';
-        }
+
         if (sign == '<')
         {
             printf("<");
@@ -203,7 +202,9 @@ int analyzeExp(TStack *expStack, TOKEN *token)
                 stackPop(expStack);
                 stackPop(expStack);
                 break;
-
+            case tableLeftPar:
+                return SYNTAX_ERROR;
+                break;
             }
             
         }
@@ -278,8 +279,13 @@ int convertToIndex(int value)
     case T_GE:
         return tableGreatEqual;
     case T_L_BRACKET:
+        lBracketInStack = true;
         return tableLeftPar;
     case T_R_BRACKET:
+        // treba odkomentovat
+        // if(inFce == true && lBracketInStack == false){
+        //     return tableDollar;
+        // }
         return tableRightPar;
     case T_SEMICOL:
         return tableDollar;
