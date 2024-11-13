@@ -98,8 +98,9 @@ int analyzeExp(TStack *expStack, TOKEN *token)
                 newExp->terminal = true;
                 newExp->type = convertToIndex(nextToken->type);
                 newExp->dataType = nextToken->current_attribute;
-                printf("\n%d\n", nextToken->current_attribute);
+                
             }
+            
             stackPush(expStack, newExp);
             nextToken = getToken();
             if (nextToken->type == 1)
