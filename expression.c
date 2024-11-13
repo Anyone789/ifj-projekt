@@ -1,8 +1,8 @@
 #include "expression.h"
-//vyriesit zatvorky
+// vyriesit zatvorky
 int dolarValue = tableDollar;
 // nastav premennu inFce na true ked sme vo while alebo v if inak bude false
-//bool inFce = false;
+// bool inFce = false;
 bool lBracketInStack = false;
 // na oddelenie v stacku
 // v scanner treba urobit tak aby ked uz ma zistene ze aky to je typ, tak konci
@@ -70,7 +70,7 @@ int binCheck(TStack *expStack, int operator)
 
     return 0;
 }
-
+// jedina funkcia ktoru bude volat parser ked bude
 int analyzeExp(TStack *expStack, TOKEN *token)
 {
     // ked doskusam, tak odkomentovat
@@ -78,6 +78,7 @@ int analyzeExp(TStack *expStack, TOKEN *token)
     printf("%d", ((ElmExp *)(expStack->stackTop->value))->type);
     nextToken = token;
     nextToken = getToken();
+    // pridat do parseru ked budes volat token
     if (nextToken->type == 1)
     {
         return LEXICAL_ERROR;
@@ -193,7 +194,7 @@ int analyzeExp(TStack *expStack, TOKEN *token)
                 stackPop(expStack);
                 stackPop(expStack);
                 break;
-            
+
             case tableGreatEqual:
                 if (binCheck(expStack, tableGreatEqual) != 0)
                 {
@@ -206,7 +207,6 @@ int analyzeExp(TStack *expStack, TOKEN *token)
                 return SYNTAX_ERROR;
                 break;
             }
-            
         }
         else if (sign == '=')
         {
@@ -217,7 +217,7 @@ int analyzeExp(TStack *expStack, TOKEN *token)
             stackPush(expStack, newExp);
             nextToken = getToken();
             printf("=");
-            
+
             // redukcia zatvoriek
         }
         else if (sign == '#')
@@ -320,6 +320,6 @@ int main(int argc, char **argv)
         int i = analyzeExp(&stack, token);
         printf("%d", i);
     }
-    
+
     return 0;
 }
