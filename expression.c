@@ -79,6 +79,7 @@ int analyzeExp(TStack *expStack, TOKEN *token)
     nextToken = token;
     nextToken = getToken();
     // pridat do parseru ked budes volat token
+    printf("%s", nextToken->attribute.dStr->str); // toto je slovo co da ti token
     if (nextToken->type == 1)
     {
         return LEXICAL_ERROR;
