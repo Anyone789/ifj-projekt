@@ -1,24 +1,34 @@
 #include "stack.h"
+#include "errorCodes.h"
 
 // inicializacia zasobnika
-void stackInit(TStack *stack){
+void stackInit(TStack *stack)
+{
     stack->stackTop = NULL;
     stack->stackSize = 0;
 }
 // zistenie prazdneho zasobnika
-bool stackIsEmpty(TStack *stack){
+bool stackIsEmpty(TStack *stack)
+{
     return (stack->stackTop == NULL);
 }
 // vlozenie prvku do zasobnika
-void stackPush(TStack *stack, void *value){
-    TStackItem *newItem = (TStackItem *)malloc(sizeof(struct stackItemStructure));
+void stackPush(TStack *stack, void *value)
+{
+    TStackItem *newItem = (TStackItem *)malloc(sizeof(struct stackItemStructure)); // ak toto zliha treba pridat internal error
+    if (newItem == NULL)
+    {
+        exit(INTERNAL_ERROR);
+    }
+
     newItem->value = value;
     newItem->next = stack->stackTop;
     stack->stackTop = newItem;
     stack->stackSize++;
 }
 // odobratie prvku zo zasobnika
-void stackPop(TStack *stack){
+void stackPop(TStack *stack)
+{
     TStackItem *item;
     if (!stackIsEmpty(stack))
     {
@@ -29,11 +39,13 @@ void stackPop(TStack *stack){
     }
 }
 // ziskanie hodnoty vrcholu zasobnika
-int *stackTop(TStack *stack){
+int *stackTop(TStack *stack)
+{
     return (stack->stackTop->value);
 }
 // odstranenie prvkov zo zasobnika
-void stackDispose(TStack *stack){
+void stackDispose(TStack *stack)
+{
     while (!stackIsEmpty(stack))
     {
         stackPop(stack);

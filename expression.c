@@ -2,7 +2,7 @@
 // vyriesit zatvorky
 int dolarValue = tableDollar;
 // nastav premennu inFce na true ked sme vo while alebo v if inak bude false
-// bool inFce = false;
+bool inFce = true;
 bool lBracketInStack = false;
 // na oddelenie v stacku
 // v scanner treba urobit tak aby ked uz ma zistene ze aky to je typ, tak konci
@@ -79,7 +79,7 @@ int analyzeExp(TStack *expStack, TOKEN *token)
     nextToken = token;
     nextToken = getToken();
     // pridat do parseru ked budes volat token
-    printf("%s", nextToken->attribute.dStr->str); // toto je slovo co da ti token
+    // printf("%s, %d", nextToken->attribute.dStr->str, nextToken->type); // toto je slovo co da ti token
     if (nextToken->type == 1)
     {
         return LEXICAL_ERROR;
@@ -284,13 +284,14 @@ int convertToIndex(int value)
         return tableLeftPar;
     case T_R_BRACKET:
         // treba odkomentovat
-        // if(inFce == true && lBracketInStack == false){
-        //     return tableDollar;
-        // }
+        if (inFce == true && lBracketInStack == false)
+        {
+            return tableDollar;
+        }
         return tableRightPar;
     case T_SEMICOL:
         return tableDollar;
-    }
+        }
     return tableOther;
 }
 // testovanie
