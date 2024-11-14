@@ -15,12 +15,10 @@
 #include <stdbool.h>
 #include <stdlib.h>
 
-#define TERMINAL_COUNT 24
-#define NON_TERMINAL_COUNT 22
+#define TERMINAL_COUNT 27
+#define NON_TERMINAL_COUNT 24
 #define MAX_RULE_ITEMS 12
 
-#define tLlleftSquareBracket -2
-#define tLlrightSquareBracket -3
 #define tLlQuestionMark -4
 #define tLlZigImport -5
 #define tLlImport -6
@@ -55,6 +53,9 @@ typedef enum
     tLlDollar,
     tLlPipe,
     tLlIfj,
+    tLlleftSquareBracket,
+    tLlrightSquareBracket,
+    tLlVoid,
 
 } Terminal;
 
@@ -83,6 +84,7 @@ typedef enum
     nLlVarInitStatement,
     nLlNoNullBody,
     nLlFunctId,
+    nLlDefType,
 
 } NonTerminals;
 
