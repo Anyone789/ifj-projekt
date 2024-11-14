@@ -1,6 +1,6 @@
 // Module for lexical analyser
 // Author(s): Tomáš Hrbáč, Václav Bergman
-// Last Edit: 1.11.2024
+// Last Edit: 14.11.2024
 
 
 #include <stdbool.h>
