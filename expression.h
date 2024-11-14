@@ -4,9 +4,16 @@
 #include "scanner.h"
 #include "stack.h"
 #include "errorCodes.h"
-#define PrecTableSize 14
 
-typedef enum {
+#define MAX_TERM_COUNT 100
+#define MAX_NON_TERM_COUNT 100
+#define MAX_STACK_SIZE 100
+#define MAX_TERM_LENGTH 20
+#define PrecTableSize 14
+extern bool inFce;
+
+typedef enum
+{
 
     tableMultiply,
     tableDivide,
@@ -26,20 +33,22 @@ typedef enum {
     tableDollar,
     tableOther,
 
-}tableItem;
+} tableItem;
 
-typedef enum{
+typedef enum
+{
     KeyWord,
     Term,
     NonTerm
-}TermType;
+} TermType;
 
-typedef struct elmExpression{
-    //int token_type; //Typ tokenu (globálně)
-    int type; // Id
-    int dataType; // datovy INT FLOAT STRING
-    bool terminal;  //Určuje, zda je prvek terminál
-}ElmExp;
+typedef struct elmExpression
+{
+    // int token_type; //Typ tokenu (globálně)
+    int type;      // Id
+    int dataType;  // datovy INT FLOAT STRING
+    bool terminal; // Určuje, zda je prvek terminál
+} ElmExp;
 
 int analyzeExp(TStack *expStack, TOKEN *token);
 int initExpStack(TStack *expStack);

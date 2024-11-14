@@ -2,11 +2,14 @@
 // vyriesit zatvorky
 int dolarValue = tableDollar;
 // nastav premennu inFce na true ked sme vo while alebo v if inak bude false
-bool inFce = true;
+
 bool lBracketInStack = false;
 // na oddelenie v stacku
 // v scanner treba urobit tak aby ked uz ma zistene ze aky to je typ, tak konci
 int sep = 44;
+
+bool inFce = false;
+
 TOKEN *nextToken;
 char precTable[PrecTableSize][PrecTableSize] = {
     //        *    /    +    -    ==  !=    <    >    <=  >=    (    )    ID   $
@@ -42,7 +45,7 @@ int initExpStack(TStack *expStack)
     }
     else
     {
-        return SYNTAX_ERROR;
+        exit(INTERNAL_ERROR);
     }
 }
 
@@ -53,19 +56,19 @@ int binCheck(TStack *expStack, int operator)
     if (rOperand->type != tableIdentifier || rOperand->terminal == true)
     {
         printf("\nRoperand\n");
-        return SYNTAX_ERROR;
+        exit(SYNTAX_ERROR);
     }
     ElmExp *op = ((ElmExp *)(stackItem->next->value));
     if (op->type != operator|| op->terminal == false)
     {
         printf("\nOperator\n");
-        return SYNTAX_ERROR;
+        exit(SYNTAX_ERROR);
     }
     ElmExp *lOperand = ((ElmExp *)(stackItem->next->next->value));
     if (lOperand->type != tableIdentifier || lOperand->terminal == true)
     {
         printf("\nLoperand\n");
-        return SYNTAX_ERROR;
+        exit(SYNTAX_ERROR);
     }
 
     return 0;
@@ -73,16 +76,17 @@ int binCheck(TStack *expStack, int operator)
 // jedina funkcia ktoru bude volat parser ked bude
 int analyzeExp(TStack *expStack, TOKEN *token)
 {
+    printf("%d", inFce);
     // ked doskusam, tak odkomentovat
     initExpStack(expStack);
     printf("%d", ((ElmExp *)(expStack->stackTop->value))->type);
     nextToken = token;
-    nextToken = getToken();
+    // nextToken = getToken();
     // pridat do parseru ked budes volat token
     // printf("%s, %d", nextToken->attribute.dStr->str, nextToken->type); // toto je slovo co da ti token
     if (nextToken->type == 1)
     {
-        return LEXICAL_ERROR;
+        exit(LEXICAL_ERROR);
     }
     char sign;
     while (1)
@@ -106,7 +110,7 @@ int analyzeExp(TStack *expStack, TOKEN *token)
             nextToken = getToken();
             if (nextToken->type == 1)
             {
-                return LEXICAL_ERROR;
+                exit(LEXICAL_ERROR);
             }
         }
         else if (sign == '>')
@@ -125,7 +129,7 @@ int analyzeExp(TStack *expStack, TOKEN *token)
             case tableMultiply:
                 if (binCheck(expStack, tableMultiply) != 0)
                 {
-                    return SYNTAX_ERROR;
+                    exit(SYNTAX_ERROR);
                 }
                 stackPop(expStack);
                 stackPop(expStack);
@@ -133,7 +137,7 @@ int analyzeExp(TStack *expStack, TOKEN *token)
             case tablePlus:
                 if (binCheck(expStack, tablePlus) != 0)
                 {
-                    return SYNTAX_ERROR;
+                    exit(SYNTAX_ERROR);
                 }
                 stackPop(expStack);
                 stackPop(expStack);
@@ -141,7 +145,7 @@ int analyzeExp(TStack *expStack, TOKEN *token)
             case tableMinus:
                 if (binCheck(expStack, tableMinus) != 0)
                 {
-                    return SYNTAX_ERROR;
+                    exit(SYNTAX_ERROR);
                 }
                 stackPop(expStack);
                 stackPop(expStack);
@@ -149,7 +153,7 @@ int analyzeExp(TStack *expStack, TOKEN *token)
             case tableDivide:
                 if (binCheck(expStack, tableDivide) != 0)
                 {
-                    return SYNTAX_ERROR;
+                    exit(SYNTAX_ERROR);
                 }
                 stackPop(expStack);
                 stackPop(expStack);
@@ -158,7 +162,7 @@ int analyzeExp(TStack *expStack, TOKEN *token)
                 if (binCheck(expStack, tableEqual) != 0)
                 {
 
-                    return SYNTAX_ERROR;
+                    exit(SYNTAX_ERROR);
                 }
                 stackPop(expStack);
                 stackPop(expStack);
@@ -166,7 +170,7 @@ int analyzeExp(TStack *expStack, TOKEN *token)
             case tableNotEqual:
                 if (binCheck(expStack, tableNotEqual) != 0)
                 {
-                    return SYNTAX_ERROR;
+                    exit(SYNTAX_ERROR);
                 }
                 stackPop(expStack);
                 stackPop(expStack);
@@ -174,7 +178,7 @@ int analyzeExp(TStack *expStack, TOKEN *token)
             case tableLess:
                 if (binCheck(expStack, tableLess) != 0)
                 {
-                    return SYNTAX_ERROR;
+                    exit(SYNTAX_ERROR);
                 }
                 stackPop(expStack);
                 stackPop(expStack);
@@ -182,7 +186,7 @@ int analyzeExp(TStack *expStack, TOKEN *token)
             case tableLessEqual:
                 if (binCheck(expStack, tableLessEqual) != 0)
                 {
-                    return SYNTAX_ERROR;
+                    exit(SYNTAX_ERROR);
                 }
                 stackPop(expStack);
                 stackPop(expStack);
@@ -190,7 +194,7 @@ int analyzeExp(TStack *expStack, TOKEN *token)
             case tableGreat:
                 if (binCheck(expStack, tableGreat) != 0)
                 {
-                    return SYNTAX_ERROR;
+                    exit(SYNTAX_ERROR);
                 }
                 stackPop(expStack);
                 stackPop(expStack);
@@ -199,13 +203,13 @@ int analyzeExp(TStack *expStack, TOKEN *token)
             case tableGreatEqual:
                 if (binCheck(expStack, tableGreatEqual) != 0)
                 {
-                    return SYNTAX_ERROR;
+                    exit(SYNTAX_ERROR);
                 }
                 stackPop(expStack);
                 stackPop(expStack);
                 break;
             case tableLeftPar:
-                return SYNTAX_ERROR;
+                exit(SYNTAX_ERROR);
                 break;
             }
         }
@@ -233,6 +237,7 @@ int analyzeExp(TStack *expStack, TOKEN *token)
             return SYNTAX_ERROR;
         }
     }
+    inFce = false;
     return 0;
     stackDispose(expStack);
 }
@@ -291,37 +296,37 @@ int convertToIndex(int value)
         return tableRightPar;
     case T_SEMICOL:
         return tableDollar;
-        }
+    }
     return tableOther;
 }
 // testovanie
-int main(int argc, char **argv)
-{
-    if (argc > 2)
-    {
-        fprintf(stderr, "Too many arguments!");
-        exit(0);
-    }
-    if (argc == 1)
-    {
-        fprintf(stderr, "Few arguments!");
-        exit(0);
-    }
-    else
-    {
-        FILE *src;
+// int main(int argc, char **argv)
+// {
+//     if (argc > 2)
+//     {
+//         fprintf(stderr, "Too many arguments!");
+//         exit(0);
+//     }
+//     if (argc == 1)
+//     {
+//         fprintf(stderr, "Few arguments!");
+//         exit(0);
+//     }
+//     else
+//     {
+//         FILE *src;
 
-        if ((src = fopen(argv[1], "r")) == NULL)
-        {
-            fprintf(stderr, "The file cannot be opened.");
-            exit(0);
-        }
-        setSourceFile(src);
-        TStack stack;
-        TOKEN *token;
-        int i = analyzeExp(&stack, token);
-        printf("%d", i);
-    }
+//         if ((src = fopen(argv[1], "r")) == NULL)
+//         {
+//             fprintf(stderr, "The file cannot be opened.");
+//             exit(0);
+//         }
+//         setSourceFile(src);
+//         TStack stack;
+//         TOKEN *token;
+//         int i = analyzeExp(&stack, token);
+//         printf("%d", i);
+//     }
 
-    return 0;
-}
+//     return 0;
+// }

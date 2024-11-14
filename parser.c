@@ -2,8 +2,11 @@
 // authors: Samuel Kundrat
 // created: 11.11.2024
 // edited: 13.11.2024
+
+// komentar pridat
 #include "parser.h"
 
+//
 ProductionRule llRules[] =
     {
         // eof and epsilon rules are temporary
@@ -314,6 +317,11 @@ void parserIn(TStack *parserStack)
         printf("literal: %d\n", literal);
         stackPrint(parserStack);
 
+        if (literal == tLlIf)
+        {
+            inFce = true;
+        }
+
         printf("==================76==========\n");
         if ((top >= 0 && top <= TERMINAL_COUNT - 1) || (top <= -1 && top >= -8))
         {
@@ -363,14 +371,25 @@ void parserIn(TStack *parserStack)
             pushRule(parserStack, llTable[top % 100][literal]);
             continue;
         }
-        else if (literal == -10)
+        else if (top == -10)
         {
-            // zavolat funkciu analyze expression
-            // urobit vlastny stack
-            // funkcia vracia 0 ak je dobre a != 0 ak je chyba
-            // nastav globalnu premennu bool inFce = true; ak je to expression v if alebo while = true, inak false
-            // zatvorka za exprssion mozno het mozno nie to iste ; ak je priradenie
-            printf("bude exprssion\n");
+            stackPop(parserStack);
+            stackPop(parserStack);
+            printf("bude exprssion:   %d\n", inFce);
+            TStack expStack;
+            analyzeExp(&expStack, token);
+            token = getToken();
+            literal = convertTokenToIndex(token);
+            // return;
+            //  stackPush(parserStack, (void *)(intptr_t)tLlRightRoundBracket);
+            stackPrint(parserStack);
+            printf("token po EXP: %d\n", literal);
+            // return;
+            //    zavolat funkciu analyze expression
+            //    urobit vlastny stack
+            //    funkcia vracia 0 ak je dobre a != 0 ak je chyba
+            //    nastav globalnu premennu bool inFce = true; ak je to expression v if alebo while = true, inak false
+            //    zatvorka za exprssion mozno het mozno nie to iste ; ak je priradenie
         }
     }
 }
