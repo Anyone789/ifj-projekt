@@ -11,16 +11,16 @@
 typedef struct stackItemStructure
 {
     void *value;
-    struct stackItemStructure *next; 
-}TStackItem;
+    struct stackItemStructure *next;
+} TStackItem;
 
 // struktura zasobinka
 
 typedef struct stackStructure
 {
-   TStackItem *stackTop;
-   int stackSize;
-}TStack;
+    TStackItem *stackTop;
+    int stackSize;
+} TStack;
 
 // deklaracia funkcii
 void stackInit(TStack *stack);
@@ -29,4 +29,9 @@ void stackPop(TStack *stack);
 int *stackTop(TStack *stack);
 bool stackIsEmpty(TStack *stack);
 void stackDispose(TStack *stack);
+/*
+    @brief  support function for parser to visualize stack printing from TOP to BOTTOM
+    @param *stack The stack
+ */
+void stackPrint(TStack *stack);
 #endif

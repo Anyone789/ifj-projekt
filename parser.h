@@ -11,16 +11,22 @@
 #include "scanner.h"
 #include "expression.h"
 #include <string.h>
+#include <stdio.h>
+#include <stdbool.h>
+#include <stdlib.h>
 
 #define TERMINAL_COUNT 24
 #define NON_TERMINAL_COUNT 22
 #define MAX_RULE_ITEMS 12
 
-#define tLlleftSquareBracket -1
-#define tLlrightSquareBracket -2
-#define tLlQuestionMark -3
-#define tLlEndOfFile -4
-#define EXP -5
+#define tLlleftSquareBracket -2
+#define tLlrightSquareBracket -3
+#define tLlQuestionMark -4
+#define tLlZigImport -5
+#define tLlImport -6
+#define EPS -7
+#define tLlDot -8
+#define EXP -10
 
 // enumerator for all terminals in LL1 table
 typedef enum
@@ -107,9 +113,9 @@ void pushRule(TStack *parserStack, int rule);
  */
 int convertTokenToIndex(TOKEN *token);
 /*
-    @brief  function that gets item from top of the stack and converts it to index
-    *parserStack  stack to push
-    @return index
+    @brief  function that parses whole file
+    @param  *parserStack  stack to push to
+    @return none
  */
-int getItemFromStackAndConvert(TStack *parserStack);
+void parserIn(TStack *parserStack);
 #endif

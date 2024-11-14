@@ -1,1 +1,6 @@
+
 const ifj = @import("ifj24.zig");
+pub fn bar(param : i32) []u8 {
+const r = foo(param);
+return r;
+}

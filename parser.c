@@ -55,8 +55,7 @@ ProductionRule llRules[] =
     {
         // eof and epsilon rules are temporary
         {nLlProgram, {nLlPrologue, nLlProgramBody, EOF}},
-        //{nLlPrologue, {tLlConst, tLlIfj, tLlEqual, @, import, tLlLeftRoundBracket, ifj24.zig, tLlRightRoundBracket, tLlSemicolon}},
-        // neviem toto pravidlo je zatial take
+        {nLlPrologue, {tLlConst, tLlId, tLlEqual, tLlImport, tLlLeftRoundBracket, tLlZigImport, tLlRightRoundBracket, tLlSemicolon}},
         {nLlProgramBody, {nLlFunctDef, nLlProgramBody}},
         {nLlProgramBody, {nLlFunctCall, nLlProgramBody}},
         {nLlProgramBody, {}},
@@ -96,7 +95,7 @@ ProductionRule llRules[] =
         {nLlVarInitStatement, {tLlId, tLlEqual, nLlItem, tLlSemicolon}}};
 
 // 2D array of LL1 table for ifj24 compile
-int llTable[TERMINAL_COUNT][NON_TERMINAL_COUNT] = {
+int llTable[NON_TERMINAL_COUNT][TERMINAL_COUNT] = {
     //                           c   p   f   F   I   i   f   s  if   w   r   v   ,   (   )   =   ;   {   }   e   :   $   |  ifj
     /* <program>             */ {0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1},
     /* <prologue>            */ {1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1},
@@ -122,28 +121,61 @@ int llTable[TERMINAL_COUNT][NON_TERMINAL_COUNT] = {
     /* <param_list>          */ {-1, -1, -1, 41, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 42},
 };
 
-int parsIt()
+int parsIt(TStack *parserStack)
 {
-    TStack *parserStack;
-    TOKEN *token;
-    stackInit(parserStack);
-    // push for the first NONTERMINAL <program> => beginning of the parsing PHAZE
-    stackPush(parserStack, nLlProgram);
-    if ()
-    {
-        /* code */
-    }
+    // TOKEN *token;
+    // int top;
+    // int index;
 
-    token = getToken();
+    stackInit(parserStack);
+    // pushes EOF to the stack bacause we skipped first rule, because every programm in ifj24 has to start with prologue
+    // stackPush(parserStack, (void *)(intptr_t)EOF);
+
+    //  push for the first NONTERMINAL <program> => beginning of the parsing PHAZE
+    // stackPush(parserStack, (void *)(intptr_t)nLlProgram); // Cast enum to integer (intptr_t) to store in stack
+    // top = *(int *)(parserStack->stackTop);
+
+    // stackPop(parserStack);
+    //  printf("P%d.\n", stackIsEmpty(parserStack));
+    //  token = getToken();
+    //  index = convertTokenToIndex(token);
+    pushRule(parserStack, llTable[0][0]);
+
+    // index = convertTokenToIndex(token);
+    // printf(" | %d je index pravidlo je: %d\n ", index, llTable[top % 100][index]);
+    // top = *(int *)(parserStack->stackTop);
+    // printf("Top je: %d\n", top);
+
+    // stackPrint(parserStack);
+
+    parserIn(parserStack);
+    return 1;
 }
 
 void pushRule(TStack *parserStack, int rule)
 {
-    int i = 0;
-    while (llRules[rule].production[i] != 0)
+    int i = MAX_RULE_ITEMS - 1;
+    while (i >= 0)
     {
-        stackPush(parserStack, llRules[rule].production[i]);
-        i++;
+
+        if ((intptr_t)llRules[rule].production[i] == 0)
+        {
+            if (rule == 1 && i == 0)
+            {
+                stackPush(parserStack, (void *)(intptr_t)llRules[rule].production[i]);
+                i--;
+                continue;
+            }
+            else
+            {
+
+                i--;
+                continue;
+            }
+        }
+
+        stackPush(parserStack, (void *)(intptr_t)llRules[rule].production[i]);
+        i--;
     }
 }
 
@@ -184,9 +216,28 @@ int convertTokenToIndex(TOKEN *token)
         {
             return tLlElse;
         }
+        else if (strcmp(token->attribute.dStr->str, "import") == 0)
+        {
+            return tLlImport;
+        }
+        else if (strcmp(token->attribute.dStr->str, "i32") == 0)
+        {
+            return tLlInt;
+        }
+        else if (strcmp(token->attribute.dStr->str, "u8") == 0)
+        {
+            return tLlString;
+        }
+        else if (strcmp(token->attribute.dStr->str, "f64") == 0)
+        {
+            return tLlFloat;
+        }
+        else
+        {
+            exit(SYNTAX_ERROR);
+        }
 
         break;
-        // opytaj sa ne error token type ci tu mozes dat ze to exitne na scanner erroro nejaky alebo ako sa to vola
     case T_ERROR:
         exit(LEXICAL_ERROR);
     case T_ID:
@@ -205,6 +256,10 @@ int convertTokenToIndex(TOKEN *token)
         return tLlFloat;
         break;
     case T_STR:
+        if (strcmp(token->attribute.dStr->str, "ifj24.zig") == 0)
+        {
+            return tLlZigImport;
+        }
         return tLlString;
         break;
     case T_PLUS:
@@ -238,6 +293,7 @@ int convertTokenToIndex(TOKEN *token)
         break;
     case T_R_SQ_BRACKET:
         return tLlrightSquareBracket;
+        break;
     case T_L_BRACKET:
         return tLlLeftRoundBracket;
         break;
@@ -246,26 +302,115 @@ int convertTokenToIndex(TOKEN *token)
         break;
     case T_QUESTION_MK:
         return tLlQuestionMark;
-    // neviem co s botkou prekonzultovat na meetingu
+        break;
+        // built in function
     case T_DOT:
+        return tLlDot;
         break;
     case T_COM:
         return tLlComma;
         break;
-    // opytat sa na import
+    // netusim co je import
     case T_IMPORT:
         break;
     case T_EOF:
-        return tLlEndOfFile;
+        return tLlDollar;
     case T_UNDEFINED:
+        exit(LEXICAL_ERROR);
         break;
     default:
         // if token will be anything else than ll table symbol or something unexpected it ll be lexical error just for now
-        exit(1);
+        exit(SYNTAX_ERROR);
         break;
     }
 }
 
-int getItemFromStackAndConvert(TStack *parserStack)
+void parserIn(TStack *parserStack)
 {
+    TOKEN *token;
+    int literal = 99;
+    int top;
+
+    token = getToken();
+    literal = convertTokenToIndex(token);
+
+    while (literal != EOF)
+    {
+
+        top = *(int *)(parserStack->stackTop);
+        printf("som tu\n");
+        printf("top: %d\n", top);
+        stackPrint(parserStack);
+
+        printf("==================76==========\n");
+        if ((top >= 0 && top <= 23) || (top <= -1 && top >= -8))
+        {
+
+            printf("NA VSTUPE JE TERMINAL\n");
+            printf("top: %d\n", top);
+            printf("literal: %d\n", literal);
+            if (top == -1 && literal == 21)
+            {
+                stackPop(parserStack);
+                printf("END");
+                return;
+            }
+            else if (top == literal)
+            {
+                stackPop(parserStack);
+                printf("po pope je stack\n");
+                stackPrint(parserStack);
+                // parserIn(parserStack);
+                // continue;
+            }
+            else
+            {
+                printf("syntax error");
+                exit(SYNTAX_ERROR);
+            }
+
+            token = getToken();
+            literal = convertTokenToIndex(token);
+        }
+        else if (top >= 100 && top <= 121)
+        {
+
+            printf("NA VSTUPE JE NETERMINAL ALEBO SPECIAL\n");
+            printf("top: %d\n", top);
+            printf("literal: %d\n", literal);
+            printf("pravidlo: %d\n", (llTable[top % 100][literal]));
+            stackPop(parserStack);
+            printf("po pope je stack\n");
+            stackPrint(parserStack);
+            if ((llTable[top % 100][literal]) == -1)
+            {
+                printf("syntax error");
+                exit(SYNTAX_ERROR);
+            }
+
+            pushRule(parserStack, llTable[top % 100][literal]);
+            continue;
+        }
+        else if (literal == -10)
+        {
+            printf("bude exprssion\n");
+        }
+    }
+}
+
+int main(int argc, char **argv)
+{
+    FILE *src;
+
+    if ((src = fopen(argv[1], "r")) == NULL)
+    {
+        fprintf(stderr, "The file cannot be opened.");
+        exit(0);
+    }
+
+    setSourceFile(src);
+    TStack parserStack;
+    parsIt(&parserStack);
+
+    return 0;
 }
