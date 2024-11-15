@@ -1,60 +1,53 @@
 // symtable.h
 // Interface for symbol table module
-// Author(s): Václav Bergman
+// Author(s): Václav Bergman, Marián Šuľa
 // Last Edit: 13.11.2024
 
 #ifndef SYMTABLE_H
 #define SYMTABLE_H
 
 #include <stdbool.h>
+#include "dstring.h"
+#include <stdlib.h>
+#include <stdio.h>
 
-// Separate enums for variables and functions
+typedef enum {
+    var,
+    fce
+} nodeType;
 
-// Variable node
-typedef struct variableNode
-{
-    char *name;         // Name is used as a key
-    // ENUM type - same as with functions
+// Uzel stromu
+typedef struct symtable {
+  char  *key;                     // klíč
+  void *data;                   // hodnota
+  int height;                   // vyska stromu
+  nodeType dataType;            // typ uzla
+  struct symtable *left;       // levý potomek
+  struct symtable *right;      // pravý potomek
+} bstSymtable;
+//struktura premennej
+typedef struct var {
+    int dataType;
     bool initialized;
     bool constant;      // If variable is const type
     bool isPar;         // If variable is function parameter (const == true)
     bool use;           // If variable is used during run time
-    // bool compTime - if variable's value is known at compile time
-    struct variableNode *left;
-    struct variableNode *right;
-} VARIABLE_NODE;
+} varData;
 
-// Function node
-typedef struct functionNode
-{
-    char *name;         // Name is used as a key
-    // ENUM returnType - use keywords or new enum? ... not all keywords are valid return types
-    struct variableNode *localSymtable;
-    struct functionNode *left;
-    struct functionNode *right;
-} FUNCTION_NODE;
 
-// Symtable constructor
-// Return value: Success - ptr to a symtable, failure - NULL
-FUNCTION_NODE **createSymtable();
+typedef struct fce {
+    int returnType;      // return value
+    int paramCount;     // param caunt
+    bool isDefined;     // is function defined
+    struct symtable *locals;
+} fceData;
 
-// Symtable destructor
-void destroySymtable(FUNCTION_NODE **symtable);
-
-// Create function node
-// Return value: Success - ptr to a function node, failure - NULL
-FUNCTION_NODE *createFunctionNode(char *name); // returnType
-
-// Add function to symtable
-void addFunctionToSymtable(FUNCTION_NODE **symtable, FUNCTION_NODE *functionNode);
-
-// Create variable node
-// Return value: Success - ptr to a variable node, failure - NULL
-VARIABLE_NODE *createVariableNode(char *name, bool initialized, bool constant, bool isPar, bool use); // type, compTime
-
-// Add variable node to function's local symtable
-void addVariableNodeToLocalSymtable(FUNCTION_NODE *functionNode, VARIABLE_NODE *variableNode);
-
-// Function for batch adding built in functions
-
+void symtableInit(bstSymtable **symTree);
+bstSymtable* symtableSearch(bstSymtable **symTree, DSTRING key);
+void symtableInsertVar(bstSymtable **symTree, DSTRING key, void *data);
+void symtableInsertFce(bstSymtable **symTree, DSTRING key, void *data);
+void symtableDelete(bstSymtable **symTree, DSTRING key);
+void symtableDispose(bstSymtable **symTree);
 #endif
+
+//((varData*)(*symTree)->data)->initialized = false; // pristup k jednotlivym udajom varData
