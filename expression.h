@@ -33,12 +33,12 @@ typedef enum{
     Term,
     NonTerm
 }TermType;
-
+// pridat veci co mam v mobile
 typedef struct elmExpression{
-    //int token_type; //Typ tokenu (globálně)
+    
     int type; // Id
-    int dataType; // datovy INT FLOAT STRING
-    bool terminal;  //Určuje, zda je prvek terminál
+    int dataType;
+    bool terminal; 
 }ElmExp;
 
 int analyzeExp(TStack *expStack, TOKEN *token);
