@@ -1,9 +1,1 @@
-const ifj = @import("ifj24.zig");
-pub fn main() void {
-if(i<1){
-  a = foo();
-  b = bar();
-}else{}
-
-
-}
+if(asda, sa)

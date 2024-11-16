@@ -81,7 +81,7 @@ int analyzeExp(TStack *expStack, TOKEN *token)
     initExpStack(expStack);
     printf("%d", ((ElmExp *)(expStack->stackTop->value))->type);
     nextToken = token;
-    // nextToken = getToken();
+    nextToken = getToken();
     // pridat do parseru ked budes volat token
     // printf("%s, %d", nextToken->attribute.dStr->str, nextToken->type); // toto je slovo co da ti token
     if (nextToken->type == 1)
@@ -300,33 +300,33 @@ int convertToIndex(int value)
     return tableOther;
 }
 // testovanie
-// int main(int argc, char **argv)
-// {
-//     if (argc > 2)
-//     {
-//         fprintf(stderr, "Too many arguments!");
-//         exit(0);
-//     }
-//     if (argc == 1)
-//     {
-//         fprintf(stderr, "Few arguments!");
-//         exit(0);
-//     }
-//     else
-//     {
-//         FILE *src;
+int main(int argc, char **argv)
+{
+    if (argc > 2)
+    {
+        fprintf(stderr, "Too many arguments!");
+        exit(0);
+    }
+    if (argc == 1)
+    {
+        fprintf(stderr, "Few arguments!");
+        exit(0);
+    }
+    else
+    {
+        FILE *src;
 
-//         if ((src = fopen(argv[1], "r")) == NULL)
-//         {
-//             fprintf(stderr, "The file cannot be opened.");
-//             exit(0);
-//         }
-//         setSourceFile(src);
-//         TStack stack;
-//         TOKEN *token;
-//         int i = analyzeExp(&stack, token);
-//         printf("%d", i);
-//     }
+        if ((src = fopen(argv[1], "r")) == NULL)
+        {
+            fprintf(stderr, "The file cannot be opened.");
+            exit(0);
+        }
+        setSourceFile(src);
+        TStack stack;
+        TOKEN *token;
+        int i = analyzeExp(&stack, token);
+        printf("%d", i);
+    }
 
-//     return 0;
-// }
+    return 0;
+}

@@ -24,6 +24,7 @@
 #define tLlImport -6
 #define EPS -7
 #define tLlDot -8
+#define tLlComm -9
 #define EXP -10
 
 // enumerator for all terminals in LL1 table
