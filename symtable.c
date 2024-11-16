@@ -332,7 +332,7 @@ void insertFunction(bstSymtable **symTree, const char *name, int returnType, int
 
     symtableInsertFce(symTree, *functionName, functionData);
 }
-void insertLoaclVariables(const char *name, int dataType, bool initialized, bool constant, bool isPar, bool use, bstSymtable **local)
+void insertVariables(const char *name, int dataType, bool initialized, bool constant, bool isPar, bool use, bstSymtable **local)
 {
     DSTRING *variableName = dStringCreate();
     dStringAddString(variableName, name);
@@ -547,10 +547,10 @@ int main()
 
     bstSymtable *localTree;
     symtableInit(&localTree);
-    insertLoaclVariables("ahoj", 5, true, true, true, true, &localTree);
-    insertLoaclVariables("cau", 2, true, true, true, true, &localTree);
-    insertLoaclVariables("pa", 8, true, true, true, true, &localTree);
-    insertLoaclVariables("kar", 0, true, true, true, true, &localTree);
+    insertVariables("ahoj", 5, true, true, true, true, &localTree);
+    insertVariables("cau", 2, true, true, true, true, &localTree);
+    insertVariables("pa", 8, true, true, true, true, &localTree);
+    insertVariables("kar", 0, true, true, true, true, &localTree);
     // vlozil som do funkcie lokalny strom
     printTree(localTree, 0, "");
     ((fceData *)result->data)->locals = &localTree;
