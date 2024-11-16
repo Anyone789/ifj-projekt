@@ -1,7 +1,7 @@
 // header file for parser for ifj24
 // authors: Samuel Kundrat
 // created: 11.11.2024
-// edited: 13.11.2024
+// edited: 16.11.2024
 
 // komentar pridat
 #include "parser.h"
@@ -24,7 +24,7 @@ ProductionRule llRules[] =
         {nLlType, {}},
         {nLlParams, {tLlComma, nLlParamList}},
         {nLlParams, {}},
-        {nLlFunctCall, {nLlFunctId, tLlLeftRoundBracket, nLlParamCallList, tLlRightRoundBracket}},
+        {nLlFunctCall, {nLlFunctId, tLlLeftRoundBracket, nLlParamCallList, tLlRightRoundBracket, tLlSemicolon}},
         {nLlParamCallList, {tLlId, nLlParamsCall}},
         {nLlParamCallList, {nLlType, nLlParamsCall}},
         {nLlParamsCall, {tLlComma, nLlParamCallList}},
@@ -40,15 +40,15 @@ ProductionRule llRules[] =
         {nLlStatement, {nLlVarInitStatement}},
         {nLlConditionStatement, {tLlIf, tLlLeftRoundBracket, EXP, tLlRightRoundBracket, nLlNoNullBody, tLlLeftCurlyBracket, nLlFunctBody, tLlRightCurlyBracket, tLlElse, tLlLeftCurlyBracket, nLlFunctBody, tLlRightCurlyBracket}},
         {nLlLoopStatement, {tLlWhile, tLlLeftRoundBracket, EXP, tLlRightRoundBracket, nLlNoNullBody, tLlLeftCurlyBracket, nLlFunctBody, tLlRightCurlyBracket}},
-        {nLlReturnStatement, {tLlReturn, nLlReturnList, tLlSemicolon}},
-        {nLlReturnList, {}},
+        {nLlReturnStatement, {tLlReturn, nLlReturnList}},
+        {nLlReturnList, {tLlSemicolon}},
         {nLlReturnList, {nLlItem}},
         {nLlItem, {nLlFunctCall}},
         {nLlItem, {tLlId}},
-        {nLlItem, {EXP}},
-        {nLlVarDefStatement, {tLlVar, tLlId, nLlDefType, tLlEqual, nLlItem, tLlSemicolon}},
-        {nLlConstDefStatement, {tLlConst, tLlId, nLlDefType, tLlEqual, nLlItem, tLlSemicolon}},
-        {nLlVarInitStatement, {tLlId, tLlEqual, nLlItem, tLlSemicolon}},
+        {nLlItem, {EXP, tLlSemicolon}},
+        {nLlVarDefStatement, {tLlVar, tLlId, nLlDefType, tLlEqual, nLlItem}},
+        {nLlConstDefStatement, {tLlConst, tLlId, nLlDefType, tLlEqual, nLlItem}},
+        {nLlVarInitStatement, {tLlId, tLlEqual, nLlItem}},
         {nLlNoNullBody, {}},
         {nLlNoNullBody, {tLlPipe, tLlId, tLlPipe}},
         {nLlFunctId, {tLlFunctId}},
