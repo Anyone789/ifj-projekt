@@ -1,1 +1,7 @@
-if(asda, sa)
+//sdasdsa
+const ifj = @import("ifj24.zig");
+pub fn bar(param : []u8) []u8 {
+while(i < 1)|sasa|{
+
+}
+}

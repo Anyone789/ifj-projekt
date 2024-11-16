@@ -281,12 +281,14 @@ int convertTokenToIndex(TOKEN *token)
     case T_DOT:
         return tLlDot;
         break;
-    case T_COM:
+    case T_COMMA:
         return tLlComma;
         break;
     // netusim co je import
     case T_IMPORT:
         break;
+    case T_PIPE:
+        return tLlPipe;
     case T_EOF:
         return tLlDollar;
     case T_UNDEFINED:
@@ -379,8 +381,9 @@ void parserIn(TStack *parserStack)
             TStack expStack;
             analyzeExp(&expStack, token);
             token = getToken();
-            literal = convertTokenToIndex(token);
+            // printf("padla expression");
             // return;
+            literal = convertTokenToIndex(token);
             //  stackPush(parserStack, (void *)(intptr_t)tLlRightRoundBracket);
             stackPrint(parserStack);
             printf("token po EXP: %d\n", literal);

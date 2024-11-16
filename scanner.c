@@ -1,6 +1,6 @@
 // Module for lexical analyser
 // Author(s): Tomáš Hrbáč, Václav Bergman
-// Last Edit: 1.11.2024
+// Last Edit: 14.11.2024
 
 
 #include <stdbool.h>
@@ -23,8 +23,8 @@ const char *TOKEN_TYPE_STRING[] = {
     "T_PLUS", "T_MINUS", "T_MUL", "T_DIV",
     "T_EQ", "T_NE", "T_LT", "T_LE", "T_GT", "T_GE", "T_ASSIGN",
     "T_SEMICOL", "T_COLON", "T_L_BRACE", "T_R_BRACE", "T_L_SQ_BRACKET", "T_R_SQ_BRACKET",
-    "T_L_BRACKET", "T_R_BRACKET", "T_QUESTION_MK", "T_DOT", "T_COM", "T_IMPORT",
-    "T_EOF", "T_UNDEFINED"
+    "T_L_BRACKET", "T_R_BRACKET", "T_QUESTION_MK", "T_PIPE", "T_DOT", "T_COMMA", "T_COM",
+    "T_IMPORT", "T_EOF", "T_UNDEFINED"
 };
 
 const char* keywords[] = {
@@ -135,10 +135,20 @@ TOKEN *getToken()
                     state = QUESTION_MARK;
                     token->type = T_QUESTION_MK;
                 }
+                else if (c == '|')
+                {
+                    state = PIPE;
+                    token->type = T_PIPE;
+                }
                 else if (c == '.')
                 {
                     state = DOT;
                     token->type = T_DOT;
+                }
+                else if (c == ',')
+                {
+                    state = COMMA;
+                    token->type = T_COMMA;
                 }
                 else if (c == ';')
                 {
@@ -231,8 +241,9 @@ TOKEN *getToken()
                 if (\
                 state == LEFT_SQ_BRACKET || state == RIGHT_SQ_BRACKET || state == LEFT_BRACKET ||\
                 state == RIGHT_BRACKET || state == LEFT_BRACE || state == RIGHT_BRACE ||\
-                state == DOT || state == SEMICOLON || state == COLON || state == QUESTION_MARK ||\
-                state == PLUS || state == MINUS || state == MULTIPLY || state == END_OF_FILE\
+                state == QUESTION_MARK || state == PIPE || state == DOT || state == COMMA ||\
+                state == SEMICOLON || state == COLON || state == PLUS || state == MINUS ||\
+                state == MULTIPLY || state == END_OF_FILE\
                 )
                 {
                     tokenScanned = true;
@@ -581,3 +592,4 @@ TOKEN *getToken()
 	
     return token;
 }
+

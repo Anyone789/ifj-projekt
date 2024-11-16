@@ -1,13 +1,14 @@
 // scanner.h
 // Interface for the scanner
 // Author(s): Václav Bergman, Tomáš Hrbáč
-// Last Edited: 1.11.2024
+// Last Edited: 14.11.2024
 
 #ifndef SCANNER_H
 #define SCANNER_H
 
-#include "dstring.h"
 #include <stdio.h>
+#include "dstring.h"
+
 // Enum of token types
 typedef enum tokenType
 {
@@ -16,8 +17,8 @@ typedef enum tokenType
     T_PLUS, T_MINUS, T_MUL, T_DIV,
     T_EQ, T_NE, T_LT, T_LE, T_GT, T_GE, T_ASSIGN,
     T_SEMICOL, T_COLON, T_L_BRACE, T_R_BRACE, T_L_SQ_BRACKET, T_R_SQ_BRACKET,
-    T_L_BRACKET, T_R_BRACKET, T_QUESTION_MK, T_DOT, T_COM, T_IMPORT,
-    T_EOF, T_UNDEFINED
+    T_L_BRACKET, T_R_BRACKET, T_QUESTION_MK, T_PIPE, T_DOT, T_COMMA, T_COM,
+    T_IMPORT, T_EOF, T_UNDEFINED
 } TOKEN_TYPE;
 
 // String equivalents of token types
@@ -33,16 +34,22 @@ typedef enum states
     INTEGER, INT_ZERO, FLOAT_DP_START, FLOAT_DP_END, FLOAT_EX_START, FLOAT_EX_MID, FLOAT_EX_END, 
     NOT_EQUAL, LESS_THAN, GREATER_THAN,
     ASSIGN, PLUS, MINUS, DIVIDE, MULTIPLY, SEMICOLON, COLON, LEFT_SQ_BRACKET, RIGHT_SQ_BRACKET,
-    LEFT_BRACKET, RIGHT_BRACKET, LEFT_BRACE, RIGHT_BRACE, DOT, QUESTION_MARK, COMMENT, NO_LINEFEED,
-    END_OF_FILE
+    LEFT_BRACKET, RIGHT_BRACKET, LEFT_BRACE, RIGHT_BRACE, PIPE, DOT, COMMA, QUESTION_MARK, COMMENT,
+    NO_LINEFEED, END_OF_FILE
 } STATES;
 
+// Enum for attribute type
+// I, F, DSTR correspond to i, f, dStr of TOKEN_ATTRIBUTE struct
+// NONE indicates TOKEN_ATTRIBUTE is not set
 typedef enum attributeType
 {
     NONE, I, F, DSTR
 } ATTRIBUTE_TYPE;
 
 // Union for storing token value
+// i -> integer
+// f -> float
+// dStr -> dynamic string
 typedef union tokenAtribute
 {
     int i;
@@ -50,7 +57,10 @@ typedef union tokenAtribute
     DSTRING *dStr;
 } TOKEN_ATTRIBUTE;
 
-// The token
+// Structure representing the token
+// type -> token type
+// attribute -> value of the token, some tokens have NONE (eg. T_ASSIGN)
+// current_attribute -> indicates which element of attribute struct is set
 typedef struct tokenStruct
 {
     TOKEN_TYPE type;
@@ -58,11 +68,25 @@ typedef struct tokenStruct
     ATTRIBUTE_TYPE current_attribute;
 } TOKEN;
 
-
+/*
+    @brief Sets a file from which the scanner will get tokens
+    @param *file pointer to a file
+    @return NONE
+*/
 void setSourceFile(FILE *file);
 
+/*
+    @brief Performs a scanning operation on the source file and returns one token
+    @param NONE
+    @return Pointer to a token
+*/
 TOKEN *getToken();
 
+/*
+    @brief Destroys a token
+    @param *token pointer to a token
+    @return NONE
+*/
 void destroyToken(TOKEN *token);
 
 #endif
