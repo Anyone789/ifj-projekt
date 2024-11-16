@@ -11,7 +11,7 @@ ProductionRule llRules[] =
     {
         // eof and epsilon rules are temporary
         {nLlProgram, {nLlPrologue, nLlProgramBody, EOF}},
-        {nLlPrologue, {tLlConst, tLlIfj, tLlEqual, tLlImport, tLlLeftRoundBracket, tLlId, tLlRightRoundBracket, tLlSemicolon}},
+        {nLlPrologue, {tLlConst, tLlIfj, tLlEqual, tLlImport, tLlLeftRoundBracket, tLlString, tLlRightRoundBracket, tLlSemicolon}},
         {nLlProgramBody, {nLlFunctDef, nLlProgramBody}},
         {nLlProgramBody, {nLlFunctCall, nLlProgramBody}},
         {nLlProgramBody, {}},
@@ -56,6 +56,7 @@ ProductionRule llRules[] =
         {nLlDefType, {tLlColon, nLlType}},
         {nLlDefType, {}},
         {nLlType, {tLlVoid}},
+        {nLlType, {tLlString}},
 };
 
 // 2D array of LL1 table for ifj24 compile
@@ -66,7 +67,7 @@ int llTable[NON_TERMINAL_COUNT][TERMINAL_COUNT] = {
     /* <program_body>        */ {-1, 2, -1, 3, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 4, -1, -1, -1, -1, -1},
     /* <funct_def>           */ {-1, 5, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1},
     /* <param_list>          */ {-1, -1, -1, -1, 6, -1, -1, -1, -1, -1, -1, -1, -1, -1, 7, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1},
-    /* <type>                */ {-1, -1, -1, -1, -1, 8, 9, -1, -1, -1, -1, -1, 11, -1, 11, 11, -1, 11, -1, -1, -1, -1, -1, -1, 10, -1, 45},
+    /* <type>                */ {-1, -1, -1, -1, -1, 8, 9, 46, -1, -1, -1, -1, 11, -1, 11, 11, -1, 11, -1, -1, -1, -1, -1, -1, 10, -1, 45},
     /* <params>              */ {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 12, -1, 13, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1},
     /* <funct_call>          */ {-1, -1, -1, 14, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 14, -1, -1, -1},
     /* <param_call_list>     */ {-1, -1, -1, -1, 15, 16, 16, 16, -1, -1, -1, -1, 16, -1, 16, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1},
@@ -234,7 +235,7 @@ int convertTokenToIndex(TOKEN *token)
         // {
         //     return tLlZigImport;
         // }
-        return tLlId;
+        return tLlString;
         break;
     case T_PLUS:
     case T_MINUS:

@@ -16,7 +16,7 @@
 #include <stdlib.h>
 
 #define TERMINAL_COUNT 27
-#define NON_TERMINAL_COUNT 24
+#define NON_TERMINAL_COUNT 25
 #define MAX_RULE_ITEMS 12
 
 #define tLlQuestionMark -4
