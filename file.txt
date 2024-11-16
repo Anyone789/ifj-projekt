@@ -1,7 +1,15 @@
 //sdasdsa
 const ifj = @import("ifj24.zig");
 pub fn bar(param : []u8) []u8 {
-while(i < 1)|sasa|{
-
+var a = foo(b, 4, "sas");
+if(s < 3){
+    while(b){
+        l = 98;
+    }
+}else{
+    b = k("sas");
 }
+foo();
+//sdasdsa
+return gofo(21, "asa", kl);
 }
