@@ -376,7 +376,8 @@ TOKEN *getToken()
                 {
                     state = NO_LINEFEED;
                 }
-                else if (c == '\n')
+                // c == EOF for dealing with 'comment and EOF on the same line' edge case
+                else if (c == '\n' || c == EOF)
                 {
                     state = INITIAL;
                 }
