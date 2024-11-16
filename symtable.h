@@ -39,15 +39,16 @@ typedef struct fce {
     int returnType;      // return value
     int paramCount;     // param caunt
     bool isDefined;     // is function defined
-    struct symtable *locals;
+    bool buildIn;
+    varData *params;
+    bstSymtable **locals;
 } fceData;
 
 void symtableInit(bstSymtable **symTree);
 bstSymtable* symtableSearch(bstSymtable **symTree, DSTRING key);
 void symtableInsertVar(bstSymtable **symTree, DSTRING key, void *data);
 void symtableInsertFce(bstSymtable **symTree, DSTRING key, void *data);
+void symtableInsertBuildInFce(bstSymtable **symTree);
 void symtableDelete(bstSymtable **symTree, DSTRING key);
 void symtableDispose(bstSymtable **symTree);
 #endif
-
-//((varData*)(*symTree)->data)->initialized = false; // pristup k jednotlivym udajom varData

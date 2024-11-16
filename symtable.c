@@ -190,7 +190,7 @@ bstSymtable *balance(bstSymtable **symTree)
  */
 bstSymtable *symtableSearch(bstSymtable **symTree, DSTRING key)
 {
-    if (*symTree == NULL)
+    if (symTree == NULL || *symTree == NULL)
     {
         return NULL;
     }
@@ -281,6 +281,118 @@ void symtableInsertFce(bstSymtable **symTree, DSTRING key, void *data)
 {
     symtableInsert(symTree, key, data);
     (*symTree)->dataType = fce;
+}
+
+void dStringAddString(DSTRING *dstr, const char *str)
+{
+    while (*str)
+    {
+        dStringAddChar(dstr, *str++);
+    }
+}
+
+void insertFunction(bstSymtable **symTree, const char *name, int returnType, int paramCount, bool isDefined, bool buildIn, bool hasLocals, varData *varDatas)
+{
+    DSTRING *functionName = dStringCreate();
+    dStringAddString(functionName, name);
+    fceData *functionData = (fceData *)malloc(sizeof(fceData));
+    if (functionData == NULL)
+    {
+        // Handle memory allocation failure
+        printf("Memory allocation for fceData failed\n");
+        exit(1); // Or handle it appropriately
+    }
+    bstSymtable *localTreei2f = NULL;
+    if (hasLocals)
+    {
+        localTreei2f = (bstSymtable *)malloc(sizeof(struct symtable));
+        symtableInit(&localTreei2f);
+    }
+    // Initialize the fields
+    functionData->returnType = returnType;
+    functionData->paramCount = paramCount;
+    functionData->isDefined = isDefined;
+    functionData->buildIn = buildIn;
+    functionData->locals = (hasLocals) ? &localTreei2f : NULL;
+    if (paramCount > 0 && returnType != NONE)
+    {
+        functionData->params = (varData *)malloc(paramCount * sizeof(varData));
+        if (functionData->params == NULL)
+        {
+            printf("Memory allocation for parameters failed\n");
+            exit(1);
+        }
+        for (int i = 0; i < paramCount; i++)
+        {
+            functionData->params[i] = varDatas[i]; // Kopírovanie údajov parametra
+        }
+    }else{
+        functionData->params = NULL;
+    }
+
+    symtableInsertFce(symTree, *functionName, functionData);
+}
+void insertLoaclVariables(const char *name, int dataType, bool initialized, bool constant, bool isPar, bool use, bstSymtable **local)
+{
+    DSTRING *variableName = dStringCreate();
+    dStringAddString(variableName, name);
+
+    varData *variableData = (varData *)malloc(sizeof(varData));
+    if (variableData == NULL)
+    {
+        // Handle memory allocation failure
+        printf("Memory allocation for fceData failed\n");
+        exit(1); // Or handle it appropriately
+    }
+
+    // Initialize the fields
+    variableData->constant = constant;
+    variableData->dataType = dataType;
+    variableData->initialized = initialized;
+    variableData->isPar = isPar;
+    variableData->use = use;
+
+    symtableInsertVar(local, *variableName, variableData);
+}
+
+void symtableInsertBuildInFce(bstSymtable **symTree)
+{
+    // Functions for loading values
+    // readstr
+    insertFunction(symTree, "readstr", DSTR, 0, true, true, false, NULL);
+    // readi32
+    insertFunction(symTree, "readi32", I, 0, true, true, false, NULL);
+    // readf64
+    insertFunction(symTree, "readf64", F, 0, true, true, false, NULL);
+
+    // Function for printing out values
+    // the dataType of term in write(term) doesnt matter
+    insertFunction(symTree, "write", NONE, 1, true, true, false, NULL);
+
+    // Functions for converting number values
+    varData varDatas[5];
+    varDatas[0].dataType = I;
+    insertFunction(symTree, "i2f", F, 1, true, true, false, varDatas);
+    varDatas[0].dataType = F;
+    insertFunction(symTree, "f2i", I, 1, true, true, false, varDatas);
+    varDatas[0].dataType = NONE;
+    // Functions for string operations
+    insertFunction(symTree, "string", DSTR, 1, true, true, false, varDatas);
+    varDatas[0].dataType = DSTR;
+    insertFunction(symTree, "length", I, 1, true, true, false, varDatas);
+    varDatas[0].dataType = DSTR;
+    varDatas[1].dataType = I;
+    varDatas[2].dataType = I;
+    insertFunction(symTree, "substring", DSTR, 3, true, true, false, varDatas);
+    varDatas[0].dataType = DSTR;
+    varDatas[1].dataType = DSTR;
+    insertFunction(symTree, "strcmp", I, 2, true, true, false, varDatas);
+    varDatas[0].dataType = DSTR;
+    varDatas[1].dataType = I;
+    insertFunction(symTree, "ord", I, 2, true, true, false, varDatas);
+    varDatas[0].dataType = I;
+    insertFunction(symTree, "chr", DSTR, 1, true, true, false, varDatas);
+    
 }
 /**
  * @brief Helper function to replace a node with its rightmost descendant.
@@ -425,76 +537,125 @@ int main()
 {
     bstSymtable *symTree;
     symtableInit(&symTree);
-    // Create test variables
-    varData var1 = {1, true, false, false, true}; // Variable 'a'
-    varData var2 = {2, true, true, false, true};  // Variable 'b'
-
-    // Create DSTRING keys for the variables
-    TOKEN *token = createToken();
-    token->type = T_ID;
-    token->current_attribute = DSTR;
-    token->attribute.dStr = dStringCreate();
-    dStringAddChar(token->attribute.dStr, 'a'); // Variable 'a'
-
-    // Insert the variable into the symbol table
-    symtableInsertVar(&symTree, *token->attribute.dStr, &var1);
-    token->attribute.dStr = dStringCreate();
-    dStringAddChar(token->attribute.dStr, 'b'); // Variable 'b'
-    // Insert the second variable into the symbol table
-    symtableInsertVar(&symTree, *token->attribute.dStr, &var2);
-
-    token->attribute.dStr = dStringCreate();
-    dStringAddChar(token->attribute.dStr, 'c'); // Variable 'b'
-    symtableInsertVar(&symTree, *token->attribute.dStr, &var2);
-
-    token->attribute.dStr = dStringCreate();
-    dStringAddChar(token->attribute.dStr, 'd'); // Variable 'b'
-    symtableInsertVar(&symTree, *token->attribute.dStr, &var2);
-
-    token->attribute.dStr = dStringCreate();
-    dStringAddChar(token->attribute.dStr, 1); // Variable 'b'
-    symtableInsertVar(&symTree, *token->attribute.dStr, &var2);
-
-    token->attribute.dStr = dStringCreate();
-    dStringAddChar(token->attribute.dStr, 'g'); // Variable 'b'
-    symtableInsertVar(&symTree, *token->attribute.dStr, &var2);
-
-    token->attribute.dStr = dStringCreate();
-    dStringAddChar(token->attribute.dStr, 'h'); // Variable 'b'
-    symtableInsertVar(&symTree, *token->attribute.dStr, &var2);
-
-    token->attribute.dStr = dStringCreate();
-    dStringAddChar(token->attribute.dStr, 'i'); // Variable 'b'
-    symtableInsertVar(&symTree, *token->attribute.dStr, &var2);
-
+    DSTRING *readstr = dStringCreate();
+    dStringAddString(readstr, "chr");
+    symtableInsertBuildInFce(&symTree);
+    bstSymtable *result = symtableSearch(&symTree, *readstr);
     printTree(symTree, 0, "");
-    // Delete the root node (variable 'a')
-    token->attribute.dStr = dStringCreate();
-    dStringAddChar(token->attribute.dStr, 'c');
-    symtableDelete(&symTree, *token->attribute.dStr);
-    // Search for 'a' (should not be found)
-    bstSymtable *result = symtableSearch(&symTree, *token->attribute.dStr);
-    if (result != NULL)
+    printf("paramType:%d\n", ((fceData*)result->data)->params[0].dataType);
+    printf("ret:%d\n", ((fceData*)result->data)->returnType);
+
+    bstSymtable *localTree;
+    symtableInit(&localTree);
+    insertLoaclVariables("ahoj", 5, true, true, true, true, &localTree);
+    insertLoaclVariables("cau", 2, true, true, true, true, &localTree);
+    insertLoaclVariables("pa", 8, true, true, true, true, &localTree);
+    insertLoaclVariables("kar", 0, true, true, true, true, &localTree);
+    // vlozil som do funkcie lokalny strom
+    printTree(localTree, 0, "");
+    ((fceData *)result->data)->locals = &localTree;
+
+    DSTRING *str = dStringCreate();
+    dStringAddString(str, "pa");
+
+    if (((fceData *)result->data)->locals != NULL)
     {
-        printf("Variable 'a' found after deletion.\n");
+        printf("Found \n");
+        printf("Address stored in: %p\n", (void *)((fceData *)result->data)->locals);
+
+        // Skontrolujte, či sa správne inicializovalo
+        if (((fceData *)result->data)->locals != NULL)
+        {
+            printf("Local tree is initialized%d\n", ((fceData *)result->data)->returnType);
+        }
+
+        bstSymtable *resLocal = symtableSearch(((fceData *)result->data)->locals, *str);
+        if (resLocal != NULL)
+        {
+            printf("Found in locals %d\n", ((varData*)resLocal->data)->dataType);
+        }
+        else
+        {
+            printf("Not found in locals\n");
+        }
     }
     else
     {
-        printf("Variable 'a' successfully deleted.\n");
+        printf("Not Found \n");
     }
+    //  Create test variables
+    //  varData var1 = {1, true, false, false, true}; // Variable 'a'
+    //  varData var2 = {2, true, true, false, true};  // Variable 'b'
 
-    // Search for 'b' (should be found as it replaces 'a')
-    token->attribute.dStr = dStringCreate();
-    dStringAddChar(token->attribute.dStr, 'b'); // Variable 'b'
-    result = symtableSearch(&symTree, *token->attribute.dStr);
-    if (result != NULL)
-    {
-        printf("Variable 'b' found after deletion of 'a'.\n");
-    }
-    else
-    {
-        printf("Variable 'b' not found after deletion.\n");
-    }
+    // // Create DSTRING keys for the variables
+    // TOKEN *token = createToken();
+    // token->type = T_ID;
+    // token->current_attribute = DSTR;
+    // token->attribute.dStr = dStringCreate();
+    // dStringAddChar(token->attribute.dStr, 'a'); // Variable 'a'
 
+    // // Insert the variable into the symbol table
+    // symtableInsertVar(&symTree, *token->attribute.dStr, &var1);
+    // token->attribute.dStr = dStringCreate();
+    // dStringAddChar(token->attribute.dStr, 'b'); // Variable 'b'
+    // // Insert the second variable into the symbol table
+    // symtableInsertVar(&symTree, *token->attribute.dStr, &var2);
+
+    // token->attribute.dStr = dStringCreate();
+    // dStringAddChar(token->attribute.dStr, 'c'); // Variable 'b'
+    // symtableInsertVar(&symTree, *token->attribute.dStr, &var2);
+
+    // token->attribute.dStr = dStringCreate();
+    // dStringAddChar(token->attribute.dStr, 'd'); // Variable 'b'
+    // symtableInsertVar(&symTree, *token->attribute.dStr, &var2);
+
+    // token->attribute.dStr = dStringCreate();
+    // dStringAddChar(token->attribute.dStr, 1); // Variable 'b'
+    // symtableInsertVar(&symTree, *token->attribute.dStr, &var2);
+
+    // token->attribute.dStr = dStringCreate();
+    // dStringAddChar(token->attribute.dStr, 'g'); // Variable 'b'
+    // symtableInsertVar(&symTree, *token->attribute.dStr, &var2);
+
+    // token->attribute.dStr = dStringCreate();
+    // dStringAddChar(token->attribute.dStr, 'h'); // Variable 'b'
+    // symtableInsertVar(&symTree, *token->attribute.dStr, &var2);
+
+    // token->attribute.dStr = dStringCreate();
+    // dStringAddString(token->attribute.dStr, "ifj");
+    // symtableInsertVar(&symTree, *token->attribute.dStr, &var2);
+
+    // printTree(symTree, 0, "");
+    // // Delete the root node (variable 'a')
+    // token->attribute.dStr = dStringCreate();
+    // dStringAddChar(token->attribute.dStr, 'c');
+    // symtableDelete(&symTree, *token->attribute.dStr);
+    // // Search for 'a' (should not be found)
+    // bstSymtable *result = symtableSearch(&symTree, *token->attribute.dStr);
+    // if (result != NULL)
+    // {
+    //     printf("Variable 'a' found after deletion.\n");
+    // }
+    // else
+    // {
+    //     printf("Variable 'a' successfully deleted.\n");
+    // }
+
+    // // Search for 'b' (should be found as it replaces 'a')
+    // token->attribute.dStr = dStringCreate();
+    // dStringAddChar(token->attribute.dStr, 'b'); // Variable 'b'
+    // result = symtableSearch(&symTree, *token->attribute.dStr);
+    // if (result != NULL)
+    // {
+    //     printf("Variable 'b' found after deletion of 'a'.\n");
+    // }
+    // else
+    // {
+    //     printf("Variable 'b' not found after deletion.\n");
+    // }
+    // pristup k lokalnym datam fce
+    // varData *cau = ((fceData*)(symTree)->data)->locals;
+    // cau->dataType;
+    // ((varData*)((fceData*)(symTree)->data)->locals)->dataType;
     return 0;
 }
