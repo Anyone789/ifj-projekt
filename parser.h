@@ -19,14 +19,14 @@
 #define NON_TERMINAL_COUNT 26
 #define MAX_RULE_ITEMS 12
 
-#define tLlZigImport -5
+// #define tLlZigImport -5
 #define tLlImport -6
-#define EPS -7
+// #define EPS -7
 #define tLlDot -8
-#define tLlComm -9
+// #define tLlComm -9
 #define EXP -10
 
-// global variable for
+// global variable to let know sematic alysis that variable can be also null
 extern bool nullType;
 
 // enumerator for all terminals in LL1 table
@@ -113,17 +113,35 @@ void pushRule(TStack *parserStack, int rule);
 /*
     @brief  function that converts token from scanner to index in LL table
     @param *token token to convert to index in
-    @return index of token in LL table,
-    @return -1 when [
-    @return -2 when ]
-    @return -3 when ?
-    @return -4 when EOF = \0
+    @return index of token in LL table based on enumrator,
+    @return -6 when TOKEN = T_KEYWOR.atribute = import
+    @return -8 when TOKEN  = T_DO
  */
 int convertTokenToIndex(TOKEN *token);
-/*
-    @brief  function that parses whole file
-    @param  *parserStack  stack to push to
-    @return none
+/**
+ * @brief Parses tokens from the input and processes them based on LL(1) grammar rules.
+ *
+ * This function takes a stack as input, processes tokens from the input using
+ * the LL(1) parsing method, and modifies the stack accordingly. It handles
+ * terminals, non-terminals, special cases, and expressions. Errors in syntax
+ * result in termination of the program with a syntax error code.
+ *
+ * @param parserStack Pointer to the stack used for parsing. The stack contains
+ *        grammar rules and tokens for processing.
+ *
+ * @details
+ * - Reads tokens using `getToken()`.
+ * - Converts tokens to indexes using `convertTokenToIndex()`.
+ * - Uses an LL table (`llTable`) for processing grammar rules.
+ * - Handles expressions through the `analyzeExp()` function when encountering
+ *   expression-related non-terminals.
+ * - If a syntax error is encountered, the program exits with `SYNTAX_ERROR`.
+ * - Special cases:
+ *   - Handles `nullType` when encountering the `NULL` token.
+ *   - Toggles `inFce` when processing an `if` statement token (`tLlIf`).
+ *
+ * @return void This function does not return a value.
+ *
  */
 void parserIn(TStack *parserStack);
 #endif

@@ -1,16 +1,14 @@
 // header file for parser for ifj24
 // authors: Samuel Kundrat
 // created: 11.11.2024
-// edited: 16.11.2024
+// edited: 17.11.2024
 
-// komentar pridat
 #include "parser.h"
 
 bool nullType = false;
-//
+// PARSING RULES
 ProductionRule llRules[] =
     {
-        // eof and epsilon rules are temporary
         {nLlProgram, {nLlPrologue, nLlProgramBody, EOF}},
         {nLlPrologue, {tLlConst, tLlIfj, tLlEqual, tLlImport, tLlLeftRoundBracket, tLlString, tLlRightRoundBracket, tLlSemicolon}},
         {nLlProgramBody, {nLlFunctDef, nLlProgramBody}},
@@ -90,31 +88,8 @@ int llTable[NON_TERMINAL_COUNT][TERMINAL_COUNT] = {
 
 int parsIt(TStack *parserStack)
 {
-    // TOKEN *token;
-    // int top;
-    // int index;
-
     stackInit(parserStack);
-    // pushes EOF to the stack bacause we skipped first rule, because every programm in ifj24 has to start with prologue
-    // stackPush(parserStack, (void *)(intptr_t)EOF);
-
-    //  push for the first NONTERMINAL <program> => beginning of the parsing PHAZE
-    // stackPush(parserStack, (void *)(intptr_t)nLlProgram); // Cast enum to integer (intptr_t) to store in stack
-    // top = *(int *)(parserStack->stackTop);
-
-    // stackPop(parserStack);
-    //  printf("P%d.\n", stackIsEmpty(parserStack));
-    //  token = getToken();
-    //  index = convertTokenToIndex(token);
     pushRule(parserStack, llTable[0][0]);
-
-    // index = convertTokenToIndex(token);
-    // printf(" | %d je index pravidlo je: %d\n ", index, llTable[top % 100][index]);
-    // top = *(int *)(parserStack->stackTop);
-    // printf("Top je: %d\n", top);
-
-    // stackPrint(parserStack);
-
     parserIn(parserStack);
     return 1;
 }
@@ -122,11 +97,12 @@ int parsIt(TStack *parserStack)
 void pushRule(TStack *parserStack, int rule)
 {
     int i = MAX_RULE_ITEMS - 1;
+    // loop that pushes whole right side of rule to the stack without 0
     while (i >= 0)
     {
-
         if ((intptr_t)llRules[rule].production[i] == 0)
         {
+            // condition to push terminal with enum = 0 to the stack
             if ((rule == 1 && i == 0) || (rule == 37 && i == 0))
             {
                 stackPush(parserStack, (void *)(intptr_t)llRules[rule].production[i]);
@@ -135,7 +111,6 @@ void pushRule(TStack *parserStack, int rule)
             }
             else
             {
-
                 i--;
                 continue;
             }
@@ -148,6 +123,7 @@ void pushRule(TStack *parserStack, int rule)
 
 int convertTokenToIndex(TOKEN *token)
 {
+    // decoder from token enumerator to parser enumerator
     switch (token->type)
     {
     case T_KEYWORD:
@@ -240,10 +216,6 @@ int convertTokenToIndex(TOKEN *token)
         return tLlFloat;
         break;
     case T_STR:
-        // if (strcmp(token->attribute.dStr->str, "ifj24.zig") == 0)
-        // {
-        //     return tLlZigImport;
-        // }
         return tLlString;
         break;
     case T_PLUS:
@@ -287,16 +259,15 @@ int convertTokenToIndex(TOKEN *token)
     case T_QUESTION_MK:
         return tLlQuestionMark;
         break;
-        // built in function
     case T_DOT:
         return tLlDot;
         break;
     case T_COMMA:
         return tLlComma;
         break;
-    // netusim co je import
+    // netusim co je import opyatat sa
     case T_IMPORT:
-        break;
+        exit(SYNTAX_ERROR);
     case T_PIPE:
         return tLlPipe;
     case T_EOF:
@@ -305,7 +276,6 @@ int convertTokenToIndex(TOKEN *token)
         exit(LEXICAL_ERROR);
         break;
     default:
-        // if token will be anything else than ll table symbol or something unexpected it ll be lexical error just for now
         exit(SYNTAX_ERROR);
         break;
     }
@@ -320,27 +290,31 @@ void parserIn(TStack *parserStack)
     token = getToken();
     literal = convertTokenToIndex(token);
 
+    // loop for whole parsing phaze, loops till EOF or error
     while (literal != EOF)
     {
-
+        // top is top value from the stack
         top = *(int *)(parserStack->stackTop);
         printf("som tu\n");
         printf("top: %d\n", top);
         printf("literal: %d\n", literal);
         stackPrint(parserStack);
 
+        // condition which sets global variable to tru to let exprssion parsing now that we are parsing if condition expression
         if (literal == tLlIf)
         {
             inFce = true;
         }
 
         printf("==================76==========\n");
+        // terminal part
         if ((top >= 0 && top <= TERMINAL_COUNT - 1) || (top <= -1 && top >= -8))
         {
 
             printf("NA VSTUPE JE TERMINAL\n");
             printf("top: %d\n", top);
             printf("literal: %d\n", literal);
+            // END OF PARSING
             if (top == -1 && literal == 21)
             {
                 stackPop(parserStack);
@@ -365,16 +339,20 @@ void parserIn(TStack *parserStack)
             literal = convertTokenToIndex(token);
             printf("sdads");
         }
+        // none terminal phaze, pops nonterminal from stack and pushes right side of specific rule to it
         else if (top >= 100 && top <= 122)
         {
             printf("-------------top: %d\n", top);
             printf("literal: %d\n", literal);
+            // null type part
+            // this condition checks if there is ? before data type and sets global variable nullType to true to let semantic analizator let know
             if (top == 105 && literal == 28)
             {
                 nullType = true;
                 printf("ID moze byt aj NULL\n");
                 token = getToken();
                 literal = convertTokenToIndex(token);
+                // checker if user isnt using null or void with null typr indicator
                 if (literal == 26 || literal == 27)
                 {
                     printf("void alebo null nemoze byt null");
@@ -383,7 +361,7 @@ void parserIn(TStack *parserStack)
             }
             else
             {
-                // printf("ID moze byt aj NULL\n");
+                printf("ID moze byt aj NULL\n");
                 nullType = false;
             }
 
@@ -403,6 +381,8 @@ void parserIn(TStack *parserStack)
             pushRule(parserStack, llTable[top % 100][literal]);
             continue;
         }
+        // expression part
+        // uses double pop, because we want to get rid of the exp terminal from stack and first item after it, because expression takes one more token at the end
         else if (top == -10)
         {
             stackPop(parserStack);
@@ -417,12 +397,6 @@ void parserIn(TStack *parserStack)
             //  stackPush(parserStack, (void *)(intptr_t)tLlRightRoundBracket);
             stackPrint(parserStack);
             printf("token po EXP: %d\n", literal);
-            // return;
-            //    zavolat funkciu analyze expression
-            //    urobit vlastny stack
-            //    funkcia vracia 0 ak je dobre a != 0 ak je chyba
-            //    nastav globalnu premennu bool inFce = true; ak je to expression v if alebo while = true, inak false
-            //    zatvorka za exprssion mozno het mozno nie to iste ; ak je priradenie
         }
     }
 }
