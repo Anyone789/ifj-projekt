@@ -398,19 +398,21 @@ void parserIn(TStack *parserStack)
     }
 }
 
-int main(int argc, char **argv)
-{
-    FILE *src;
+// uncomment main for testing
 
-    if ((src = fopen(argv[1], "r")) == NULL)
-    {
-        fprintf(stderr, "The file cannot be opened.");
-        exit(0);
-    }
+// int main(int argc, char **argv)
+// {
+//     FILE *src;
 
-    setSourceFile(src);
-    TStack parserStack;
-    parsIt(&parserStack);
+//     if ((src = fopen(argv[1], "r")) == NULL)
+//     {
+//         fprintf(stderr, "The file cannot be opened.");
+//         exit(0);
+//     }
 
-    return 0;
-}
+//     setSourceFile(src);
+//     TStack parserStack;
+//     parsIt(&parserStack);
+
+//     return 0;
+// }
