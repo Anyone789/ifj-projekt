@@ -1,7 +1,7 @@
 // heafer file for parser for ifj24
 // authors: Samuel Kundrat
 // created: 11.11.2024
-// edited: 12.11.2024
+// edited: 17.11.2024
 
 #ifndef PARSER_H
 #define PARSER_H
@@ -26,6 +26,7 @@
 #define tLlComm -9
 #define EXP -10
 
+// global variable for
 extern bool nullType;
 
 // enumerator for all terminals in LL1 table

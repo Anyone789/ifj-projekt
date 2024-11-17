@@ -234,7 +234,7 @@ int analyzeExp(TStack *expStack, TOKEN *token)
         {
             printf("error");
             // stackDispose(expStack);
-            return SYNTAX_ERROR;
+            exit(SYNTAX_ERROR);
         }
     }
     inFce = false;
