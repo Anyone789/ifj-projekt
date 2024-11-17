@@ -265,9 +265,6 @@ int convertTokenToIndex(TOKEN *token)
     case T_COMMA:
         return tLlComma;
         break;
-    // netusim co je import opyatat sa
-    case T_IMPORT:
-        exit(SYNTAX_ERROR);
     case T_PIPE:
         return tLlPipe;
     case T_EOF:

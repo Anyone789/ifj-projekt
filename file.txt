@@ -16,7 +16,7 @@ ifj.write("Chyba pri nacitani celeho cisla!\n");
 }
 }
 // Pomocna funkce pro dekrementaci celeho cisla o zadane cislo
-pub fn decrement(n: ?i32, m: i32) i32 {
+pub fn decrement(n: ?i32, m: ?i32) i32 {
 return n - m;
 }
 // Definice funkce pro vypocet hodnoty faktorialu
@@ -27,7 +27,7 @@ result = 1;
 } else {
 const decremented_n = decrement(n, 1);
 const temp_result = factorial("sas", a, 33);
-result = n * temp_result;
+result = null;
 }
 return result;
 }

@@ -16,6 +16,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 101
 literal: 0
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 101
 literal: 0
@@ -399,6 +400,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 102
 literal: 1
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 102
 literal: 1
@@ -430,6 +432,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 103
 literal: 1
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 103
 literal: 1
@@ -713,6 +716,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 104
 literal: 14
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 104
 literal: 14
@@ -808,6 +812,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 105
 literal: 26
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 105
 literal: 26
@@ -929,6 +934,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 110
 literal: 23
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 110
 literal: 23
@@ -968,6 +974,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 111
 literal: 23
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 111
 literal: 23
@@ -1009,6 +1016,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 107
 literal: 23
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 107
 literal: 23
@@ -1058,6 +1066,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 121
 literal: 23
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 121
 literal: 23
@@ -1335,6 +1344,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 108
 literal: 7
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 108
 literal: 7
@@ -1386,6 +1396,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 105
 literal: 7
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 105
 literal: 7
@@ -1487,6 +1498,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 109
 literal: 14
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 109
 literal: 14
@@ -1610,6 +1622,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 110
 literal: 0
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 110
 literal: 0
@@ -1649,6 +1662,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 111
 literal: 0
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 111
 literal: 0
@@ -1690,6 +1704,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 118
 literal: 0
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 118
 literal: 0
@@ -1839,6 +1854,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 122
 literal: 15
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 122
 literal: 15
@@ -1926,6 +1942,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 116
 literal: 23
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 116
 literal: 23
@@ -1967,6 +1984,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 107
 literal: 23
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 107
 literal: 23
@@ -2016,6 +2034,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 121
 literal: 23
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 121
 literal: 23
@@ -2293,6 +2312,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 108
 literal: 14
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 108
 literal: 14
@@ -2344,6 +2364,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 105
 literal: 14
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 105
 literal: 14
@@ -2395,6 +2416,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 109
 literal: 14
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 109
 literal: 14
@@ -2518,6 +2540,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 110
 literal: 8
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 110
 literal: 8
@@ -2557,6 +2580,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 111
 literal: 8
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 111
 literal: 8
@@ -2598,6 +2622,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 112
 literal: 8
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 112
 literal: 8
@@ -2898,6 +2923,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 120
 literal: 22
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 120
 literal: 22
@@ -3235,6 +3261,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 110
 literal: 8
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 110
 literal: 8
@@ -3298,6 +3325,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 111
 literal: 8
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 111
 literal: 8
@@ -3363,6 +3391,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 112
 literal: 8
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 112
 literal: 8
@@ -3779,6 +3808,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 120
 literal: 17
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 120
 literal: 17
@@ -3954,6 +3984,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 110
 literal: 23
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 110
 literal: 23
@@ -4041,6 +4072,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 111
 literal: 23
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 111
 literal: 23
@@ -4130,6 +4162,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 107
 literal: 23
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 107
 literal: 23
@@ -4227,6 +4260,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 121
 literal: 23
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 121
 literal: 23
@@ -4744,6 +4778,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 108
 literal: 7
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 108
 literal: 7
@@ -4843,6 +4878,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 105
 literal: 7
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 105
 literal: 7
@@ -5040,6 +5076,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 109
 literal: 14
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 109
 literal: 14
@@ -5307,6 +5344,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 110
 literal: 18
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 110
 literal: 18
@@ -5606,6 +5644,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 110
 literal: 0
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 110
 literal: 0
@@ -5677,6 +5716,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 111
 literal: 0
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 111
 literal: 0
@@ -5750,6 +5790,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 118
 literal: 0
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 118
 literal: 0
@@ -5995,6 +6036,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 122
 literal: 15
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 122
 literal: 15
@@ -6146,6 +6188,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 116
 literal: 3
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 116
 literal: 3
@@ -6219,6 +6262,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 107
 literal: 3
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 107
 literal: 3
@@ -6300,6 +6344,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 121
 literal: 3
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 121
 literal: 3
@@ -6553,6 +6598,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 108
 literal: 4
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 108
 literal: 4
@@ -6716,6 +6762,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 109
 literal: 14
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 109
 literal: 14
@@ -6935,6 +6982,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 110
 literal: 23
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 110
 literal: 23
@@ -7006,6 +7054,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 111
 literal: 23
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 111
 literal: 23
@@ -7079,6 +7128,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 107
 literal: 23
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 107
 literal: 23
@@ -7160,6 +7210,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 121
 literal: 23
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 121
 literal: 23
@@ -7597,6 +7648,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 108
 literal: 7
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 108
 literal: 7
@@ -7680,6 +7732,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 105
 literal: 7
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 105
 literal: 7
@@ -7845,6 +7898,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 109
 literal: 14
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 109
 literal: 14
@@ -8064,6 +8118,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 110
 literal: 23
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 110
 literal: 23
@@ -8135,6 +8190,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 111
 literal: 23
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 111
 literal: 23
@@ -8208,6 +8264,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 107
 literal: 23
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 107
 literal: 23
@@ -8289,6 +8346,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 121
 literal: 23
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 121
 literal: 23
@@ -8726,6 +8784,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 108
 literal: 4
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 108
 literal: 4
@@ -8889,6 +8948,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 109
 literal: 14
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 109
 literal: 14
@@ -9108,6 +9168,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 110
 literal: 18
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 110
 literal: 18
@@ -9235,6 +9296,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 110
 literal: 18
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 110
 literal: 18
@@ -9438,6 +9500,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 110
 literal: 23
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 110
 literal: 23
@@ -9485,6 +9548,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 111
 literal: 23
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 111
 literal: 23
@@ -9534,6 +9598,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 107
 literal: 23
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 107
 literal: 23
@@ -9591,6 +9656,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 121
 literal: 23
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 121
 literal: 23
@@ -9908,6 +9974,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 108
 literal: 7
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 108
 literal: 7
@@ -9967,6 +10034,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 105
 literal: 7
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 105
 literal: 7
@@ -10084,6 +10152,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 109
 literal: 14
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 109
 literal: 14
@@ -10231,6 +10300,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 110
 literal: 18
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 110
 literal: 18
@@ -10310,6 +10380,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 110
 literal: 18
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 110
 literal: 18
@@ -10373,6 +10444,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 102
 literal: 1
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 102
 literal: 1
@@ -10404,6 +10476,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 103
 literal: 1
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 103
 literal: 1
@@ -10687,6 +10760,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 104
 literal: 4
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 104
 literal: 4
@@ -10834,7 +10908,7 @@ Stack (top to bottom):
  Stack size: 9
 sdadssom tu
 top: 105
-literal: 5
+literal: 28
 
 Stack (top to bottom):
 
@@ -10861,7 +10935,8 @@ Stack (top to bottom):
  Stack size: 9
 ==================76==========
 -------------top: 105
-literal: 5
+literal: 28
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 105
 literal: 5
@@ -10971,6 +11046,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 106
 literal: 12
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 106
 literal: 12
@@ -11078,6 +11154,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 104
 literal: 4
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 104
 literal: 4
@@ -11225,7 +11302,7 @@ Stack (top to bottom):
  Stack size: 9
 sdadssom tu
 top: 105
-literal: 5
+literal: 28
 
 Stack (top to bottom):
 
@@ -11252,7 +11329,8 @@ Stack (top to bottom):
  Stack size: 9
 ==================76==========
 -------------top: 105
-literal: 5
+literal: 28
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 105
 literal: 5
@@ -11362,6 +11440,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 106
 literal: 14
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 106
 literal: 14
@@ -11457,6 +11536,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 105
 literal: 5
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 105
 literal: 5
@@ -11578,6 +11658,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 110
 literal: 10
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 110
 literal: 10
@@ -11617,6 +11698,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 111
 literal: 10
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 111
 literal: 10
@@ -11658,6 +11740,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 114
 literal: 10
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 114
 literal: 10
@@ -11741,6 +11824,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 115
 literal: 4
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 115
 literal: 4
@@ -11782,6 +11866,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 116
 literal: 4
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 116
 literal: 4
@@ -11894,6 +11979,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 110
 literal: 18
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 110
 literal: 18
@@ -11957,6 +12043,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 102
 literal: 1
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 102
 literal: 1
@@ -11988,6 +12075,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 103
 literal: 1
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 103
 literal: 1
@@ -12271,6 +12359,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 104
 literal: 4
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 104
 literal: 4
@@ -12446,6 +12535,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 105
 literal: 5
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 105
 literal: 5
@@ -12555,6 +12645,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 106
 literal: 14
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 106
 literal: 14
@@ -12650,6 +12741,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 105
 literal: 5
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 105
 literal: 5
@@ -12771,6 +12863,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 110
 literal: 11
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 110
 literal: 11
@@ -12810,6 +12903,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 111
 literal: 11
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 111
 literal: 11
@@ -12851,6 +12945,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 117
 literal: 11
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 117
 literal: 11
@@ -13000,6 +13095,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 122
 literal: 20
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 122
 literal: 20
@@ -13099,6 +13195,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 105
 literal: 5
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 105
 literal: 5
@@ -13232,6 +13329,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 116
 literal: 5
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 116
 literal: 5
@@ -13344,6 +13442,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 110
 literal: 8
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 110
 literal: 8
@@ -13383,6 +13482,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 111
 literal: 8
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 111
 literal: 8
@@ -13424,6 +13524,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 112
 literal: 8
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 112
 literal: 8
@@ -13707,10 +13808,10 @@ Stack (top to bottom):
  |-------|
  └───────┘
  Stack size: 12
-token po EXP: 17
+token po EXP: 22
 som tu
 top: 120
-literal: 17
+literal: 22
 
 Stack (top to bottom):
 
@@ -13743,11 +13844,12 @@ Stack (top to bottom):
  Stack size: 12
 ==================76==========
 -------------top: 120
-literal: 17
+literal: 22
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 120
-literal: 17
-pravidlo: 39
+literal: 22
+pravidlo: 40
 po pope je stack
 
 Stack (top to bottom):
@@ -13778,6 +13880,216 @@ Stack (top to bottom):
  └───────┘
  Stack size: 11
 som tu
+top: 22
+literal: 22
+
+Stack (top to bottom):
+
+ ┌───────┐
+ │    22 │ <- position 14
+ |-------|
+ │     4 │ <- position 13
+ |-------|
+ │    22 │ <- position 12
+ |-------|
+ │    17 │ <- position 11
+ |-------|
+ │   110 │ <- position 10
+ |-------|
+ │    18 │ <- position 9
+ |-------|
+ │    19 │ <- position 8
+ |-------|
+ │    17 │ <- position 7
+ |-------|
+ │   110 │ <- position 6
+ |-------|
+ │    18 │ <- position 5
+ |-------|
+ │   110 │ <- position 4
+ |-------|
+ │    18 │ <- position 3
+ |-------|
+ │   102 │ <- position 2
+ |-------|
+ │    -1 │ <- position 1
+ |-------|
+ └───────┘
+ Stack size: 14
+==================76==========
+NA VSTUPE JE TERMINAL
+top: 22
+literal: 22
+po pope je stack
+
+Stack (top to bottom):
+
+ ┌───────┐
+ │     4 │ <- position 13
+ |-------|
+ │    22 │ <- position 12
+ |-------|
+ │    17 │ <- position 11
+ |-------|
+ │   110 │ <- position 10
+ |-------|
+ │    18 │ <- position 9
+ |-------|
+ │    19 │ <- position 8
+ |-------|
+ │    17 │ <- position 7
+ |-------|
+ │   110 │ <- position 6
+ |-------|
+ │    18 │ <- position 5
+ |-------|
+ │   110 │ <- position 4
+ |-------|
+ │    18 │ <- position 3
+ |-------|
+ │   102 │ <- position 2
+ |-------|
+ │    -1 │ <- position 1
+ |-------|
+ └───────┘
+ Stack size: 13
+sdadssom tu
+top: 4
+literal: 4
+
+Stack (top to bottom):
+
+ ┌───────┐
+ │     4 │ <- position 13
+ |-------|
+ │    22 │ <- position 12
+ |-------|
+ │    17 │ <- position 11
+ |-------|
+ │   110 │ <- position 10
+ |-------|
+ │    18 │ <- position 9
+ |-------|
+ │    19 │ <- position 8
+ |-------|
+ │    17 │ <- position 7
+ |-------|
+ │   110 │ <- position 6
+ |-------|
+ │    18 │ <- position 5
+ |-------|
+ │   110 │ <- position 4
+ |-------|
+ │    18 │ <- position 3
+ |-------|
+ │   102 │ <- position 2
+ |-------|
+ │    -1 │ <- position 1
+ |-------|
+ └───────┘
+ Stack size: 13
+==================76==========
+NA VSTUPE JE TERMINAL
+top: 4
+literal: 4
+po pope je stack
+
+Stack (top to bottom):
+
+ ┌───────┐
+ │    22 │ <- position 12
+ |-------|
+ │    17 │ <- position 11
+ |-------|
+ │   110 │ <- position 10
+ |-------|
+ │    18 │ <- position 9
+ |-------|
+ │    19 │ <- position 8
+ |-------|
+ │    17 │ <- position 7
+ |-------|
+ │   110 │ <- position 6
+ |-------|
+ │    18 │ <- position 5
+ |-------|
+ │   110 │ <- position 4
+ |-------|
+ │    18 │ <- position 3
+ |-------|
+ │   102 │ <- position 2
+ |-------|
+ │    -1 │ <- position 1
+ |-------|
+ └───────┘
+ Stack size: 12
+sdadssom tu
+top: 22
+literal: 22
+
+Stack (top to bottom):
+
+ ┌───────┐
+ │    22 │ <- position 12
+ |-------|
+ │    17 │ <- position 11
+ |-------|
+ │   110 │ <- position 10
+ |-------|
+ │    18 │ <- position 9
+ |-------|
+ │    19 │ <- position 8
+ |-------|
+ │    17 │ <- position 7
+ |-------|
+ │   110 │ <- position 6
+ |-------|
+ │    18 │ <- position 5
+ |-------|
+ │   110 │ <- position 4
+ |-------|
+ │    18 │ <- position 3
+ |-------|
+ │   102 │ <- position 2
+ |-------|
+ │    -1 │ <- position 1
+ |-------|
+ └───────┘
+ Stack size: 12
+==================76==========
+NA VSTUPE JE TERMINAL
+top: 22
+literal: 22
+po pope je stack
+
+Stack (top to bottom):
+
+ ┌───────┐
+ │    17 │ <- position 11
+ |-------|
+ │   110 │ <- position 10
+ |-------|
+ │    18 │ <- position 9
+ |-------|
+ │    19 │ <- position 8
+ |-------|
+ │    17 │ <- position 7
+ |-------|
+ │   110 │ <- position 6
+ |-------|
+ │    18 │ <- position 5
+ |-------|
+ │   110 │ <- position 4
+ |-------|
+ │    18 │ <- position 3
+ |-------|
+ │   102 │ <- position 2
+ |-------|
+ │    -1 │ <- position 1
+ |-------|
+ └───────┘
+ Stack size: 11
+sdadssom tu
 top: 17
 literal: 17
 
@@ -13871,6 +14183,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 110
 literal: 4
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 110
 literal: 4
@@ -13934,6 +14247,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 111
 literal: 4
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 111
 literal: 4
@@ -13999,6 +14313,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 119
 literal: 4
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 119
 literal: 4
@@ -14200,6 +14515,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 116
 literal: 5
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 116
 literal: 5
@@ -14340,6 +14656,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 110
 literal: 18
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 110
 literal: 18
@@ -14543,6 +14860,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 110
 literal: 0
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 110
 literal: 0
@@ -14590,6 +14908,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 111
 literal: 0
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 111
 literal: 0
@@ -14639,6 +14958,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 118
 literal: 0
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 118
 literal: 0
@@ -14812,6 +15132,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 122
 literal: 15
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 122
 literal: 15
@@ -14915,6 +15236,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 116
 literal: 3
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 116
 literal: 3
@@ -14964,6 +15286,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 107
 literal: 3
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 107
 literal: 3
@@ -15021,6 +15344,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 121
 literal: 3
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 121
 literal: 3
@@ -15202,6 +15526,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 108
 literal: 4
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 108
 literal: 4
@@ -15317,6 +15642,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 109
 literal: 12
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 109
 literal: 12
@@ -15432,6 +15758,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 108
 literal: 5
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 108
 literal: 5
@@ -15491,6 +15818,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 105
 literal: 5
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 105
 literal: 5
@@ -15608,6 +15936,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 109
 literal: 14
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 109
 literal: 14
@@ -15755,6 +16084,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 110
 literal: 0
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 110
 literal: 0
@@ -15802,6 +16132,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 111
 literal: 0
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 111
 literal: 0
@@ -15851,6 +16182,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 118
 literal: 0
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 118
 literal: 0
@@ -16024,6 +16356,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 122
 literal: 15
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 122
 literal: 15
@@ -16127,6 +16460,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 116
 literal: 3
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 116
 literal: 3
@@ -16176,6 +16510,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 107
 literal: 3
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 107
 literal: 3
@@ -16233,6 +16568,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 121
 literal: 3
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 121
 literal: 3
@@ -16386,6 +16722,300 @@ Stack (top to bottom):
  Stack size: 9
 sdadssom tu
 top: 108
+literal: 7
+
+Stack (top to bottom):
+
+ ┌───────┐
+ │   108 │ <- position 9
+ |-------|
+ │    14 │ <- position 8
+ |-------|
+ │    16 │ <- position 7
+ |-------|
+ │   110 │ <- position 6
+ |-------|
+ │    18 │ <- position 5
+ |-------|
+ │   110 │ <- position 4
+ |-------|
+ │    18 │ <- position 3
+ |-------|
+ │   102 │ <- position 2
+ |-------|
+ │    -1 │ <- position 1
+ |-------|
+ └───────┘
+ Stack size: 9
+==================76==========
+-------------top: 108
+literal: 7
+ID moze byt aj NULL
+NA VSTUPE JE NETERMINAL ALEBO SPECIAL
+top: 108
+literal: 7
+pravidlo: 16
+po pope je stack
+
+Stack (top to bottom):
+
+ ┌───────┐
+ │    14 │ <- position 8
+ |-------|
+ │    16 │ <- position 7
+ |-------|
+ │   110 │ <- position 6
+ |-------|
+ │    18 │ <- position 5
+ |-------|
+ │   110 │ <- position 4
+ |-------|
+ │    18 │ <- position 3
+ |-------|
+ │   102 │ <- position 2
+ |-------|
+ │    -1 │ <- position 1
+ |-------|
+ └───────┘
+ Stack size: 8
+som tu
+top: 105
+literal: 7
+
+Stack (top to bottom):
+
+ ┌───────┐
+ │   105 │ <- position 10
+ |-------|
+ │   109 │ <- position 9
+ |-------|
+ │    14 │ <- position 8
+ |-------|
+ │    16 │ <- position 7
+ |-------|
+ │   110 │ <- position 6
+ |-------|
+ │    18 │ <- position 5
+ |-------|
+ │   110 │ <- position 4
+ |-------|
+ │    18 │ <- position 3
+ |-------|
+ │   102 │ <- position 2
+ |-------|
+ │    -1 │ <- position 1
+ |-------|
+ └───────┘
+ Stack size: 10
+==================76==========
+-------------top: 105
+literal: 7
+ID moze byt aj NULL
+NA VSTUPE JE NETERMINAL ALEBO SPECIAL
+top: 105
+literal: 7
+pravidlo: 46
+po pope je stack
+
+Stack (top to bottom):
+
+ ┌───────┐
+ │   109 │ <- position 9
+ |-------|
+ │    14 │ <- position 8
+ |-------|
+ │    16 │ <- position 7
+ |-------|
+ │   110 │ <- position 6
+ |-------|
+ │    18 │ <- position 5
+ |-------|
+ │   110 │ <- position 4
+ |-------|
+ │    18 │ <- position 3
+ |-------|
+ │   102 │ <- position 2
+ |-------|
+ │    -1 │ <- position 1
+ |-------|
+ └───────┘
+ Stack size: 9
+som tu
+top: 7
+literal: 7
+
+Stack (top to bottom):
+
+ ┌───────┐
+ │     7 │ <- position 10
+ |-------|
+ │   109 │ <- position 9
+ |-------|
+ │    14 │ <- position 8
+ |-------|
+ │    16 │ <- position 7
+ |-------|
+ │   110 │ <- position 6
+ |-------|
+ │    18 │ <- position 5
+ |-------|
+ │   110 │ <- position 4
+ |-------|
+ │    18 │ <- position 3
+ |-------|
+ │   102 │ <- position 2
+ |-------|
+ │    -1 │ <- position 1
+ |-------|
+ └───────┘
+ Stack size: 10
+==================76==========
+NA VSTUPE JE TERMINAL
+top: 7
+literal: 7
+po pope je stack
+
+Stack (top to bottom):
+
+ ┌───────┐
+ │   109 │ <- position 9
+ |-------|
+ │    14 │ <- position 8
+ |-------|
+ │    16 │ <- position 7
+ |-------|
+ │   110 │ <- position 6
+ |-------|
+ │    18 │ <- position 5
+ |-------|
+ │   110 │ <- position 4
+ |-------|
+ │    18 │ <- position 3
+ |-------|
+ │   102 │ <- position 2
+ |-------|
+ │    -1 │ <- position 1
+ |-------|
+ └───────┘
+ Stack size: 9
+sdadssom tu
+top: 109
+literal: 12
+
+Stack (top to bottom):
+
+ ┌───────┐
+ │   109 │ <- position 9
+ |-------|
+ │    14 │ <- position 8
+ |-------|
+ │    16 │ <- position 7
+ |-------|
+ │   110 │ <- position 6
+ |-------|
+ │    18 │ <- position 5
+ |-------|
+ │   110 │ <- position 4
+ |-------|
+ │    18 │ <- position 3
+ |-------|
+ │   102 │ <- position 2
+ |-------|
+ │    -1 │ <- position 1
+ |-------|
+ └───────┘
+ Stack size: 9
+==================76==========
+-------------top: 109
+literal: 12
+ID moze byt aj NULL
+NA VSTUPE JE NETERMINAL ALEBO SPECIAL
+top: 109
+literal: 12
+pravidlo: 17
+po pope je stack
+
+Stack (top to bottom):
+
+ ┌───────┐
+ │    14 │ <- position 8
+ |-------|
+ │    16 │ <- position 7
+ |-------|
+ │   110 │ <- position 6
+ |-------|
+ │    18 │ <- position 5
+ |-------|
+ │   110 │ <- position 4
+ |-------|
+ │    18 │ <- position 3
+ |-------|
+ │   102 │ <- position 2
+ |-------|
+ │    -1 │ <- position 1
+ |-------|
+ └───────┘
+ Stack size: 8
+som tu
+top: 12
+literal: 12
+
+Stack (top to bottom):
+
+ ┌───────┐
+ │    12 │ <- position 10
+ |-------|
+ │   108 │ <- position 9
+ |-------|
+ │    14 │ <- position 8
+ |-------|
+ │    16 │ <- position 7
+ |-------|
+ │   110 │ <- position 6
+ |-------|
+ │    18 │ <- position 5
+ |-------|
+ │   110 │ <- position 4
+ |-------|
+ │    18 │ <- position 3
+ |-------|
+ │   102 │ <- position 2
+ |-------|
+ │    -1 │ <- position 1
+ |-------|
+ └───────┘
+ Stack size: 10
+==================76==========
+NA VSTUPE JE TERMINAL
+top: 12
+literal: 12
+po pope je stack
+
+Stack (top to bottom):
+
+ ┌───────┐
+ │   108 │ <- position 9
+ |-------|
+ │    14 │ <- position 8
+ |-------|
+ │    16 │ <- position 7
+ |-------|
+ │   110 │ <- position 6
+ |-------|
+ │    18 │ <- position 5
+ |-------|
+ │   110 │ <- position 4
+ |-------|
+ │    18 │ <- position 3
+ |-------|
+ │   102 │ <- position 2
+ |-------|
+ │    -1 │ <- position 1
+ |-------|
+ └───────┘
+ Stack size: 9
+sdadssom tu
+top: 108
 literal: 4
 
 Stack (top to bottom):
@@ -16414,6 +17044,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 108
 literal: 4
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 108
 literal: 4
@@ -16501,6 +17132,300 @@ Stack (top to bottom):
  Stack size: 9
 sdadssom tu
 top: 109
+literal: 12
+
+Stack (top to bottom):
+
+ ┌───────┐
+ │   109 │ <- position 9
+ |-------|
+ │    14 │ <- position 8
+ |-------|
+ │    16 │ <- position 7
+ |-------|
+ │   110 │ <- position 6
+ |-------|
+ │    18 │ <- position 5
+ |-------|
+ │   110 │ <- position 4
+ |-------|
+ │    18 │ <- position 3
+ |-------|
+ │   102 │ <- position 2
+ |-------|
+ │    -1 │ <- position 1
+ |-------|
+ └───────┘
+ Stack size: 9
+==================76==========
+-------------top: 109
+literal: 12
+ID moze byt aj NULL
+NA VSTUPE JE NETERMINAL ALEBO SPECIAL
+top: 109
+literal: 12
+pravidlo: 17
+po pope je stack
+
+Stack (top to bottom):
+
+ ┌───────┐
+ │    14 │ <- position 8
+ |-------|
+ │    16 │ <- position 7
+ |-------|
+ │   110 │ <- position 6
+ |-------|
+ │    18 │ <- position 5
+ |-------|
+ │   110 │ <- position 4
+ |-------|
+ │    18 │ <- position 3
+ |-------|
+ │   102 │ <- position 2
+ |-------|
+ │    -1 │ <- position 1
+ |-------|
+ └───────┘
+ Stack size: 8
+som tu
+top: 12
+literal: 12
+
+Stack (top to bottom):
+
+ ┌───────┐
+ │    12 │ <- position 10
+ |-------|
+ │   108 │ <- position 9
+ |-------|
+ │    14 │ <- position 8
+ |-------|
+ │    16 │ <- position 7
+ |-------|
+ │   110 │ <- position 6
+ |-------|
+ │    18 │ <- position 5
+ |-------|
+ │   110 │ <- position 4
+ |-------|
+ │    18 │ <- position 3
+ |-------|
+ │   102 │ <- position 2
+ |-------|
+ │    -1 │ <- position 1
+ |-------|
+ └───────┘
+ Stack size: 10
+==================76==========
+NA VSTUPE JE TERMINAL
+top: 12
+literal: 12
+po pope je stack
+
+Stack (top to bottom):
+
+ ┌───────┐
+ │   108 │ <- position 9
+ |-------|
+ │    14 │ <- position 8
+ |-------|
+ │    16 │ <- position 7
+ |-------|
+ │   110 │ <- position 6
+ |-------|
+ │    18 │ <- position 5
+ |-------|
+ │   110 │ <- position 4
+ |-------|
+ │    18 │ <- position 3
+ |-------|
+ │   102 │ <- position 2
+ |-------|
+ │    -1 │ <- position 1
+ |-------|
+ └───────┘
+ Stack size: 9
+sdadssom tu
+top: 108
+literal: 5
+
+Stack (top to bottom):
+
+ ┌───────┐
+ │   108 │ <- position 9
+ |-------|
+ │    14 │ <- position 8
+ |-------|
+ │    16 │ <- position 7
+ |-------|
+ │   110 │ <- position 6
+ |-------|
+ │    18 │ <- position 5
+ |-------|
+ │   110 │ <- position 4
+ |-------|
+ │    18 │ <- position 3
+ |-------|
+ │   102 │ <- position 2
+ |-------|
+ │    -1 │ <- position 1
+ |-------|
+ └───────┘
+ Stack size: 9
+==================76==========
+-------------top: 108
+literal: 5
+ID moze byt aj NULL
+NA VSTUPE JE NETERMINAL ALEBO SPECIAL
+top: 108
+literal: 5
+pravidlo: 16
+po pope je stack
+
+Stack (top to bottom):
+
+ ┌───────┐
+ │    14 │ <- position 8
+ |-------|
+ │    16 │ <- position 7
+ |-------|
+ │   110 │ <- position 6
+ |-------|
+ │    18 │ <- position 5
+ |-------|
+ │   110 │ <- position 4
+ |-------|
+ │    18 │ <- position 3
+ |-------|
+ │   102 │ <- position 2
+ |-------|
+ │    -1 │ <- position 1
+ |-------|
+ └───────┘
+ Stack size: 8
+som tu
+top: 105
+literal: 5
+
+Stack (top to bottom):
+
+ ┌───────┐
+ │   105 │ <- position 10
+ |-------|
+ │   109 │ <- position 9
+ |-------|
+ │    14 │ <- position 8
+ |-------|
+ │    16 │ <- position 7
+ |-------|
+ │   110 │ <- position 6
+ |-------|
+ │    18 │ <- position 5
+ |-------|
+ │   110 │ <- position 4
+ |-------|
+ │    18 │ <- position 3
+ |-------|
+ │   102 │ <- position 2
+ |-------|
+ │    -1 │ <- position 1
+ |-------|
+ └───────┘
+ Stack size: 10
+==================76==========
+-------------top: 105
+literal: 5
+ID moze byt aj NULL
+NA VSTUPE JE NETERMINAL ALEBO SPECIAL
+top: 105
+literal: 5
+pravidlo: 8
+po pope je stack
+
+Stack (top to bottom):
+
+ ┌───────┐
+ │   109 │ <- position 9
+ |-------|
+ │    14 │ <- position 8
+ |-------|
+ │    16 │ <- position 7
+ |-------|
+ │   110 │ <- position 6
+ |-------|
+ │    18 │ <- position 5
+ |-------|
+ │   110 │ <- position 4
+ |-------|
+ │    18 │ <- position 3
+ |-------|
+ │   102 │ <- position 2
+ |-------|
+ │    -1 │ <- position 1
+ |-------|
+ └───────┘
+ Stack size: 9
+som tu
+top: 5
+literal: 5
+
+Stack (top to bottom):
+
+ ┌───────┐
+ │     5 │ <- position 10
+ |-------|
+ │   109 │ <- position 9
+ |-------|
+ │    14 │ <- position 8
+ |-------|
+ │    16 │ <- position 7
+ |-------|
+ │   110 │ <- position 6
+ |-------|
+ │    18 │ <- position 5
+ |-------|
+ │   110 │ <- position 4
+ |-------|
+ │    18 │ <- position 3
+ |-------|
+ │   102 │ <- position 2
+ |-------|
+ │    -1 │ <- position 1
+ |-------|
+ └───────┘
+ Stack size: 10
+==================76==========
+NA VSTUPE JE TERMINAL
+top: 5
+literal: 5
+po pope je stack
+
+Stack (top to bottom):
+
+ ┌───────┐
+ │   109 │ <- position 9
+ |-------|
+ │    14 │ <- position 8
+ |-------|
+ │    16 │ <- position 7
+ |-------|
+ │   110 │ <- position 6
+ |-------|
+ │    18 │ <- position 5
+ |-------|
+ │   110 │ <- position 4
+ |-------|
+ │    18 │ <- position 3
+ |-------|
+ │   102 │ <- position 2
+ |-------|
+ │    -1 │ <- position 1
+ |-------|
+ └───────┘
+ Stack size: 9
+sdadssom tu
+top: 109
 literal: 14
 
 Stack (top to bottom):
@@ -16529,6 +17454,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 109
 literal: 14
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 109
 literal: 14
@@ -16676,6 +17602,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 110
 literal: 4
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 110
 literal: 4
@@ -16723,6 +17650,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 111
 literal: 4
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 111
 literal: 4
@@ -16772,6 +17700,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 119
 literal: 4
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 119
 literal: 4
@@ -16901,7 +17830,7 @@ Stack (top to bottom):
  Stack size: 7
 sdadssom tu
 top: 116
-literal: 4
+literal: 27
 
 Stack (top to bottom):
 
@@ -16924,11 +17853,12 @@ Stack (top to bottom):
  Stack size: 7
 ==================76==========
 -------------top: 116
-literal: 4
+literal: 27
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 116
-literal: 4
-pravidlo: 35
+literal: 27
+pravidlo: 34
 po pope je stack
 
 Stack (top to bottom):
@@ -16949,13 +17879,13 @@ Stack (top to bottom):
  └───────┘
  Stack size: 6
 som tu
-top: -10
-literal: 4
+top: 27
+literal: 27
 
 Stack (top to bottom):
 
  ┌───────┐
- │   -10 │ <- position 8
+ │    27 │ <- position 8
  |-------|
  │    16 │ <- position 7
  |-------|
@@ -16974,43 +17904,59 @@ Stack (top to bottom):
  └───────┘
  Stack size: 8
 ==================76==========
-bude exprssion:   0
-0
-13
-stack size:1
+NA VSTUPE JE TERMINAL
+top: 27
+literal: 27
+po pope je stack
 
-prec[13][12]
-<
-3
+Stack (top to bottom):
 
-stack size:2
+ ┌───────┐
+ │    16 │ <- position 7
+ |-------|
+ │   110 │ <- position 6
+ |-------|
+ │    18 │ <- position 5
+ |-------|
+ │   110 │ <- position 4
+ |-------|
+ │    18 │ <- position 3
+ |-------|
+ │   102 │ <- position 2
+ |-------|
+ │    -1 │ <- position 1
+ |-------|
+ └───────┘
+ Stack size: 7
+sdadssom tu
+top: 16
+literal: 16
 
-prec[12][0]
->
-stack size:2
+Stack (top to bottom):
 
-prec[13][0]
-<
-0
+ ┌───────┐
+ │    16 │ <- position 7
+ |-------|
+ │   110 │ <- position 6
+ |-------|
+ │    18 │ <- position 5
+ |-------|
+ │   110 │ <- position 4
+ |-------|
+ │    18 │ <- position 3
+ |-------|
+ │   102 │ <- position 2
+ |-------|
+ │    -1 │ <- position 1
+ |-------|
+ └───────┘
+ Stack size: 7
+==================76==========
+NA VSTUPE JE TERMINAL
+top: 16
+literal: 16
+po pope je stack
 
-stack size:3
-
-prec[0][12]
-<
-3
-
-stack size:4
-
-prec[12][13]
->
-stack size:4
-
-prec[0][13]
->
-stack size:2
-
-prec[13][13]
-end
 Stack (top to bottom):
 
  ┌───────┐
@@ -17028,8 +17974,7 @@ Stack (top to bottom):
  |-------|
  └───────┘
  Stack size: 6
-token po EXP: 18
-som tu
+sdadssom tu
 top: 110
 literal: 18
 
@@ -17053,6 +17998,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 110
 literal: 18
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 110
 literal: 18
@@ -17132,6 +18078,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 110
 literal: 10
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 110
 literal: 10
@@ -17171,6 +18118,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 111
 literal: 10
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 111
 literal: 10
@@ -17212,6 +18160,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 114
 literal: 10
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 114
 literal: 10
@@ -17295,6 +18244,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 115
 literal: 4
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 115
 literal: 4
@@ -17336,6 +18286,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 116
 literal: 4
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 116
 literal: 4
@@ -17428,6 +18379,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 110
 literal: 18
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 110
 literal: 18
@@ -17491,6 +18443,7 @@ Stack (top to bottom):
 ==================76==========
 -------------top: 102
 literal: 21
+ID moze byt aj NULL
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 102
 literal: 21

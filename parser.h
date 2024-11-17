@@ -107,7 +107,7 @@ typedef struct
     @brief that pushes right side of the rule to the stack
     @param *parserStack  stack to push
     @param rule  index of rule in LL1 table
-    @return NONE
+    @return void This function does not return a value.
 */
 void pushRule(TStack *parserStack, int rule);
 /*
