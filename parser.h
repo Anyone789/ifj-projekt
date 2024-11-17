@@ -15,7 +15,7 @@
 #include <stdbool.h>
 #include <stdlib.h>
 
-#define TERMINAL_COUNT 28
+#define TERMINAL_COUNT 29
 #define NON_TERMINAL_COUNT 26
 #define MAX_RULE_ITEMS 12
 
