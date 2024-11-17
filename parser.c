@@ -6,6 +6,7 @@
 // komentar pridat
 #include "parser.h"
 
+bool nullType = false;
 //
 ProductionRule llRules[] =
     {
@@ -357,6 +358,25 @@ void parserIn(TStack *parserStack)
         }
         else if (top >= 100 && top <= 122)
         {
+            printf("-------------top: %d\n", top);
+            printf("literal: %d\n", literal);
+            if (top == 105 && literal == 28)
+            {
+                nullType = true;
+                printf("ID moze byt aj NULL\n");
+                token = getToken();
+                literal = convertTokenToIndex(token);
+                if (literal == 26 || literal == 27)
+                {
+                    printf("void alebo null nemoze byt null");
+                    exit(SYNTAX_ERROR);
+                }
+            }
+            else
+            {
+                // printf("ID moze byt aj NULL\n");
+                nullType = false;
+            }
 
             printf("NA VSTUPE JE NETERMINAL ALEBO SPECIAL\n");
             printf("top: %d\n", top);

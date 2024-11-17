@@ -15,17 +15,18 @@
 #include <stdbool.h>
 #include <stdlib.h>
 
-#define TERMINAL_COUNT 27
-#define NON_TERMINAL_COUNT 25
+#define TERMINAL_COUNT 28
+#define NON_TERMINAL_COUNT 26
 #define MAX_RULE_ITEMS 12
 
-#define tLlQuestionMark -4
 #define tLlZigImport -5
 #define tLlImport -6
 #define EPS -7
 #define tLlDot -8
 #define tLlComm -9
 #define EXP -10
+
+extern bool nullType;
 
 // enumerator for all terminals in LL1 table
 typedef enum
@@ -57,6 +58,8 @@ typedef enum
     tLlleftSquareBracket,
     tLlrightSquareBracket,
     tLlVoid,
+    tLlNull,
+    tLlQuestionMark,
 
 } Terminal;
 
@@ -86,6 +89,7 @@ typedef enum
     nLlNoNullBody,
     nLlFunctId,
     nLlDefType,
+    nLlNull,
 
 } NonTerminals;
 
