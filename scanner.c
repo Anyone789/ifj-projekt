@@ -3,14 +3,9 @@
 // Last Edit: 1.11.2024
 
 
-#include <stdbool.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <ctype.h>
-#include <string.h>
+
 #include "scanner.h"
-#include "dstring.h"
-#include "errorCodes.h"
+
 
 FILE *src;
 TOKEN token;

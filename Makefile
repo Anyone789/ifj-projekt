@@ -5,7 +5,7 @@ CC = gcc
 CFLAGS = -Wall -Wextra -std=c11
 
 # Zoznam zdrojových súborov a objektových súborov
-SRC = expression.c stack.c scanner.c dstring.c
+SRC = expression.c stack.c scanner.c dstring.c symtable.c
 OBJ = $(SRC:.c=.o)
 
 # Výchozí cieľ - preklad kompletného programu

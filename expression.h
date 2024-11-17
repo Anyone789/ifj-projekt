@@ -4,6 +4,7 @@
 #include "scanner.h"
 #include "stack.h"
 #include "errorCodes.h"
+#include "symtable.h"
 #define PrecTableSize 14
 
 typedef enum {
@@ -38,11 +39,13 @@ typedef struct elmExpression{
     
     int type; // Id
     int dataType;
-    bool terminal; 
+    bool terminal;
+    DSTRING *key; 
 }ElmExp;
 
 int analyzeExp(TStack *expStack, TOKEN *token);
 int initExpStack(TStack *expStack);
 char getSign(TStack *expStack);
 int convertToIndex(int value);
+int reduce(TStack *expStack);
 #endif

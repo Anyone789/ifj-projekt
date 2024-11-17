@@ -3,11 +3,8 @@
 // Author(s): Václav Bergman, Tomáš Hrbáč
 // Last Edited: 31.10.2024
 
-#include <string.h>
-#include <stdlib.h>
-#include <stdio.h>
+
 #include "dstring.h"
-#include "errorCodes.h"
 
 // Dynamic string constructor
 DSTRING *dStringCreate()
