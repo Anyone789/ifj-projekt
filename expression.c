@@ -52,7 +52,7 @@ void checkSem(ElmExp *lOperand, ElmExp *rOperand)
 {
     if (lOperand->dataType != T_ID && rOperand->dataType != T_ID)
     {
-    
+
         if (lOperand->dataType != rOperand->dataType)
         {
             if (lOperand->dataType == T_STR || rOperand->dataType == T_STR)
@@ -71,7 +71,7 @@ void checkSem(ElmExp *lOperand, ElmExp *rOperand)
         // search for id adn cmpr
         if (lOperand->dataType == T_ID && rOperand->dataType != T_ID)
         {
-        
+
             bstSymtable *result = symtableSearch(&symTree, *lOperand->key);
             if (result == NULL)
             {
@@ -118,7 +118,7 @@ void checkSem(ElmExp *lOperand, ElmExp *rOperand)
         }
         else
         {
-            
+
             bstSymtable *lResult = symtableSearch(&symTree, *lOperand->key);
             bstSymtable *rResult = symtableSearch(&symTree, *rOperand->key);
             if (lResult == NULL || rResult == NULL)
@@ -137,7 +137,6 @@ void checkSem(ElmExp *lOperand, ElmExp *rOperand)
                 else
                 {
                     printf("OK");
-
                 }
             }
         }
@@ -166,7 +165,7 @@ int binCheck(TStack *expStack, int operator)
         return SYNTAX_ERROR;
     }
     checkSem(lOperand, rOperand);
-    
+
     return 0;
 }
 
@@ -215,7 +214,8 @@ int analyzeExp(TStack *expStack, TOKEN *token)
         else if (sign == '>')
         {
             printf(">");
-            if(reduce(expStack) == SYNTAX_ERROR){
+            if (reduce(expStack) == SYNTAX_ERROR)
+            {
                 return SYNTAX_ERROR;
             }
         }
@@ -268,103 +268,104 @@ char getSign(TStack *expStack)
     return precTable[((ElmExp *)(stackTopValue->value))->type][convertToIndex(stackInput)];
 }
 
-int reduce(TStack *expStack){
+int reduce(TStack *expStack)
+{
     TStackItem *stackItem = expStack->stackTop;
-            while (((ElmExp *)(stackItem->value))->terminal != true)
-            {
-                stackItem = stackItem->next;
-            }
-            switch (((ElmExp *)(stackItem->value))->type)
-            {
-            case tableIdentifier:
-                ((ElmExp *)(stackItem->value))->terminal = false;
-                break;
-            case tableMultiply:
-                if (binCheck(expStack, tableMultiply) != 0)
-                {
-                    return SYNTAX_ERROR;
-                }
-                stackPop(expStack);
-                stackPop(expStack);
-                break;
-            case tablePlus:
-                if (binCheck(expStack, tablePlus) != 0)
-                {
-                    return SYNTAX_ERROR;
-                }
-                stackPop(expStack);
-                stackPop(expStack);
-                break;
-            case tableMinus:
-                if (binCheck(expStack, tableMinus) != 0)
-                {
-                    return SYNTAX_ERROR;
-                }
-                stackPop(expStack);
-                stackPop(expStack);
-                break;
-            case tableDivide:
-                if (binCheck(expStack, tableDivide) != 0)
-                {
-                    return SYNTAX_ERROR;
-                }
-                stackPop(expStack);
-                stackPop(expStack);
-                break;
-            case tableEqual:
-                if (binCheck(expStack, tableEqual) != 0)
-                {
+    while (((ElmExp *)(stackItem->value))->terminal != true)
+    {
+        stackItem = stackItem->next;
+    }
+    switch (((ElmExp *)(stackItem->value))->type)
+    {
+    case tableIdentifier:
+        ((ElmExp *)(stackItem->value))->terminal = false;
+        break;
+    case tableMultiply:
+        if (binCheck(expStack, tableMultiply) != 0)
+        {
+            return SYNTAX_ERROR;
+        }
+        stackPop(expStack);
+        stackPop(expStack);
+        break;
+    case tablePlus:
+        if (binCheck(expStack, tablePlus) != 0)
+        {
+            return SYNTAX_ERROR;
+        }
+        stackPop(expStack);
+        stackPop(expStack);
+        break;
+    case tableMinus:
+        if (binCheck(expStack, tableMinus) != 0)
+        {
+            return SYNTAX_ERROR;
+        }
+        stackPop(expStack);
+        stackPop(expStack);
+        break;
+    case tableDivide:
+        if (binCheck(expStack, tableDivide) != 0)
+        {
+            return SYNTAX_ERROR;
+        }
+        stackPop(expStack);
+        stackPop(expStack);
+        break;
+    case tableEqual:
+        if (binCheck(expStack, tableEqual) != 0)
+        {
 
-                    return SYNTAX_ERROR;
-                }
-                stackPop(expStack);
-                stackPop(expStack);
-                break;
-            case tableNotEqual:
-                if (binCheck(expStack, tableNotEqual) != 0)
-                {
-                    return SYNTAX_ERROR;
-                }
-                stackPop(expStack);
-                stackPop(expStack);
-                break;
-            case tableLess:
-                if (binCheck(expStack, tableLess) != 0)
-                {
-                    return SYNTAX_ERROR;
-                }
-                stackPop(expStack);
-                stackPop(expStack);
-                break;
-            case tableLessEqual:
-                if (binCheck(expStack, tableLessEqual) != 0)
-                {
-                    return SYNTAX_ERROR;
-                }
-                stackPop(expStack);
-                stackPop(expStack);
-                break;
-            case tableGreat:
-                if (binCheck(expStack, tableGreat) != 0)
-                {
-                    return SYNTAX_ERROR;
-                }
-                stackPop(expStack);
-                stackPop(expStack);
-                break;
+            return SYNTAX_ERROR;
+        }
+        stackPop(expStack);
+        stackPop(expStack);
+        break;
+    case tableNotEqual:
+        if (binCheck(expStack, tableNotEqual) != 0)
+        {
+            return SYNTAX_ERROR;
+        }
+        stackPop(expStack);
+        stackPop(expStack);
+        break;
+    case tableLess:
+        if (binCheck(expStack, tableLess) != 0)
+        {
+            return SYNTAX_ERROR;
+        }
+        stackPop(expStack);
+        stackPop(expStack);
+        break;
+    case tableLessEqual:
+        if (binCheck(expStack, tableLessEqual) != 0)
+        {
+            return SYNTAX_ERROR;
+        }
+        stackPop(expStack);
+        stackPop(expStack);
+        break;
+    case tableGreat:
+        if (binCheck(expStack, tableGreat) != 0)
+        {
+            return SYNTAX_ERROR;
+        }
+        stackPop(expStack);
+        stackPop(expStack);
+        break;
 
-            case tableGreatEqual:
-                if (binCheck(expStack, tableGreatEqual) != 0)
-                {
-                    return SYNTAX_ERROR;
-                }
-                stackPop(expStack);
-                stackPop(expStack);
-                break;
-            case tableLeftPar:
-                return SYNTAX_ERROR;
-                break;
-            }
+    case tableGreatEqual:
+        if (binCheck(expStack, tableGreatEqual) != 0)
+        {
+            return SYNTAX_ERROR;
+        }
+        stackPop(expStack);
+        stackPop(expStack);
+        break;
+    case tableLeftPar:
+        return SYNTAX_ERROR;
+        break;
+    }
 }
 
 int convertToIndex(int value)
