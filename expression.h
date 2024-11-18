@@ -4,13 +4,11 @@
 #include "scanner.h"
 #include "stack.h"
 #include "errorCodes.h"
-
-#define MAX_TERM_COUNT 100
-#define MAX_NON_TERM_COUNT 100
-#define MAX_STACK_SIZE 100
-#define MAX_TERM_LENGTH 20
+#include "symtable.h"
 #define PrecTableSize 14
+
 extern bool inFce;
+extern bstSymtable *symTree;
 
 typedef enum
 {
@@ -41,17 +39,19 @@ typedef enum
     Term,
     NonTerm
 } TermType;
-
+// pridat veci co mam v mobile
 typedef struct elmExpression
 {
-    // int token_type; //Typ tokenu (globálně)
-    int type;      // Id
-    int dataType;  // datovy INT FLOAT STRING
-    bool terminal; // Určuje, zda je prvek terminál
+
+    int type; // Id
+    DATATYPE dataType;
+    bool terminal;
+    DSTRING *key;
 } ElmExp;
 
 int analyzeExp(TStack *expStack, TOKEN *token);
 int initExpStack(TStack *expStack);
 char getSign(TStack *expStack);
 int convertToIndex(int value);
+int reduce(TStack *expStack);
 #endif
