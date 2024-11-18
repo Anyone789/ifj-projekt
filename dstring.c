@@ -1,7 +1,7 @@
 // dstring.c
 // Module for manipulating with strings dynamically
 // Author(s): Václav Bergman, Tomáš Hrbáč
-// Last Edited: 31.10.2024
+// Last Edited: 18.11.2024
 
 #include <string.h>
 #include <stdlib.h>
@@ -9,7 +9,6 @@
 #include "dstring.h"
 #include "errorCodes.h"
 
-// Dynamic string constructor
 DSTRING *dStringCreate()
 {
     DSTRING *dStr = malloc(sizeof(DSTRING));
@@ -33,21 +32,18 @@ DSTRING *dStringCreate()
     return dStr;
 }
 
-// Dynamic string destructor
 void dStringDestroy(DSTRING *dStr)
 {
     free(dStr->str);
     free(dStr);
 }
 
-// Clears contents of a dynamic string
 void dStringClear(DSTRING *dStr)
 {
    dStr->str[0] = '\0';
    dStr->length = 0;
 }
 
-// Adds one character to a dynamic string
 void dStringAddChar(DSTRING *dStr, char c)
 {
     // Test for string size overflow
@@ -69,7 +65,6 @@ void dStringAddChar(DSTRING *dStr, char c)
     dStr->str[dStr->length] = '\0';
 }
 
-// Makes a copy of src to dest
 void dStringCopy(DSTRING *dest, DSTRING *src)
 {
    if ((src->length + 1) > dest->allocSize)
@@ -87,37 +82,31 @@ void dStringCopy(DSTRING *dest, DSTRING *src)
    dest->length = src->length;
 }
 
-// Compares two dynamic strings
 int dStringCmp(DSTRING *dStr1, DSTRING *dStr2)
 {
    return strcmp(dStr1->str, dStr2->str);
 }
 
-// Compares a dynamic string with a constant string
 int dStringCmpConst(DSTRING *dStr, const char *cStr)
 {
    return strcmp(dStr->str, cStr);
 }
 
-// Returns contents of a dynamic string
 char *dStringGetStr(DSTRING *dStr)
 {
    return dStr->str;
 }
 
-// Returns length of a dynamic string
 int dStringGetLength(DSTRING *dStr)
 {
    return dStr->length;
 }
 
-// Converts dynamic string to int
 int dStringToInt(DSTRING *dStr)
 {
     return atoi(dStr->str);
 }
 
-// Converts dynamic string to double
 double dStringToDouble(DSTRING *dStr)
 {
     return atof(dStr->str);
