@@ -28,7 +28,7 @@
 
 // global variable to let know sematic alysis that variable can be also null
 extern bool nullType;
-
+extern int returnExpValue;
 // enumerator for all terminals in LL1 table
 typedef enum
 {

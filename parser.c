@@ -6,7 +6,10 @@
 #include "parser.h"
 
 bool nullType = false;
+bool isConst = false;
+// bool assign = false;
 bstSymtable *symTree;
+bstSymtable *symLocal;
 
 // PARSING RULES
 ProductionRule llRules[] =
@@ -131,6 +134,7 @@ int convertTokenToIndex(TOKEN *token)
     case T_KEYWORD:
         if (strcmp(token->attribute.dStr->str, "const") == 0)
         {
+            isConst = true;
             return tLlConst;
         }
         else if (strcmp(token->attribute.dStr->str, "pub") == 0)
@@ -202,6 +206,7 @@ int convertTokenToIndex(TOKEN *token)
         {
             return tLlIfj;
         }
+
         return tLlId;
         break;
     case T_FX_ID:
@@ -282,6 +287,8 @@ int convertTokenToIndex(TOKEN *token)
 
 void parserIn(TStack *parserStack)
 {
+    DSTRING *ID;
+    ID = dStringCreate();
     TOKEN *token;
     int literal = 99;
     int top;
@@ -292,6 +299,12 @@ void parserIn(TStack *parserStack)
     // loop for whole parsing phaze, loops till EOF or error
     while (literal != EOF)
     {
+        if (literal == tLlId)
+        {
+            printf("********NA VSTUPE JE TOKEN ID************\n");
+            ID = token->attribute.dStr;
+            printf("%s\n", ID->str);
+        }
         // top is top value from the stack
         top = *(int *)(parserStack->stackTop);
         printf("som tu\n");
@@ -303,6 +316,16 @@ void parserIn(TStack *parserStack)
         if (literal == tLlIf)
         {
             inFce = true;
+        }
+
+        if (literal == tLlEqual)
+        {
+            // assign = true;
+            bstSymtable *res = symtableSearch(&symLocal, *ID);
+            if (res != NULL)
+            {
+                ((varData *)res->data)->initialized = true;
+            }
         }
 
         printf("==================76==========\n");
@@ -337,12 +360,28 @@ void parserIn(TStack *parserStack)
             token = getToken();
             literal = convertTokenToIndex(token);
             printf("sdads");
+            if (top == tLlVar || top == tLlConst)
+            {
+                if (symtableSearch(&symLocal, *token->attribute.dStr) == NULL)
+                {
+                    insertVariables(token->attribute.dStr->str, (DATATYPE){false, false, token->type}, false, isConst, false, false, &symLocal);
+                }
+                else
+                {
+                    printf("majko");
+
+                    exit(REDEFINITION_ERROR);
+                    /* code */
+                }
+                isConst = false;
+            }
         }
         // none terminal phaze, pops nonterminal from stack and pushes right side of specific rule to it
         else if (top >= 100 && top <= 122)
         {
             printf("-------------top: %d\n", top);
             printf("literal: %d\n", literal);
+
             // null type part
             // this condition checks if there is ? before data type and sets global variable nullType to true to let semantic analizator let know
             if (top == 105 && literal == 28)
@@ -362,6 +401,19 @@ void parserIn(TStack *parserStack)
             {
                 printf("ID moze byt aj NULL\n");
                 nullType = false;
+            }
+
+            if ((llTable[top % 100][literal]) == 38)
+            {
+                bstSymtable *res = symtableSearch(&symLocal, *ID);
+                if (res == NULL)
+                {
+                    exit(UNDEFINED_VARIABLE_ERROR);
+                }
+                if (((varData *)res->data)->constant == true)
+                {
+                    exit(REDEFINITION_ERROR);
+                }
             }
 
             printf("NA VSTUPE JE NETERMINAL ALEBO SPECIAL\n");
@@ -389,6 +441,24 @@ void parserIn(TStack *parserStack)
             printf("bude exprssion:   %d\n", inFce);
             TStack expStack;
             analyzeExp(&expStack, token);
+            // assign = false;
+
+            if (inFce == false)
+            {
+                bstSymtable *result = symtableSearch(&symLocal, *ID);
+                if (result == NULL)
+                {
+                    printf("sadsadass");
+                    exit(SYNTAX_ERROR);
+                }
+                else
+                {
+                    printf("alles gut\n");
+                    ((varData *)result->data)->dataType.type = returnExpValue;
+                    //*ID = NULL;
+                }
+            }
+
             token = getToken();
             // printf("padla expression");
             // return;
@@ -415,7 +485,19 @@ int main(int argc, char **argv)
     setSourceFile(src);
     TStack parserStack;
     symtableInit(&symTree);
+    symtableInit(&symLocal);
     parsIt(&parserStack);
+    DSTRING *str = dStringCreate();
+    dStringAddString(str, "b");
+    bstSymtable *resLocal = symtableSearch(&symLocal, *str);
+    if (resLocal != NULL)
+    {
+        printf("\nFound in locals %d %d\n", ((varData *)resLocal->data)->constant, isConst);
+    }
+    else
+    {
+        printf("Not found in locals\n");
+    }
 
     return 0;
 }

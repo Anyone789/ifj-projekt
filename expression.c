@@ -73,7 +73,7 @@ void checkSem(ElmExp *lOperand, ElmExp *rOperand)
         if (lOperand->dataType.type == T_ID && rOperand->dataType.type != T_ID)
         {
 
-            bstSymtable *result = symtableSearch(&symTree, *lOperand->key);
+            bstSymtable *result = symtableSearch(&symLocal, *lOperand->key);
             if (result == NULL)
             {
                 printf("%d", INCOMPATIBLE_TYPE_ERROR);
@@ -95,7 +95,7 @@ void checkSem(ElmExp *lOperand, ElmExp *rOperand)
         }
         else if (rOperand->dataType.type == T_ID && lOperand->dataType.type != T_ID)
         {
-            bstSymtable *result = symtableSearch(&symTree, *rOperand->key);
+            bstSymtable *result = symtableSearch(&symLocal, *rOperand->key);
             if (result == NULL)
             {
                 printf("%d", INCOMPATIBLE_TYPE_ERROR);
@@ -120,8 +120,8 @@ void checkSem(ElmExp *lOperand, ElmExp *rOperand)
         else
         {
 
-            bstSymtable *lResult = symtableSearch(&symTree, *lOperand->key);
-            bstSymtable *rResult = symtableSearch(&symTree, *rOperand->key);
+            bstSymtable *lResult = symtableSearch(&symLocal, *lOperand->key);
+            bstSymtable *rResult = symtableSearch(&symLocal, *rOperand->key);
             if (lResult == NULL || rResult == NULL)
             {
                 printf("%d", INCOMPATIBLE_TYPE_ERROR);
@@ -151,19 +151,19 @@ int binCheck(TStack *expStack, int operator)
     if (rOperand->type != tableIdentifier || rOperand->terminal == true)
     {
         printf("\nRoperand\n");
-        return SYNTAX_ERROR;
+        exit(SYNTAX_ERROR);
     }
     ElmExp *op = ((ElmExp *)(stackItem->next->value));
     if (op->type != operator|| op->terminal == false)
     {
         printf("\nOperator\n");
-        return SYNTAX_ERROR;
+        exit(SYNTAX_ERROR);
     }
     ElmExp *lOperand = ((ElmExp *)(stackItem->next->next->value));
     if (lOperand->type != tableIdentifier || lOperand->terminal == true)
     {
         printf("\nLoperand\n");
-        return SYNTAX_ERROR;
+        exit(SYNTAX_ERROR);
     }
     checkSem(lOperand, rOperand);
 
@@ -179,7 +179,7 @@ int analyzeExp(TStack *expStack, TOKEN *token)
     // nextToken = getToken();
     if (nextToken->type == 1)
     {
-        return LEXICAL_ERROR;
+        exit(LEXICAL_ERROR);
     }
 
     char sign;
@@ -209,7 +209,7 @@ int analyzeExp(TStack *expStack, TOKEN *token)
             nextToken = getToken();
             if (nextToken->type == 1)
             {
-                return LEXICAL_ERROR;
+                exit(LEXICAL_ERROR);
             }
         }
         else if (sign == '>')
@@ -217,7 +217,7 @@ int analyzeExp(TStack *expStack, TOKEN *token)
             printf(">");
             if (reduce(expStack) == SYNTAX_ERROR)
             {
-                return SYNTAX_ERROR;
+                exit(SYNTAX_ERROR);
             }
         }
         else if (sign == '=')
@@ -236,13 +236,14 @@ int analyzeExp(TStack *expStack, TOKEN *token)
         {
             printf("end");
             returnExpValue = ((ElmExp *)(expStack->stackTop->value))->dataType.type;
-            if (returnExpValue == T_FLOAT)
+            if (returnExpValue == T_ID)
             {
-                returnExpValue = F;
-            }
-            else
-            {
-                returnExpValue = I;
+                bstSymtable *resul = symtableSearch(&symLocal, *((ElmExp *)(expStack->stackTop->value))->key);
+                returnExpValue = ((varData *)resul->data)->dataType.type;
+                if (returnExpValue != T_INT && returnExpValue != T_FLOAT && returnExpValue != T_STR)
+                {
+                    exit(GENERIC_SEMANTIC_ERROR);
+                }
             }
             break;
         }
@@ -250,7 +251,7 @@ int analyzeExp(TStack *expStack, TOKEN *token)
         {
             printf("error");
             // stackDispose(expStack);
-            return SYNTAX_ERROR;
+            exit(SYNTAX_ERROR);
         }
     }
     return 0;

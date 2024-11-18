@@ -9,6 +9,7 @@
 
 extern bool inFce;
 extern bstSymtable *symTree;
+extern bstSymtable *symLocal;
 
 typedef enum
 {
