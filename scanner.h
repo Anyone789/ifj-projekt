@@ -1,7 +1,7 @@
 // scanner.h
 // Interface for the scanner
 // Author(s): Václav Bergman, Tomáš Hrbáč
-// Last Edited: 14.11.2024
+// Last Edited: 18.11.2024
 
 #ifndef SCANNER_H
 #define SCANNER_H

@@ -1,7 +1,6 @@
 // Module for lexical analyser
 // Author(s): Tomáš Hrbáč, Václav Bergman
-// Last Edit: 14.11.2024
-
+// Last Edit: 18.11.2024
 
 #include <stdbool.h>
 #include <stdio.h>
@@ -12,11 +11,11 @@
 #include "dstring.h"
 #include "errorCodes.h"
 
-FILE *src;
-TOKEN token;
+FILE *src;  // Pointer to a file to be scanned
 
-const char *importStr = "import";
+const char *importStr = "import";   // Auxiliary string for matching scanned toke to import keyword
 
+// String equivalents for token types
 const char *TOKEN_TYPE_STRING[] = {
     "T_KEYWORD", "T_ERROR", "T_ID", "T_FX_ID", "T_BUILT_IN_FX_ID",
     "T_INT", "T_STR", "T_FLOAT", 
@@ -27,6 +26,7 @@ const char *TOKEN_TYPE_STRING[] = {
     "T_EOF", "T_UNDEFINED"
 };
 
+// Array of keywords
 const char* keywords[] = {
     "const", "else", "fn", "if", "i32", "f64", 
     "null", "pub", "return","u8", "[]u8", "var",
@@ -237,7 +237,8 @@ TOKEN *getToken()
                 {
                     token->type = T_ERROR;
                 }
-
+                
+                // Following states are terminal, no more scanning required to decide token type
                 if (\
                 state == LEFT_SQ_BRACKET || state == RIGHT_SQ_BRACKET || state == LEFT_BRACKET ||\
                 state == RIGHT_BRACKET || state == LEFT_BRACE || state == RIGHT_BRACE ||\
@@ -386,6 +387,14 @@ TOKEN *getToken()
             }
             case NO_LINEFEED:
             {
+                if (c != '\n')
+                {
+                    ungetc(c, src);
+                }
+                state = COMMENT;
+
+                // Different code for handling '\' symbol in comment
+                /*
                 if (c == '\n')
                 {
                     state = COMMENT;
@@ -395,6 +404,7 @@ TOKEN *getToken()
                     token->type = T_ERROR;
                     tokenScanned = true;
                 }
+                */
 
                 break;
             }
