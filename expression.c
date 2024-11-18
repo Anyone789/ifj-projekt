@@ -4,8 +4,8 @@ int dolarValue = tableDollar;
 // nastav premennu inFce na true ked sme vo while alebo v if inak bude false
 // bool inFce = false;
 bool lBracketInStack = false;
-int returnExpValue = I;
-bstSymtable *symTree;
+int returnExpValue = 0;
+bstSymtable *symLocal;
 // na oddelenie v stacku
 // v scanner treba urobit tak aby ked uz ma zistene ze aky to je typ, tak konci
 int sep = 44;
@@ -72,7 +72,7 @@ void checkSem(ElmExp *lOperand, ElmExp *rOperand)
         if (lOperand->dataType.type == T_ID && rOperand->dataType.type != T_ID)
         {
 
-            bstSymtable *result = symtableSearch(&symTree, *lOperand->key);
+            bstSymtable *result = symtableSearch(&symLocal, *lOperand->key);
             if (result == NULL)
             {
                 printf("%d", INCOMPATIBLE_TYPE_ERROR);
@@ -94,7 +94,7 @@ void checkSem(ElmExp *lOperand, ElmExp *rOperand)
         }
         else if (rOperand->dataType.type == T_ID && lOperand->dataType.type != T_ID)
         {
-            bstSymtable *result = symtableSearch(&symTree, *rOperand->key);
+            bstSymtable *result = symtableSearch(&symLocal, *rOperand->key);
             if (result == NULL)
             {
                 printf("%d", INCOMPATIBLE_TYPE_ERROR);
@@ -111,6 +111,7 @@ void checkSem(ElmExp *lOperand, ElmExp *rOperand)
                 else
                 {
                     lOperand->dataType.type = T_ID;
+
                     lOperand->key = rOperand->key;
                     printf("OK");
                 }
@@ -119,8 +120,8 @@ void checkSem(ElmExp *lOperand, ElmExp *rOperand)
         else
         {
 
-            bstSymtable *lResult = symtableSearch(&symTree, *lOperand->key);
-            bstSymtable *rResult = symtableSearch(&symTree, *rOperand->key);
+            bstSymtable *lResult = symtableSearch(&symLocal, *lOperand->key);
+            bstSymtable *rResult = symtableSearch(&symLocal, *rOperand->key);
             if (lResult == NULL || rResult == NULL)
             {
                 printf("%d", INCOMPATIBLE_TYPE_ERROR);
@@ -235,13 +236,12 @@ int analyzeExp(TStack *expStack, TOKEN *token)
         {
             printf("end");
             returnExpValue = ((ElmExp *)(expStack->stackTop->value))->dataType.type;
-            if (returnExpValue == T_FLOAT)
-            {
-                returnExpValue = F;
-            }
-            else
-            {
-                returnExpValue = I;
+            if(returnExpValue == T_ID){
+                bstSymtable *resul = symtableSearch(&symLocal, *((ElmExp *)(expStack->stackTop->value))->key);
+                returnExpValue = ((varData*)resul->data)->dataType.type;
+                if(returnExpValue != T_INT && returnExpValue != T_FLOAT && returnExpValue != T_STR){
+                    exit(GENERIC_SEMANTIC_ERROR);
+                }
             }
             break;
         }
@@ -279,6 +279,7 @@ int reduce(TStack *expStack)
     {
     case tableIdentifier:
         ((ElmExp *)(stackItem->value))->terminal = false;
+        
         break;
     case tableMultiply:
         if (binCheck(expStack, tableMultiply) != 0)
@@ -438,10 +439,10 @@ int main(int argc, char **argv)
         TStack stack;
         TOKEN *token;
 
-        symtableInit(&symTree);
-        symtableInsertBuildInFce(&symTree);
-        insertVariables("x", (DATATYPE){false, false, T_INT}, true, false, false, false, &symTree);
-        insertVariables("y", (DATATYPE){false, false, T_INT}, true, false, false, false, &symTree);
+        symtableInit(&symLocal);
+        symtableInsertBuildInFce(&symLocal);
+        insertVariables("x", (DATATYPE){false, false, T_INT}, true, false, false, false, &symLocal);
+        insertVariables("y", (DATATYPE){false, false, T_INT}, true, false, false, false, &symLocal);
         int i = analyzeExp(&stack, token);
         printf("%d\n", i);
         printf("return: %d", returnExpValue);
