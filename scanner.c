@@ -24,7 +24,7 @@ const char *TOKEN_TYPE_STRING[] = {
     "T_EQ", "T_NE", "T_LT", "T_LE", "T_GT", "T_GE", "T_ASSIGN",
     "T_SEMICOL", "T_COLON", "T_L_BRACE", "T_R_BRACE", "T_L_SQ_BRACKET", "T_R_SQ_BRACKET",
     "T_L_BRACKET", "T_R_BRACKET", "T_QUESTION_MK", "T_PIPE", "T_DOT", "T_COMMA", "T_COM",
-    "T_IMPORT", "T_EOF", "T_UNDEFINED"
+    "T_EOF", "T_UNDEFINED"
 };
 
 const char* keywords[] = {
