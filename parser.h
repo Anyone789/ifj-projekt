@@ -111,7 +111,7 @@ typedef struct
 */
 void pushRule(TStack *parserStack, int rule);
 /*
-    @brief  function that converts token from scanner to index in LL table
+    @brief  function that converts token from scanner to index in LL table and adds specific tokens to symtebl for semantic analysis
     @param *token token to convert to index in
     @return index of token in LL table based on enumrator,
     @return -6 when TOKEN = T_KEYWOR.atribute = import
@@ -144,4 +144,5 @@ int convertTokenToIndex(TOKEN *token);
  *
  */
 void parserIn(TStack *parserStack);
+
 #endif
