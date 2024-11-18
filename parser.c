@@ -399,7 +399,7 @@ void parserIn(TStack *parserStack)
             }
             else
             {
-                printf("ID moze byt aj NULL\n");
+                printf("ID moze byt aj NULL v else\n");
                 nullType = false;
             }
 
@@ -416,6 +416,43 @@ void parserIn(TStack *parserStack)
                 }
             }
 
+            if ((llTable[top % 100][literal]) == 9 || (llTable[top % 100][literal]) == 8)
+            {
+                bstSymtable *res = symtableSearch(&symLocal, *ID);
+                if (res == NULL)
+                {
+                    exit(UNDEFINED_VARIABLE_ERROR);
+                }
+                else
+                {
+
+                    if (strcmp(token->attribute.dStr->str, "i32") == 0)
+                    {
+                        ((varData *)res->data)->dataType.type = T_INT;
+                    }
+
+                    else if (strcmp(token->attribute.dStr->str, "f64") == 0)
+                    {
+                        ((varData *)res->data)->dataType.type = T_FLOAT;
+                    }
+                }
+            }
+            if ((llTable[top % 100][literal]) == 10)
+            {
+                bstSymtable *res = symtableSearch(&symLocal, *ID);
+                if (res == NULL)
+                {
+                    exit(UNDEFINED_VARIABLE_ERROR);
+                }
+                else
+                {
+                    printf("kjsabkj%d", token->type);
+                    if (token->type == T_L_SQ_BRACKET)
+                    {
+                        ((varData *)res->data)->dataType.type = T_STR;
+                    }
+                }
+            }
             printf("NA VSTUPE JE NETERMINAL ALEBO SPECIAL\n");
             printf("top: %d\n", top);
             printf("literal: %d\n", literal);
@@ -453,8 +490,17 @@ void parserIn(TStack *parserStack)
                 }
                 else
                 {
-                    printf("alles gut\n");
-                    ((varData *)result->data)->dataType.type = returnExpValue;
+                    printf("alles gut\n%d, %d", ((varData *)result->data)->dataType.type, returnExpValue);
+                    if (((varData *)result->data)->dataType.type == T_ID)
+                    {
+                        ((varData *)result->data)->dataType.type = returnExpValue;
+                        /* code */
+                    }
+                    else if (((varData *)result->data)->dataType.type != returnExpValue)
+                    {
+                        exit(INCOMPATIBLE_TYPE_ERROR);
+                    }
+
                     //*ID = NULL;
                 }
             }
@@ -488,11 +534,11 @@ int main(int argc, char **argv)
     symtableInit(&symLocal);
     parsIt(&parserStack);
     DSTRING *str = dStringCreate();
-    dStringAddString(str, "b");
+    dStringAddString(str, "a");
     bstSymtable *resLocal = symtableSearch(&symLocal, *str);
     if (resLocal != NULL)
     {
-        printf("\nFound in locals %d %d\n", ((varData *)resLocal->data)->constant, isConst);
+        printf("\nFound in locals %d %d\n", ((varData *)resLocal->data)->dataType.type, isConst);
     }
     else
     {
