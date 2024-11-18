@@ -4,10 +4,6 @@
 // Last Edit: 15.11.2024
 // zajtra dopisat
 #include "symtable.h"
-#include "scanner.c"
-#include <string.h>
-#include <math.h>
-
 /**
  * @brief Initializes a binary search tree symbol table.
  *
@@ -291,7 +287,7 @@ void dStringAddString(DSTRING *dstr, const char *str)
     }
 }
 
-void insertFunction(bstSymtable **symTree, const char *name, int returnType, int paramCount, bool isDefined, bool buildIn, bool hasLocals, varData *varDatas)
+void insertFunction(bstSymtable **symTree, const char *name, DATATYPE returnType, int paramCount, bool isDefined, bool buildIn, bool hasLocals, varData *varDatas)
 {
     DSTRING *functionName = dStringCreate();
     dStringAddString(functionName, name);
@@ -314,7 +310,7 @@ void insertFunction(bstSymtable **symTree, const char *name, int returnType, int
     functionData->isDefined = isDefined;
     functionData->buildIn = buildIn;
     functionData->locals = (hasLocals) ? &localTreei2f : NULL;
-    if (paramCount > 0 && returnType != NONE)
+    if (paramCount > 0)
     {
         functionData->params = (varData *)malloc(paramCount * sizeof(varData));
         if (functionData->params == NULL)
@@ -332,7 +328,7 @@ void insertFunction(bstSymtable **symTree, const char *name, int returnType, int
 
     symtableInsertFce(symTree, *functionName, functionData);
 }
-void insertVariables(const char *name, int dataType, bool initialized, bool constant, bool isPar, bool use, bstSymtable **local)
+void insertVariables(const char *name, DATATYPE dataType, bool initialized, bool constant, bool isPar, bool use, bstSymtable **local)
 {
     DSTRING *variableName = dStringCreate();
     dStringAddString(variableName, name);
@@ -359,39 +355,43 @@ void symtableInsertBuildInFce(bstSymtable **symTree)
 {
     // Functions for loading values
     // readstr
-    insertFunction(symTree, "readstr", DSTR, 0, true, true, false, NULL);
+    insertFunction(symTree, "readstr", (DATATYPE){true, false, T_STR}, 0, true, true, false, NULL);
     // readi32
-    insertFunction(symTree, "readi32", I, 0, true, true, false, NULL);
+    insertFunction(symTree, "readi32", (DATATYPE){true, false, T_INT}, 0, true, true, false, NULL);
     // readf64
-    insertFunction(symTree, "readf64", F, 0, true, true, false, NULL);
+    insertFunction(symTree, "readf64", (DATATYPE){true, false, T_FLOAT}, 0, true, true, false, NULL);
 
     // Function for printing out values
     // the dataType of term in write(term) doesnt matter
-    insertFunction(symTree, "write", NONE, 1, true, true, false, NULL);
+    varData varDatas[5];
+    varDatas[0].dataType = (DATATYPE){true, false, T_KEYWORD};
+    insertFunction(symTree, "write", (DATATYPE){false, true, T_KEYWORD}, 1, true, true, false, varDatas);
 
     // Functions for converting number values
-    varData varDatas[5];
-    varDatas[0].dataType = I;
-    insertFunction(symTree, "i2f", F, 1, true, true, false, varDatas);
-    varDatas[0].dataType = F;
-    insertFunction(symTree, "f2i", I, 1, true, true, false, varDatas);
-    varDatas[0].dataType = NONE;
+    varDatas[0].dataType = (DATATYPE){false, false, T_INT};
+    insertFunction(symTree, "i2f", (DATATYPE){false, false, T_FLOAT}, 1, true, true, false, varDatas);
+    varDatas[0].dataType = (DATATYPE){false, false, T_FLOAT};
+    insertFunction(symTree, "f2i", (DATATYPE){false, false, T_INT}, 1, true, true, false, varDatas);
+    varDatas[0].dataType = (DATATYPE){false, false, T_KEYWORD};
     // Functions for string operations
-    insertFunction(symTree, "string", DSTR, 1, true, true, false, varDatas);
-    varDatas[0].dataType = DSTR;
-    insertFunction(symTree, "length", I, 1, true, true, false, varDatas);
-    varDatas[0].dataType = DSTR;
-    varDatas[1].dataType = I;
-    varDatas[2].dataType = I;
-    insertFunction(symTree, "substring", DSTR, 3, true, true, false, varDatas);
-    varDatas[0].dataType = DSTR;
-    varDatas[1].dataType = DSTR;
-    insertFunction(symTree, "strcmp", I, 2, true, true, false, varDatas);
-    varDatas[0].dataType = DSTR;
-    varDatas[1].dataType = I;
-    insertFunction(symTree, "ord", I, 2, true, true, false, varDatas);
-    varDatas[0].dataType = I;
-    insertFunction(symTree, "chr", DSTR, 1, true, true, false, varDatas);
+    insertFunction(symTree, "string", (DATATYPE){false, false, T_STR}, 1, true, true, false, varDatas);
+    varDatas[0].dataType = (DATATYPE){false, false, T_STR};
+    insertFunction(symTree, "length", (DATATYPE){false, false, T_INT}, 1, true, true, false, varDatas);
+    varDatas[0].dataType = (DATATYPE){false, false, T_STR};
+    varDatas[1].dataType = (DATATYPE){false, false, T_STR};
+    insertFunction(symTree, "concat", (DATATYPE){false, false, T_STR}, 3, true, true, false, varDatas);
+    varDatas[0].dataType = (DATATYPE){false, false, T_STR};
+    varDatas[1].dataType = (DATATYPE){false, false, T_INT};
+    varDatas[2].dataType = (DATATYPE){false, false, T_INT};
+    insertFunction(symTree, "substring", (DATATYPE){true, false, T_STR}, 3, true, true, false, varDatas);
+    varDatas[0].dataType = (DATATYPE){false, false, T_STR};
+    varDatas[1].dataType = (DATATYPE){false, false, T_STR};
+    insertFunction(symTree, "strcmp", (DATATYPE){false, false, T_STR}, 2, true, true, false, varDatas);
+    varDatas[0].dataType = (DATATYPE){false, false, T_STR};
+    varDatas[1].dataType = (DATATYPE){false, false, T_INT};
+    insertFunction(symTree, "ord", (DATATYPE){false, false, T_INT}, 2, true, true, false, varDatas);
+    varDatas[0].dataType = (DATATYPE){false, false, T_INT};
+    insertFunction(symTree, "chr", (DATATYPE){false, false, T_STR}, 1, true, true, false, varDatas);
     
 }
 /**
@@ -542,21 +542,21 @@ int main()
     symtableInsertBuildInFce(&symTree);
     bstSymtable *result = symtableSearch(&symTree, *readstr);
     printTree(symTree, 0, "");
-    printf("paramType:%d\n", ((fceData*)result->data)->params[0].dataType);
-    printf("ret:%d\n", ((fceData*)result->data)->returnType);
+    printf("paramType:%d\n", ((fceData*)result->data)->params[0].dataType.type);
+    printf("ret:%d\n", ((fceData*)result->data)->returnType.type);
 
     bstSymtable *localTree;
     symtableInit(&localTree);
-    insertVariables("ahoj", 5, true, true, true, true, &localTree);
-    insertVariables("cau", 2, true, true, true, true, &localTree);
-    insertVariables("pa", 8, true, true, true, true, &localTree);
-    insertVariables("kar", 0, true, true, true, true, &localTree);
+    insertVariables("ahoj", (DATATYPE){false, false, T_STR}, true, true, true, true, &localTree);
+    insertVariables("cau", (DATATYPE){false, false, T_INT}, true, true, true, true, &localTree);
+    insertVariables("pa", (DATATYPE){false, false, T_STR}, true, true, true, true, &localTree);
+    insertVariables("kar", (DATATYPE){true, false, T_FLOAT}, true, true, true, true, &localTree);
     // vlozil som do funkcie lokalny strom
     printTree(localTree, 0, "");
     ((fceData *)result->data)->locals = &localTree;
 
     DSTRING *str = dStringCreate();
-    dStringAddString(str, "pa");
+    dStringAddString(str, "kar");
 
     if (((fceData *)result->data)->locals != NULL)
     {
@@ -566,13 +566,13 @@ int main()
         // Skontrolujte, či sa správne inicializovalo
         if (((fceData *)result->data)->locals != NULL)
         {
-            printf("Local tree is initialized%d\n", ((fceData *)result->data)->returnType);
+            printf("Local tree is initialized%d\n", ((fceData *)result->data)->returnType.type);
         }
 
         bstSymtable *resLocal = symtableSearch(((fceData *)result->data)->locals, *str);
         if (resLocal != NULL)
         {
-            printf("Found in locals %d\n", ((varData*)resLocal->data)->dataType);
+            printf("Found in locals %d\n", ((varData*)resLocal->data)->dataType.type);
         }
         else
         {

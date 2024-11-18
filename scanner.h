@@ -7,6 +7,13 @@
 #define SCANNER_H
 
 #include "dstring.h"
+#include <stdio.h>
+#include <stdbool.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <ctype.h>
+#include <string.h>
+#include "errorCodes.h"
 
 // Enum of token types
 typedef enum tokenType
@@ -59,7 +66,7 @@ typedef struct tokenStruct
 } TOKEN;
 
 
-void setSourceFile(FILE *file);
+//void setSourceFile(FILE *file);
 
 TOKEN *getToken();
 

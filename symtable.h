@@ -7,14 +7,18 @@
 #define SYMTABLE_H
 
 #include <stdbool.h>
-#include "dstring.h"
-#include <stdlib.h>
-#include <stdio.h>
-
+#include "scanner.h"
+#include <string.h>
+#include <math.h>
 typedef enum {
     var,
     fce
 } nodeType;
+
+extern const char *TOKEN_TYPE_STRING[];
+
+// Array of keywords
+extern const char* keywords[];
 
 // Uzel stromu
 typedef struct symtable {
@@ -25,9 +29,16 @@ typedef struct symtable {
   struct symtable *left;       // levý potomek
   struct symtable *right;      // pravý potomek
 } bstSymtable;
+
+typedef struct dataType
+{
+    bool isNull;
+    bool isVoid;
+    TOKEN_TYPE type;
+}DATATYPE;
 //struktura premennej
 typedef struct var {
-    int dataType;
+    DATATYPE dataType;
     bool initialized;
     bool constant;      // If variable is const type
     bool isPar;         // If variable is function parameter (const == true)
@@ -36,7 +47,7 @@ typedef struct var {
 
 
 typedef struct fce {
-    int returnType;      // return value
+    DATATYPE returnType;      // return value
     int paramCount;     // param caunt
     bool isDefined;     // is function defined
     bool buildIn;

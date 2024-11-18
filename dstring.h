@@ -5,7 +5,11 @@
 
 #ifndef DSTRING_H
 #define DSTRING_H
-
+#include <string.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include "errorCodes.h"
+#include <stdbool.h>
 // Base length of dynamic string
 #define DSTRING_BASE_LEN 8 
 
