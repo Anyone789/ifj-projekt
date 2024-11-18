@@ -6,16 +6,19 @@
 #ifndef SYMTABLE_H
 #define SYMTABLE_H
 
-
+#include <stdbool.h>
 #include "scanner.h"
-
-
-extern const char *TOKEN_TYPE_STRING[];  // Declare extern
-extern const char* keywords[];  
+#include <string.h>
+#include <math.h>
 typedef enum {
     var,
     fce
 } nodeType;
+
+extern const char *TOKEN_TYPE_STRING[];
+
+// Array of keywords
+extern const char* keywords[];
 
 // Uzel stromu
 typedef struct symtable {
@@ -26,9 +29,16 @@ typedef struct symtable {
   struct symtable *left;       // levý potomek
   struct symtable *right;      // pravý potomek
 } bstSymtable;
+
+typedef struct dataType
+{
+    bool isNull;
+    bool isVoid;
+    TOKEN_TYPE type;
+}DATATYPE;
 //struktura premennej
 typedef struct var {
-    int dataType;
+    DATATYPE dataType;
     bool initialized;
     bool constant;      // If variable is const type
     bool isPar;         // If variable is function parameter (const == true)
@@ -37,7 +47,7 @@ typedef struct var {
 
 
 typedef struct fce {
-    int returnType;      // return value
+    DATATYPE returnType;      // return value
     int paramCount;     // param caunt
     bool isDefined;     // is function defined
     bool buildIn;
@@ -52,5 +62,5 @@ void symtableInsertFce(bstSymtable **symTree, DSTRING key, void *data);
 void symtableInsertBuildInFce(bstSymtable **symTree);
 void symtableDelete(bstSymtable **symTree, DSTRING key);
 void symtableDispose(bstSymtable **symTree);
-void insertVariables(const char *name, int dataType, bool initialized, bool constant, bool isPar, bool use, bstSymtable **local);
+void insertVariables(const char *name, DATATYPE dataType, bool initialized, bool constant, bool isPar, bool use, bstSymtable **local);
 #endif

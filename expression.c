@@ -50,26 +50,26 @@ int initExpStack(TStack *expStack)
 
 void checkSem(ElmExp *lOperand, ElmExp *rOperand)
 {
-    if (lOperand->dataType != T_ID && rOperand->dataType != T_ID)
+    if (lOperand->dataType.type != T_ID && rOperand->dataType.type != T_ID)
     {
 
-        if (lOperand->dataType != rOperand->dataType)
+        if (lOperand->dataType.type != rOperand->dataType.type)
         {
-            if (lOperand->dataType == T_STR || rOperand->dataType == T_STR)
+            if (lOperand->dataType.type == T_STR || rOperand->dataType.type == T_STR)
             {
                 printf("%d", INCOMPATIBLE_TYPE_ERROR);
                 exit(INCOMPATIBLE_TYPE_ERROR);
             }
             else
             {
-                lOperand->dataType = T_FLOAT;
+                lOperand->dataType.type = T_FLOAT;
             }
         }
     }
     else
     {
         // search for id adn cmpr
-        if (lOperand->dataType == T_ID && rOperand->dataType != T_ID)
+        if (lOperand->dataType.type == T_ID && rOperand->dataType.type != T_ID)
         {
 
             bstSymtable *result = symtableSearch(&symTree, *lOperand->key);
@@ -80,7 +80,7 @@ void checkSem(ElmExp *lOperand, ElmExp *rOperand)
             }
             else
             {
-                if (((varData *)result->data)->dataType != rOperand->dataType)
+                if (((varData *)result->data)->dataType.type != rOperand->dataType.type)
                 {
                     printf("%d", INCOMPATIBLE_TYPE_ERROR);
                     printf("NO");
@@ -92,7 +92,7 @@ void checkSem(ElmExp *lOperand, ElmExp *rOperand)
                 }
             }
         }
-        else if (rOperand->dataType == T_ID && lOperand->dataType != T_ID)
+        else if (rOperand->dataType.type == T_ID && lOperand->dataType.type != T_ID)
         {
             bstSymtable *result = symtableSearch(&symTree, *rOperand->key);
             if (result == NULL)
@@ -102,7 +102,7 @@ void checkSem(ElmExp *lOperand, ElmExp *rOperand)
             }
             else
             {
-                if (((varData *)result->data)->dataType != lOperand->dataType)
+                if (((varData *)result->data)->dataType.type != lOperand->dataType.type)
                 {
                     printf("%d", INCOMPATIBLE_TYPE_ERROR);
                     printf("NO");
@@ -110,7 +110,7 @@ void checkSem(ElmExp *lOperand, ElmExp *rOperand)
                 }
                 else
                 {
-                    lOperand->dataType = T_ID;
+                    lOperand->dataType.type = T_ID;
                     lOperand->key = rOperand->key;
                     printf("OK");
                 }
@@ -128,7 +128,7 @@ void checkSem(ElmExp *lOperand, ElmExp *rOperand)
             }
             else
             {
-                if (((varData *)lResult->data)->dataType != ((varData *)rResult->data)->dataType)
+                if (((varData *)lResult->data)->dataType.type != ((varData *)rResult->data)->dataType.type)
                 {
                     printf("%d", INCOMPATIBLE_TYPE_ERROR);
                     printf("NO");
@@ -196,7 +196,7 @@ int analyzeExp(TStack *expStack, TOKEN *token)
             {
                 newExp->terminal = true;
                 newExp->type = convertToIndex(nextToken->type);
-                newExp->dataType = nextToken->type;
+                newExp->dataType.type = nextToken->type;
                 if (nextToken->current_attribute == DSTR)
                 {
 
@@ -234,7 +234,7 @@ int analyzeExp(TStack *expStack, TOKEN *token)
         else if (sign == '#')
         {
             printf("end");
-            returnExpValue = ((ElmExp *)(expStack->stackTop->value))->dataType;
+            returnExpValue = ((ElmExp *)(expStack->stackTop->value))->dataType.type;
             if (returnExpValue == T_FLOAT)
             {
                 returnExpValue = F;
@@ -440,8 +440,8 @@ int main(int argc, char **argv)
 
         symtableInit(&symTree);
         symtableInsertBuildInFce(&symTree);
-        insertVariables("x", T_INT, true, false, false, false, &symTree);
-        insertVariables("y", T_INT, true, false, false, false, &symTree);
+        insertVariables("x", (DATATYPE){false, false, T_INT}, true, false, false, false, &symTree);
+        insertVariables("y", (DATATYPE){false, false, T_INT}, true, false, false, false, &symTree);
         int i = analyzeExp(&stack, token);
         printf("%d\n", i);
         printf("return: %d", returnExpValue);

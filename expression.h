@@ -38,7 +38,7 @@ typedef enum{
 typedef struct elmExpression{
     
     int type; // Id
-    int dataType;
+    DATATYPE dataType;
     bool terminal;
     DSTRING *key; 
 }ElmExp;
