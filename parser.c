@@ -7,7 +7,7 @@
 
 bool nullType = false;
 bool isConst = false;
-// bool assign = false;
+bool assign = false;
 bstSymtable *symTree;
 bstSymtable *symLocal;
 
@@ -299,7 +299,8 @@ void parserIn(TStack *parserStack)
     // loop for whole parsing phaze, loops till EOF or error
     while (literal != EOF)
     {
-        if (literal == tLlId)
+        printf("%d*******\n", assign);
+        if (literal == tLlId && assign == false)
         {
             printf("********NA VSTUPE JE TOKEN ID************\n");
             ID = token->attribute.dStr;
@@ -320,7 +321,7 @@ void parserIn(TStack *parserStack)
 
         if (literal == tLlEqual)
         {
-            // assign = true;
+            assign = true;
             bstSymtable *res = symtableSearch(&symLocal, *ID);
             if (res != NULL)
             {
@@ -375,6 +376,11 @@ void parserIn(TStack *parserStack)
                 }
                 isConst = false;
             }
+
+            if (literal == tLlSemicolon)
+            {
+                assign = false;
+            }
         }
         // none terminal phaze, pops nonterminal from stack and pushes right side of specific rule to it
         else if (top >= 100 && top <= 122)
@@ -419,6 +425,7 @@ void parserIn(TStack *parserStack)
             if ((llTable[top % 100][literal]) == 9 || (llTable[top % 100][literal]) == 8)
             {
                 bstSymtable *res = symtableSearch(&symLocal, *ID);
+                printf("jhash %s", ID->str);
                 if (res == NULL)
                 {
                     exit(UNDEFINED_VARIABLE_ERROR);
@@ -453,6 +460,7 @@ void parserIn(TStack *parserStack)
                     }
                 }
             }
+
             printf("NA VSTUPE JE NETERMINAL ALEBO SPECIAL\n");
             printf("top: %d\n", top);
             printf("literal: %d\n", literal);
@@ -478,7 +486,6 @@ void parserIn(TStack *parserStack)
             printf("bude exprssion:   %d\n", inFce);
             TStack expStack;
             analyzeExp(&expStack, token);
-            // assign = false;
 
             if (inFce == false)
             {
@@ -512,6 +519,7 @@ void parserIn(TStack *parserStack)
             //  stackPush(parserStack, (void *)(intptr_t)tLlRightRoundBracket);
             stackPrint(parserStack);
             printf("token po EXP: %d\n", literal);
+            assign = false;
         }
     }
 }

@@ -2,6 +2,7 @@
 const ifj = @import("ifj24.zig");
 // Hlavni funkce
 pub fn main() void {
-    var a : i32 = 1;
-    var d: f64 = 1 + a;
+    conat a: f64 = 3.0+2;
+     a = a+ 5.0;
+
 }
