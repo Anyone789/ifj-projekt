@@ -1,7 +1,7 @@
 // scanner.h
 // Interface for the scanner
 // Author(s): Václav Bergman, Tomáš Hrbáč
-// Last Edited: 18.11.2024
+// Last Edited: 19.11.2024
 
 #ifndef SCANNER_H
 #define SCANNER_H
@@ -20,9 +20,6 @@ typedef enum tokenType
     T_L_BRACKET, T_R_BRACKET, T_QUESTION_MK, T_PIPE, T_DOT, T_COMMA, T_COM,
     T_EOF, T_UNDEFINED
 } TOKEN_TYPE;
-
-// String equivalents of token types
-extern const char *TOKEN_TYPE_STRING[];
 
 // Array of keywords
 extern const char* keywords[];

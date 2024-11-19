@@ -1,6 +1,6 @@
 // Module for lexical analyser
 // Author(s): Tomáš Hrbáč, Václav Bergman
-// Last Edit: 18.11.2024
+// Last Edit: 19.11.2024
 
 #include <stdbool.h>
 #include <stdio.h>
@@ -13,18 +13,7 @@
 
 FILE *src;  // Pointer to a file to be scanned
 
-const char *importStr = "import";   // Auxiliary string for matching scanned toke to import keyword
-
-// String equivalents for token types
-const char *TOKEN_TYPE_STRING[] = {
-    "T_KEYWORD", "T_ERROR", "T_ID", "T_FX_ID", "T_BUILT_IN_FX_ID",
-    "T_INT", "T_STR", "T_FLOAT", 
-    "T_PLUS", "T_MINUS", "T_MUL", "T_DIV",
-    "T_EQ", "T_NE", "T_LT", "T_LE", "T_GT", "T_GE", "T_ASSIGN",
-    "T_SEMICOL", "T_COLON", "T_L_BRACE", "T_R_BRACE", "T_L_SQ_BRACKET", "T_R_SQ_BRACKET",
-    "T_L_BRACKET", "T_R_BRACKET", "T_QUESTION_MK", "T_PIPE", "T_DOT", "T_COMMA", "T_COM",
-    "T_EOF", "T_UNDEFINED"
-};
+const char *importStr = "import";   // Auxiliary string for matching scanned token to import keyword
 
 // Array of keywords
 const char* keywords[] = {
