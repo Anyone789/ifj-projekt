@@ -51,26 +51,26 @@ void stackDispose(TStack *stack)
         stackPop(stack);
     }
 }
-void stackPrint(TStack *stack)
-{
-    TStackItem *current = stack->stackTop;
-    int position = stack->stackSize;
+// void stackPrint(TStack *stack)
+// {
+//     TStackItem *current = stack->stackTop;
+//     int position = stack->stackSize;
 
-    printf("\nStack (top to bottom):\n\n");
-    printf(" ┌───────┐\n");
+//     printf("\nStack (top to bottom):\n\n");
+//     printf(" ┌───────┐\n");
 
-    while (current != NULL)
-    {
-        // Cast value back to int for printing
-        int value = (int)(intptr_t)current->value;
+//     while (current != NULL)
+//     {
+//         // Cast value back to int for printing
+//         int value = (int)current->value;
 
-        // Print each stack item with its position and value
-        printf(" │ %5d │ <- position %d\n", value, position);
-        printf(" |-------|\n");
-        current = current->next;
-        position--;
-    }
+//         // Print each stack item with its position and value
+//         printf(" │ %5d │ <- position %d\n", value, position);
+//         printf(" |-------|\n");
+//         current = current->next;
+//         position--;
+//     }
 
-    printf(" └───────┘\n");
-    printf(" Stack size: %d\n", stack->stackSize);
-}
+//     printf(" └───────┘\n");
+//     printf(" Stack size: %d\n", stack->stackSize);
+// }

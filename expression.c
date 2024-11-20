@@ -58,7 +58,7 @@ void checkSem(ElmExp *lOperand, ElmExp *rOperand)
         {
             if (lOperand->dataType.type == T_STR || rOperand->dataType.type == T_STR)
             {
-                printf("%d", INCOMPATIBLE_TYPE_ERROR);
+                // printf("%d", INCOMPATIBLE_TYPE_ERROR);
                 exit(INCOMPATIBLE_TYPE_ERROR);
             }
             else
@@ -76,20 +76,20 @@ void checkSem(ElmExp *lOperand, ElmExp *rOperand)
             bstSymtable *result = symtableSearch(&symLocal, *lOperand->key);
             if (result == NULL)
             {
-                printf("%d", INCOMPATIBLE_TYPE_ERROR);
+                ("%d", INCOMPATIBLE_TYPE_ERROR);
                 exit(INCOMPATIBLE_TYPE_ERROR);
             }
             else
             {
                 if (((varData *)result->data)->dataType.type != rOperand->dataType.type)
                 {
-                    printf("%d", INCOMPATIBLE_TYPE_ERROR);
-                    printf("NO");
+                    // printf("%d", INCOMPATIBLE_TYPE_ERROR);
+                    // printf("NO");
                     exit(INCOMPATIBLE_TYPE_ERROR);
                 }
                 else
                 {
-                    printf("OK");
+                    // printf("OK");
                     ((varData *)result->data)->use = true;
                 }
             }
@@ -106,15 +106,15 @@ void checkSem(ElmExp *lOperand, ElmExp *rOperand)
             {
                 if (((varData *)result->data)->dataType.type != lOperand->dataType.type)
                 {
-                    printf("%d", INCOMPATIBLE_TYPE_ERROR);
-                    printf("NO");
+                    // printf("%d", INCOMPATIBLE_TYPE_ERROR);
+                    // printf("NO");
                     exit(INCOMPATIBLE_TYPE_ERROR);
                 }
                 else
                 {
                     lOperand->dataType.type = T_ID;
                     lOperand->key = rOperand->key;
-                    printf("OK");
+                    // printf("OK");
                     ((varData *)result->data)->use = true;
                 }
             }
@@ -126,20 +126,20 @@ void checkSem(ElmExp *lOperand, ElmExp *rOperand)
             bstSymtable *rResult = symtableSearch(&symLocal, *rOperand->key);
             if (lResult == NULL || rResult == NULL)
             {
-                printf("%d", INCOMPATIBLE_TYPE_ERROR);
+                // printf("%d", INCOMPATIBLE_TYPE_ERROR);
                 exit(INCOMPATIBLE_TYPE_ERROR);
             }
             else
             {
                 if (((varData *)lResult->data)->dataType.type != ((varData *)rResult->data)->dataType.type)
                 {
-                    printf("%d", INCOMPATIBLE_TYPE_ERROR);
-                    printf("NO");
+                    // printf("%d", INCOMPATIBLE_TYPE_ERROR);
+                    // printf("NO");
                     exit(INCOMPATIBLE_TYPE_ERROR);
                 }
                 else
                 {
-                    printf("OK");
+                    // printf("OK");
                     ((varData *)lResult->data)->use = true;
                     ((varData *)rResult->data)->use = true;
                 }
@@ -154,19 +154,19 @@ int binCheck(TStack *expStack, int operator)
     ElmExp *rOperand = ((ElmExp *)(stackItem->value));
     if (rOperand->type != tableIdentifier || rOperand->terminal == true)
     {
-        printf("\nRoperand\n");
+        // printf("\nRoperand\n");
         exit(SYNTAX_ERROR);
     }
     ElmExp *op = ((ElmExp *)(stackItem->next->value));
     if (op->type != operator|| op->terminal == false)
     {
-        printf("\nOperator\n");
+        // printf("\nOperator\n");
         exit(SYNTAX_ERROR);
     }
     ElmExp *lOperand = ((ElmExp *)(stackItem->next->next->value));
     if (lOperand->type != tableIdentifier || lOperand->terminal == true)
     {
-        printf("\nLoperand\n");
+        // printf("\nLoperand\n");
         exit(SYNTAX_ERROR);
     }
     checkSem(lOperand, rOperand);
@@ -178,7 +178,7 @@ int analyzeExp(TStack *expStack, TOKEN *token)
 {
     // ked doskusam, tak odkomentovat
     initExpStack(expStack);
-    printf("%d", ((ElmExp *)(expStack->stackTop->value))->type);
+    // printf("%d", ((ElmExp *)(expStack->stackTop->value))->type);
     nextToken = token;
     // nextToken = getToken();
     if (nextToken->type == 1)
@@ -189,13 +189,13 @@ int analyzeExp(TStack *expStack, TOKEN *token)
     char sign;
     while (1)
     {
-        printf("\nstack size:%d\n", expStack->stackSize);
-        printf("\n%d\n", nextToken->current_attribute);
+        // printf("\nstack size:%d\n", expStack->stackSize);
+        // printf("\n%d\n", nextToken->current_attribute);
         sign = getSign(expStack);
 
         if (sign == '<')
         {
-            printf("<");
+            // printf("<");
             ElmExp *newExp = malloc(sizeof(struct elmExpression));
             if (newExp != NULL)
             {
@@ -218,7 +218,7 @@ int analyzeExp(TStack *expStack, TOKEN *token)
         }
         else if (sign == '>')
         {
-            printf(">");
+            // printf(">");
             if (reduce(expStack) == SYNTAX_ERROR)
             {
                 exit(SYNTAX_ERROR);
@@ -232,13 +232,13 @@ int analyzeExp(TStack *expStack, TOKEN *token)
             stackPop(expStack);
             stackPush(expStack, newExp);
             nextToken = getToken();
-            printf("=");
+            // printf("=");
 
             // redukcia zatvoriek
         }
         else if (sign == '#')
         {
-            printf("end");
+            // printf("end");
             returnExpValue = ((ElmExp *)(expStack->stackTop->value))->dataType.type;
             if (returnExpValue == T_ID)
             {
@@ -258,8 +258,8 @@ int analyzeExp(TStack *expStack, TOKEN *token)
         }
         else
         {
-            printf("error");
-            // stackDispose(expStack);
+            // printf("error");
+            //  stackDispose(expStack);
             exit(SYNTAX_ERROR);
         }
     }
@@ -275,7 +275,7 @@ char getSign(TStack *expStack)
     {
         stackTopValue = stackTopValue->next;
     }
-    printf("\nprec[%d][%d]\n", ((ElmExp *)(stackTopValue->value))->type, convertToIndex(stackInput));
+    // printf("\nprec[%d][%d]\n", ((ElmExp *)(stackTopValue->value))->type, convertToIndex(stackInput));
     return precTable[((ElmExp *)(stackTopValue->value))->type][convertToIndex(stackInput)];
 }
 

@@ -118,12 +118,12 @@ void pushRule(TStack *parserStack, int rule)
     // loop that pushes whole right side of rule to the stack without 0
     while (i >= 0)
     {
-        if ((intptr_t)llRules[rule].production[i] == 0)
+        if (llRules[rule].production[i] == 0)
         {
             // condition to push terminal with enum = 0 to the stack
             if ((rule == 1 && i == 0) || (rule == 37 && i == 0))
             {
-                stackPush(parserStack, (void *)(intptr_t)llRules[rule].production[i]);
+                stackPush(parserStack, (void *)llRules[rule].production[i]);
                 i--;
                 continue;
             }
@@ -134,7 +134,7 @@ void pushRule(TStack *parserStack, int rule)
             }
         }
 
-        stackPush(parserStack, (void *)(intptr_t)llRules[rule].production[i]);
+        stackPush(parserStack, (void *)llRules[rule].production[i]);
         i--;
     }
 }
@@ -317,27 +317,27 @@ void parserIn(TStack *parserStack)
     // loop for whole parsing phaze, loops till EOF or error
     while (literal != EOF)
     {
-        printf("%d*******\n", assign);
+        // printf("%d*******\n", assign);
 
         if (literal == tLlId && assign == false)
         {
-            printf("********NA VSTUPE JE TOKEN ID************\n");
+            // printf("********NA VSTUPE JE TOKEN ID************\n");
             ID = token->attribute.dStr;
-            printf("%s\n", ID->str);
+            // printf("%s\n", ID->str);
             paramTypeCounter = 1;
         }
         if (literal == tLlFunctId && state == nLlFunctDef)
         {
-            printf("********NA VSTUPE JE TOKEN ID************\n");
+            // printf("********NA VSTUPE JE TOKEN ID************\n");
             functionID = token->attribute.dStr;
-            printf("%s\n", functionID->str);
+            // printf("%s\n", functionID->str);
         }
         // top is top value from the stack
         top = *(int *)(parserStack->stackTop);
-        printf("som tu\n");
-        printf("top: %d\n", top);
-        printf("literal: %d\n", literal);
-        stackPrint(parserStack);
+        // printf("som tu\n");
+        // printf("top: %d\n", top);
+        // printf("literal: %d\n", literal);
+        // stackPrint(parserStack);
 
         // condition which sets global variable to tru to let exprssion parsing now that we are parsing if condition expression
         if (literal == tLlIf)
@@ -355,37 +355,37 @@ void parserIn(TStack *parserStack)
             }
         }
 
-        printf("==================76==========\n");
+        // printf("==================76==========\n");
 
         // terminal part
         if ((top >= 0 && top <= TERMINAL_COUNT - 1) || (top <= -1 && top >= -8))
         {
 
-            printf("NA VSTUPE JE TERMINAL\n");
-            printf("top: %d\n", top);
-            printf("literal: %d\n", literal);
+            // printf("NA VSTUPE JE TERMINAL\n");
+            // printf("top: %d\n", top);
+            // printf("literal: %d\n", literal);
             // END OF PARSING
             if (top == -1 && literal == 21)
             {
                 stackPop(parserStack);
-                printf("END");
+                // printf("END");
                 return;
             }
             else if (top == literal)
             {
                 stackPop(parserStack);
-                printf("po pope je stack\n");
-                stackPrint(parserStack);
+                // printf("po pope je stack\n");
+                // stackPrint(parserStack);
                 // parserIn(parserStack);
                 // continue;
             }
             else
             {
-                printf("syntax error");
+                // printf("syntax error");
                 exit(SYNTAX_ERROR);
             }
 
-            printf("sdads");
+            // printf("sdads");
             token = getToken();
             literal = convertTokenToIndex(token);
             // adding variables to localTree
@@ -399,7 +399,7 @@ void parserIn(TStack *parserStack)
                     }
                     else
                     {
-                        printf("majko");
+                        // printf("majko");
 
                         exit(REDEFINITION_ERROR);
                         /* code */
@@ -425,27 +425,27 @@ void parserIn(TStack *parserStack)
         // none terminal phaze, pops nonterminal from stack and pushes right side of specific rule to it
         else if (top >= 100 && top <= 122)
         {
-            printf("-------------top: %d\n", top);
-            printf("literal: %d\n", literal);
+            // printf("-------------top: %d\n", top);
+            // printf("literal: %d\n", literal);
 
             // null type part
             // this condition checks if there is ? before data type and sets global variable nullType to true to let semantic analizator let know
             if (top == 105 && literal == 28)
             {
                 nullType = true;
-                printf("ID moze byt aj NULL\n");
+                // printf("ID moze byt aj NULL\n");
                 token = getToken();
                 literal = convertTokenToIndex(token);
                 // checker if user isnt using null or void with null typr indicator
                 if (literal == 26 || literal == 27)
                 {
-                    printf("void alebo null nemoze byt null");
+                    // printf("void alebo null nemoze byt null");
                     exit(SYNTAX_ERROR);
                 }
             }
             else
             {
-                printf("ID moze byt aj NULL v else\n");
+                // printf("ID moze byt aj NULL v else\n");
                 nullType = false;
             }
 
@@ -465,12 +465,12 @@ void parserIn(TStack *parserStack)
                     exit(REDEFINITION_ERROR);
                 }
             }
-            printf("counter je : %d\n", paramTypeCounter);
+            // printf("counter je : %d\n", paramTypeCounter);
             if ((llTable[top % 100][literal]) == 9 || (llTable[top % 100][literal]) == 8 || (llTable[top % 100][literal]) == 10 || (llTable[top % 100][literal]) == 45)
             {
                 bstSymtable *res = symtableSearch(&symLocal, *ID);
                 bstSymtable *resFce = symtableSearch(&symTree, *functionID);
-                printf("jhash %s", ID->str);
+                // printf("jhash %s", ID->str);
                 if (res == NULL && resFce == NULL)
                 {
                     exit(UNDEFINED_VARIABLE_ERROR);
@@ -478,20 +478,20 @@ void parserIn(TStack *parserStack)
                 else
                 {
 
-                    printf("counter je : %d\n", paramTypeCounter);
+                    // printf("counter je : %d\n", paramTypeCounter);
                     if (token->type == T_L_SQ_BRACKET)
                     {
                         if (paramTypeCounter == 1)
                         {
                             if (state == nLlParamList)
                             {
-                                printf("iugsaiu%d", paramCount);
+                                // printf("iugsaiu%d", paramCount);
                                 //((fceData *)resFce->data)->params[paramCount].dataType.type = T_INT;
                                 varData *varDatas;
                                 varDatas = malloc(sizeof(varData) * 1); // Replace ARRAY_SIZE with the required size
                                 if (varDatas == NULL)
                                 {
-                                    fprintf(stderr, "Memory allocation failed\n");
+                                    // fprintf(stderr, "Memory allocation failed\n");
                                     exit(EXIT_FAILURE);
                                 }
 
@@ -516,13 +516,13 @@ void parserIn(TStack *parserStack)
 
                             if (state == nLlParamList)
                             {
-                                printf("iugsaiu%d", paramCount);
+                                // printf("iugsaiu%d", paramCount);
                                 //((fceData *)resFce->data)->params[paramCount].dataType.type = T_INT;
                                 varData *varDatas;
                                 varDatas = malloc(sizeof(varData) * 1); // Replace ARRAY_SIZE with the required size
                                 if (varDatas == NULL)
                                 {
-                                    fprintf(stderr, "Memory allocation failed\n");
+                                    // fprintf(stderr, "Memory allocation failed\n");
                                     exit(EXIT_FAILURE);
                                 }
 
@@ -547,13 +547,13 @@ void parserIn(TStack *parserStack)
                         {
                             if (state == nLlParamList)
                             {
-                                printf("iugsaiu%d", paramCount);
+                                // printf("iugsaiu%d", paramCount);
                                 //((fceData *)resFce->data)->params[paramCount].dataType.type = T_INT;
                                 varData *varDatas;
                                 varDatas = malloc(sizeof(varData) * 1); // Replace ARRAY_SIZE with the required size
                                 if (varDatas == NULL)
                                 {
-                                    fprintf(stderr, "Memory allocation failed\n");
+                                    // fprintf(stderr, "Memory allocation failed\n");
                                     exit(EXIT_FAILURE);
                                 }
 
@@ -646,22 +646,22 @@ void parserIn(TStack *parserStack)
             {
                 exit(GENERIC_SEMANTIC_ERROR);
             }
-            printf("NA VSTUPE JE NETERMINAL ALEBO SPECIAL\n");
-            printf("top: %d\n", top);
-            printf("literal: %d\n", literal);
-            printf("pravidlo: %d\n", (llTable[top % 100][literal]));
+            // printf("NA VSTUPE JE NETERMINAL ALEBO SPECIAL\n");
+            // printf("top: %d\n", top);
+            // printf("literal: %d\n", literal);
+            // printf("pravidlo: %d\n", (llTable[top % 100][literal]));
             if (top != nLlType && top != nLlItem)
             {
                 state = top;
             }
-            printf("\nSTAV BUDE%d\n", state);
+            // printf("\nSTAV BUDE%d\n", state);
 
             stackPop(parserStack);
-            printf("po pope je stack\n");
-            stackPrint(parserStack);
+            // printf("po pope je stack\n");
+            // stackPrint(parserStack);
             if ((llTable[top % 100][literal]) == -1)
             {
-                printf("syntax error");
+                // printf("syntax error");
                 exit(SYNTAX_ERROR);
             }
 
@@ -674,9 +674,9 @@ void parserIn(TStack *parserStack)
         {
             stackPop(parserStack);
             stackPop(parserStack);
-            printf("bude exprssion:   %d\n", inFce);
+            // printf("bude exprssion:   %d\n", inFce);
             paramTypeCounter = 0;
-            printf("counter je : %d\n", paramTypeCounter);
+            // printf("counter je : %d\n", paramTypeCounter);
             TStack expStack;
             analyzeExp(&expStack, token);
 
@@ -700,12 +700,12 @@ void parserIn(TStack *parserStack)
                     bstSymtable *result = symtableSearch(&symLocal, *ID);
                     if (result == NULL)
                     {
-                        printf("sadsadass");
+                        // printf("sadsadass");
                         exit(SYNTAX_ERROR);
                     }
                     else
                     {
-                        printf("alles gut\n%d, %d", ((varData *)result->data)->dataType.type, returnExpValue);
+                        // printf("alles gut\n%d, %d", ((varData *)result->data)->dataType.type, returnExpValue);
                         if (((varData *)result->data)->dataType.type == T_ID)
                         {
                             ((varData *)result->data)->dataType.type = returnExpValue;
@@ -720,8 +720,8 @@ void parserIn(TStack *parserStack)
 
             token = getToken();
             literal = convertTokenToIndex(token);
-            stackPrint(parserStack);
-            printf("token po EXP: %d\n", literal);
+            // stackPrint(parserStack);
+            // printf("token po EXP: %d\n", literal);
             assign = false;
         }
     }
@@ -743,18 +743,19 @@ int main(int argc, char **argv)
     TStack parserStack;
     symtableInit(&symTree);
     symtableInit(&symLocal);
+    symtableInsertBuildInFce(&symTree);
     parsIt(&parserStack);
-    DSTRING *str = dStringCreate();
-    dStringAddString(str, "red");
-    bstSymtable *resLocal = symtableSearch(&symLocal, *str);
-    if (resLocal != NULL)
-    {
-        printf("\nFound in locals %d \n", ((varData *)resLocal->data)->use);
-    }
-    else
-    {
-        printf("Not found in locals\n");
-    }
+    // DSTRING *str = dStringCreate();
+    // dStringAddString(str, "red");
+    // bstSymtable *resLocal = symtableSearch(&symLocal, *str);
+    // if (resLocal != NULL)
+    // {
+    //     // printf("\nFound in locals %d \n", ((varData *)resLocal->data)->use);
+    // }
+    // else
+    // {
+    //     // printf("Not found in locals\n");
+    // }
 
     return 0;
 }

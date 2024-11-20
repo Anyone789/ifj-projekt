@@ -292,7 +292,7 @@ void insertFunction(bstSymtable **symTree, const char *name, DATATYPE returnType
     DSTRING *functionName = dStringCreate();
     dStringAddString(functionName, name);
     // Skontrolujte, či už funkcia existuje
-    printf("Memory reallocation for parameters failed\n");
+
     bstSymtable *existingNode = symtableSearch(symTree, *functionName);
     if (existingNode != NULL)
     {
@@ -327,7 +327,7 @@ void insertFunction(bstSymtable **symTree, const char *name, DATATYPE returnType
         fceData *functionData = (fceData *)malloc(sizeof(fceData));
         if (functionData == NULL)
         {
-            printf("Memory allocation for fceData failed\n");
+
             exit(1);
         }
         bstSymtable *localTree = NULL;
@@ -349,7 +349,7 @@ void insertFunction(bstSymtable **symTree, const char *name, DATATYPE returnType
             functionData->params = (varData *)malloc(newParamCount * sizeof(varData));
             if (functionData->params == NULL)
             {
-                printf("Memory allocation for parameters failed\n");
+
                 exit(1);
             }
             for (int i = 0; i < newParamCount; i++)
@@ -377,7 +377,7 @@ void insertVariables(const char *name, DATATYPE dataType, bool initialized, bool
     if (variableData == NULL)
     {
         // Handle memory allocation failure
-        printf("Memory allocation for fceData failed\n");
+
         exit(1); // Or handle it appropriately
     }
 
@@ -547,7 +547,7 @@ void printTree(bstSymtable *root, int level, const char *prefix)
     }
 
     // Print the current node with its key and height
-    printf("%s%s[%s,%d]\n", prefix, (level > 0) ? "+" : "-", root->key, root->height);
+    // printf("%s%s[%s,%d]\n", prefix, (level > 0) ? "+" : "-", root->key, root->height);
 
     // Prepare new prefix for child nodes
     char newPrefix[100];
