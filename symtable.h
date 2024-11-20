@@ -66,5 +66,6 @@ void symtableInsertBuildInFce(bstSymtable **symTree);
 void symtableDelete(bstSymtable **symTree, DSTRING key);
 void symtableDispose(bstSymtable **symTree);
 void insertVariables(const char *name, DATATYPE dataType, bool initialized, bool constant, bool isPar, bool use, bstSymtable **local);
+void insertFunction(bstSymtable **symTree, const char *name, DATATYPE returnType, int newParamCount, bool isDefined, bool buildIn, bool hasLocals, varData *newVarDatas);
 void dStringAddString(DSTRING *dstr, const char *str);
 #endif

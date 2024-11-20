@@ -239,6 +239,10 @@ int analyzeExp(TStack *expStack, TOKEN *token)
             if (returnExpValue == T_ID)
             {
                 bstSymtable *resul = symtableSearch(&symLocal, *((ElmExp *)(expStack->stackTop->value))->key);
+                if (resul == NULL)
+                {
+                    exit(UNDEFINED_VARIABLE_ERROR);
+                }
                 returnExpValue = ((varData *)resul->data)->dataType.type;
                 if (returnExpValue != T_INT && returnExpValue != T_FLOAT && returnExpValue != T_STR)
                 {
@@ -405,9 +409,10 @@ int convertToIndex(int value)
         return tableLeftPar;
     case T_R_BRACKET:
         // treba odkomentovat
-        // if(inFce == true && lBracketInStack == false){
-        //     return tableDollar;
-        // }
+        if (inFce == true && lBracketInStack == false)
+        {
+            return tableDollar;
+        }
         return tableRightPar;
     case T_SEMICOL:
         return tableDollar;

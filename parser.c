@@ -289,9 +289,12 @@ void parserIn(TStack *parserStack)
 {
     DSTRING *ID;
     ID = dStringCreate();
+    DSTRING *functionID;
+    functionID = dStringCreate();
     TOKEN *token;
     int literal = 99;
     int top;
+    int paramTypeCounter = 0;
 
     token = getToken();
     literal = convertTokenToIndex(token);
@@ -300,11 +303,19 @@ void parserIn(TStack *parserStack)
     while (literal != EOF)
     {
         printf("%d*******\n", assign);
+
         if (literal == tLlId && assign == false)
         {
             printf("********NA VSTUPE JE TOKEN ID************\n");
             ID = token->attribute.dStr;
             printf("%s\n", ID->str);
+            paramTypeCounter = 1;
+        }
+        if (literal == tLlFunctId)
+        {
+            printf("********NA VSTUPE JE TOKEN ID************\n");
+            functionID = token->attribute.dStr;
+            printf("%s\n", functionID->str);
         }
         // top is top value from the stack
         top = *(int *)(parserStack->stackTop);
@@ -330,6 +341,7 @@ void parserIn(TStack *parserStack)
         }
 
         printf("==================76==========\n");
+
         // terminal part
         if ((top >= 0 && top <= TERMINAL_COUNT - 1) || (top <= -1 && top >= -8))
         {
@@ -358,23 +370,36 @@ void parserIn(TStack *parserStack)
                 exit(SYNTAX_ERROR);
             }
 
+            printf("sdads");
             token = getToken();
             literal = convertTokenToIndex(token);
-            printf("sdads");
-            if (top == tLlVar || top == tLlConst)
+            // adding variables to localTree
+            if ((top == tLlVar || top == tLlConst || top == tLlLeftRoundBracket || top == tLlComma) && token->type == T_ID)
             {
+                if (inFce == false)
+                {
+                    if (symtableSearch(&symLocal, *token->attribute.dStr) == NULL)
+                    {
+                        insertVariables(token->attribute.dStr->str, (DATATYPE){false, false, token->type}, false, isConst, false, false, &symLocal);
+                    }
+                    else
+                    {
+                        printf("majko");
+
+                        exit(REDEFINITION_ERROR);
+                        /* code */
+                    }
+                    isConst = false;
+                }
+            }
+            // adding functions to globalTree
+            if (top == tLlFn)
+            {
+
                 if (symtableSearch(&symLocal, *token->attribute.dStr) == NULL)
                 {
-                    insertVariables(token->attribute.dStr->str, (DATATYPE){false, false, token->type}, false, isConst, false, false, &symLocal);
+                    insertFunction(&symTree, token->attribute.dStr->str, (DATATYPE){false, false, token->type}, 0, true, false, true, NULL);
                 }
-                else
-                {
-                    printf("majko");
-
-                    exit(REDEFINITION_ERROR);
-                    /* code */
-                }
-                isConst = false;
             }
 
             if (literal == tLlSemicolon)
@@ -421,46 +446,128 @@ void parserIn(TStack *parserStack)
                     exit(REDEFINITION_ERROR);
                 }
             }
-
-            if ((llTable[top % 100][literal]) == 9 || (llTable[top % 100][literal]) == 8)
+            printf("counter je : %d\n", paramTypeCounter);
+            if ((llTable[top % 100][literal]) == 9 || (llTable[top % 100][literal]) == 8 || (llTable[top % 100][literal]) == 10 || (llTable[top % 100][literal]) == 45)
             {
                 bstSymtable *res = symtableSearch(&symLocal, *ID);
+                bstSymtable *resFce = symtableSearch(&symTree, *functionID);
                 printf("jhash %s", ID->str);
-                if (res == NULL)
+                if (res == NULL && resFce == NULL)
                 {
                     exit(UNDEFINED_VARIABLE_ERROR);
                 }
                 else
                 {
 
-                    if (strcmp(token->attribute.dStr->str, "i32") == 0)
+                    printf("counter je : %d\n", paramTypeCounter);
+                    if (token->type == T_L_SQ_BRACKET)
                     {
-                        ((varData *)res->data)->dataType.type = T_INT;
+                        if (paramTypeCounter == 1)
+                        {
+                            ((varData *)res->data)->dataType.type = T_STR;
+                            paramTypeCounter = 0;
+                            /* code */
+                        }
+                        else
+                        {
+                            ((fceData *)resFce->data)->returnType.type = T_STR;
+                        }
+                    }
+                    else if (strcmp(token->attribute.dStr->str, "i32") == 0)
+                    {
+                        if (paramTypeCounter == 1)
+                        {
+                            ((varData *)res->data)->dataType.type = T_INT;
+                            paramTypeCounter = 0;
+                        }
+                        else
+                        {
+
+                            ((fceData *)resFce->data)->returnType.type = T_INT;
+                        }
                     }
 
                     else if (strcmp(token->attribute.dStr->str, "f64") == 0)
                     {
-                        ((varData *)res->data)->dataType.type = T_FLOAT;
-                    }
-                }
-            }
-            if ((llTable[top % 100][literal]) == 10)
-            {
-                bstSymtable *res = symtableSearch(&symLocal, *ID);
-                if (res == NULL)
-                {
-                    exit(UNDEFINED_VARIABLE_ERROR);
-                }
-                else
-                {
-                    printf("kjsabkj%d", token->type);
-                    if (token->type == T_L_SQ_BRACKET)
-                    {
-                        ((varData *)res->data)->dataType.type = T_STR;
-                    }
-                }
-            }
+                        if (paramTypeCounter == 1)
+                        {
+                            ((varData *)res->data)->dataType.type = T_FLOAT;
+                            paramTypeCounter = 0;
+                            /* code */
+                        }
+                        else
+                        {
 
+                            ((fceData *)resFce->data)->returnType.type = T_FLOAT;
+                        }
+                    }
+                    else
+                    {
+                        if (paramTypeCounter == 1)
+                        {
+                            ((varData *)res->data)->dataType.type = T_KEYWORD;
+                            paramTypeCounter = 0;
+                            /* code */
+                        }
+                        else
+                        {
+
+                            ((fceData *)resFce->data)->returnType.type = T_KEYWORD;
+                        }
+                    }
+                }
+            }
+            // if ((llTable[top % 100][literal]) == 10)
+            // {
+            //     bstSymtable *res = symtableSearch(&symLocal, *ID);
+            //     bstSymtable *resFce = symtableSearch(&symTree, *functionID);
+            //     printf("jhash %s", ID->str);
+            //     if (res == NULL || resFce == NULL)
+            //     {
+            //         exit(UNDEFINED_VARIABLE_ERROR);
+            //     }
+            //     else
+            //     {
+            //         printf("kjsabkj%d", token->type);
+            //         if (token->type == T_L_SQ_BRACKET)
+            //         {
+            //             if (paramTypeCounter == 1)
+            //             {
+            //                 ((varData *)res->data)->dataType.type = T_STR;
+            //                 paramTypeCounter = 0;
+            //                 /* code */
+            //             }
+            //             else
+            //             {
+            //                 ((fceData *)resFce->data)->returnType.type = T_STR;
+            //             }
+            //         }
+            //     }
+            // }
+
+            if ((llTable[top % 100][literal]) == 5)
+            {
+                symtableDispose(&symLocal);
+            }
+            if ((llTable[top % 100][literal]) == 33)
+            {
+                paramTypeCounter = 0;
+            }
+            // if ((llTable[top % 100][literal]) == 32)
+            // {
+            //     bstSymtable *resFce = symtableSearch(&symTree, *functionID);
+            //     if (resFce == NULL)
+            //     {
+            //         exit(UNDEFINED_VARIABLE_ERROR);
+            //     }
+            //     else
+            //     {
+            //     }
+            // }
+            if ((llTable[top % 100][literal]) == 31)
+            {
+                exit(GENERIC_SEMANTIC_ERROR);
+            }
             printf("NA VSTUPE JE NETERMINAL ALEBO SPECIAL\n");
             printf("top: %d\n", top);
             printf("literal: %d\n", literal);
@@ -484,6 +591,8 @@ void parserIn(TStack *parserStack)
             stackPop(parserStack);
             stackPop(parserStack);
             printf("bude exprssion:   %d\n", inFce);
+            paramTypeCounter = 0;
+            printf("counter je : %d\n", paramTypeCounter);
             TStack expStack;
             analyzeExp(&expStack, token);
 
@@ -542,11 +651,11 @@ int main(int argc, char **argv)
     symtableInit(&symLocal);
     parsIt(&parserStack);
     DSTRING *str = dStringCreate();
-    dStringAddString(str, "a");
-    bstSymtable *resLocal = symtableSearch(&symLocal, *str);
+    dStringAddString(str, "main");
+    bstSymtable *resLocal = symtableSearch(&symTree, *str);
     if (resLocal != NULL)
     {
-        printf("\nFound in locals %d %d\n", ((varData *)resLocal->data)->dataType.type, isConst);
+        printf("\nFound in locals %d \n", ((fceData *)resLocal->data)->returnType.type);
     }
     else
     {

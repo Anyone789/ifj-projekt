@@ -287,46 +287,86 @@ void dStringAddString(DSTRING *dstr, const char *str)
     }
 }
 
-void insertFunction(bstSymtable **symTree, const char *name, DATATYPE returnType, int paramCount, bool isDefined, bool buildIn, bool hasLocals, varData *varDatas)
+void insertFunction(bstSymtable **symTree, const char *name, DATATYPE returnType, int newParamCount, bool isDefined, bool buildIn, bool hasLocals, varData *newVarDatas)
 {
     DSTRING *functionName = dStringCreate();
     dStringAddString(functionName, name);
-    fceData *functionData = (fceData *)malloc(sizeof(fceData));
-    if (functionData == NULL)
+    // Skontrolujte, či už funkcia existuje
+    printf("Memory reallocation for parameters failed\n");
+    bstSymtable *existingNode = symtableSearch(symTree, *functionName);
+    if (existingNode != NULL)
     {
-        // Handle memory allocation failure
-        printf("Memory allocation for fceData failed\n");
-        exit(1); // Or handle it appropriately
-    }
-    bstSymtable *localTreei2f = NULL;
-    if (hasLocals)
-    {
-        localTreei2f = (bstSymtable *)malloc(sizeof(struct symtable));
-        symtableInit(&localTreei2f);
-    }
-    // Initialize the fields
-    functionData->returnType = returnType;
-    functionData->paramCount = paramCount;
-    functionData->isDefined = isDefined;
-    functionData->buildIn = buildIn;
-    functionData->locals = (hasLocals) ? &localTreei2f : NULL;
-    if (paramCount > 0)
-    {
-        functionData->params = (varData *)malloc(paramCount * sizeof(varData));
-        if (functionData->params == NULL)
+        // Funkcia existuje, aktualizujeme ju
+        fceData *existingData = existingNode->data;
+
+        // Pridáme nové parametre, ak sú
+        if (newParamCount > 0)
         {
-            printf("Memory allocation for parameters failed\n");
+
+            // varData *datas = existingData->params;
+            //  Realokácia pamäte pre nové parametre
+            varData *newParams = (varData *)realloc(existingData->params, newParamCount * sizeof(varData));
+            if (newParams == NULL)
+            {
+                exit(1);
+            }
+            existingData->params = newParams;
+
+            // Pridanie nových parametrov
+
+            existingData->params[newParamCount - 1] = newVarDatas[0];
+
+            // Aktualizácia počtu parametrov
+            existingData->paramCount = newParamCount;
+        }
+
+        return;
+    }
+    else
+    {
+        fceData *functionData = (fceData *)malloc(sizeof(fceData));
+        if (functionData == NULL)
+        {
+            printf("Memory allocation for fceData failed\n");
             exit(1);
         }
-        for (int i = 0; i < paramCount; i++)
+        bstSymtable *localTree = NULL;
+        if (hasLocals)
         {
-            functionData->params[i] = varDatas[i]; // Kopírovanie údajov parametra
+            localTree = (bstSymtable *)malloc(sizeof(struct symtable));
+            symtableInit(&localTree);
         }
-    }else{
-        functionData->params = NULL;
+
+        // Inicializácia polí novej funkcie
+        functionData->returnType = returnType;
+        functionData->paramCount = newParamCount;
+        functionData->isDefined = isDefined;
+        functionData->buildIn = buildIn;
+        functionData->locals = (hasLocals) ? &localTree : NULL;
+
+        if (newParamCount > 0)
+        {
+            functionData->params = (varData *)malloc(newParamCount * sizeof(varData));
+            if (functionData->params == NULL)
+            {
+                printf("Memory allocation for parameters failed\n");
+                exit(1);
+            }
+            for (int i = 0; i < newParamCount; i++)
+            {
+                functionData->params[i] = newVarDatas[i];
+            }
+        }
+        else
+        {
+            functionData->params = NULL;
+        }
+        symtableInsertFce(symTree, *functionName, functionData);
     }
 
-    symtableInsertFce(symTree, *functionName, functionData);
+    // Ak funkcia neexistuje, vytvoríme novú
+
+    // Pridáme novú funkciu do symbolickej tabuľky
 }
 void insertVariables(const char *name, DATATYPE dataType, bool initialized, bool constant, bool isPar, bool use, bstSymtable **local)
 {
@@ -392,7 +432,6 @@ void symtableInsertBuildInFce(bstSymtable **symTree)
     insertFunction(symTree, "ord", (DATATYPE){false, false, T_INT}, 2, true, true, false, varDatas);
     varDatas[0].dataType = (DATATYPE){false, false, T_INT};
     insertFunction(symTree, "chr", (DATATYPE){false, false, T_STR}, 1, true, true, false, varDatas);
-    
 }
 /**
  * @brief Helper function to replace a node with its rightmost descendant.

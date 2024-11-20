@@ -90,7 +90,7 @@ typedef enum
     nLlNoNullBody,
     nLlFunctId,
     nLlDefType,
-    nLlNull,
+    // nLlNull,
 
 } NonTerminals;
 
