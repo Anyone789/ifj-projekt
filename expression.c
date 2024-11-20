@@ -90,6 +90,7 @@ void checkSem(ElmExp *lOperand, ElmExp *rOperand)
                 else
                 {
                     printf("OK");
+                    ((varData *)result->data)->use = true;
                 }
             }
         }
@@ -114,6 +115,7 @@ void checkSem(ElmExp *lOperand, ElmExp *rOperand)
                     lOperand->dataType.type = T_ID;
                     lOperand->key = rOperand->key;
                     printf("OK");
+                    ((varData *)result->data)->use = true;
                 }
             }
         }
@@ -138,6 +140,8 @@ void checkSem(ElmExp *lOperand, ElmExp *rOperand)
                 else
                 {
                     printf("OK");
+                    ((varData *)lResult->data)->use = true;
+                    ((varData *)rResult->data)->use = true;
                 }
             }
         }
@@ -244,6 +248,7 @@ int analyzeExp(TStack *expStack, TOKEN *token)
                     exit(UNDEFINED_VARIABLE_ERROR);
                 }
                 returnExpValue = ((varData *)resul->data)->dataType.type;
+                ((varData *)resul->data)->use = true;
                 if (returnExpValue != T_INT && returnExpValue != T_FLOAT && returnExpValue != T_STR)
                 {
                     exit(GENERIC_SEMANTIC_ERROR);

@@ -23,6 +23,8 @@ NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 101
 literal: 0
 pravidlo: 1
+
+STAV BUDE101
 po pope je stack
 
 Stack (top to bottom):
@@ -417,6 +419,8 @@ NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 102
 literal: 1
 pravidlo: 2
+
+STAV BUDE102
 po pope je stack
 
 Stack (top to bottom):
@@ -451,6 +455,8 @@ NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 103
 literal: 1
 pravidlo: 5
+
+STAV BUDE103
 po pope je stack
 
 Stack (top to bottom):
@@ -744,6 +750,8 @@ NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 104
 literal: 14
 pravidlo: 7
+
+STAV BUDE104
 po pope je stack
 
 Stack (top to bottom):
@@ -844,6 +852,8 @@ NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 105
 literal: 26
 pravidlo: 45
+
+STAV BUDE104
 po pope je stack
 
 Stack (top to bottom):
@@ -970,6 +980,8 @@ NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 110
 literal: 11
 pravidlo: 19
+
+STAV BUDE110
 po pope je stack
 
 Stack (top to bottom):
@@ -1012,6 +1024,8 @@ NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 111
 literal: 11
 pravidlo: 25
+
+STAV BUDE111
 po pope je stack
 
 Stack (top to bottom):
@@ -1056,6 +1070,8 @@ NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 117
 literal: 11
 pravidlo: 36
+
+STAV BUDE117
 po pope je stack
 
 Stack (top to bottom):
@@ -1212,6 +1228,8 @@ NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 122
 literal: 20
 pravidlo: 43
+
+STAV BUDE122
 po pope je stack
 
 Stack (top to bottom):
@@ -1285,7 +1303,7 @@ Stack (top to bottom):
 sdads0*******
 som tu
 top: 105
-literal: 5
+literal: 6
 
 Stack (top to bottom):
 
@@ -1308,15 +1326,16 @@ Stack (top to bottom):
  Stack size: 7
 ==================76==========
 -------------top: 105
-literal: 5
+literal: 6
 ID moze byt aj NULL v else
 counter je : 1
 jhash redcounter je : 1
-iugsaiu0Memory reallocation for parameters failed
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 105
-literal: 5
-pravidlo: 8
+literal: 6
+pravidlo: 9
+
+STAV BUDE122
 po pope je stack
 
 Stack (top to bottom):
@@ -1338,13 +1357,13 @@ Stack (top to bottom):
  Stack size: 6
 0*******
 som tu
-top: 5
-literal: 5
+top: 6
+literal: 6
 
 Stack (top to bottom):
 
  ┌───────┐
- │     5 │ <- position 7
+ │     6 │ <- position 7
  |-------|
  │    15 │ <- position 6
  |-------|
@@ -1362,8 +1381,8 @@ Stack (top to bottom):
  Stack size: 7
 ==================76==========
 NA VSTUPE JE TERMINAL
-top: 5
-literal: 5
+top: 6
+literal: 6
 po pope je stack
 
 Stack (top to bottom):
@@ -1429,7 +1448,7 @@ Stack (top to bottom):
 sdads1*******
 som tu
 top: 116
-literal: 5
+literal: 6
 
 Stack (top to bottom):
 
@@ -1448,13 +1467,15 @@ Stack (top to bottom):
  Stack size: 5
 ==================76==========
 -------------top: 116
-literal: 5
+literal: 6
 ID moze byt aj NULL v else
 counter je : 0
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 116
-literal: 5
+literal: 6
 pravidlo: 35
+
+STAV BUDE122
 po pope je stack
 
 Stack (top to bottom):
@@ -1473,7 +1494,7 @@ Stack (top to bottom):
 1*******
 som tu
 top: -10
-literal: 5
+literal: 6
 
 Stack (top to bottom):
 
@@ -1498,7 +1519,7 @@ counter je : 0
 13
 stack size:1
 
-1
+2
 
 prec[13][12]
 <
@@ -1506,19 +1527,19 @@ stack size:2
 
 0
 
-prec[12][2]
+prec[12][0]
 >
 stack size:2
 
 0
 
-prec[13][2]
+prec[13][0]
 <
 stack size:3
 
 1
 
-prec[2][12]
+prec[0][12]
 <
 stack size:4
 
@@ -1530,7 +1551,7 @@ stack size:4
 
 0
 
-prec[2][13]
+prec[0][13]
 >
 stack size:2
 
@@ -1538,7 +1559,7 @@ stack size:2
 
 prec[13][13]
 endalles gut
-5, 5
+7, 7
 Stack (top to bottom):
 
  ┌───────┐
@@ -1582,6 +1603,8 @@ NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 110
 literal: 4
 pravidlo: 19
+
+STAV BUDE110
 po pope je stack
 
 Stack (top to bottom):
@@ -1626,6 +1649,8 @@ NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 111
 literal: 4
 pravidlo: 27
+
+STAV BUDE111
 po pope je stack
 
 Stack (top to bottom):
@@ -1672,6 +1697,8 @@ NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 119
 literal: 4
 pravidlo: 38
+
+STAV BUDE119
 po pope je stack
 
 Stack (top to bottom):
@@ -1782,440 +1809,6 @@ Stack (top to bottom):
 sdads1*******
 som tu
 top: 116
-literal: 5
-
-Stack (top to bottom):
-
- ┌───────┐
- │   116 │ <- position 5
- |-------|
- │   110 │ <- position 4
- |-------|
- │    18 │ <- position 3
- |-------|
- │   102 │ <- position 2
- |-------|
- │    -1 │ <- position 1
- |-------|
- └───────┘
- Stack size: 5
-==================76==========
--------------top: 116
-literal: 5
-ID moze byt aj NULL v else
-counter je : 1
-NA VSTUPE JE NETERMINAL ALEBO SPECIAL
-top: 116
-literal: 5
-pravidlo: 35
-po pope je stack
-
-Stack (top to bottom):
-
- ┌───────┐
- │   110 │ <- position 4
- |-------|
- │    18 │ <- position 3
- |-------|
- │   102 │ <- position 2
- |-------|
- │    -1 │ <- position 1
- |-------|
- └───────┘
- Stack size: 4
-1*******
-som tu
-top: -10
-literal: 5
-
-Stack (top to bottom):
-
- ┌───────┐
- │   -10 │ <- position 6
- |-------|
- │    16 │ <- position 5
- |-------|
- │   110 │ <- position 4
- |-------|
- │    18 │ <- position 3
- |-------|
- │   102 │ <- position 2
- |-------|
- │    -1 │ <- position 1
- |-------|
- └───────┘
- Stack size: 6
-==================76==========
-bude exprssion:   0
-counter je : 0
-13
-stack size:1
-
-1
-
-prec[13][12]
-<
-stack size:2
-
-0
-
-prec[12][13]
->
-stack size:2
-
-0
-
-prec[13][13]
-endalles gut
-5, 5
-Stack (top to bottom):
-
- ┌───────┐
- │   110 │ <- position 4
- |-------|
- │    18 │ <- position 3
- |-------|
- │   102 │ <- position 2
- |-------|
- │    -1 │ <- position 1
- |-------|
- └───────┘
- Stack size: 4
-token po EXP: 11
-0*******
-som tu
-top: 110
-literal: 11
-
-Stack (top to bottom):
-
- ┌───────┐
- │   110 │ <- position 4
- |-------|
- │    18 │ <- position 3
- |-------|
- │   102 │ <- position 2
- |-------|
- │    -1 │ <- position 1
- |-------|
- └───────┘
- Stack size: 4
-==================76==========
--------------top: 110
-literal: 11
-ID moze byt aj NULL v else
-counter je : 0
-NA VSTUPE JE NETERMINAL ALEBO SPECIAL
-top: 110
-literal: 11
-pravidlo: 19
-po pope je stack
-
-Stack (top to bottom):
-
- ┌───────┐
- │    18 │ <- position 3
- |-------|
- │   102 │ <- position 2
- |-------|
- │    -1 │ <- position 1
- |-------|
- └───────┘
- Stack size: 3
-0*******
-som tu
-top: 111
-literal: 11
-
-Stack (top to bottom):
-
- ┌───────┐
- │   111 │ <- position 5
- |-------|
- │   110 │ <- position 4
- |-------|
- │    18 │ <- position 3
- |-------|
- │   102 │ <- position 2
- |-------|
- │    -1 │ <- position 1
- |-------|
- └───────┘
- Stack size: 5
-==================76==========
--------------top: 111
-literal: 11
-ID moze byt aj NULL v else
-counter je : 0
-NA VSTUPE JE NETERMINAL ALEBO SPECIAL
-top: 111
-literal: 11
-pravidlo: 25
-po pope je stack
-
-Stack (top to bottom):
-
- ┌───────┐
- │   110 │ <- position 4
- |-------|
- │    18 │ <- position 3
- |-------|
- │   102 │ <- position 2
- |-------|
- │    -1 │ <- position 1
- |-------|
- └───────┘
- Stack size: 4
-0*******
-som tu
-top: 117
-literal: 11
-
-Stack (top to bottom):
-
- ┌───────┐
- │   117 │ <- position 5
- |-------|
- │   110 │ <- position 4
- |-------|
- │    18 │ <- position 3
- |-------|
- │   102 │ <- position 2
- |-------|
- │    -1 │ <- position 1
- |-------|
- └───────┘
- Stack size: 5
-==================76==========
--------------top: 117
-literal: 11
-ID moze byt aj NULL v else
-counter je : 0
-NA VSTUPE JE NETERMINAL ALEBO SPECIAL
-top: 117
-literal: 11
-pravidlo: 36
-po pope je stack
-
-Stack (top to bottom):
-
- ┌───────┐
- │   110 │ <- position 4
- |-------|
- │    18 │ <- position 3
- |-------|
- │   102 │ <- position 2
- |-------|
- │    -1 │ <- position 1
- |-------|
- └───────┘
- Stack size: 4
-0*******
-som tu
-top: 11
-literal: 11
-
-Stack (top to bottom):
-
- ┌───────┐
- │    11 │ <- position 9
- |-------|
- │     4 │ <- position 8
- |-------|
- │   122 │ <- position 7
- |-------|
- │    15 │ <- position 6
- |-------|
- │   116 │ <- position 5
- |-------|
- │   110 │ <- position 4
- |-------|
- │    18 │ <- position 3
- |-------|
- │   102 │ <- position 2
- |-------|
- │    -1 │ <- position 1
- |-------|
- └───────┘
- Stack size: 9
-==================76==========
-NA VSTUPE JE TERMINAL
-top: 11
-literal: 11
-po pope je stack
-
-Stack (top to bottom):
-
- ┌───────┐
- │     4 │ <- position 8
- |-------|
- │   122 │ <- position 7
- |-------|
- │    15 │ <- position 6
- |-------|
- │   116 │ <- position 5
- |-------|
- │   110 │ <- position 4
- |-------|
- │    18 │ <- position 3
- |-------|
- │   102 │ <- position 2
- |-------|
- │    -1 │ <- position 1
- |-------|
- └───────┘
- Stack size: 8
-sdads0*******
-********NA VSTUPE JE TOKEN ID************
-a
-som tu
-top: 4
-literal: 4
-
-Stack (top to bottom):
-
- ┌───────┐
- │     4 │ <- position 8
- |-------|
- │   122 │ <- position 7
- |-------|
- │    15 │ <- position 6
- |-------|
- │   116 │ <- position 5
- |-------|
- │   110 │ <- position 4
- |-------|
- │    18 │ <- position 3
- |-------|
- │   102 │ <- position 2
- |-------|
- │    -1 │ <- position 1
- |-------|
- └───────┘
- Stack size: 8
-==================76==========
-NA VSTUPE JE TERMINAL
-top: 4
-literal: 4
-po pope je stack
-
-Stack (top to bottom):
-
- ┌───────┐
- │   122 │ <- position 7
- |-------|
- │    15 │ <- position 6
- |-------|
- │   116 │ <- position 5
- |-------|
- │   110 │ <- position 4
- |-------|
- │    18 │ <- position 3
- |-------|
- │   102 │ <- position 2
- |-------|
- │    -1 │ <- position 1
- |-------|
- └───────┘
- Stack size: 7
-sdads0*******
-som tu
-top: 122
-literal: 15
-
-Stack (top to bottom):
-
- ┌───────┐
- │   122 │ <- position 7
- |-------|
- │    15 │ <- position 6
- |-------|
- │   116 │ <- position 5
- |-------|
- │   110 │ <- position 4
- |-------|
- │    18 │ <- position 3
- |-------|
- │   102 │ <- position 2
- |-------|
- │    -1 │ <- position 1
- |-------|
- └───────┘
- Stack size: 7
-==================76==========
--------------top: 122
-literal: 15
-ID moze byt aj NULL v else
-counter je : 1
-NA VSTUPE JE NETERMINAL ALEBO SPECIAL
-top: 122
-literal: 15
-pravidlo: 44
-po pope je stack
-
-Stack (top to bottom):
-
- ┌───────┐
- │    15 │ <- position 6
- |-------|
- │   116 │ <- position 5
- |-------|
- │   110 │ <- position 4
- |-------|
- │    18 │ <- position 3
- |-------|
- │   102 │ <- position 2
- |-------|
- │    -1 │ <- position 1
- |-------|
- └───────┘
- Stack size: 6
-1*******
-som tu
-top: 15
-literal: 15
-
-Stack (top to bottom):
-
- ┌───────┐
- │    15 │ <- position 6
- |-------|
- │   116 │ <- position 5
- |-------|
- │   110 │ <- position 4
- |-------|
- │    18 │ <- position 3
- |-------|
- │   102 │ <- position 2
- |-------|
- │    -1 │ <- position 1
- |-------|
- └───────┘
- Stack size: 6
-==================76==========
-NA VSTUPE JE TERMINAL
-top: 15
-literal: 15
-po pope je stack
-
-Stack (top to bottom):
-
- ┌───────┐
- │   116 │ <- position 5
- |-------|
- │   110 │ <- position 4
- |-------|
- │    18 │ <- position 3
- |-------|
- │   102 │ <- position 2
- |-------|
- │    -1 │ <- position 1
- |-------|
- └───────┘
- Stack size: 5
-sdads1*******
-som tu
-top: 116
 literal: 6
 
 Stack (top to bottom):
@@ -2242,6 +1835,8 @@ NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 116
 literal: 6
 pravidlo: 35
+
+STAV BUDE119
 po pope je stack
 
 Stack (top to bottom):
@@ -2301,7 +1896,7 @@ stack size:2
 
 prec[13][13]
 endalles gut
-2, 7
+7, 7
 Stack (top to bottom):
 
  ┌───────┐
@@ -2343,6 +1938,8 @@ NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 110
 literal: 18
 pravidlo: 20
+
+STAV BUDE110
 po pope je stack
 
 Stack (top to bottom):
@@ -2410,6 +2007,8 @@ NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 102
 literal: 1
 pravidlo: 2
+
+STAV BUDE102
 po pope je stack
 
 Stack (top to bottom):
@@ -2444,6 +2043,8 @@ NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 103
 literal: 1
 pravidlo: 5
+
+STAV BUDE103
 po pope je stack
 
 Stack (top to bottom):
@@ -2588,7 +2189,7 @@ Stack (top to bottom):
 sdadsMemory reallocation for parameters failed
 0*******
 ********NA VSTUPE JE TOKEN ID************
-decrement
+increment
 som tu
 top: 3
 literal: 3
@@ -2703,11 +2304,9 @@ Stack (top to bottom):
  └───────┘
  Stack size: 8
 sdads0*******
-********NA VSTUPE JE TOKEN ID************
-n
 som tu
 top: 104
-literal: 4
+literal: 14
 
 Stack (top to bottom):
 
@@ -2732,720 +2331,15 @@ Stack (top to bottom):
  Stack size: 8
 ==================76==========
 -------------top: 104
-literal: 4
-ID moze byt aj NULL v else
-counter je : 1
-NA VSTUPE JE NETERMINAL ALEBO SPECIAL
-top: 104
-literal: 4
-pravidlo: 6
-po pope je stack
-
-Stack (top to bottom):
-
- ┌───────┐
- │    14 │ <- position 7
- |-------|
- │   105 │ <- position 6
- |-------|
- │    17 │ <- position 5
- |-------|
- │   110 │ <- position 4
- |-------|
- │    18 │ <- position 3
- |-------|
- │   102 │ <- position 2
- |-------|
- │    -1 │ <- position 1
- |-------|
- └───────┘
- Stack size: 7
-0*******
-********NA VSTUPE JE TOKEN ID************
-n
-som tu
-top: 4
-literal: 4
-
-Stack (top to bottom):
-
- ┌───────┐
- │     4 │ <- position 11
- |-------|
- │    20 │ <- position 10
- |-------|
- │   105 │ <- position 9
- |-------|
- │   106 │ <- position 8
- |-------|
- │    14 │ <- position 7
- |-------|
- │   105 │ <- position 6
- |-------|
- │    17 │ <- position 5
- |-------|
- │   110 │ <- position 4
- |-------|
- │    18 │ <- position 3
- |-------|
- │   102 │ <- position 2
- |-------|
- │    -1 │ <- position 1
- |-------|
- └───────┘
- Stack size: 11
-==================76==========
-NA VSTUPE JE TERMINAL
-top: 4
-literal: 4
-po pope je stack
-
-Stack (top to bottom):
-
- ┌───────┐
- │    20 │ <- position 10
- |-------|
- │   105 │ <- position 9
- |-------|
- │   106 │ <- position 8
- |-------|
- │    14 │ <- position 7
- |-------|
- │   105 │ <- position 6
- |-------|
- │    17 │ <- position 5
- |-------|
- │   110 │ <- position 4
- |-------|
- │    18 │ <- position 3
- |-------|
- │   102 │ <- position 2
- |-------|
- │    -1 │ <- position 1
- |-------|
- └───────┘
- Stack size: 10
-sdads0*******
-som tu
-top: 20
-literal: 20
-
-Stack (top to bottom):
-
- ┌───────┐
- │    20 │ <- position 10
- |-------|
- │   105 │ <- position 9
- |-------|
- │   106 │ <- position 8
- |-------|
- │    14 │ <- position 7
- |-------|
- │   105 │ <- position 6
- |-------|
- │    17 │ <- position 5
- |-------|
- │   110 │ <- position 4
- |-------|
- │    18 │ <- position 3
- |-------|
- │   102 │ <- position 2
- |-------|
- │    -1 │ <- position 1
- |-------|
- └───────┘
- Stack size: 10
-==================76==========
-NA VSTUPE JE TERMINAL
-top: 20
-literal: 20
-po pope je stack
-
-Stack (top to bottom):
-
- ┌───────┐
- │   105 │ <- position 9
- |-------|
- │   106 │ <- position 8
- |-------|
- │    14 │ <- position 7
- |-------|
- │   105 │ <- position 6
- |-------|
- │    17 │ <- position 5
- |-------|
- │   110 │ <- position 4
- |-------|
- │    18 │ <- position 3
- |-------|
- │   102 │ <- position 2
- |-------|
- │    -1 │ <- position 1
- |-------|
- └───────┘
- Stack size: 9
-sdads0*******
-som tu
-top: 105
-literal: 6
-
-Stack (top to bottom):
-
- ┌───────┐
- │   105 │ <- position 9
- |-------|
- │   106 │ <- position 8
- |-------|
- │    14 │ <- position 7
- |-------|
- │   105 │ <- position 6
- |-------|
- │    17 │ <- position 5
- |-------|
- │   110 │ <- position 4
- |-------|
- │    18 │ <- position 3
- |-------|
- │   102 │ <- position 2
- |-------|
- │    -1 │ <- position 1
- |-------|
- └───────┘
- Stack size: 9
-==================76==========
--------------top: 105
-literal: 6
-ID moze byt aj NULL v else
-counter je : 1
-jhash ncounter je : 1
-Memory reallocation for parameters failed
-NA VSTUPE JE NETERMINAL ALEBO SPECIAL
-top: 105
-literal: 6
-pravidlo: 9
-po pope je stack
-
-Stack (top to bottom):
-
- ┌───────┐
- │   106 │ <- position 8
- |-------|
- │    14 │ <- position 7
- |-------|
- │   105 │ <- position 6
- |-------|
- │    17 │ <- position 5
- |-------|
- │   110 │ <- position 4
- |-------|
- │    18 │ <- position 3
- |-------|
- │   102 │ <- position 2
- |-------|
- │    -1 │ <- position 1
- |-------|
- └───────┘
- Stack size: 8
-0*******
-som tu
-top: 6
-literal: 6
-
-Stack (top to bottom):
-
- ┌───────┐
- │     6 │ <- position 9
- |-------|
- │   106 │ <- position 8
- |-------|
- │    14 │ <- position 7
- |-------|
- │   105 │ <- position 6
- |-------|
- │    17 │ <- position 5
- |-------|
- │   110 │ <- position 4
- |-------|
- │    18 │ <- position 3
- |-------|
- │   102 │ <- position 2
- |-------|
- │    -1 │ <- position 1
- |-------|
- └───────┘
- Stack size: 9
-==================76==========
-NA VSTUPE JE TERMINAL
-top: 6
-literal: 6
-po pope je stack
-
-Stack (top to bottom):
-
- ┌───────┐
- │   106 │ <- position 8
- |-------|
- │    14 │ <- position 7
- |-------|
- │   105 │ <- position 6
- |-------|
- │    17 │ <- position 5
- |-------|
- │   110 │ <- position 4
- |-------|
- │    18 │ <- position 3
- |-------|
- │   102 │ <- position 2
- |-------|
- │    -1 │ <- position 1
- |-------|
- └───────┘
- Stack size: 8
-sdads0*******
-som tu
-top: 106
-literal: 12
-
-Stack (top to bottom):
-
- ┌───────┐
- │   106 │ <- position 8
- |-------|
- │    14 │ <- position 7
- |-------|
- │   105 │ <- position 6
- |-------|
- │    17 │ <- position 5
- |-------|
- │   110 │ <- position 4
- |-------|
- │    18 │ <- position 3
- |-------|
- │   102 │ <- position 2
- |-------|
- │    -1 │ <- position 1
- |-------|
- └───────┘
- Stack size: 8
-==================76==========
--------------top: 106
-literal: 12
-ID moze byt aj NULL v else
-counter je : 0
-NA VSTUPE JE NETERMINAL ALEBO SPECIAL
-top: 106
-literal: 12
-pravidlo: 12
-po pope je stack
-
-Stack (top to bottom):
-
- ┌───────┐
- │    14 │ <- position 7
- |-------|
- │   105 │ <- position 6
- |-------|
- │    17 │ <- position 5
- |-------|
- │   110 │ <- position 4
- |-------|
- │    18 │ <- position 3
- |-------|
- │   102 │ <- position 2
- |-------|
- │    -1 │ <- position 1
- |-------|
- └───────┘
- Stack size: 7
-0*******
-som tu
-top: 12
-literal: 12
-
-Stack (top to bottom):
-
- ┌───────┐
- │    12 │ <- position 9
- |-------|
- │   104 │ <- position 8
- |-------|
- │    14 │ <- position 7
- |-------|
- │   105 │ <- position 6
- |-------|
- │    17 │ <- position 5
- |-------|
- │   110 │ <- position 4
- |-------|
- │    18 │ <- position 3
- |-------|
- │   102 │ <- position 2
- |-------|
- │    -1 │ <- position 1
- |-------|
- └───────┘
- Stack size: 9
-==================76==========
-NA VSTUPE JE TERMINAL
-top: 12
-literal: 12
-po pope je stack
-
-Stack (top to bottom):
-
- ┌───────┐
- │   104 │ <- position 8
- |-------|
- │    14 │ <- position 7
- |-------|
- │   105 │ <- position 6
- |-------|
- │    17 │ <- position 5
- |-------|
- │   110 │ <- position 4
- |-------|
- │    18 │ <- position 3
- |-------|
- │   102 │ <- position 2
- |-------|
- │    -1 │ <- position 1
- |-------|
- └───────┘
- Stack size: 8
-sdads0*******
-********NA VSTUPE JE TOKEN ID************
-m
-som tu
-top: 104
-literal: 4
-
-Stack (top to bottom):
-
- ┌───────┐
- │   104 │ <- position 8
- |-------|
- │    14 │ <- position 7
- |-------|
- │   105 │ <- position 6
- |-------|
- │    17 │ <- position 5
- |-------|
- │   110 │ <- position 4
- |-------|
- │    18 │ <- position 3
- |-------|
- │   102 │ <- position 2
- |-------|
- │    -1 │ <- position 1
- |-------|
- └───────┘
- Stack size: 8
-==================76==========
--------------top: 104
-literal: 4
-ID moze byt aj NULL v else
-counter je : 1
-NA VSTUPE JE NETERMINAL ALEBO SPECIAL
-top: 104
-literal: 4
-pravidlo: 6
-po pope je stack
-
-Stack (top to bottom):
-
- ┌───────┐
- │    14 │ <- position 7
- |-------|
- │   105 │ <- position 6
- |-------|
- │    17 │ <- position 5
- |-------|
- │   110 │ <- position 4
- |-------|
- │    18 │ <- position 3
- |-------|
- │   102 │ <- position 2
- |-------|
- │    -1 │ <- position 1
- |-------|
- └───────┘
- Stack size: 7
-0*******
-********NA VSTUPE JE TOKEN ID************
-m
-som tu
-top: 4
-literal: 4
-
-Stack (top to bottom):
-
- ┌───────┐
- │     4 │ <- position 11
- |-------|
- │    20 │ <- position 10
- |-------|
- │   105 │ <- position 9
- |-------|
- │   106 │ <- position 8
- |-------|
- │    14 │ <- position 7
- |-------|
- │   105 │ <- position 6
- |-------|
- │    17 │ <- position 5
- |-------|
- │   110 │ <- position 4
- |-------|
- │    18 │ <- position 3
- |-------|
- │   102 │ <- position 2
- |-------|
- │    -1 │ <- position 1
- |-------|
- └───────┘
- Stack size: 11
-==================76==========
-NA VSTUPE JE TERMINAL
-top: 4
-literal: 4
-po pope je stack
-
-Stack (top to bottom):
-
- ┌───────┐
- │    20 │ <- position 10
- |-------|
- │   105 │ <- position 9
- |-------|
- │   106 │ <- position 8
- |-------|
- │    14 │ <- position 7
- |-------|
- │   105 │ <- position 6
- |-------|
- │    17 │ <- position 5
- |-------|
- │   110 │ <- position 4
- |-------|
- │    18 │ <- position 3
- |-------|
- │   102 │ <- position 2
- |-------|
- │    -1 │ <- position 1
- |-------|
- └───────┘
- Stack size: 10
-sdads0*******
-som tu
-top: 20
-literal: 20
-
-Stack (top to bottom):
-
- ┌───────┐
- │    20 │ <- position 10
- |-------|
- │   105 │ <- position 9
- |-------|
- │   106 │ <- position 8
- |-------|
- │    14 │ <- position 7
- |-------|
- │   105 │ <- position 6
- |-------|
- │    17 │ <- position 5
- |-------|
- │   110 │ <- position 4
- |-------|
- │    18 │ <- position 3
- |-------|
- │   102 │ <- position 2
- |-------|
- │    -1 │ <- position 1
- |-------|
- └───────┘
- Stack size: 10
-==================76==========
-NA VSTUPE JE TERMINAL
-top: 20
-literal: 20
-po pope je stack
-
-Stack (top to bottom):
-
- ┌───────┐
- │   105 │ <- position 9
- |-------|
- │   106 │ <- position 8
- |-------|
- │    14 │ <- position 7
- |-------|
- │   105 │ <- position 6
- |-------|
- │    17 │ <- position 5
- |-------|
- │   110 │ <- position 4
- |-------|
- │    18 │ <- position 3
- |-------|
- │   102 │ <- position 2
- |-------|
- │    -1 │ <- position 1
- |-------|
- └───────┘
- Stack size: 9
-sdads0*******
-som tu
-top: 105
-literal: 6
-
-Stack (top to bottom):
-
- ┌───────┐
- │   105 │ <- position 9
- |-------|
- │   106 │ <- position 8
- |-------|
- │    14 │ <- position 7
- |-------|
- │   105 │ <- position 6
- |-------|
- │    17 │ <- position 5
- |-------|
- │   110 │ <- position 4
- |-------|
- │    18 │ <- position 3
- |-------|
- │   102 │ <- position 2
- |-------|
- │    -1 │ <- position 1
- |-------|
- └───────┘
- Stack size: 9
-==================76==========
--------------top: 105
-literal: 6
-ID moze byt aj NULL v else
-counter je : 1
-jhash mcounter je : 1
-Memory reallocation for parameters failed
-NA VSTUPE JE NETERMINAL ALEBO SPECIAL
-top: 105
-literal: 6
-pravidlo: 9
-po pope je stack
-
-Stack (top to bottom):
-
- ┌───────┐
- │   106 │ <- position 8
- |-------|
- │    14 │ <- position 7
- |-------|
- │   105 │ <- position 6
- |-------|
- │    17 │ <- position 5
- |-------|
- │   110 │ <- position 4
- |-------|
- │    18 │ <- position 3
- |-------|
- │   102 │ <- position 2
- |-------|
- │    -1 │ <- position 1
- |-------|
- └───────┘
- Stack size: 8
-0*******
-som tu
-top: 6
-literal: 6
-
-Stack (top to bottom):
-
- ┌───────┐
- │     6 │ <- position 9
- |-------|
- │   106 │ <- position 8
- |-------|
- │    14 │ <- position 7
- |-------|
- │   105 │ <- position 6
- |-------|
- │    17 │ <- position 5
- |-------|
- │   110 │ <- position 4
- |-------|
- │    18 │ <- position 3
- |-------|
- │   102 │ <- position 2
- |-------|
- │    -1 │ <- position 1
- |-------|
- └───────┘
- Stack size: 9
-==================76==========
-NA VSTUPE JE TERMINAL
-top: 6
-literal: 6
-po pope je stack
-
-Stack (top to bottom):
-
- ┌───────┐
- │   106 │ <- position 8
- |-------|
- │    14 │ <- position 7
- |-------|
- │   105 │ <- position 6
- |-------|
- │    17 │ <- position 5
- |-------|
- │   110 │ <- position 4
- |-------|
- │    18 │ <- position 3
- |-------|
- │   102 │ <- position 2
- |-------|
- │    -1 │ <- position 1
- |-------|
- └───────┘
- Stack size: 8
-sdads0*******
-som tu
-top: 106
-literal: 14
-
-Stack (top to bottom):
-
- ┌───────┐
- │   106 │ <- position 8
- |-------|
- │    14 │ <- position 7
- |-------|
- │   105 │ <- position 6
- |-------|
- │    17 │ <- position 5
- |-------|
- │   110 │ <- position 4
- |-------|
- │    18 │ <- position 3
- |-------|
- │   102 │ <- position 2
- |-------|
- │    -1 │ <- position 1
- |-------|
- └───────┘
- Stack size: 8
-==================76==========
--------------top: 106
 literal: 14
 ID moze byt aj NULL v else
 counter je : 0
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
-top: 106
+top: 104
 literal: 14
-pravidlo: 13
+pravidlo: 7
+
+STAV BUDE104
 po pope je stack
 
 Stack (top to bottom):
@@ -3541,11 +2435,13 @@ Stack (top to bottom):
 literal: 6
 ID moze byt aj NULL v else
 counter je : 0
-jhash mcounter je : 0
+jhash redcounter je : 0
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 105
 literal: 6
 pravidlo: 9
+
+STAV BUDE104
 po pope je stack
 
 Stack (top to bottom):
@@ -3672,6 +2568,8 @@ NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 110
 literal: 11
 pravidlo: 19
+
+STAV BUDE110
 po pope je stack
 
 Stack (top to bottom):
@@ -3714,6 +2612,8 @@ NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 111
 literal: 11
 pravidlo: 25
+
+STAV BUDE111
 po pope je stack
 
 Stack (top to bottom):
@@ -3758,6 +2658,8 @@ NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 117
 literal: 11
 pravidlo: 36
+
+STAV BUDE117
 po pope je stack
 
 Stack (top to bottom):
@@ -3830,7 +2732,7 @@ Stack (top to bottom):
  Stack size: 8
 sdads0*******
 ********NA VSTUPE JE TOKEN ID************
-a
+red
 som tu
 top: 4
 literal: 4
@@ -3884,7 +2786,7 @@ Stack (top to bottom):
 sdads0*******
 som tu
 top: 122
-literal: 15
+literal: 20
 
 Stack (top to bottom):
 
@@ -3907,13 +2809,15 @@ Stack (top to bottom):
  Stack size: 7
 ==================76==========
 -------------top: 122
-literal: 15
+literal: 20
 ID moze byt aj NULL v else
 counter je : 1
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 122
-literal: 15
-pravidlo: 44
+literal: 20
+pravidlo: 43
+
+STAV BUDE122
 po pope je stack
 
 Stack (top to bottom):
@@ -3933,7 +2837,521 @@ Stack (top to bottom):
  |-------|
  └───────┘
  Stack size: 6
+0*******
+som tu
+top: 20
+literal: 20
+
+Stack (top to bottom):
+
+ ┌───────┐
+ │    20 │ <- position 8
+ |-------|
+ │   105 │ <- position 7
+ |-------|
+ │    15 │ <- position 6
+ |-------|
+ │   116 │ <- position 5
+ |-------|
+ │   110 │ <- position 4
+ |-------|
+ │    18 │ <- position 3
+ |-------|
+ │   102 │ <- position 2
+ |-------|
+ │    -1 │ <- position 1
+ |-------|
+ └───────┘
+ Stack size: 8
+==================76==========
+NA VSTUPE JE TERMINAL
+top: 20
+literal: 20
+po pope je stack
+
+Stack (top to bottom):
+
+ ┌───────┐
+ │   105 │ <- position 7
+ |-------|
+ │    15 │ <- position 6
+ |-------|
+ │   116 │ <- position 5
+ |-------|
+ │   110 │ <- position 4
+ |-------|
+ │    18 │ <- position 3
+ |-------|
+ │   102 │ <- position 2
+ |-------|
+ │    -1 │ <- position 1
+ |-------|
+ └───────┘
+ Stack size: 7
+sdads0*******
+som tu
+top: 105
+literal: 6
+
+Stack (top to bottom):
+
+ ┌───────┐
+ │   105 │ <- position 7
+ |-------|
+ │    15 │ <- position 6
+ |-------|
+ │   116 │ <- position 5
+ |-------|
+ │   110 │ <- position 4
+ |-------|
+ │    18 │ <- position 3
+ |-------|
+ │   102 │ <- position 2
+ |-------|
+ │    -1 │ <- position 1
+ |-------|
+ └───────┘
+ Stack size: 7
+==================76==========
+-------------top: 105
+literal: 6
+ID moze byt aj NULL v else
+counter je : 1
+jhash redcounter je : 1
+NA VSTUPE JE NETERMINAL ALEBO SPECIAL
+top: 105
+literal: 6
+pravidlo: 9
+
+STAV BUDE122
+po pope je stack
+
+Stack (top to bottom):
+
+ ┌───────┐
+ │    15 │ <- position 6
+ |-------|
+ │   116 │ <- position 5
+ |-------|
+ │   110 │ <- position 4
+ |-------|
+ │    18 │ <- position 3
+ |-------|
+ │   102 │ <- position 2
+ |-------|
+ │    -1 │ <- position 1
+ |-------|
+ └───────┘
+ Stack size: 6
+0*******
+som tu
+top: 6
+literal: 6
+
+Stack (top to bottom):
+
+ ┌───────┐
+ │     6 │ <- position 7
+ |-------|
+ │    15 │ <- position 6
+ |-------|
+ │   116 │ <- position 5
+ |-------|
+ │   110 │ <- position 4
+ |-------|
+ │    18 │ <- position 3
+ |-------|
+ │   102 │ <- position 2
+ |-------|
+ │    -1 │ <- position 1
+ |-------|
+ └───────┘
+ Stack size: 7
+==================76==========
+NA VSTUPE JE TERMINAL
+top: 6
+literal: 6
+po pope je stack
+
+Stack (top to bottom):
+
+ ┌───────┐
+ │    15 │ <- position 6
+ |-------|
+ │   116 │ <- position 5
+ |-------|
+ │   110 │ <- position 4
+ |-------|
+ │    18 │ <- position 3
+ |-------|
+ │   102 │ <- position 2
+ |-------|
+ │    -1 │ <- position 1
+ |-------|
+ └───────┘
+ Stack size: 6
+sdads0*******
+som tu
+top: 15
+literal: 15
+
+Stack (top to bottom):
+
+ ┌───────┐
+ │    15 │ <- position 6
+ |-------|
+ │   116 │ <- position 5
+ |-------|
+ │   110 │ <- position 4
+ |-------|
+ │    18 │ <- position 3
+ |-------|
+ │   102 │ <- position 2
+ |-------|
+ │    -1 │ <- position 1
+ |-------|
+ └───────┘
+ Stack size: 6
+==================76==========
+NA VSTUPE JE TERMINAL
+top: 15
+literal: 15
+po pope je stack
+
+Stack (top to bottom):
+
+ ┌───────┐
+ │   116 │ <- position 5
+ |-------|
+ │   110 │ <- position 4
+ |-------|
+ │    18 │ <- position 3
+ |-------|
+ │   102 │ <- position 2
+ |-------|
+ │    -1 │ <- position 1
+ |-------|
+ └───────┘
+ Stack size: 5
+sdads1*******
+som tu
+top: 116
+literal: 6
+
+Stack (top to bottom):
+
+ ┌───────┐
+ │   116 │ <- position 5
+ |-------|
+ │   110 │ <- position 4
+ |-------|
+ │    18 │ <- position 3
+ |-------|
+ │   102 │ <- position 2
+ |-------|
+ │    -1 │ <- position 1
+ |-------|
+ └───────┘
+ Stack size: 5
+==================76==========
+-------------top: 116
+literal: 6
+ID moze byt aj NULL v else
+counter je : 0
+NA VSTUPE JE NETERMINAL ALEBO SPECIAL
+top: 116
+literal: 6
+pravidlo: 35
+
+STAV BUDE122
+po pope je stack
+
+Stack (top to bottom):
+
+ ┌───────┐
+ │   110 │ <- position 4
+ |-------|
+ │    18 │ <- position 3
+ |-------|
+ │   102 │ <- position 2
+ |-------|
+ │    -1 │ <- position 1
+ |-------|
+ └───────┘
+ Stack size: 4
 1*******
+som tu
+top: -10
+literal: 6
+
+Stack (top to bottom):
+
+ ┌───────┐
+ │   -10 │ <- position 6
+ |-------|
+ │    16 │ <- position 5
+ |-------|
+ │   110 │ <- position 4
+ |-------|
+ │    18 │ <- position 3
+ |-------|
+ │   102 │ <- position 2
+ |-------|
+ │    -1 │ <- position 1
+ |-------|
+ └───────┘
+ Stack size: 6
+==================76==========
+bude exprssion:   0
+counter je : 0
+13
+stack size:1
+
+2
+
+prec[13][12]
+<
+stack size:2
+
+0
+
+prec[12][0]
+>
+stack size:2
+
+0
+
+prec[13][0]
+<
+stack size:3
+
+1
+
+prec[0][12]
+<
+stack size:4
+
+0
+
+prec[12][13]
+>
+stack size:4
+
+0
+
+prec[0][13]
+>
+stack size:2
+
+0
+
+prec[13][13]
+endalles gut
+7, 7
+Stack (top to bottom):
+
+ ┌───────┐
+ │   110 │ <- position 4
+ |-------|
+ │    18 │ <- position 3
+ |-------|
+ │   102 │ <- position 2
+ |-------|
+ │    -1 │ <- position 1
+ |-------|
+ └───────┘
+ Stack size: 4
+token po EXP: 4
+0*******
+********NA VSTUPE JE TOKEN ID************
+red
+som tu
+top: 110
+literal: 4
+
+Stack (top to bottom):
+
+ ┌───────┐
+ │   110 │ <- position 4
+ |-------|
+ │    18 │ <- position 3
+ |-------|
+ │   102 │ <- position 2
+ |-------|
+ │    -1 │ <- position 1
+ |-------|
+ └───────┘
+ Stack size: 4
+==================76==========
+-------------top: 110
+literal: 4
+ID moze byt aj NULL v else
+counter je : 1
+NA VSTUPE JE NETERMINAL ALEBO SPECIAL
+top: 110
+literal: 4
+pravidlo: 19
+
+STAV BUDE110
+po pope je stack
+
+Stack (top to bottom):
+
+ ┌───────┐
+ │    18 │ <- position 3
+ |-------|
+ │   102 │ <- position 2
+ |-------|
+ │    -1 │ <- position 1
+ |-------|
+ └───────┘
+ Stack size: 3
+0*******
+********NA VSTUPE JE TOKEN ID************
+red
+som tu
+top: 111
+literal: 4
+
+Stack (top to bottom):
+
+ ┌───────┐
+ │   111 │ <- position 5
+ |-------|
+ │   110 │ <- position 4
+ |-------|
+ │    18 │ <- position 3
+ |-------|
+ │   102 │ <- position 2
+ |-------|
+ │    -1 │ <- position 1
+ |-------|
+ └───────┘
+ Stack size: 5
+==================76==========
+-------------top: 111
+literal: 4
+ID moze byt aj NULL v else
+counter je : 1
+NA VSTUPE JE NETERMINAL ALEBO SPECIAL
+top: 111
+literal: 4
+pravidlo: 27
+
+STAV BUDE111
+po pope je stack
+
+Stack (top to bottom):
+
+ ┌───────┐
+ │   110 │ <- position 4
+ |-------|
+ │    18 │ <- position 3
+ |-------|
+ │   102 │ <- position 2
+ |-------|
+ │    -1 │ <- position 1
+ |-------|
+ └───────┘
+ Stack size: 4
+0*******
+********NA VSTUPE JE TOKEN ID************
+red
+som tu
+top: 119
+literal: 4
+
+Stack (top to bottom):
+
+ ┌───────┐
+ │   119 │ <- position 5
+ |-------|
+ │   110 │ <- position 4
+ |-------|
+ │    18 │ <- position 3
+ |-------|
+ │   102 │ <- position 2
+ |-------|
+ │    -1 │ <- position 1
+ |-------|
+ └───────┘
+ Stack size: 5
+==================76==========
+-------------top: 119
+literal: 4
+ID moze byt aj NULL v else
+counter je : 1
+NA VSTUPE JE NETERMINAL ALEBO SPECIAL
+top: 119
+literal: 4
+pravidlo: 38
+
+STAV BUDE119
+po pope je stack
+
+Stack (top to bottom):
+
+ ┌───────┐
+ │   110 │ <- position 4
+ |-------|
+ │    18 │ <- position 3
+ |-------|
+ │   102 │ <- position 2
+ |-------|
+ │    -1 │ <- position 1
+ |-------|
+ └───────┘
+ Stack size: 4
+0*******
+********NA VSTUPE JE TOKEN ID************
+red
+som tu
+top: 4
+literal: 4
+
+Stack (top to bottom):
+
+ ┌───────┐
+ │     4 │ <- position 7
+ |-------|
+ │    15 │ <- position 6
+ |-------|
+ │   116 │ <- position 5
+ |-------|
+ │   110 │ <- position 4
+ |-------|
+ │    18 │ <- position 3
+ |-------|
+ │   102 │ <- position 2
+ |-------|
+ │    -1 │ <- position 1
+ |-------|
+ └───────┘
+ Stack size: 7
+==================76==========
+NA VSTUPE JE TERMINAL
+top: 4
+literal: 4
+po pope je stack
+
+Stack (top to bottom):
+
+ ┌───────┐
+ │    15 │ <- position 6
+ |-------|
+ │   116 │ <- position 5
+ |-------|
+ │   110 │ <- position 4
+ |-------|
+ │    18 │ <- position 3
+ |-------|
+ │   102 │ <- position 2
+ |-------|
+ │    -1 │ <- position 1
+ |-------|
+ └───────┘
+ Stack size: 6
+sdads0*******
 som tu
 top: 15
 literal: 15
@@ -4005,6 +3423,8 @@ NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 116
 literal: 6
 pravidlo: 35
+
+STAV BUDE119
 po pope je stack
 
 Stack (top to bottom):
@@ -4064,7 +3484,7 @@ stack size:2
 
 prec[13][13]
 endalles gut
-2, 7
+7, 7
 Stack (top to bottom):
 
  ┌───────┐
@@ -4106,6 +3526,8 @@ NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 110
 literal: 18
 pravidlo: 20
+
+STAV BUDE110
 po pope je stack
 
 Stack (top to bottom):
@@ -4173,6 +3595,8 @@ NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 102
 literal: 21
 pravidlo: 4
+
+STAV BUDE102
 po pope je stack
 
 Stack (top to bottom):
@@ -4199,4 +3623,4 @@ NA VSTUPE JE TERMINAL
 top: -1
 literal: 21
 END
-Found in locals 5 
+Found in locals 1 

@@ -2,14 +2,14 @@
 const ifj = @import("ifj24.zig");
 // Hlavni funkce
 pub fn main() void {
-    var red: i32 = 3 +2;
-     red = 1;
-    var a = 6.2;
+   var red: f64 = 3.2 *2;
+    red = 22.1;
+    // var a: i32= 62;
     
 
 }
 
-pub fn decrement(n: f64, m: f64) f64{
- var a = 3.2;
-
+pub fn increment() f64{
+    var red: f64 = 3.2 *2;
+    red = 1.22;
 }

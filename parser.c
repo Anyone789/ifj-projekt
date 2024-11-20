@@ -98,7 +98,20 @@ int parsIt(TStack *parserStack)
     parserIn(parserStack);
     return 1;
 }
+int usedVar(bstSymtable **symTree)
+{
+    if (*symTree != NULL)
+    {
+        // printf("%s", ((DSTRING *)(*symTree)->key)->str);
+        if (((varData *)(*symTree)->data)->use == false)
+        {
+            exit(UNUSED_VARIABLE_ERROR);
+        }
 
+        usedVar(&(*symTree)->left);
+        usedVar(&(*symTree)->right);
+    }
+}
 void pushRule(TStack *parserStack, int rule)
 {
     int i = MAX_RULE_ITEMS - 1;
@@ -296,6 +309,7 @@ void parserIn(TStack *parserStack)
     int top;
     int paramTypeCounter = 0;
     int paramCount = 0;
+    NonTerminals state;
 
     token = getToken();
     literal = convertTokenToIndex(token);
@@ -312,7 +326,7 @@ void parserIn(TStack *parserStack)
             printf("%s\n", ID->str);
             paramTypeCounter = 1;
         }
-        if (literal == tLlFunctId)
+        if (literal == tLlFunctId && state == nLlFunctDef)
         {
             printf("********NA VSTUPE JE TOKEN ID************\n");
             functionID = token->attribute.dStr;
@@ -442,6 +456,10 @@ void parserIn(TStack *parserStack)
                 {
                     exit(UNDEFINED_VARIABLE_ERROR);
                 }
+                else
+                {
+                    ((varData *)res->data)->use = true;
+                }
                 if (((varData *)res->data)->constant == true)
                 {
                     exit(REDEFINITION_ERROR);
@@ -465,7 +483,22 @@ void parserIn(TStack *parserStack)
                     {
                         if (paramTypeCounter == 1)
                         {
-                            //((fceData *)resFce->data)->params[paramCount].dataType.type = T_STR;
+                            if (state == nLlParamList)
+                            {
+                                printf("iugsaiu%d", paramCount);
+                                //((fceData *)resFce->data)->params[paramCount].dataType.type = T_INT;
+                                varData *varDatas;
+                                varDatas = malloc(sizeof(varData) * 1); // Replace ARRAY_SIZE with the required size
+                                if (varDatas == NULL)
+                                {
+                                    fprintf(stderr, "Memory allocation failed\n");
+                                    exit(EXIT_FAILURE);
+                                }
+
+                                varDatas[0].dataType = (DATATYPE){false, false, T_STR};
+                                insertFunction(&symTree, functionID->str, (DATATYPE){false, false, token->type}, paramCount + 1, true, false, true, varDatas);
+                                paramCount++;
+                            }
                             ((varData *)res->data)->dataType.type = T_STR;
                             paramTypeCounter = 0;
                             paramCount++;
@@ -480,21 +513,26 @@ void parserIn(TStack *parserStack)
                     {
                         if (paramTypeCounter == 1)
                         {
-                            printf("iugsaiu%d", paramCount);
-                            //((fceData *)resFce->data)->params[paramCount].dataType.type = T_INT;
-                            varData *varDatas;
-                            varDatas = malloc(sizeof(varData) * 1); // Replace ARRAY_SIZE with the required size
-                            if (varDatas == NULL)
+
+                            if (state == nLlParamList)
                             {
-                                fprintf(stderr, "Memory allocation failed\n");
-                                exit(EXIT_FAILURE);
+                                printf("iugsaiu%d", paramCount);
+                                //((fceData *)resFce->data)->params[paramCount].dataType.type = T_INT;
+                                varData *varDatas;
+                                varDatas = malloc(sizeof(varData) * 1); // Replace ARRAY_SIZE with the required size
+                                if (varDatas == NULL)
+                                {
+                                    fprintf(stderr, "Memory allocation failed\n");
+                                    exit(EXIT_FAILURE);
+                                }
+
+                                varDatas[0].dataType = (DATATYPE){false, false, T_INT};
+                                insertFunction(&symTree, functionID->str, (DATATYPE){false, false, token->type}, paramCount + 1, true, false, true, varDatas);
+                                paramCount++;
                             }
 
-                            varDatas[0].dataType = (DATATYPE){false, false, T_INT};
-                            insertFunction(&symTree, functionID->str, (DATATYPE){false, false, token->type}, paramCount + 1, true, false, true, varDatas);
                             ((varData *)res->data)->dataType.type = T_INT;
                             paramTypeCounter = 0;
-                            paramCount++;
                         }
                         else
                         {
@@ -507,19 +545,24 @@ void parserIn(TStack *parserStack)
                     {
                         if (paramTypeCounter == 1)
                         {
-                            varData *varDatas;
-                            varDatas = malloc(sizeof(varData) * 1); // Replace ARRAY_SIZE with the required size
-                            if (varDatas == NULL)
+                            if (state == nLlParamList)
                             {
-                                fprintf(stderr, "Memory allocation failed\n");
-                                exit(EXIT_FAILURE);
-                            }
+                                printf("iugsaiu%d", paramCount);
+                                //((fceData *)resFce->data)->params[paramCount].dataType.type = T_INT;
+                                varData *varDatas;
+                                varDatas = malloc(sizeof(varData) * 1); // Replace ARRAY_SIZE with the required size
+                                if (varDatas == NULL)
+                                {
+                                    fprintf(stderr, "Memory allocation failed\n");
+                                    exit(EXIT_FAILURE);
+                                }
 
-                            varDatas[0].dataType = (DATATYPE){false, false, T_FLOAT};
-                            insertFunction(&symTree, functionID->str, (DATATYPE){false, false, token->type}, paramCount + 1, true, false, true, varDatas);
+                                varDatas[0].dataType = (DATATYPE){false, false, T_FLOAT};
+                                insertFunction(&symTree, functionID->str, (DATATYPE){false, false, token->type}, paramCount + 1, true, false, true, varDatas);
+                                paramCount++;
+                            }
                             ((varData *)res->data)->dataType.type = T_FLOAT;
                             paramTypeCounter = 0;
-                            paramCount++;
                         }
                         else
                         {
@@ -573,6 +616,7 @@ void parserIn(TStack *parserStack)
 
             if ((llTable[top % 100][literal]) == 5)
             {
+
                 symtableDispose(&symLocal);
             }
             if ((llTable[top % 100][literal]) == 33)
@@ -582,6 +626,10 @@ void parserIn(TStack *parserStack)
             if ((llTable[top % 100][literal]) == 19 || (llTable[top % 100][literal]) == 20)
             {
                 paramCount = 0;
+            }
+            if ((llTable[top % 100][literal]) == 20)
+            {
+                usedVar(&symLocal);
             }
             // if ((llTable[top % 100][literal]) == 32)
             // {
@@ -602,6 +650,12 @@ void parserIn(TStack *parserStack)
             printf("top: %d\n", top);
             printf("literal: %d\n", literal);
             printf("pravidlo: %d\n", (llTable[top % 100][literal]));
+            if (top != nLlType && top != nLlItem)
+            {
+                state = top;
+            }
+            printf("\nSTAV BUDE%d\n", state);
+
             stackPop(parserStack);
             printf("po pope je stack\n");
             stackPrint(parserStack);
@@ -626,36 +680,46 @@ void parserIn(TStack *parserStack)
             TStack expStack;
             analyzeExp(&expStack, token);
 
+            if (state == nLlReturnList)
+            {
+                bstSymtable *res = symtableSearch(&symTree, *functionID);
+                if (res == NULL)
+                {
+                    exit(INTERNAL_ERROR);
+                }
+                if (returnExpValue != ((fceData *)res->data)->returnType.type)
+                {
+                    exit(INCORRECT_RETURN_ERROR);
+                }
+            }
+
             if (inFce == false)
             {
-                bstSymtable *result = symtableSearch(&symLocal, *ID);
-                if (result == NULL)
+                if (state != nLlReturnList)
                 {
-                    printf("sadsadass");
-                    exit(SYNTAX_ERROR);
-                }
-                else
-                {
-                    printf("alles gut\n%d, %d", ((varData *)result->data)->dataType.type, returnExpValue);
-                    if (((varData *)result->data)->dataType.type == T_ID)
+                    bstSymtable *result = symtableSearch(&symLocal, *ID);
+                    if (result == NULL)
                     {
-                        ((varData *)result->data)->dataType.type = returnExpValue;
-                        /* code */
+                        printf("sadsadass");
+                        exit(SYNTAX_ERROR);
                     }
-                    else if (((varData *)result->data)->dataType.type != returnExpValue)
+                    else
                     {
-                        exit(INCOMPATIBLE_TYPE_ERROR);
+                        printf("alles gut\n%d, %d", ((varData *)result->data)->dataType.type, returnExpValue);
+                        if (((varData *)result->data)->dataType.type == T_ID)
+                        {
+                            ((varData *)result->data)->dataType.type = returnExpValue;
+                        }
+                        else if (((varData *)result->data)->dataType.type != returnExpValue)
+                        {
+                            exit(INCOMPATIBLE_TYPE_ERROR);
+                        }
                     }
-
-                    //*ID = NULL;
                 }
             }
 
             token = getToken();
-            // printf("padla expression");
-            // return;
             literal = convertTokenToIndex(token);
-            //  stackPush(parserStack, (void *)(intptr_t)tLlRightRoundBracket);
             stackPrint(parserStack);
             printf("token po EXP: %d\n", literal);
             assign = false;
@@ -681,11 +745,11 @@ int main(int argc, char **argv)
     symtableInit(&symLocal);
     parsIt(&parserStack);
     DSTRING *str = dStringCreate();
-    dStringAddString(str, "main");
-    bstSymtable *resLocal = symtableSearch(&symTree, *str);
+    dStringAddString(str, "red");
+    bstSymtable *resLocal = symtableSearch(&symLocal, *str);
     if (resLocal != NULL)
     {
-        printf("\nFound in locals %d \n", ((fceData *)resLocal->data)->params[0].dataType.type);
+        printf("\nFound in locals %d \n", ((varData *)resLocal->data)->use);
     }
     else
     {
