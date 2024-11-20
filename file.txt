@@ -9,7 +9,7 @@ pub fn main() void {
 
 }
 
-pub fn decrement(n: i32, m: i32) f64{
+pub fn decrement(n: f64, m: f64) f64{
  var a = 3.2;
 
 }

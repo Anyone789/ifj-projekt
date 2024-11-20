@@ -295,6 +295,7 @@ void parserIn(TStack *parserStack)
     int literal = 99;
     int top;
     int paramTypeCounter = 0;
+    int paramCount = 0;
 
     token = getToken();
     literal = convertTokenToIndex(token);
@@ -464,8 +465,10 @@ void parserIn(TStack *parserStack)
                     {
                         if (paramTypeCounter == 1)
                         {
+                            //((fceData *)resFce->data)->params[paramCount].dataType.type = T_STR;
                             ((varData *)res->data)->dataType.type = T_STR;
                             paramTypeCounter = 0;
+                            paramCount++;
                             /* code */
                         }
                         else
@@ -477,8 +480,21 @@ void parserIn(TStack *parserStack)
                     {
                         if (paramTypeCounter == 1)
                         {
+                            printf("iugsaiu%d", paramCount);
+                            //((fceData *)resFce->data)->params[paramCount].dataType.type = T_INT;
+                            varData *varDatas;
+                            varDatas = malloc(sizeof(varData) * 1); // Replace ARRAY_SIZE with the required size
+                            if (varDatas == NULL)
+                            {
+                                fprintf(stderr, "Memory allocation failed\n");
+                                exit(EXIT_FAILURE);
+                            }
+
+                            varDatas[0].dataType = (DATATYPE){false, false, T_INT};
+                            insertFunction(&symTree, functionID->str, (DATATYPE){false, false, token->type}, paramCount + 1, true, false, true, varDatas);
                             ((varData *)res->data)->dataType.type = T_INT;
                             paramTypeCounter = 0;
+                            paramCount++;
                         }
                         else
                         {
@@ -491,9 +507,19 @@ void parserIn(TStack *parserStack)
                     {
                         if (paramTypeCounter == 1)
                         {
+                            varData *varDatas;
+                            varDatas = malloc(sizeof(varData) * 1); // Replace ARRAY_SIZE with the required size
+                            if (varDatas == NULL)
+                            {
+                                fprintf(stderr, "Memory allocation failed\n");
+                                exit(EXIT_FAILURE);
+                            }
+
+                            varDatas[0].dataType = (DATATYPE){false, false, T_FLOAT};
+                            insertFunction(&symTree, functionID->str, (DATATYPE){false, false, token->type}, paramCount + 1, true, false, true, varDatas);
                             ((varData *)res->data)->dataType.type = T_FLOAT;
                             paramTypeCounter = 0;
-                            /* code */
+                            paramCount++;
                         }
                         else
                         {
@@ -552,6 +578,10 @@ void parserIn(TStack *parserStack)
             if ((llTable[top % 100][literal]) == 33)
             {
                 paramTypeCounter = 0;
+            }
+            if ((llTable[top % 100][literal]) == 19 || (llTable[top % 100][literal]) == 20)
+            {
+                paramCount = 0;
             }
             // if ((llTable[top % 100][literal]) == 32)
             // {
@@ -655,7 +685,7 @@ int main(int argc, char **argv)
     bstSymtable *resLocal = symtableSearch(&symTree, *str);
     if (resLocal != NULL)
     {
-        printf("\nFound in locals %d \n", ((fceData *)resLocal->data)->returnType.type);
+        printf("\nFound in locals %d \n", ((fceData *)resLocal->data)->params[0].dataType.type);
     }
     else
     {

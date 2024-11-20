@@ -1312,6 +1312,7 @@ literal: 5
 ID moze byt aj NULL v else
 counter je : 1
 jhash redcounter je : 1
+iugsaiu0Memory reallocation for parameters failed
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 105
 literal: 5
@@ -2886,7 +2887,7 @@ Stack (top to bottom):
 sdads0*******
 som tu
 top: 105
-literal: 5
+literal: 6
 
 Stack (top to bottom):
 
@@ -2913,14 +2914,15 @@ Stack (top to bottom):
  Stack size: 9
 ==================76==========
 -------------top: 105
-literal: 5
+literal: 6
 ID moze byt aj NULL v else
 counter je : 1
 jhash ncounter je : 1
+Memory reallocation for parameters failed
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 105
-literal: 5
-pravidlo: 8
+literal: 6
+pravidlo: 9
 po pope je stack
 
 Stack (top to bottom):
@@ -2946,13 +2948,13 @@ Stack (top to bottom):
  Stack size: 8
 0*******
 som tu
-top: 5
-literal: 5
+top: 6
+literal: 6
 
 Stack (top to bottom):
 
  ┌───────┐
- │     5 │ <- position 9
+ │     6 │ <- position 9
  |-------|
  │   106 │ <- position 8
  |-------|
@@ -2974,8 +2976,8 @@ Stack (top to bottom):
  Stack size: 9
 ==================76==========
 NA VSTUPE JE TERMINAL
-top: 5
-literal: 5
+top: 6
+literal: 6
 po pope je stack
 
 Stack (top to bottom):
@@ -3295,7 +3297,7 @@ Stack (top to bottom):
 sdads0*******
 som tu
 top: 105
-literal: 5
+literal: 6
 
 Stack (top to bottom):
 
@@ -3322,14 +3324,15 @@ Stack (top to bottom):
  Stack size: 9
 ==================76==========
 -------------top: 105
-literal: 5
+literal: 6
 ID moze byt aj NULL v else
 counter je : 1
 jhash mcounter je : 1
+Memory reallocation for parameters failed
 NA VSTUPE JE NETERMINAL ALEBO SPECIAL
 top: 105
-literal: 5
-pravidlo: 8
+literal: 6
+pravidlo: 9
 po pope je stack
 
 Stack (top to bottom):
@@ -3355,13 +3358,13 @@ Stack (top to bottom):
  Stack size: 8
 0*******
 som tu
-top: 5
-literal: 5
+top: 6
+literal: 6
 
 Stack (top to bottom):
 
  ┌───────┐
- │     5 │ <- position 9
+ │     6 │ <- position 9
  |-------|
  │   106 │ <- position 8
  |-------|
@@ -3383,8 +3386,8 @@ Stack (top to bottom):
  Stack size: 9
 ==================76==========
 NA VSTUPE JE TERMINAL
-top: 5
-literal: 5
+top: 6
+literal: 6
 po pope je stack
 
 Stack (top to bottom):
@@ -4196,4 +4199,4 @@ NA VSTUPE JE TERMINAL
 top: -1
 literal: 21
 END
-Found in locals 0 
+Found in locals 5 
