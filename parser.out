@@ -738,7 +738,7 @@ Stack (top to bottom):
  └───────┘
  Stack size: 6
 pravidlo bude: 45
-state:0 literal:0 token:0 0
+khjgf 0 0state:0 literal:0 token:0 0
 po pope je stack
 
 Stack (top to bottom):
@@ -1144,7 +1144,7 @@ Stack (top to bottom):
  └───────┘
  Stack size: 7
 pravidlo bude: 9
-state:0 literal:0 token:0 0
+khjgf 0 0state:0 literal:0 token:0 0
 po pope je stack
 
 Stack (top to bottom):
@@ -2332,7 +2332,7 @@ Stack (top to bottom):
  Stack size: 7
 pravidlo bude: 18
 state:1 literal:1 token:26 0
-Functionincrement 0
+Function main 0 0
 po pope je stack
 
 Stack (top to bottom):
@@ -2952,7 +2952,7 @@ Stack (top to bottom):
 pravidlo bude: 9
 
 ParCount2, 0
-state:0 literal:0 token:0 0
+khjgf 1 0state:0 literal:0 token:0 0
 po pope je stack
 
 Stack (top to bottom):
@@ -3315,7 +3315,7 @@ Stack (top to bottom):
 pravidlo bude: 8
 
 ParCount2, 1
-state:0 literal:0 token:0 0
+khjgf 2 0state:0 literal:0 token:0 0
 po pope je stack
 
 Stack (top to bottom):
@@ -3501,7 +3501,7 @@ Stack (top to bottom):
  └───────┘
  Stack size: 6
 pravidlo bude: 8
-state:0 literal:0 token:0 0
+khjgf 2 0state:0 literal:0 token:0 0
 po pope je stack
 
 Stack (top to bottom):
@@ -3907,7 +3907,7 @@ Stack (top to bottom):
  └───────┘
  Stack size: 7
 pravidlo bude: 9
-state:0 literal:0 token:0 0
+khjgf 0 0state:0 literal:0 token:0 0
 po pope je stack
 
 Stack (top to bottom):
@@ -5919,7 +5919,7 @@ Stack (top to bottom):
  Stack size: 7
 pravidlo bude: 18
 state:1 literal:1 token:26 0
-Functionincrement 0
+Function increment 2 2
 po pope je stack
 
 Stack (top to bottom):

@@ -8,6 +8,7 @@
 bool nullType = false;
 bool isConst = false;
 bool assign = false;
+int paramCountGlob = 0;
 bstSymtable *symTree;
 bstSymtable *symLocal;
 
@@ -168,6 +169,7 @@ void processFunction(bstSymtable *resFce, DSTRING *functionID, int type, int *pa
             }
 
             (*paramCount)++;
+            paramCountGlob = *paramCount;
         }
     }
 }
@@ -580,9 +582,10 @@ void parserIn(TStack *parserStack)
 
             if (literal == tLlSemicolon)
             {
-                if (assign && fceCall)
+                if (fceCall)
                 {
                     bstSymtable *res = symtableSearch(&symTree, *functionID);
+
                     if (res != NULL)
                     {
                         if (paramCountList != ((fceData *)(res->data))->paramCount)
@@ -601,6 +604,7 @@ void parserIn(TStack *parserStack)
                 unusedFce = false;
                 varDef = false;
                 isReturn = false;
+                fceCall = false;
             }
             if (fceCall && assign && literal == tLlId && ifj)
             {
@@ -695,6 +699,7 @@ void parserIn(TStack *parserStack)
                     if (token->type != T_INT && token->type != T_FLOAT && token->type != T_STR)
                     {
                         handleTokenType(res, resFce, token, functionID, &paramCount, &paramTypeCounter, state);
+                        printf("khjgf %d %d", paramCount, token->type);
                     }
                 }
             }
@@ -776,11 +781,15 @@ void parserIn(TStack *parserStack)
                                 printf("params rozny typ param:%d, var:%d\n", ((fceData *)resFce->data)->params[paramCountList].dataType.isNull, ((varData *)res->data)->dataType.isNull);
                                 exit(WRONG_ARGUMENTS_ERROR);
                             }
+                            //printf("ADASDid:%d, count%d\n",((fceData *)resFce->data)->paramCount, paramCountList);
                             if (((fceData *)resFce->data)->paramCount <= paramCountList)
                             {
                                 printf("params pocet\n");
                                 exit(WRONG_ARGUMENTS_ERROR);
                             }
+                            
+                            
+                            
                             ((varData *)res->data)->use = true;
                             paramTypeCounter = 0;
                             paramCountList++;
@@ -904,23 +913,23 @@ void parserIn(TStack *parserStack)
             }
             if ((llTable[top % 100][literal]) == 18)
             {
-                //bstSymtable *res = symtableSearch(&symTree, *functionID);
-                printf("Function%s %d\n", functionID->str, paramCount);
-                // if (res != NULL)
-                // {
-                //     if (paramCount != ((fceData *)(res->data))->paramCount)
-                //     {
-                //         printf("dasd");
-                //         exit(WRONG_ARGUMENTS_ERROR);
-                //     }
-                //     /* code */
-                // }
+                bstSymtable *res = symtableSearch(&symTree, *functionIDCurrent);
+                printf("Function %s %d %d\n", functionIDCurrent->str, paramCountGlob, ((fceData *)(res->data))->paramCount);
+                if (res != NULL)
+                {
+                    if (paramCountGlob != ((fceData *)(res->data))->paramCount)
+                    {
+                        printf("dasd");
+                        exit(WRONG_ARGUMENTS_ERROR);
+                    }
+                    /* code */
+                }
             }
             
             if ((llTable[top % 100][literal]) == 18 || (llTable[top % 100][literal]) == 20)
             {
 
-                fceCall = false;
+                //fceCall = false;
             }
             if ((llTable[top % 100][literal]) == 33)
             {
