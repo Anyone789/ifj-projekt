@@ -5,11 +5,23 @@ pub fn main() void {
    var red: f64 = 3.2 *2;
     red = 22.1;
     // var a: i32= 62;
+   red = increment(red, 2);
     
 
 }
 
-pub fn increment() f64{
+pub fn increment(a : f64, b : i32) i32{
     var red: f64 = 3.2 *2;
     red = 1.22;
+    var s = 2;
+    s= 3;
+    b=3;
+    s = increment(a, b);
+
+
 }
+
+
+// uz len dorobit: menej parametrov ma byt error ale nieje, ciarka robi bordel
+// return type pri build in fce 
+// ked vola a este nobola def, tak ma byt error ked je viac param, ale nie je
