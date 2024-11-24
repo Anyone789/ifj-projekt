@@ -29,6 +29,9 @@ const decremented_n = decrement(n, 1);
 const temp_result = factorial(decremented_n);
 result = n * temp_result;
 }
+while (n) |val| {
+    val = 1;
+}
 return result;
 }
 

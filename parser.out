@@ -80,7 +80,7 @@ Stack (top to bottom):
  |-------|
  └───────┘
  Stack size: 9
-CAUUU0jshag ifj
+0jshag ifj
 call:0 assign:0 literal:23 ifj:0
 padlo ifj
 som tu
@@ -1636,7 +1636,7 @@ Stack (top to bottom):
  |-------|
  └───────┘
  Stack size: 8
-CAUUU0jshag inp
+0jshag inp
 call:0 assign:0 literal:4 ifj:0
 som tu
 top: 4
@@ -2586,7 +2586,7 @@ Stack (top to bottom):
  |-------|
  └───────┘
  Stack size: 14
-CAUUUcall:0 assign:0 literal:4 ifj:0
+call:0 assign:0 literal:4 ifj:0
 som tu
 top: -10
 literal: 4
@@ -2789,8 +2789,8 @@ Stack (top to bottom):
  |-------|
  └───────┘
  Stack size: 13
-CAUUU0jshag INP
-ID IF inp 5call:0 assign:0 literal:4 ifj:0
+0jshag INP
+CAUUUID IF inp 5call:0 assign:0 literal:4 ifj:0
 som tu
 top: 4
 literal: 4
@@ -3358,7 +3358,7 @@ Stack (top to bottom):
  |-------|
  └───────┘
  Stack size: 20
-CAUUUcall:0 assign:0 literal:4 ifj:0
+call:0 assign:0 literal:4 ifj:0
 som tu
 top: -10
 literal: 4
@@ -5509,7 +5509,7 @@ Stack (top to bottom):
  |-------|
  └───────┘
  Stack size: 16
-CAUUU0jshag vysl
+0jshag vysl
 call:0 assign:0 literal:4 ifj:0
 som tu
 top: 4
@@ -6123,7 +6123,7 @@ Stack (top to bottom):
  |-------|
  └───────┘
  Stack size: 15
-CAUUUcall:1 assign:1 literal:4 ifj:0
+call:1 assign:1 literal:4 ifj:0
 som tu
 top: 108
 literal: 4
@@ -8215,7 +8215,7 @@ Stack (top to bottom):
  |-------|
  └───────┘
  Stack size: 15
-CAUUUcall:1 assign:0 literal:4 ifj:1
+call:1 assign:0 literal:4 ifj:1
 som tu
 top: 108
 literal: 4
@@ -10081,7 +10081,7 @@ Stack (top to bottom):
  |-------|
  └───────┘
  Stack size: 8
-CAUUU0jshag n
+0jshag n
 call:0 assign:0 literal:4 ifj:0
 som tu
 top: 104
@@ -10447,7 +10447,7 @@ Stack (top to bottom):
  |-------|
  └───────┘
  Stack size: 8
-CAUUU0jshag m
+0jshag m
 call:0 assign:0 literal:4 ifj:0
 som tu
 top: 104
@@ -11513,7 +11513,7 @@ Stack (top to bottom):
  |-------|
  └───────┘
  Stack size: 8
-CAUUU0jshag n
+0jshag n
 call:0 assign:0 literal:4 ifj:0
 som tu
 top: 104
@@ -12142,7 +12142,7 @@ Stack (top to bottom):
  |-------|
  └───────┘
  Stack size: 8
-CAUUU0jshag result
+0jshag result
 call:0 assign:0 literal:4 ifj:0
 som tu
 top: 4
@@ -12738,7 +12738,7 @@ Stack (top to bottom):
  |-------|
  └───────┘
  Stack size: 14
-CAUUUcall:0 assign:0 literal:4 ifj:0
+call:0 assign:0 literal:4 ifj:0
 som tu
 top: -10
 literal: 4
@@ -13742,7 +13742,7 @@ Stack (top to bottom):
  |-------|
  └───────┘
  Stack size: 10
-CAUUU0jshag decremented_n
+0jshag decremented_n
 call:0 assign:0 literal:4 ifj:0
 som tu
 top: 4
@@ -14164,7 +14164,7 @@ Stack (top to bottom):
  |-------|
  └───────┘
  Stack size: 9
-CAUUUcall:1 assign:1 literal:4 ifj:0
+call:1 assign:1 literal:4 ifj:0
 som tu
 top: 108
 literal: 4
@@ -14881,7 +14881,7 @@ Stack (top to bottom):
  |-------|
  └───────┘
  Stack size: 10
-CAUUU0jshag temp_result
+0jshag temp_result
 call:0 assign:0 literal:4 ifj:0
 som tu
 top: 4
@@ -15303,7 +15303,7 @@ Stack (top to bottom):
  |-------|
  └───────┘
  Stack size: 9
-CAUUUcall:1 assign:1 literal:4 ifj:0
+call:1 assign:1 literal:4 ifj:0
 som tu
 top: 108
 literal: 4
@@ -15833,6 +15833,921 @@ Stack (top to bottom):
 som tu
 top: -10
 literal: 4
+
+Stack (top to bottom):
+
+ ┌───────┐
+ │   -10 │ <- position 8
+ |-------|
+ │    16 │ <- position 7
+ |-------|
+ │   110 │ <- position 6
+ |-------|
+ │    18 │ <- position 5
+ |-------|
+ │   110 │ <- position 4
+ |-------|
+ │    18 │ <- position 3
+ |-------|
+ │   102 │ <- position 2
+ |-------|
+ │    -1 │ <- position 1
+ |-------|
+ └───────┘
+ Stack size: 8
+
+Stack (top to bottom):
+
+ ┌───────┐
+ │   110 │ <- position 6
+ |-------|
+ │    18 │ <- position 5
+ |-------|
+ │   110 │ <- position 4
+ |-------|
+ │    18 │ <- position 3
+ |-------|
+ │   102 │ <- position 2
+ |-------|
+ │    -1 │ <- position 1
+ |-------|
+ └───────┘
+ Stack size: 6
+token po EXP: 18
+som tu
+top: 110
+literal: 18
+
+Stack (top to bottom):
+
+ ┌───────┐
+ │   110 │ <- position 6
+ |-------|
+ │    18 │ <- position 5
+ |-------|
+ │   110 │ <- position 4
+ |-------|
+ │    18 │ <- position 3
+ |-------|
+ │   102 │ <- position 2
+ |-------|
+ │    -1 │ <- position 1
+ |-------|
+ └───────┘
+ Stack size: 6
+pravidlo bude: 20
+state:0 literal:0 token:22 0
+kajshdhsa0
+po pope je stack
+
+Stack (top to bottom):
+
+ ┌───────┐
+ │    18 │ <- position 5
+ |-------|
+ │   110 │ <- position 4
+ |-------|
+ │    18 │ <- position 3
+ |-------|
+ │   102 │ <- position 2
+ |-------|
+ │    -1 │ <- position 1
+ |-------|
+ └───────┘
+ Stack size: 5
+som tu
+top: 18
+literal: 18
+
+Stack (top to bottom):
+
+ ┌───────┐
+ │    18 │ <- position 5
+ |-------|
+ │   110 │ <- position 4
+ |-------|
+ │    18 │ <- position 3
+ |-------|
+ │   102 │ <- position 2
+ |-------|
+ │    -1 │ <- position 1
+ |-------|
+ └───────┘
+ Stack size: 5
+po pope je stack
+
+Stack (top to bottom):
+
+ ┌───────┐
+ │   110 │ <- position 4
+ |-------|
+ │    18 │ <- position 3
+ |-------|
+ │   102 │ <- position 2
+ |-------|
+ │    -1 │ <- position 1
+ |-------|
+ └───────┘
+ Stack size: 4
+call:0 assign:0 literal:9 ifj:0
+som tu
+top: 110
+literal: 9
+
+Stack (top to bottom):
+
+ ┌───────┐
+ │   110 │ <- position 4
+ |-------|
+ │    18 │ <- position 3
+ |-------|
+ │   102 │ <- position 2
+ |-------|
+ │    -1 │ <- position 1
+ |-------|
+ └───────┘
+ Stack size: 4
+pravidlo bude: 19
+state:0 literal:0 token:0 0
+kajshdhsa0
+po pope je stack
+
+Stack (top to bottom):
+
+ ┌───────┐
+ │    18 │ <- position 3
+ |-------|
+ │   102 │ <- position 2
+ |-------|
+ │    -1 │ <- position 1
+ |-------|
+ └───────┘
+ Stack size: 3
+som tu
+top: 111
+literal: 9
+
+Stack (top to bottom):
+
+ ┌───────┐
+ │   111 │ <- position 5
+ |-------|
+ │   110 │ <- position 4
+ |-------|
+ │    18 │ <- position 3
+ |-------|
+ │   102 │ <- position 2
+ |-------|
+ │    -1 │ <- position 1
+ |-------|
+ └───────┘
+ Stack size: 5
+pravidlo bude: 22
+state:0 literal:0 token:0 0
+po pope je stack
+
+Stack (top to bottom):
+
+ ┌───────┐
+ │   110 │ <- position 4
+ |-------|
+ │    18 │ <- position 3
+ |-------|
+ │   102 │ <- position 2
+ |-------|
+ │    -1 │ <- position 1
+ |-------|
+ └───────┘
+ Stack size: 4
+som tu
+top: 113
+literal: 9
+
+Stack (top to bottom):
+
+ ┌───────┐
+ │   113 │ <- position 5
+ |-------|
+ │   110 │ <- position 4
+ |-------|
+ │    18 │ <- position 3
+ |-------|
+ │   102 │ <- position 2
+ |-------|
+ │    -1 │ <- position 1
+ |-------|
+ └───────┘
+ Stack size: 5
+pravidlo bude: 29
+state:0 literal:0 token:0 0
+po pope je stack
+
+Stack (top to bottom):
+
+ ┌───────┐
+ │   110 │ <- position 4
+ |-------|
+ │    18 │ <- position 3
+ |-------|
+ │   102 │ <- position 2
+ |-------|
+ │    -1 │ <- position 1
+ |-------|
+ └───────┘
+ Stack size: 4
+som tu
+top: 9
+literal: 9
+
+Stack (top to bottom):
+
+ ┌───────┐
+ │     9 │ <- position 12
+ |-------|
+ │    13 │ <- position 11
+ |-------|
+ │   -10 │ <- position 10
+ |-------|
+ │    14 │ <- position 9
+ |-------|
+ │   120 │ <- position 8
+ |-------|
+ │    17 │ <- position 7
+ |-------|
+ │   110 │ <- position 6
+ |-------|
+ │    18 │ <- position 5
+ |-------|
+ │   110 │ <- position 4
+ |-------|
+ │    18 │ <- position 3
+ |-------|
+ │   102 │ <- position 2
+ |-------|
+ │    -1 │ <- position 1
+ |-------|
+ └───────┘
+ Stack size: 12
+po pope je stack
+
+Stack (top to bottom):
+
+ ┌───────┐
+ │    13 │ <- position 11
+ |-------|
+ │   -10 │ <- position 10
+ |-------|
+ │    14 │ <- position 9
+ |-------|
+ │   120 │ <- position 8
+ |-------|
+ │    17 │ <- position 7
+ |-------|
+ │   110 │ <- position 6
+ |-------|
+ │    18 │ <- position 5
+ |-------|
+ │   110 │ <- position 4
+ |-------|
+ │    18 │ <- position 3
+ |-------|
+ │   102 │ <- position 2
+ |-------|
+ │    -1 │ <- position 1
+ |-------|
+ └───────┘
+ Stack size: 11
+call:0 assign:0 literal:13 ifj:0
+som tu
+top: 13
+literal: 13
+
+Stack (top to bottom):
+
+ ┌───────┐
+ │    13 │ <- position 11
+ |-------|
+ │   -10 │ <- position 10
+ |-------|
+ │    14 │ <- position 9
+ |-------|
+ │   120 │ <- position 8
+ |-------|
+ │    17 │ <- position 7
+ |-------|
+ │   110 │ <- position 6
+ |-------|
+ │    18 │ <- position 5
+ |-------|
+ │   110 │ <- position 4
+ |-------|
+ │    18 │ <- position 3
+ |-------|
+ │   102 │ <- position 2
+ |-------|
+ │    -1 │ <- position 1
+ |-------|
+ └───────┘
+ Stack size: 11
+po pope je stack
+
+Stack (top to bottom):
+
+ ┌───────┐
+ │   -10 │ <- position 10
+ |-------|
+ │    14 │ <- position 9
+ |-------|
+ │   120 │ <- position 8
+ |-------|
+ │    17 │ <- position 7
+ |-------|
+ │   110 │ <- position 6
+ |-------|
+ │    18 │ <- position 5
+ |-------|
+ │   110 │ <- position 4
+ |-------|
+ │    18 │ <- position 3
+ |-------|
+ │   102 │ <- position 2
+ |-------|
+ │    -1 │ <- position 1
+ |-------|
+ └───────┘
+ Stack size: 10
+call:0 assign:0 literal:4 ifj:0
+som tu
+top: -10
+literal: 4
+
+Stack (top to bottom):
+
+ ┌───────┐
+ │   -10 │ <- position 10
+ |-------|
+ │    14 │ <- position 9
+ |-------|
+ │   120 │ <- position 8
+ |-------|
+ │    17 │ <- position 7
+ |-------|
+ │   110 │ <- position 6
+ |-------|
+ │    18 │ <- position 5
+ |-------|
+ │   110 │ <- position 4
+ |-------|
+ │    18 │ <- position 3
+ |-------|
+ │   102 │ <- position 2
+ |-------|
+ │    -1 │ <- position 1
+ |-------|
+ └───────┘
+ Stack size: 10
+
+Stack (top to bottom):
+
+ ┌───────┐
+ │   120 │ <- position 8
+ |-------|
+ │    17 │ <- position 7
+ |-------|
+ │   110 │ <- position 6
+ |-------|
+ │    18 │ <- position 5
+ |-------|
+ │   110 │ <- position 4
+ |-------|
+ │    18 │ <- position 3
+ |-------|
+ │   102 │ <- position 2
+ |-------|
+ │    -1 │ <- position 1
+ |-------|
+ └───────┘
+ Stack size: 8
+token po EXP: 22
+som tu
+top: 120
+literal: 22
+
+Stack (top to bottom):
+
+ ┌───────┐
+ │   120 │ <- position 8
+ |-------|
+ │    17 │ <- position 7
+ |-------|
+ │   110 │ <- position 6
+ |-------|
+ │    18 │ <- position 5
+ |-------|
+ │   110 │ <- position 4
+ |-------|
+ │    18 │ <- position 3
+ |-------|
+ │   102 │ <- position 2
+ |-------|
+ │    -1 │ <- position 1
+ |-------|
+ └───────┘
+ Stack size: 8
+pravidlo bude: 40
+state:0 literal:0 token:28 0
+po pope je stack
+
+Stack (top to bottom):
+
+ ┌───────┐
+ │    17 │ <- position 7
+ |-------|
+ │   110 │ <- position 6
+ |-------|
+ │    18 │ <- position 5
+ |-------|
+ │   110 │ <- position 4
+ |-------|
+ │    18 │ <- position 3
+ |-------|
+ │   102 │ <- position 2
+ |-------|
+ │    -1 │ <- position 1
+ |-------|
+ └───────┘
+ Stack size: 7
+som tu
+top: 22
+literal: 22
+
+Stack (top to bottom):
+
+ ┌───────┐
+ │    22 │ <- position 10
+ |-------|
+ │     4 │ <- position 9
+ |-------|
+ │    22 │ <- position 8
+ |-------|
+ │    17 │ <- position 7
+ |-------|
+ │   110 │ <- position 6
+ |-------|
+ │    18 │ <- position 5
+ |-------|
+ │   110 │ <- position 4
+ |-------|
+ │    18 │ <- position 3
+ |-------|
+ │   102 │ <- position 2
+ |-------|
+ │    -1 │ <- position 1
+ |-------|
+ └───────┘
+ Stack size: 10
+po pope je stack
+
+Stack (top to bottom):
+
+ ┌───────┐
+ │     4 │ <- position 9
+ |-------|
+ │    22 │ <- position 8
+ |-------|
+ │    17 │ <- position 7
+ |-------|
+ │   110 │ <- position 6
+ |-------|
+ │    18 │ <- position 5
+ |-------|
+ │   110 │ <- position 4
+ |-------|
+ │    18 │ <- position 3
+ |-------|
+ │   102 │ <- position 2
+ |-------|
+ │    -1 │ <- position 1
+ |-------|
+ └───────┘
+ Stack size: 9
+0jshag val
+CAUUUID IF n 5call:0 assign:0 literal:4 ifj:0
+som tu
+top: 4
+literal: 4
+
+Stack (top to bottom):
+
+ ┌───────┐
+ │     4 │ <- position 9
+ |-------|
+ │    22 │ <- position 8
+ |-------|
+ │    17 │ <- position 7
+ |-------|
+ │   110 │ <- position 6
+ |-------|
+ │    18 │ <- position 5
+ |-------|
+ │   110 │ <- position 4
+ |-------|
+ │    18 │ <- position 3
+ |-------|
+ │   102 │ <- position 2
+ |-------|
+ │    -1 │ <- position 1
+ |-------|
+ └───────┘
+ Stack size: 9
+po pope je stack
+
+Stack (top to bottom):
+
+ ┌───────┐
+ │    22 │ <- position 8
+ |-------|
+ │    17 │ <- position 7
+ |-------|
+ │   110 │ <- position 6
+ |-------|
+ │    18 │ <- position 5
+ |-------|
+ │   110 │ <- position 4
+ |-------|
+ │    18 │ <- position 3
+ |-------|
+ │   102 │ <- position 2
+ |-------|
+ │    -1 │ <- position 1
+ |-------|
+ └───────┘
+ Stack size: 8
+call:0 assign:0 literal:22 ifj:0
+som tu
+top: 22
+literal: 22
+
+Stack (top to bottom):
+
+ ┌───────┐
+ │    22 │ <- position 8
+ |-------|
+ │    17 │ <- position 7
+ |-------|
+ │   110 │ <- position 6
+ |-------|
+ │    18 │ <- position 5
+ |-------|
+ │   110 │ <- position 4
+ |-------|
+ │    18 │ <- position 3
+ |-------|
+ │   102 │ <- position 2
+ |-------|
+ │    -1 │ <- position 1
+ |-------|
+ └───────┘
+ Stack size: 8
+po pope je stack
+
+Stack (top to bottom):
+
+ ┌───────┐
+ │    17 │ <- position 7
+ |-------|
+ │   110 │ <- position 6
+ |-------|
+ │    18 │ <- position 5
+ |-------|
+ │   110 │ <- position 4
+ |-------|
+ │    18 │ <- position 3
+ |-------|
+ │   102 │ <- position 2
+ |-------|
+ │    -1 │ <- position 1
+ |-------|
+ └───────┘
+ Stack size: 7
+call:0 assign:0 literal:17 ifj:0
+som tu
+top: 17
+literal: 17
+
+Stack (top to bottom):
+
+ ┌───────┐
+ │    17 │ <- position 7
+ |-------|
+ │   110 │ <- position 6
+ |-------|
+ │    18 │ <- position 5
+ |-------|
+ │   110 │ <- position 4
+ |-------|
+ │    18 │ <- position 3
+ |-------|
+ │   102 │ <- position 2
+ |-------|
+ │    -1 │ <- position 1
+ |-------|
+ └───────┘
+ Stack size: 7
+po pope je stack
+
+Stack (top to bottom):
+
+ ┌───────┐
+ │   110 │ <- position 6
+ |-------|
+ │    18 │ <- position 5
+ |-------|
+ │   110 │ <- position 4
+ |-------|
+ │    18 │ <- position 3
+ |-------|
+ │   102 │ <- position 2
+ |-------|
+ │    -1 │ <- position 1
+ |-------|
+ └───────┘
+ Stack size: 6
+call:0 assign:0 literal:4 ifj:0
+som tu
+top: 110
+literal: 4
+
+Stack (top to bottom):
+
+ ┌───────┐
+ │   110 │ <- position 6
+ |-------|
+ │    18 │ <- position 5
+ |-------|
+ │   110 │ <- position 4
+ |-------|
+ │    18 │ <- position 3
+ |-------|
+ │   102 │ <- position 2
+ |-------|
+ │    -1 │ <- position 1
+ |-------|
+ └───────┘
+ Stack size: 6
+pravidlo bude: 19
+state:0 literal:0 token:2 0
+kajshdhsa0
+po pope je stack
+
+Stack (top to bottom):
+
+ ┌───────┐
+ │    18 │ <- position 5
+ |-------|
+ │   110 │ <- position 4
+ |-------|
+ │    18 │ <- position 3
+ |-------|
+ │   102 │ <- position 2
+ |-------|
+ │    -1 │ <- position 1
+ |-------|
+ └───────┘
+ Stack size: 5
+som tu
+top: 111
+literal: 4
+
+Stack (top to bottom):
+
+ ┌───────┐
+ │   111 │ <- position 7
+ |-------|
+ │   110 │ <- position 6
+ |-------|
+ │    18 │ <- position 5
+ |-------|
+ │   110 │ <- position 4
+ |-------|
+ │    18 │ <- position 3
+ |-------|
+ │   102 │ <- position 2
+ |-------|
+ │    -1 │ <- position 1
+ |-------|
+ └───────┘
+ Stack size: 7
+pravidlo bude: 27
+state:0 literal:0 token:2 0
+po pope je stack
+
+Stack (top to bottom):
+
+ ┌───────┐
+ │   110 │ <- position 6
+ |-------|
+ │    18 │ <- position 5
+ |-------|
+ │   110 │ <- position 4
+ |-------|
+ │    18 │ <- position 3
+ |-------|
+ │   102 │ <- position 2
+ |-------|
+ │    -1 │ <- position 1
+ |-------|
+ └───────┘
+ Stack size: 6
+som tu
+top: 119
+literal: 4
+
+Stack (top to bottom):
+
+ ┌───────┐
+ │   119 │ <- position 7
+ |-------|
+ │   110 │ <- position 6
+ |-------|
+ │    18 │ <- position 5
+ |-------|
+ │   110 │ <- position 4
+ |-------|
+ │    18 │ <- position 3
+ |-------|
+ │   102 │ <- position 2
+ |-------|
+ │    -1 │ <- position 1
+ |-------|
+ └───────┘
+ Stack size: 7
+pravidlo bude: 38
+state:0 literal:0 token:2 0
+po pope je stack
+
+Stack (top to bottom):
+
+ ┌───────┐
+ │   110 │ <- position 6
+ |-------|
+ │    18 │ <- position 5
+ |-------|
+ │   110 │ <- position 4
+ |-------|
+ │    18 │ <- position 3
+ |-------|
+ │   102 │ <- position 2
+ |-------|
+ │    -1 │ <- position 1
+ |-------|
+ └───────┘
+ Stack size: 6
+som tu
+top: 4
+literal: 4
+
+Stack (top to bottom):
+
+ ┌───────┐
+ │     4 │ <- position 9
+ |-------|
+ │    15 │ <- position 8
+ |-------|
+ │   116 │ <- position 7
+ |-------|
+ │   110 │ <- position 6
+ |-------|
+ │    18 │ <- position 5
+ |-------|
+ │   110 │ <- position 4
+ |-------|
+ │    18 │ <- position 3
+ |-------|
+ │   102 │ <- position 2
+ |-------|
+ │    -1 │ <- position 1
+ |-------|
+ └───────┘
+ Stack size: 9
+po pope je stack
+
+Stack (top to bottom):
+
+ ┌───────┐
+ │    15 │ <- position 8
+ |-------|
+ │   116 │ <- position 7
+ |-------|
+ │   110 │ <- position 6
+ |-------|
+ │    18 │ <- position 5
+ |-------|
+ │   110 │ <- position 4
+ |-------|
+ │    18 │ <- position 3
+ |-------|
+ │   102 │ <- position 2
+ |-------|
+ │    -1 │ <- position 1
+ |-------|
+ └───────┘
+ Stack size: 8
+call:0 assign:0 literal:15 ifj:0
+som tu
+top: 15
+literal: 15
+
+Stack (top to bottom):
+
+ ┌───────┐
+ │    15 │ <- position 8
+ |-------|
+ │   116 │ <- position 7
+ |-------|
+ │   110 │ <- position 6
+ |-------|
+ │    18 │ <- position 5
+ |-------|
+ │   110 │ <- position 4
+ |-------|
+ │    18 │ <- position 3
+ |-------|
+ │   102 │ <- position 2
+ |-------|
+ │    -1 │ <- position 1
+ |-------|
+ └───────┘
+ Stack size: 8
+po pope je stack
+
+Stack (top to bottom):
+
+ ┌───────┐
+ │   116 │ <- position 7
+ |-------|
+ │   110 │ <- position 6
+ |-------|
+ │    18 │ <- position 5
+ |-------|
+ │   110 │ <- position 4
+ |-------|
+ │    18 │ <- position 3
+ |-------|
+ │   102 │ <- position 2
+ |-------|
+ │    -1 │ <- position 1
+ |-------|
+ └───────┘
+ Stack size: 7
+call:0 assign:1 literal:5 ifj:0
+som tu
+top: 116
+literal: 5
+
+Stack (top to bottom):
+
+ ┌───────┐
+ │   116 │ <- position 7
+ |-------|
+ │   110 │ <- position 6
+ |-------|
+ │    18 │ <- position 5
+ |-------|
+ │   110 │ <- position 4
+ |-------|
+ │    18 │ <- position 3
+ |-------|
+ │   102 │ <- position 2
+ |-------|
+ │    -1 │ <- position 1
+ |-------|
+ └───────┘
+ Stack size: 7
+pravidlo bude: 35
+state:0 literal:1 token:5 0
+po pope je stack
+
+Stack (top to bottom):
+
+ ┌───────┐
+ │   110 │ <- position 6
+ |-------|
+ │    18 │ <- position 5
+ |-------|
+ │   110 │ <- position 4
+ |-------|
+ │    18 │ <- position 3
+ |-------|
+ │   102 │ <- position 2
+ |-------|
+ │    -1 │ <- position 1
+ |-------|
+ └───────┘
+ Stack size: 6
+som tu
+top: -10
+literal: 5
 
 Stack (top to bottom):
 

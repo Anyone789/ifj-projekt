@@ -480,7 +480,7 @@ void parserIn(TStack *parserStack)
         stackPrint(parserStack);
 
         // condition which sets global variable to tru to let exprssion parsing now that we are parsing if condition expression
-        if (literal == tLlIf)
+        if (literal == tLlIf || literal == tLlWhile)
         {
             inFce = true;
         }
@@ -542,7 +542,6 @@ void parserIn(TStack *parserStack)
 
             if ((top == tLlVar || top == tLlConst || top == tLlLeftRoundBracket || top == tLlComma || top == tLlPipe) && token->type == T_ID)
             {
-                printf("CAUUU");
                 if (inFce == false)
                 {
                     if (symtableSearch(&symLocal, *token->attribute.dStr) == NULL)
@@ -550,6 +549,7 @@ void parserIn(TStack *parserStack)
                         printf("%djshag %s\n", nullType, token->attribute.dStr->str);
                         if (top == tLlPipe)
                         {
+                    printf("CAUUU");
                             bstSymtable *res = symtableSearch(&symLocal, *ID);
                             printf("ID IF %s %d", ID->str, ((varData*)res->data)->dataType.type);
                             if (res == NULL)
