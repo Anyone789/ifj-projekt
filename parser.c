@@ -149,9 +149,10 @@ void processFunction(bstSymtable *resFce, DSTRING *functionID, int type, int *pa
                 exit(EXIT_FAILURE);
             }
             varDatas[0].dataType = (DATATYPE){nullType, false, type};
-            printf("ISNULL%d\n", nullType);
+            printf("ISNULL%d %s\n", nullType, resFce->key);
             insertFunction(&symTree, functionID->str, (DATATYPE){nullType, false, type}, *paramCount + 1, true, false, true, varDatas);
             (*paramCount)++;
+            paramCountGlob = *paramCount;
         }
         else
         {
@@ -483,7 +484,11 @@ void parserIn(TStack *parserStack)
         {
             inFce = true;
         }
-
+        if (literal == tLlLeftCurlyBracket || literal == tLlPipe)
+        {
+            inFce = false;
+        }
+        
         if (literal == tLlEqual)
         {
             assign = true;
@@ -535,14 +540,30 @@ void parserIn(TStack *parserStack)
             literal = convertTokenToIndex(token);
             // adding variables to localTree
 
-            if ((top == tLlVar || top == tLlConst || top == tLlLeftRoundBracket || top == tLlComma) && token->type == T_ID)
+            if ((top == tLlVar || top == tLlConst || top == tLlLeftRoundBracket || top == tLlComma || top == tLlPipe) && token->type == T_ID)
             {
+                printf("CAUUU");
                 if (inFce == false)
                 {
                     if (symtableSearch(&symLocal, *token->attribute.dStr) == NULL)
                     {
                         printf("%djshag %s\n", nullType, token->attribute.dStr->str);
-                        insertVariables(token->attribute.dStr->str, (DATATYPE){nullType, false, token->type}, false, isConst, false, false, &symLocal);
+                        if (top == tLlPipe)
+                        {
+                            bstSymtable *res = symtableSearch(&symLocal, *ID);
+                            printf("ID IF %s %d", ID->str, ((varData*)res->data)->dataType.type);
+                            if (res == NULL)
+                            {
+                                exit(GENERIC_SEMANTIC_ERROR);
+                            }
+                            
+                            insertVariables(token->attribute.dStr->str, (DATATYPE){false, false, ((varData*)res->data)->dataType.type}, false, isConst, false, false, &symLocal);
+
+                        }else{
+                            insertVariables(token->attribute.dStr->str, (DATATYPE){nullType, false, token->type}, false, isConst, false, false, &symLocal);
+
+                        }
+                        
                         varDef = true;
                     }
                     else
@@ -578,6 +599,7 @@ void parserIn(TStack *parserStack)
                     // ((fceData *)(resFce->data))->isDefined = true;
                     /* code */
                 }
+                paramCountGlob = 0;
             }
 
             if (literal == tLlSemicolon)
@@ -590,7 +612,7 @@ void parserIn(TStack *parserStack)
                     {
                         if (paramCountList != ((fceData *)(res->data))->paramCount)
                         {
-                            printf("dasd");
+                            printf("dasd%d %d", paramCountList, ((fceData *)(res->data))->paramCount);
                             exit(WRONG_ARGUMENTS_ERROR);
                         }
                         /* code */
@@ -606,7 +628,8 @@ void parserIn(TStack *parserStack)
                 isReturn = false;
                 fceCall = false;
             }
-            if (fceCall && assign && literal == tLlId && ifj)
+            printf("call:%d assign:%d literal:%d ifj:%d\n", fceCall, assign, literal, ifj);
+            if (fceCall && assign && literal == tLlLeftRoundBracket && ifj)
             {
                 bstSymtable *resFce = symtableSearch(&symTree, *functionID);
                 bstSymtable *res = symtableSearch(&symLocal, *ID);
@@ -709,13 +732,14 @@ void parserIn(TStack *parserStack)
                 printf("\ncall\n");
                 bstSymtable *resFce = symtableSearch(&symTree, *functionID);
                 bstSymtable *res = symtableSearch(&symLocal, *ID);
+                printf("ID%s", ID->str);
                 if (resFce == NULL)
                 {
                     printf("\nunusedFce\n");
                     unusedFce = true;
                 }
 
-                if (res == NULL)
+                if (res == NULL && assign)
                 {
 
                     exit(UNDEFINED_VARIABLE_ERROR);
@@ -730,7 +754,12 @@ void parserIn(TStack *parserStack)
                             printf("\n%d\n", paramCountList);
                             if (((fceData *)resFce->data)->params[paramCountList].dataType.type != token->type)
                             {
-                                exit(WRONG_ARGUMENTS_ERROR);
+                                if (((fceData *)resFce->data)->params[paramCountList].dataType.type != T_KEYWORD)
+                                {
+                                    exit(WRONG_ARGUMENTS_ERROR);
+                                    /* code */
+                                }
+                                
                             }
                             if (((fceData *)resFce->data)->paramCount <= paramCountList)
                             {
@@ -778,8 +807,12 @@ void parserIn(TStack *parserStack)
                             {
                                 printf("id:%s, fceID:%s count%d\n", ID->str, functionID->str, paramCountList);
 
-                                printf("params rozny typ param:%d, var:%d\n", ((fceData *)resFce->data)->params[paramCountList].dataType.isNull, ((varData *)res->data)->dataType.isNull);
-                                exit(WRONG_ARGUMENTS_ERROR);
+                                printf("params rozny typ param:%d, var:%d\n", ((fceData *)resFce->data)->params[paramCountList].dataType.type, ((varData *)res->data)->dataType.type);
+                                if (((fceData *)resFce->data)->params[paramCountList].dataType.type != T_KEYWORD)
+                                {
+                                    exit(WRONG_ARGUMENTS_ERROR);
+                                    /* code */
+                                }
                             }
                             //printf("ADASDid:%d, count%d\n",((fceData *)resFce->data)->paramCount, paramCountList);
                             if (((fceData *)resFce->data)->paramCount <= paramCountList)
@@ -899,7 +932,9 @@ void parserIn(TStack *parserStack)
                     //     exit(INCOMPATIBLE_TYPE_ERROR);
                     // }
                     printf("fceID:%s id:%s\n", functionID->str, ID->str);
-                    if (((varData *)res->data)->dataType.type == T_ID)
+                    if (((fceData *)resFce->data)->isDefined == true)
+                    {
+                        if (((varData *)res->data)->dataType.type == T_ID)
                     {
                         ((varData *)res->data)->dataType.type = ((fceData *)resFce->data)->returnType.type;
                         ((varData *)res->data)->dataType.isNull = ((fceData *)resFce->data)->returnType.isNull;
@@ -907,8 +942,11 @@ void parserIn(TStack *parserStack)
                     else if ((((fceData *)resFce->data)->returnType.type != ((varData *)res->data)->dataType.type) ||
                              (((fceData *)resFce->data)->returnType.isNull != ((varData *)res->data)->dataType.isNull))
                     {
+                        printf("%d %d", ((fceData *)resFce->data)->returnType.type, ((varData *)res->data)->dataType.type);
                         exit(INCOMPATIBLE_TYPE_ERROR);
                     }
+                    }
+                    
                 }
             }
             if ((llTable[top % 100][literal]) == 18)
@@ -919,7 +957,7 @@ void parserIn(TStack *parserStack)
                 {
                     if (paramCountGlob != ((fceData *)(res->data))->paramCount)
                     {
-                        printf("dasd");
+                        printf("dasda");
                         exit(WRONG_ARGUMENTS_ERROR);
                     }
                     /* code */
@@ -945,10 +983,10 @@ void parserIn(TStack *parserStack)
                 usedVar(&symLocal);
             }
 
-            if ((llTable[top % 100][literal]) == 31)
-            {
-                exit(GENERIC_SEMANTIC_ERROR);
-            }
+            // if ((llTable[top % 100][literal]) == 31)
+            // {
+            //     exit(GENERIC_SEMANTIC_ERROR);
+            // }
 
             if (top != nLlType && top != nLlItem)
             {
