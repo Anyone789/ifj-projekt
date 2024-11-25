@@ -426,7 +426,7 @@ void symtableInsertBuildInFce(bstSymtable **symTree)
     insertFunction(symTree, "substring", (DATATYPE){true, false, T_STR}, 3, true, true, false, varDatas);
     varDatas[0].dataType = (DATATYPE){false, false, T_STR};
     varDatas[1].dataType = (DATATYPE){false, false, T_STR};
-    insertFunction(symTree, "strcmp", (DATATYPE){false, false, T_STR}, 2, true, true, false, varDatas);
+    insertFunction(symTree, "strcmp", (DATATYPE){false, false, T_INT}, 2, true, true, false, varDatas);
     varDatas[0].dataType = (DATATYPE){false, false, T_STR};
     varDatas[1].dataType = (DATATYPE){false, false, T_INT};
     insertFunction(symTree, "ord", (DATATYPE){false, false, T_INT}, 2, true, true, false, varDatas);
