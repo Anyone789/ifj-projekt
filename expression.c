@@ -253,6 +253,7 @@ int analyzeExp(TStack *expStack, TOKEN *token)
                 bstSymtable *resul = symtableSearch(&symLocal, *((ElmExp *)(expStack->stackTop->value))->key);
                 if (resul == NULL)
                 {
+                    printf("saa");
                     exit(UNDEFINED_VARIABLE_ERROR);
                 }
                 returnExpValue = ((varData *)resul->data)->dataType.type;

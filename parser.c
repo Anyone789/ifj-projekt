@@ -137,7 +137,7 @@ void processVariable(bstSymtable *res, int type, int *paramTypeCounter)
         *paramTypeCounter = 0;
     }
 }
-void processFunction(bstSymtable *resFce, DSTRING *functionID, int type, int *paramCount, int state)
+void processFunction(bstSymtable *res, bstSymtable *resFce, DSTRING *functionID, int type, int *paramCount, int state)
 {
     if (resFce != NULL && state == nLlParamList)
     {
@@ -149,6 +149,7 @@ void processFunction(bstSymtable *resFce, DSTRING *functionID, int type, int *pa
                 exit(EXIT_FAILURE);
             }
             varDatas[0].dataType = (DATATYPE){nullType, false, type};
+            varDatas[0].name = res->key;
             // printf("ISNULL%d %s\n", nullType, resFce->key);
             insertFunction(&symTree, functionID->str, (DATATYPE){nullType, false, type}, *paramCount + 1, true, false, true, varDatas);
             (*paramCount)++;
@@ -181,6 +182,7 @@ void setFunctionReturnType(bstSymtable *resFce, int type)
         ((fceData *)resFce->data)->returnType.type = type;
         ((fceData *)resFce->data)->returnType.isNull = nullType;
         ((fceData *)(resFce->data))->isDefined = true;
+        generateFunctionHead(resFce);
     }
 }
 void handleTokenType(bstSymtable *res, bstSymtable *resFce, TOKEN *token, DSTRING *functionID, int *paramCount, int *paramTypeCounter, int state)
@@ -189,7 +191,7 @@ void handleTokenType(bstSymtable *res, bstSymtable *resFce, TOKEN *token, DSTRIN
     {
         if (*paramTypeCounter == 1)
         {
-            processFunction(resFce, functionID, T_STR, paramCount, state);
+            processFunction(res, resFce, functionID, T_STR, paramCount, state);
             processVariable(res, T_STR, paramTypeCounter);
         }
         else
@@ -201,7 +203,7 @@ void handleTokenType(bstSymtable *res, bstSymtable *resFce, TOKEN *token, DSTRIN
     {
         if (*paramTypeCounter == 1)
         {
-            processFunction(resFce, functionID, T_INT, paramCount, state);
+            processFunction(res, resFce, functionID, T_INT, paramCount, state);
             processVariable(res, T_INT, paramTypeCounter);
         }
         else
@@ -213,7 +215,7 @@ void handleTokenType(bstSymtable *res, bstSymtable *resFce, TOKEN *token, DSTRIN
     {
         if (*paramTypeCounter == 1)
         {
-            processFunction(resFce, functionID, T_FLOAT, paramCount, state);
+            processFunction(res, resFce, functionID, T_FLOAT, paramCount, state);
             processVariable(res, T_FLOAT, paramTypeCounter);
         }
         else
@@ -422,6 +424,7 @@ int convertTokenToIndex(TOKEN *token)
 
 void parserIn(TStack *parserStack)
 {
+
     DSTRING *ID;
     ID = dStringCreate();
     DSTRING *functionID;
@@ -578,8 +581,10 @@ void parserIn(TStack *parserStack)
                         else
                         {
                             insertVariables(token->attribute.dStr->str, (DATATYPE){nullType, false, token->type}, false, isConst, false, false, &symLocal);
-                            if (strcmp(token->attribute.dStr->str, "ifj") != 0)
+                            if (strcmp(token->attribute.dStr->str, "ifj") != 0 && (state != nLlParams && state != nLlFunctDef))
                             {
+                                // printf("**%d**\n", state);
+
                                 generateVariables(token->attribute.dStr);
                             }
                         }
@@ -600,6 +605,7 @@ void parserIn(TStack *parserStack)
                     isConst = false;
                 }
             }
+
             // adding functions to globalTree
             if (top == tLlFn)
             {
@@ -719,6 +725,7 @@ void parserIn(TStack *parserStack)
                 if (res == NULL)
                 {
                     exit(UNDEFINED_VARIABLE_ERROR);
+                    printf("sasasa");
                 }
                 else
                 {
@@ -740,6 +747,7 @@ void parserIn(TStack *parserStack)
                 if (res == NULL && resFce == NULL)
                 {
                     exit(UNDEFINED_VARIABLE_ERROR);
+                    printf("saasas");
                 }
                 else
                 {
@@ -767,6 +775,7 @@ void parserIn(TStack *parserStack)
                 {
 
                     exit(UNDEFINED_VARIABLE_ERROR);
+                    printf("asasas");
                 }
                 else if (token->type == T_INT || token->type == T_FLOAT || token->type == T_STR)
                 {
@@ -1000,6 +1009,7 @@ void parserIn(TStack *parserStack)
             }
             if ((llTable[top % 100][literal]) == 20)
             {
+                generateFunctionReturn();
                 usedVar(&symLocal);
             }
 

@@ -2,8 +2,15 @@
 const ifj = @import("ifj24.zig");
 // Hlavni funkce
 pub fn main() void {
-    var a = 3 + 3.1;
-    a = 1.2;
+
+}
+
+pub fn foo(a: i32, b: f64, c : f64)f64 {
+    a = 4;
+    b = 1.2;
+    c = 2.3;
+    b = foo(a, b, c,);
+    return 1.2+ b;
 }
 
 // 779 nebude def fce a mam definiciu var tak by mala sediet s fce ale to asi srat
