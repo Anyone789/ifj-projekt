@@ -48,6 +48,8 @@ typedef struct elmExpression
     DATATYPE dataType;
     bool terminal;
     DSTRING *key;
+    int valueInt;
+    float valueFloat;
 } ElmExp;
 
 int analyzeExp(TStack *expStack, TOKEN *token);

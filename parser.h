@@ -10,6 +10,7 @@
 #include "errorCodes.h"
 #include "scanner.h"
 #include "expression.h"
+#include "generator.h"
 #include <string.h>
 #include <stdio.h>
 #include <stdbool.h>
