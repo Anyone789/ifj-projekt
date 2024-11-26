@@ -13,6 +13,7 @@ void assigneVariables(DSTRING *name)
 
 void generateHeader()
 {
+    printf(".IFJcode24\n");
     printf("JUMP main\n");
 }
 
@@ -28,10 +29,19 @@ void generateFunctionHead(bstSymtable *symtable)
         printf("POPS LF@%s\n", ((fceData *)symtable->data)->params[i].name);
     }
 }
-void generateFunctionReturn()
+void generateFunctionReturn(DSTRING *functionID)
 {
     printf("POPFRAME\n");
-    printf("RETURN\n");
+    if (strcmp(functionID->str, "main") != 0)
+    {
+        printf("RETURN\n");
+
+        return;
+    }
+    else
+    {
+        printf("EXIT int@0\n");
+    }
 }
 
 void generateFunctionCall(bstSymtable *symtableGlobal, bstSymtable *symtableLocal)

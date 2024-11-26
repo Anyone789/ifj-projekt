@@ -307,7 +307,7 @@ int reduce(TStack *expStack)
         else if (((ElmExp *)(stackItem->value))->dataType.type == T_FLOAT)
         {
 
-            printf("PUSHS float@%f\n", ((ElmExp *)(stackItem->value))->valueFloat);
+            printf("PUSHS float@%a\n", ((ElmExp *)(stackItem->value))->valueFloat);
         }
         else
         {
@@ -329,7 +329,7 @@ int reduce(TStack *expStack)
         {
             return SYNTAX_ERROR;
         }
-        printf("PLUS\n");
+        printf("ADDS\n");
         stackPop(expStack);
         stackPop(expStack);
         break;
@@ -338,7 +338,7 @@ int reduce(TStack *expStack)
         {
             return SYNTAX_ERROR;
         }
-        printf("MINUS\n");
+        printf("SUBS\n");
         stackPop(expStack);
         stackPop(expStack);
         break;

@@ -14,7 +14,7 @@ void generateVariables(DSTRING *name);
 void assigneVariables(DSTRING *name);
 void generateHeader();
 void generateFunctionHead(bstSymtable *symtable);
-void generateFunctionReturn();
+void generateFunctionReturn(DSTRING *functionID);
 void generateFunctionEnd(bstSymtable *symtable);
 void generateFunctionCall(bstSymtable *symtableGlobal, bstSymtable *symtableLocal);
 #endif

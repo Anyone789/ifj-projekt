@@ -656,7 +656,7 @@ void parserIn(TStack *parserStack)
 
                     if (assign == true)
                     {
-                        printf("POPS %s\n", currentID->str);
+                        printf("POPS LF@%s\n", currentID->str);
                     }
                 }
                 // printf("kajshdkjhsa%d\n", paramCount);
@@ -1025,7 +1025,7 @@ void parserIn(TStack *parserStack)
             }
             if ((llTable[top % 100][literal]) == 20)
             {
-                generateFunctionReturn();
+                generateFunctionReturn(functionIDCurrent);
                 usedVar(&symLocal);
             }
 

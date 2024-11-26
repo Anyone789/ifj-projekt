@@ -1,1 +1,0 @@
-= - da v majkovom seg fault
