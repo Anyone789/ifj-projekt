@@ -12,4 +12,6 @@
 
 void generateVariables(DSTRING *name);
 void assigneVariables(DSTRING *name);
+void generateHeader();
+void generateFunctionHead(bstSymtable *symtable);
 #endif

@@ -443,6 +443,7 @@ void parserIn(TStack *parserStack)
     bool unusedFce = false;
     bool isReturn = false;
     // loop for whole parsing phaze, loops till EOF or error
+    generateHeader();
     while (literal != EOF)
     {
 
@@ -520,6 +521,21 @@ void parserIn(TStack *parserStack)
                 stackPop(parserStack);
                 // printf("END");
                 defFunction(&symTree);
+                DSTRING *str = dStringCreate();
+                dStringAddString(str, "main");
+                bstSymtable *resLocal = symtableSearch(&symTree, *str);
+
+                if (resLocal == NULL)
+                {
+                    exit(MISSING_MAIN);
+                }
+                else
+                {
+                    if (((fceData *)(resLocal->data))->paramCount != 0 || ((fceData *)(resLocal->data))->returnType.type != 0)
+                    {
+                        exit(WRONG_ARGUMENTS_ERROR);
+                    }
+                }
                 return;
             }
             else if (top == literal)
@@ -562,6 +578,10 @@ void parserIn(TStack *parserStack)
                         else
                         {
                             insertVariables(token->attribute.dStr->str, (DATATYPE){nullType, false, token->type}, false, isConst, false, false, &symLocal);
+                            if (strcmp(token->attribute.dStr->str, "ifj") != 0)
+                            {
+                                generateVariables(token->attribute.dStr);
+                            }
                         }
 
                         varDef = true;
@@ -1053,6 +1073,7 @@ void parserIn(TStack *parserStack)
                         {
                             exit(INCOMPATIBLE_TYPE_ERROR);
                         }
+                        assigneVariables(ID);
                     }
                 }
             }
@@ -1085,11 +1106,11 @@ int main(int argc, char **argv)
     symtableInsertBuildInFce(&symTree);
     parsIt(&parserStack);
     DSTRING *str = dStringCreate();
-    dStringAddString(str, "s");
-    bstSymtable *resLocal = symtableSearch(&symLocal, *str);
+    dStringAddString(str, "main");
+    bstSymtable *resLocal = symtableSearch(&symTree, *str);
     if (resLocal != NULL)
     {
-        // printf("\nFound in locals %d \n", ((varData *)resLocal->data)->dataType.isNull);
+        // printf("\nFound in locals %d \n", ((fceData *)resLocal->data)->returnType.type);
     }
     else
     {

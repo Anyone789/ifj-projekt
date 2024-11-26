@@ -3,7 +3,7 @@ const ifj = @import("ifj24.zig");
 // Hlavni funkce
 pub fn main() void {
     var a = 3 + 3.1;
-    a = 1;
+    a = 1.2;
 }
 
 // 779 nebude def fce a mam definiciu var tak by mala sediet s fce ale to asi srat

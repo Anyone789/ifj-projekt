@@ -42,6 +42,7 @@ typedef struct dataType
 typedef struct var
 {
     DATATYPE dataType;
+    char *name;
     bool initialized;
     bool constant; // If variable is const type
     bool isPar;    // If variable is function parameter (const == true)
