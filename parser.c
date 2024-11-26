@@ -168,6 +168,7 @@ void processFunction(bstSymtable *res, bstSymtable *resFce, DSTRING *functionID,
                 {
                     exit(WRONG_ARGUMENTS_ERROR);
                 }
+                ((fceData *)(resFce->data))->params[*paramCount].name = res->key;
             }
 
             (*paramCount)++;
@@ -430,6 +431,8 @@ void parserIn(TStack *parserStack)
     DSTRING *functionID;
     DSTRING *functionIDCurrent;
     functionID = dStringCreate();
+    DSTRING *currentID;
+    currentID = dStringCreate();
     TOKEN *token;
     TOKEN *tokenBefore = token;
     int literal = 99;
@@ -605,6 +608,10 @@ void parserIn(TStack *parserStack)
                     isConst = false;
                 }
             }
+            if (top == tLlVar || top == tLlConst)
+            {
+                currentID = token->attribute.dStr;
+            }
 
             // adding functions to globalTree
             if (top == tLlFn)
@@ -644,6 +651,12 @@ void parserIn(TStack *parserStack)
                             exit(WRONG_ARGUMENTS_ERROR);
                         }
                         /* code */
+                    }
+                    printf("CALL %s\n", res->key);
+
+                    if (assign == true)
+                    {
+                        printf("POPS %s\n", currentID->str);
                     }
                 }
                 // printf("kajshdkjhsa%d\n", paramCount);
@@ -720,6 +733,7 @@ void parserIn(TStack *parserStack)
 
             if ((llTable[top % 100][literal]) == 38)
             {
+                currentID = ID;
                 bstSymtable *res = symtableSearch(&symLocal, *ID);
 
                 if (res == NULL)
@@ -834,6 +848,7 @@ void parserIn(TStack *parserStack)
                     {
                         if (((fceData *)resFce->data)->paramCount > 0 && token->type == T_ID)
                         {
+
                             /* code */
                             if (((fceData *)resFce->data)->params[paramCountList].dataType.type != ((varData *)res->data)->dataType.type || ((fceData *)resFce->data)->params[paramCountList].dataType.isNull != ((varData *)res->data)->dataType.isNull)
                             {
@@ -852,7 +867,7 @@ void parserIn(TStack *parserStack)
                                 // printf("params pocet\n");
                                 exit(WRONG_ARGUMENTS_ERROR);
                             }
-
+                            printf("PUSHS LF@%s\n", res->key);
                             ((varData *)res->data)->use = true;
                             paramTypeCounter = 0;
                             paramCountList++;
@@ -892,6 +907,7 @@ void parserIn(TStack *parserStack)
                             varDatas[0].dataType = (DATATYPE){((varData *)res->data)->dataType.isNull, false, ((varData *)res->data)->dataType.type};
                             insertFunction(&symTree, functionID->str, (DATATYPE){nullType, false, token->type}, paramCountList + 1, false, false, true, varDatas);
                             ((varData *)res->data)->use = true;
+                            printf("PUSHS LF@%s\n", res->key);
                             paramCountList++;
                         }
                     }

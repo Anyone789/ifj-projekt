@@ -2,14 +2,17 @@
 const ifj = @import("ifj24.zig");
 // Hlavni funkce
 pub fn main() void {
-
+    var a = 3;
+    var b= 4.5;
+    var c = 4.5;
+    var b: f64 = foo(a, b, c);
 }
 
 pub fn foo(a: i32, b: f64, c : f64)f64 {
     a = 4;
     b = 1.2;
     c = 2.3;
-    b = foo(a, b, c,);
+    foo(a, b, c);
     return 1.2+ b;
 }
 

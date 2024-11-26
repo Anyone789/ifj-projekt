@@ -22,7 +22,7 @@ void generateFunctionHead(bstSymtable *symtable)
     printf("CREATEFRAME\n");
     printf("PUSHFRAME\n");
 
-    for (int i = 0; i < ((fceData *)symtable->data)->paramCount; i++)
+    for (int i = ((fceData *)symtable->data)->paramCount - 1; i >= 0; i--)
     {
         printf("DEFVAR LF@%s\n", ((fceData *)symtable->data)->params[i].name);
         printf("POPS LF@%s\n", ((fceData *)symtable->data)->params[i].name);
