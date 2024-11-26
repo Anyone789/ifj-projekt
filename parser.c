@@ -596,7 +596,7 @@ void parserIn(TStack *parserStack)
                     }
                     else
                     {
-                        if (!fceCall && top == tLlConst)
+                        if (!fceCall)
                         {
 
                             exit(REDEFINITION_ERROR);

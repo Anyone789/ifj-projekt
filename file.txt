@@ -5,11 +5,12 @@ pub fn main() void {
     var a = 3;
     var b= 4.5;
     var c = 4.5;
-    var b: f64 = foo(a, b, c);
+    var d= foo(a, b, c);
+    d = 1.2;
 }
 
 pub fn foo(a: i32, b: f64, c : f64)f64 {
-    a = 4;
+   a = 4;
     b = 1.2;
     c = 2.3;
     foo(a, b, c);
