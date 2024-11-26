@@ -312,7 +312,7 @@ int reduce(TStack *expStack)
         else
         {
 
-            printf("PUSHS var@%s\n", ((ElmExp *)(stackItem->value))->key->str);
+            printf("PUSHS LF@%s\n", ((ElmExp *)(stackItem->value))->key->str);
         }
         break;
     case tableMultiply:
