@@ -234,22 +234,22 @@ void generateSubstring()
 
     // Kontrola indexů
     printf("STRLEN LF@length LF@str\n");
-    printf("LT GF@cond1 LF@i int@0\n");
-    printf("JUMPIFEQ substring_null GF@cond1 bool@true\n");
-    printf("LT GF@cond2 LF@j int@0\n");
-    printf("JUMPIFEQ substring_null GF@cond2 bool@true\n");
-    printf("GT GF@cond3 LF@i LF@j\n");
-    printf("JUMPIFEQ substring_null GF@cond3 bool@true\n");
-    printf("GE GF@cond4 LF@i LF@length\n");
-    printf("JUMPIFEQ substring_null GF@cond4 bool@true\n");
-    printf("GT GF@cond5 LF@j LF@length\n");
-    printf("JUMPIFEQ substring_null GF@cond5 bool@true\n");
+    printf("LT LF@cond1 LF@i int@0\n");
+    printf("JUMPIFEQ substring_null LF@cond1 bool@true\n");
+    printf("LT LF@cond2 LF@j int@0\n");
+    printf("JUMPIFEQ substring_null LF@cond2 bool@true\n");
+    printf("GT LF@cond3 LF@i LF@j\n");
+    printf("JUMPIFEQ substring_null LF@cond3 bool@true\n");
+    printf("GE LF@cond4 LF@i LF@length\n");
+    printf("JUMPIFEQ substring_null LF@cond4 bool@true\n");
+    printf("GT LF@cond5 LF@j LF@length\n");
+    printf("JUMPIFEQ substring_null LF@cond5 bool@true\n");
 
     // Vytvoření podřetězce
     printf("MOVE LF@result string@\n");
     printf("LABEL substring_loop\n");
-    printf("LT GF@cond6 LF@i LF@j\n");
-    printf("JUMPIFEQ substring_end GF@cond6 bool@false\n");
+    printf("LT LF@cond6 LF@i LF@j\n");
+    printf("JUMPIFEQ substring_end LF@cond6 bool@false\n");
     printf("GETCHAR LF@temp_char LF@str LF@i\n");
     printf("CONCAT LF@result LF@result LF@temp_char\n");
     printf("ADD LF@i LF@i int@1\n");
