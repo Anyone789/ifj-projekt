@@ -17,6 +17,9 @@ void generateFunctionHead(bstSymtable *symtable);
 void generateFunctionReturn(DSTRING *functionID);
 void generateFunctionEnd(bstSymtable *symtable);
 void generateFunctionCall(bstSymtable *symtableGlobal, bstSymtable *symtableLocal);
+void generateIfBeginning(int ifAloneCounter, int ifInsideCount);
+void generateIfEnd(int ifAloneCounter, int ifInsideCount);
+void generateElse(int ifAloneCounter, int ifInsideCount);
 // built in functions
 
 /**

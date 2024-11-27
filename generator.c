@@ -14,6 +14,9 @@ void assigneVariables(DSTRING *name)
 void generateHeader()
 {
     printf(".IFJcode24\n");
+    printf("DEFVAR GF@op1\n");
+    printf("DEFVAR GF@op2\n");
+    printf("DEFVAR GF@result\n");
     printf("JUMP main\n");
 }
 
@@ -42,6 +45,23 @@ void generateFunctionReturn(DSTRING *functionID)
     {
         printf("EXIT int@0\n");
     }
+}
+
+void generateIfBeginning(int ifAloneCounter, int ifInsideCount)
+{
+    printf("PUSHS bool@true\n");
+    printf("JUMPIFNEQS else%d%d\n", ifAloneCounter, ifInsideCount);
+}
+
+void generateElse(int ifAloneCounter, int ifInsideCount)
+{
+    generateIfEnd(ifAloneCounter, ifInsideCount);
+    printf("LABEL else%d%d\n", ifAloneCounter, ifInsideCount);
+}
+
+void generateIfEnd(int ifAloneCounter, int ifInsideCount)
+{
+    printf("JUMP elseEnd%d%d\n", ifAloneCounter, ifInsideCount);
 }
 
 // built in functions

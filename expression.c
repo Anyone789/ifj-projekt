@@ -358,7 +358,7 @@ int reduce(TStack *expStack)
     case tableEqual:
         if (binCheck(expStack, tableEqual) != 0)
         {
-
+            printf("EQS\n");
             return SYNTAX_ERROR;
         }
         stackPop(expStack);
@@ -367,6 +367,8 @@ int reduce(TStack *expStack)
     case tableNotEqual:
         if (binCheck(expStack, tableNotEqual) != 0)
         {
+            printf("EQS\n");
+            printf("NOTS\n");
             return SYNTAX_ERROR;
         }
         stackPop(expStack);
@@ -377,6 +379,7 @@ int reduce(TStack *expStack)
         {
             return SYNTAX_ERROR;
         }
+        printf("LTS\n");
         stackPop(expStack);
         stackPop(expStack);
         break;
@@ -385,10 +388,19 @@ int reduce(TStack *expStack)
         {
             return SYNTAX_ERROR;
         }
+        printf("POPS GF@op1\n");
+        printf("POPS GF@op2\n");
+        printf("LT GF@result GF@op1 GF@op2\n");
+        printf("PUSHS GF@result\n");
+        printf("EQ GF@result GF@op1 GF@op2\n");
+        printf("PUSHS GF@result\n");
+        printf("ORS\n");
+
         stackPop(expStack);
         stackPop(expStack);
         break;
     case tableGreat:
+        printf("GTS\n");
         if (binCheck(expStack, tableGreat) != 0)
         {
             return SYNTAX_ERROR;
@@ -402,6 +414,14 @@ int reduce(TStack *expStack)
         {
             return SYNTAX_ERROR;
         }
+        printf("POPS GF@op1\n");
+        printf("POPS GF@op2\n");
+        printf("GT GF@result GF@op1 GF@op2\n");
+        printf("PUSHS GF@result\n");
+        printf("EQ GF@result GF@op1 GF@op2\n");
+        printf("PUSHS GF@result\n");
+        printf("ORS\n");
+
         stackPop(expStack);
         stackPop(expStack);
         break;

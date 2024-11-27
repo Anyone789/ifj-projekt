@@ -11,6 +11,8 @@ bool assign = false;
 int paramCountGlob = 0;
 bstSymtable *symTree;
 bstSymtable *symLocal;
+int ifAloneCounter = 0;
+int ifInsideCount = 0;
 
 // PARSING RULES
 ProductionRule llRules[] =
@@ -285,6 +287,13 @@ int convertTokenToIndex(TOKEN *token)
         }
         else if (strcmp(token->attribute.dStr->str, "if") == 0)
         {
+            if (ifInsideCount == 0)
+            {
+                printf("sadsas\n");
+                ifAloneCounter++;
+            }
+            ifInsideCount++;
+            // printf("else: %d, if: %d\n", elseCounter, ifCounter);
             return tLlIf;
         }
         else if (strcmp(token->attribute.dStr->str, "while") == 0)
@@ -448,6 +457,9 @@ void parserIn(TStack *parserStack)
     bool ifj = false;
     bool unusedFce = false;
     bool isReturn = false;
+
+    bool ifBody = false;
+
     // loop for whole parsing phaze, loops till EOF or error
     generateHeader();
     while (literal != EOF)
@@ -479,6 +491,13 @@ void parserIn(TStack *parserStack)
             // printf("%s\n", functionID->str);
         }
 
+        if (literal == tLlElse)
+        {
+
+            generateElse(ifAloneCounter, ifInsideCount);
+            ifBody = false;
+        }
+
         // top is top value from the stack
         top = *(int *)(parserStack->stackTop);
         // printf("som tu\n");
@@ -489,7 +508,9 @@ void parserIn(TStack *parserStack)
         // condition which sets global variable to tru to let exprssion parsing now that we are parsing if condition expression
         if (literal == tLlIf || literal == tLlWhile)
         {
+
             inFce = true;
+            ifBody = true;
         }
         if (literal == tLlLeftCurlyBracket || literal == tLlPipe)
         {
@@ -1025,8 +1046,20 @@ void parserIn(TStack *parserStack)
             }
             if ((llTable[top % 100][literal]) == 20)
             {
-                generateFunctionReturn(functionIDCurrent);
-                usedVar(&symLocal);
+                if (ifBody == false && ifInsideCount == 0)
+                {
+                    generateFunctionReturn(functionIDCurrent);
+                    usedVar(&symLocal);
+                }
+                else
+                {
+                    if (ifBody == false && ifInsideCount > 0)
+                    {
+                        // printf("else: %d, if: %d\n", elseCounter, ifCounter);
+                        printf("LABEl elseEnd%d%d\n", ifAloneCounter, ifInsideCount);
+                        ifInsideCount--;
+                    }
+                }
             }
 
             // if ((llTable[top % 100][literal]) == 31)
@@ -1103,6 +1136,11 @@ void parserIn(TStack *parserStack)
                     }
                 }
             }
+            if (inFce == true)
+            {
+                generateIfBeginning(ifAloneCounter, ifInsideCount);
+            }
+
             tokenBefore = token;
             token = getToken();
             literal = convertTokenToIndex(token);
