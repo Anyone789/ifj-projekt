@@ -76,7 +76,7 @@ TOKEN *getToken()
 	while (!tokenScanned)
 	{
 		c = getc(src);
-
+ 
         switch (state)
         {
             case INITIAL:
@@ -198,7 +198,7 @@ TOKEN *getToken()
                 }
                 else if (isdigit(c))
                 {
-                    if (c == 0)
+                    if (c == '0')
                     {
                         state = INT_ZERO;
                     }
@@ -224,6 +224,7 @@ TOKEN *getToken()
                 }
                 else if (!isspace(c))
                 {
+                    state = ERROR;
                     token->type = T_ERROR;
                 }
                 
@@ -233,7 +234,7 @@ TOKEN *getToken()
                 state == RIGHT_BRACKET || state == LEFT_BRACE || state == RIGHT_BRACE ||\
                 state == QUESTION_MARK || state == PIPE || state == DOT || state == COMMA ||\
                 state == SEMICOLON || state == COLON || state == PLUS || state == MINUS ||\
-                state == MULTIPLY || state == END_OF_FILE\
+                state == MULTIPLY || state == END_OF_FILE || state == ERROR\
                 )
                 {
                     tokenScanned = true;
@@ -570,6 +571,14 @@ TOKEN *getToken()
                 }
                 else if (c == '\"')
                 {
+                    tokenScanned = true;
+                }
+                // Dealing with unterminated string ending with EOF
+                else if (c == EOF)
+                {
+                    token->type = T_ERROR;
+                    token->current_attribute = NONE;
+                    dStringDestroy(token->attribute.dStr);
                     tokenScanned = true;
                 }
                 else
