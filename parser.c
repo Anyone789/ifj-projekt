@@ -415,6 +415,7 @@ int convertTokenToIndex(TOKEN *token)
         exit(LEXICAL_ERROR);
         break;
     default:
+
         exit(SYNTAX_ERROR);
         break;
     }
@@ -488,7 +489,7 @@ void parserIn(TStack *parserStack)
         {
             inFce = false;
         }
-        
+
         if (literal == tLlEqual)
         {
             assign = true;
@@ -549,21 +550,21 @@ void parserIn(TStack *parserStack)
                         printf("%djshag %s\n", nullType, token->attribute.dStr->str);
                         if (top == tLlPipe)
                         {
-                    printf("CAUUU");
+                            printf("CAUUU");
                             bstSymtable *res = symtableSearch(&symLocal, *ID);
-                            printf("ID IF %s %d", ID->str, ((varData*)res->data)->dataType.type);
+                            printf("ID IF %s %d", ID->str, ((varData *)res->data)->dataType.type);
                             if (res == NULL)
                             {
                                 exit(GENERIC_SEMANTIC_ERROR);
                             }
-                            
-                            insertVariables(token->attribute.dStr->str, (DATATYPE){false, false, ((varData*)res->data)->dataType.type}, false, isConst, false, false, &symLocal);
 
-                        }else{
-                            insertVariables(token->attribute.dStr->str, (DATATYPE){nullType, false, token->type}, false, isConst, false, false, &symLocal);
-
+                            insertVariables(token->attribute.dStr->str, (DATATYPE){false, false, ((varData *)res->data)->dataType.type}, false, isConst, false, false, &symLocal);
                         }
-                        
+                        else
+                        {
+                            insertVariables(token->attribute.dStr->str, (DATATYPE){nullType, false, token->type}, false, isConst, false, false, &symLocal);
+                        }
+
                         varDef = true;
                     }
                     else
@@ -759,7 +760,6 @@ void parserIn(TStack *parserStack)
                                     exit(WRONG_ARGUMENTS_ERROR);
                                     /* code */
                                 }
-                                
                             }
                             if (((fceData *)resFce->data)->paramCount <= paramCountList)
                             {
@@ -814,15 +814,13 @@ void parserIn(TStack *parserStack)
                                     /* code */
                                 }
                             }
-                            //printf("ADASDid:%d, count%d\n",((fceData *)resFce->data)->paramCount, paramCountList);
+                            // printf("ADASDid:%d, count%d\n",((fceData *)resFce->data)->paramCount, paramCountList);
                             if (((fceData *)resFce->data)->paramCount <= paramCountList)
                             {
                                 printf("params pocet\n");
                                 exit(WRONG_ARGUMENTS_ERROR);
                             }
-                            
-                            
-                            
+
                             ((varData *)res->data)->use = true;
                             paramTypeCounter = 0;
                             paramCountList++;
@@ -935,18 +933,17 @@ void parserIn(TStack *parserStack)
                     if (((fceData *)resFce->data)->isDefined == true)
                     {
                         if (((varData *)res->data)->dataType.type == T_ID)
-                    {
-                        ((varData *)res->data)->dataType.type = ((fceData *)resFce->data)->returnType.type;
-                        ((varData *)res->data)->dataType.isNull = ((fceData *)resFce->data)->returnType.isNull;
+                        {
+                            ((varData *)res->data)->dataType.type = ((fceData *)resFce->data)->returnType.type;
+                            ((varData *)res->data)->dataType.isNull = ((fceData *)resFce->data)->returnType.isNull;
+                        }
+                        else if ((((fceData *)resFce->data)->returnType.type != ((varData *)res->data)->dataType.type) ||
+                                 (((fceData *)resFce->data)->returnType.isNull != ((varData *)res->data)->dataType.isNull))
+                        {
+                            printf("%d %d", ((fceData *)resFce->data)->returnType.type, ((varData *)res->data)->dataType.type);
+                            exit(INCOMPATIBLE_TYPE_ERROR);
+                        }
                     }
-                    else if ((((fceData *)resFce->data)->returnType.type != ((varData *)res->data)->dataType.type) ||
-                             (((fceData *)resFce->data)->returnType.isNull != ((varData *)res->data)->dataType.isNull))
-                    {
-                        printf("%d %d", ((fceData *)resFce->data)->returnType.type, ((varData *)res->data)->dataType.type);
-                        exit(INCOMPATIBLE_TYPE_ERROR);
-                    }
-                    }
-                    
                 }
             }
             if ((llTable[top % 100][literal]) == 18)
@@ -963,11 +960,11 @@ void parserIn(TStack *parserStack)
                     /* code */
                 }
             }
-            
+
             if ((llTable[top % 100][literal]) == 18 || (llTable[top % 100][literal]) == 20)
             {
 
-                //fceCall = false;
+                // fceCall = false;
             }
             if ((llTable[top % 100][literal]) == 33)
             {

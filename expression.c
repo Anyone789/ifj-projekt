@@ -232,6 +232,10 @@ int analyzeExp(TStack *expStack, TOKEN *token)
             stackPop(expStack);
             stackPush(expStack, newExp);
             nextToken = getToken();
+            if (nextToken->type == 1)
+            {
+                exit(LEXICAL_ERROR);
+            }
             // printf("=");
 
             // redukcia zatvoriek
