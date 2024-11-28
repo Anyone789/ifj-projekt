@@ -289,7 +289,7 @@ int convertTokenToIndex(TOKEN *token)
         {
             if (ifInsideCount == 0)
             {
-                printf("sadsas\n");
+                //printf("sadsas\n");
                 ifAloneCounter++;
             }
             ifInsideCount++;
@@ -459,7 +459,8 @@ void parserIn(TStack *parserStack)
     bool isReturn = false;
 
     bool ifBody = false;
-
+    bool elseBody = false;
+    int elseCount = 0;
     // loop for whole parsing phaze, loops till EOF or error
     generateHeader();
     while (literal != EOF)
@@ -496,6 +497,13 @@ void parserIn(TStack *parserStack)
 
             generateElse(ifAloneCounter, ifInsideCount);
             ifBody = false;
+            elseBody = true;
+            elseCount++;
+        }
+        if (literal == tLlIf)
+        {
+            elseBody = false;
+            // elseCount--;
         }
 
         // top is top value from the stack
@@ -1046,6 +1054,7 @@ void parserIn(TStack *parserStack)
             }
             if ((llTable[top % 100][literal]) == 20)
             {
+               //printf("%d %d %d\n", elseCount, elseBody, ifInsideCount);
                 if (ifBody == false && ifInsideCount == 0)
                 {
                     generateFunctionReturn(functionIDCurrent);
@@ -1053,12 +1062,18 @@ void parserIn(TStack *parserStack)
                 }
                 else
                 {
-                    if (ifBody == false && ifInsideCount > 0)
+                    if (ifBody == false && ifInsideCount > 0 && elseBody)
                     {
                         // printf("else: %d, if: %d\n", elseCounter, ifCounter);
-                        printf("LABEl elseEnd%d%d\n", ifAloneCounter, ifInsideCount);
+                        printf("LABEL elseEnd%d%d\n", ifAloneCounter, ifInsideCount);
+                        elseCount--;
+                        ifInsideCount--;
+                    }else if(elseCount == ifInsideCount && !elseBody){
+                        printf("LABEL elseEnd%d%d\n", ifAloneCounter, ifInsideCount);
+                        elseCount--;
                         ifInsideCount--;
                     }
+                    elseBody = false;
                 }
             }
 

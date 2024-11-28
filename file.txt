@@ -5,15 +5,17 @@ pub fn main() void {
     var b = 2;
     var c = 3;
     var d = 4;
-    if (1 > 0){
-        a = 2;
+    if (a > 0){
+        //a = 2;
         if(2 < 3){
             b = 3;
+            
         }else{
             c = 4;
         }
     }else{
         d = 5;
+        
     }
     
 }
