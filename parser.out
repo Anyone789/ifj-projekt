@@ -7,11 +7,37 @@ LABEL main
 CREATEFRAME
 PUSHFRAME
 DEFVAR LF@a
+cau
+prec[13][12]
+
+prec[12][2]
 PUSHS int@1
+
+prec[13][2]
+
+prec[2][10]
+
+prec[10][12]
+
+prec[12][2]
 PUSHS int@1
-PUSHS int@2
-MULS
+
+prec[10][2]
+
+prec[2][12]
+
+prec[12][11]
+PUSHS int@1
+
+prec[2][11]
 ADDS
+
+prec[10][11]
+
+prec[2][13]
+ADDS
+
+prec[13][13]
 POPS LF@a
 PUSHS int@1
 CALL foo
@@ -23,16 +49,44 @@ CREATEFRAME
 PUSHFRAME
 DEFVAR LF@b
 POPS LF@b
+cau
+prec[13][12]
+
+prec[12][6]
 PUSHS LF@b
+
+prec[13][6]
+
+prec[6][12]
+
+prec[12][2]
 PUSHS int@1
+
+prec[6][2]
+
+prec[2][12]
+
+prec[12][13]
 PUSHS int@1
+
+prec[2][13]
 ADDS
+
+prec[6][13]
 LTS
+
+prec[13][13]
 PUSHS bool@true
 JUMPIFNEQS else1
 JUMP elseEnd1
 LABEL else1
 LABEL elseEnd1
+cau
+prec[13][12]
+
+prec[12][13]
 PUSHS LF@b
+
+prec[13][13]
 POPFRAME
 RETURN

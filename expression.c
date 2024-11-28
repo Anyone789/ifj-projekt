@@ -276,8 +276,9 @@ int analyzeExp(TStack *expStack, TOKEN *token)
             exit(SYNTAX_ERROR);
         }
     }
-    return 0;
     stackDispose(expStack);
+    lBracketInStack = false;
+    return 0;
 }
 
 char getSign(TStack *expStack)
@@ -288,7 +289,7 @@ char getSign(TStack *expStack)
     {
         stackTopValue = stackTopValue->next;
     }
-    // printf("\nprec[%d][%d]\n", ((ElmExp *)(stackTopValue->value))->type, convertToIndex(stackInput));
+    printf("\nprec[%d][%d]\n", ((ElmExp *)(stackTopValue->value))->type, convertToIndex(stackInput));
     return precTable[((ElmExp *)(stackTopValue->value))->type][convertToIndex(stackInput)];
 }
 

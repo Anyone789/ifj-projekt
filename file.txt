@@ -1,7 +1,7 @@
 const ifj = @import("ifj24.zig");
 // Hlavni funkce
 pub fn main() void {
-    var a = 1+1*2;
+    var a = 1+ (1  + 1);
     a = foo(1);
 }
 
