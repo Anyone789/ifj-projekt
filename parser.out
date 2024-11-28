@@ -6,39 +6,18 @@ JUMP main
 LABEL main
 CREATEFRAME
 PUSHFRAME
-DEFVAR LF@a
 PUSHS int@1
-POPS LF@a
-DEFVAR LF@b
-PUSHS int@2
-POPS LF@b
-DEFVAR LF@c
-PUSHS int@3
-POPS LF@c
-DEFVAR LF@d
-PUSHS int@4
-POPS LF@d
-PUSHS LF@a
-PUSHS int@0
-GTS
-PUSHS bool@true
-JUMPIFNEQS else11
-PUSHS int@2
 PUSHS int@3
 LTS
-PUSHS bool@true
-JUMPIFNEQS else12
-PUSHS int@3
-POPS LF@b
-JUMP elseEnd12
-LABEL else12
-PUSHS int@4
-POPS LF@c
-LABEL elseEnd12
-JUMP elseEnd11
-LABEL else11
+LABEL whileBegin1
+PUSHS bool@false
+JUMPIFEQS whileEnd1
+DEFVAR LF@b
 PUSHS int@5
-POPS LF@d
-LABEL elseEnd11
-POPFRAME
-EXIT int@0
+POPS LF@b
+PUSHS LF@b
+POPS LF@b
+LABEL elseEnd00
+JUMP whileBegin1
+LABEL whileEnd1
+LABEL elseEnd0-1

@@ -8,11 +8,13 @@
 bool nullType = false;
 bool isConst = false;
 bool assign = false;
+int bracketWhileCounter = 0;
 int paramCountGlob = 0;
 bstSymtable *symTree;
 bstSymtable *symLocal;
 int ifAloneCounter = 0;
 int ifInsideCount = 0;
+int whileCounter = 0;
 
 // PARSING RULES
 ProductionRule llRules[] =
@@ -289,7 +291,7 @@ int convertTokenToIndex(TOKEN *token)
         {
             if (ifInsideCount == 0)
             {
-                //printf("sadsas\n");
+                // printf("sadsas\n");
                 ifAloneCounter++;
             }
             ifInsideCount++;
@@ -298,6 +300,7 @@ int convertTokenToIndex(TOKEN *token)
         }
         else if (strcmp(token->attribute.dStr->str, "while") == 0)
         {
+            whileCounter++;
             return tLlWhile;
         }
         else if (strcmp(token->attribute.dStr->str, "return") == 0)
@@ -457,7 +460,7 @@ void parserIn(TStack *parserStack)
     bool ifj = false;
     bool unusedFce = false;
     bool isReturn = false;
-
+    bool whileBody = false;
     bool ifBody = false;
     bool elseBody = false;
     int elseCount = 0;
@@ -502,8 +505,13 @@ void parserIn(TStack *parserStack)
         }
         if (literal == tLlIf)
         {
+            ifBody = true;
             elseBody = false;
             // elseCount--;
+        }
+        if (literal == tLlWhile)
+        {
+            whileBody = true;
         }
 
         // top is top value from the stack
@@ -518,7 +526,6 @@ void parserIn(TStack *parserStack)
         {
 
             inFce = true;
-            ifBody = true;
         }
         if (literal == tLlLeftCurlyBracket || literal == tLlPipe)
         {
@@ -1054,8 +1061,15 @@ void parserIn(TStack *parserStack)
             }
             if ((llTable[top % 100][literal]) == 20)
             {
-               //printf("%d %d %d\n", elseCount, elseBody, ifInsideCount);
-                if (ifBody == false && ifInsideCount == 0)
+                if (whileBody == true)
+                {
+                    printf("JUMP whileBegin%d\n", whileCounter);
+                    printf("LABEL whileEnd%d\n", whileCounter);
+                    whileBody = false;
+                }
+
+                // printf("%d %d %d\n", elseCount, elseBody, ifInsideCount);
+                if (ifBody == false && ifInsideCount == 0 && whileBody == false)
                 {
                     generateFunctionReturn(functionIDCurrent);
                     usedVar(&symLocal);
@@ -1068,7 +1082,9 @@ void parserIn(TStack *parserStack)
                         printf("LABEL elseEnd%d%d\n", ifAloneCounter, ifInsideCount);
                         elseCount--;
                         ifInsideCount--;
-                    }else if(elseCount == ifInsideCount && !elseBody){
+                    }
+                    else if (elseCount == ifInsideCount && !elseBody)
+                    {
                         printf("LABEL elseEnd%d%d\n", ifAloneCounter, ifInsideCount);
                         elseCount--;
                         ifInsideCount--;
@@ -1153,7 +1169,15 @@ void parserIn(TStack *parserStack)
             }
             if (inFce == true)
             {
-                generateIfBeginning(ifAloneCounter, ifInsideCount);
+                if (whileBody)
+                {
+                    generateWhileBeginning(whileCounter);
+                }
+                else
+                {
+
+                    generateIfBeginning(ifAloneCounter, ifInsideCount);
+                }
             }
 
             tokenBefore = token;

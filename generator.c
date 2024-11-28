@@ -64,6 +64,13 @@ void generateIfEnd(int ifAloneCounter, int ifInsideCount)
     printf("JUMP elseEnd%d%d\n", ifAloneCounter, ifInsideCount);
 }
 
+void generateWhileBeginning(int whileCounter)
+{
+    printf("LABEL whileBegin%d\n", whileCounter);
+    printf("PUSHS bool@false\n");
+    printf("JUMPIFEQS whileEnd%d\n", whileCounter);
+}
+
 // built in functions
 void generateReadStr()
 {
@@ -111,30 +118,47 @@ void generateWrite()
 
     printf("TYPE LF@type LF@term\n");
 
+    // Kontrola na null hodnotu
     printf("JUMPIFEQ write_null LF@type string@nil\n");
 
+    // Kontrola na int hodnotu
     printf("JUMPIFEQ write_int LF@type string@int\n");
 
+    // Kontrola na float hodnotu
     printf("JUMPIFEQ write_float LF@type string@float\n");
 
+    // Kontrola na string hodnotu
+    printf("JUMPIFEQ write_string LF@type string@string\n");
+
+    // Ak je typ neznámy, ukončíme s chybou
     printf("EXIT int@4\n");
 
+    // Spracovanie null hodnoty
     printf("LABEL write_null\n");
     printf("WRITE string@null\n");
     printf("JUMP write_end\n");
 
+    // Spracovanie int hodnoty
     printf("LABEL write_int\n");
     printf("WRITE LF@term\n");
     printf("JUMP write_end\n");
 
+    // Spracovanie float hodnoty
     printf("LABEL write_float\n");
     printf("WRITE LF@term\n");
     printf("JUMP write_end\n");
 
+    // Spracovanie string hodnoty
+    printf("LABEL write_string\n");
+    printf("WRITE LF@term\n");
+    printf("JUMP write_end\n");
+
+    // Koniec write funkcie
     printf("LABEL write_end\n");
     printf("POPFRAME\n");
     printf("RETURN\n");
 }
+
 void generateInt2Float()
 {
     printf("LABEL i2f\n");

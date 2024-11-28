@@ -20,6 +20,7 @@ void generateFunctionCall(bstSymtable *symtableGlobal, bstSymtable *symtableLoca
 void generateIfBeginning(int ifAloneCounter, int ifInsideCount);
 void generateIfEnd(int ifAloneCounter, int ifInsideCount);
 void generateElse(int ifAloneCounter, int ifInsideCount);
+void generateWhileBeginning(int whileCounter);
 // built in functions
 
 /**
