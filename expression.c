@@ -360,6 +360,9 @@ int reduce(TStack *expStack)
         {
             return SYNTAX_ERROR;
         }
+        if(!inFce){
+            exit(INCOMPATIBLE_TYPE_ERROR);
+        }
         printf("EQS\n");
         stackPop(expStack);
         stackPop(expStack);
@@ -368,6 +371,9 @@ int reduce(TStack *expStack)
         if (binCheck(expStack, tableNotEqual) != 0)
         {
             return SYNTAX_ERROR;
+        }
+        if(!inFce){
+            exit(INCOMPATIBLE_TYPE_ERROR);
         }
         printf("EQS\n");
         printf("NOTS\n");
@@ -379,6 +385,9 @@ int reduce(TStack *expStack)
         {
             return SYNTAX_ERROR;
         }
+        if(!inFce){
+            exit(INCOMPATIBLE_TYPE_ERROR);
+        }
         printf("LTS\n");
         stackPop(expStack);
         stackPop(expStack);
@@ -387,6 +396,9 @@ int reduce(TStack *expStack)
         if (binCheck(expStack, tableLessEqual) != 0)
         {
             return SYNTAX_ERROR;
+        }
+        if(!inFce){
+            exit(INCOMPATIBLE_TYPE_ERROR);
         }
         printf("POPS GF@op1\n");
         printf("POPS GF@op2\n");
@@ -404,6 +416,9 @@ int reduce(TStack *expStack)
         {
             return SYNTAX_ERROR;
         }
+        if(!inFce){
+            exit(INCOMPATIBLE_TYPE_ERROR);
+        }
         printf("GTS\n");
         stackPop(expStack);
         stackPop(expStack);
@@ -413,6 +428,9 @@ int reduce(TStack *expStack)
         if (binCheck(expStack, tableGreatEqual) != 0)
         {
             return SYNTAX_ERROR;
+        }
+        if(!inFce){
+            exit(INCOMPATIBLE_TYPE_ERROR);
         }
         printf("POPS GF@op1\n");
         printf("POPS GF@op2\n");
