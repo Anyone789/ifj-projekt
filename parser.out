@@ -6,18 +6,18 @@ JUMP main
 LABEL main
 CREATEFRAME
 PUSHFRAME
+DEFVAR LF@a
 PUSHS int@1
-PUSHS int@3
-LTS
+POPS LF@a
 LABEL whileBegin1
+PUSHS LF@a
+PUSHS int@1
+GTS
 PUSHS bool@false
 JUMPIFEQS whileEnd1
-DEFVAR LF@b
-PUSHS int@5
-POPS LF@b
-PUSHS LF@b
-POPS LF@b
-LABEL elseEnd00
+PUSHS int@1
+POPS LF@a
 JUMP whileBegin1
 LABEL whileEnd1
-LABEL elseEnd0-1
+POPFRAME
+EXIT int@0

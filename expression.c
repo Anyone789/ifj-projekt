@@ -358,19 +358,19 @@ int reduce(TStack *expStack)
     case tableEqual:
         if (binCheck(expStack, tableEqual) != 0)
         {
-            printf("EQS\n");
             return SYNTAX_ERROR;
         }
+        printf("EQS\n");
         stackPop(expStack);
         stackPop(expStack);
         break;
     case tableNotEqual:
         if (binCheck(expStack, tableNotEqual) != 0)
         {
-            printf("EQS\n");
-            printf("NOTS\n");
             return SYNTAX_ERROR;
         }
+        printf("EQS\n");
+        printf("NOTS\n");
         stackPop(expStack);
         stackPop(expStack);
         break;
@@ -400,11 +400,11 @@ int reduce(TStack *expStack)
         stackPop(expStack);
         break;
     case tableGreat:
-        printf("GTS\n");
         if (binCheck(expStack, tableGreat) != 0)
         {
             return SYNTAX_ERROR;
         }
+        printf("GTS\n");
         stackPop(expStack);
         stackPop(expStack);
         break;

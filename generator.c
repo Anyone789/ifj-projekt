@@ -18,6 +18,20 @@ void generateHeader()
     printf("DEFVAR GF@op2\n");
     printf("DEFVAR GF@result\n");
     printf("JUMP main\n");
+    // odkomentovat
+    // generateReadStr();
+    // generateReadInt();
+    // generateReadFloat();
+    // generateWrite();
+    // generateInt2Float();
+    // generateFloat2Int();
+    // generateString();
+    // generateLenght();
+    // generateConcat();
+    // generateSubstring();
+    // generateStrCmp();
+    // generateOrd();
+    // generateChr();
 }
 
 void generateFunctionHead(bstSymtable *symtable)
@@ -66,7 +80,7 @@ void generateIfEnd(int ifAloneCounter, int ifInsideCount)
 
 void generateWhileBeginning(int whileCounter)
 {
-    printf("LABEL whileBegin%d\n", whileCounter);
+    
     printf("PUSHS bool@false\n");
     printf("JUMPIFEQS whileEnd%d\n", whileCounter);
 }

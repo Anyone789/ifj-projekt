@@ -1,8 +1,10 @@
 const ifj = @import("ifj24.zig");
 // Hlavni funkce
 pub fn main() void {
-    while(1 < 3){
-        var b = 5;
-        b = b; 
+    var a = 1;
+  
+    while(a > 1){
+        a = 1;
     }
+
 }

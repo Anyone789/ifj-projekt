@@ -820,7 +820,10 @@ void parserIn(TStack *parserStack)
                     // printf("\nunusedFce\n");
                     unusedFce = true;
                 }
-
+                if (!assign && ((fceData *)resFce->data)->returnType.type != T_KEYWORD)
+                {
+                    exit(INCORRECT_RETURN_ERROR);
+                }
                 if (res == NULL && assign)
                 {
 
@@ -846,6 +849,18 @@ void parserIn(TStack *parserStack)
                             if (((fceData *)resFce->data)->paramCount <= paramCountList)
                             {
                                 exit(WRONG_ARGUMENTS_ERROR);
+                            }
+                            if (token->type == T_INT)
+                            {
+                                printf("PUSHS int@%d\n", token->attribute.i);
+                            }
+                            else if (token->type == T_FLOAT)
+                            {
+                                printf("PUSHS float@%a\n", token->attribute.f);
+                            }
+                            else
+                            {
+                                printf("PUSHS string@%s\n", token->attribute.dStr->str);
                             }
                             paramTypeCounter = 0;
                             paramCountList++;
@@ -873,6 +888,18 @@ void parserIn(TStack *parserStack)
 
                         varDatas[0].dataType = (DATATYPE){nullType, false, token->type};
                         insertFunction(&symTree, functionID->str, (DATATYPE){nullType, false, token->type}, paramCountList + 1, false, false, true, varDatas);
+                        if (token->type == T_INT)
+                        {
+                            printf("PUSHS int@%d\n", token->attribute.i);
+                        }
+                        else if (token->type == T_FLOAT)
+                        {
+                            printf("PUSHS float@%a\n", token->attribute.f);
+                        }
+                        else
+                        {
+                            printf("PUSHS string@%s\n", token->attribute.dStr->str);
+                        }
                         paramCountList++;
                     }
                 }
@@ -1061,15 +1088,9 @@ void parserIn(TStack *parserStack)
             }
             if ((llTable[top % 100][literal]) == 20)
             {
-                if (whileBody == true)
-                {
-                    printf("JUMP whileBegin%d\n", whileCounter);
-                    printf("LABEL whileEnd%d\n", whileCounter);
-                    whileBody = false;
-                }
 
                 // printf("%d %d %d\n", elseCount, elseBody, ifInsideCount);
-                if (ifBody == false && ifInsideCount == 0 && whileBody == false)
+                if (!ifBody && ifInsideCount == 0 && !elseBody && !whileBody)
                 {
                     generateFunctionReturn(functionIDCurrent);
                     usedVar(&symLocal);
@@ -1082,14 +1103,22 @@ void parserIn(TStack *parserStack)
                         printf("LABEL elseEnd%d%d\n", ifAloneCounter, ifInsideCount);
                         elseCount--;
                         ifInsideCount--;
+                        elseBody = false;
                     }
-                    else if (elseCount == ifInsideCount && !elseBody)
+                    else if (elseCount == ifInsideCount && !elseBody && !whileBody)
                     {
                         printf("LABEL elseEnd%d%d\n", ifAloneCounter, ifInsideCount);
                         elseCount--;
                         ifInsideCount--;
+                        elseBody = false;
                     }
-                    elseBody = false;
+                    if (whileBody && !elseBody && !ifBody)
+                    {
+                        printf("JUMP whileBegin%d\n", whileCounter);
+                        printf("LABEL whileEnd%d\n", whileCounter);
+                        whileBody = false;
+                    }
+                    
                 }
             }
 
@@ -1126,6 +1155,11 @@ void parserIn(TStack *parserStack)
             paramTypeCounter = 0;
             // printf("counter je : %d\n", paramTypeCounter);
             TStack expStack;
+            if (whileBody && inFce)
+                {
+                    printf("LABEL whileBegin%d\n", whileCounter);
+                }
+            
             analyzeExp(&expStack, token);
 
             if (state == nLlReturnList)
@@ -1173,7 +1207,7 @@ void parserIn(TStack *parserStack)
                 {
                     generateWhileBeginning(whileCounter);
                 }
-                else
+                else if (ifBody)
                 {
 
                     generateIfBeginning(ifAloneCounter, ifInsideCount);
