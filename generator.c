@@ -61,10 +61,10 @@ void generateFunctionReturn(DSTRING *functionID)
     }
 }
 
-void generateIfBeginning(int ifAloneCounter, int ifInsideCount)
+void generateIfBeginning(int ifAloneCounter)
 {
     printf("PUSHS bool@true\n");
-    printf("JUMPIFNEQS else%d%d\n", ifAloneCounter, ifInsideCount);
+    printf("JUMPIFNEQS else%d\n", ifAloneCounter);
 }
 
 void generateElse(int ifAloneCounter, int ifInsideCount)
@@ -80,7 +80,7 @@ void generateIfEnd(int ifAloneCounter, int ifInsideCount)
 
 void generateWhileBeginning(int whileCounter)
 {
-    
+
     printf("PUSHS bool@false\n");
     printf("JUMPIFEQS whileEnd%d\n", whileCounter);
 }

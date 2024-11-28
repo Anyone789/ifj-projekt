@@ -289,12 +289,7 @@ int convertTokenToIndex(TOKEN *token)
         }
         else if (strcmp(token->attribute.dStr->str, "if") == 0)
         {
-            if (ifInsideCount == 0)
-            {
-                // printf("sadsas\n");
-                ifAloneCounter++;
-            }
-            ifInsideCount++;
+
             // printf("else: %d, if: %d\n", elseCounter, ifCounter);
             return tLlIf;
         }
@@ -440,15 +435,18 @@ void parserIn(TStack *parserStack)
 
     DSTRING *ID;
     ID = dStringCreate();
+    TStack generatorStack;
+    stackInit(&generatorStack);
+    char *print;
     DSTRING *functionID;
-    DSTRING *functionIDCurrent;
+    DSTRING *functionIDCurrent = NULL;
     functionID = dStringCreate();
     DSTRING *currentID;
     currentID = dStringCreate();
     TOKEN *token;
     TOKEN *tokenBefore = token;
     int literal = 99;
-    int top;
+    int top = -100;
     int paramTypeCounter = 0;
     int paramCount = 0;
     int paramCountList = 0;
@@ -464,6 +462,7 @@ void parserIn(TStack *parserStack)
     bool ifBody = false;
     bool elseBody = false;
     int elseCount = 0;
+
     // loop for whole parsing phaze, loops till EOF or error
     generateHeader();
     while (literal != EOF)
@@ -498,24 +497,73 @@ void parserIn(TStack *parserStack)
         if (literal == tLlElse)
         {
 
-            generateElse(ifAloneCounter, ifInsideCount);
             ifBody = false;
             elseBody = true;
-            elseCount++;
+            whileBody = false;
         }
         if (literal == tLlIf)
         {
+
+            // printf("%s", ((char *)generatorStack.stackTop->value));
             ifBody = true;
             elseBody = false;
+            whileBody = false;
             // elseCount--;
         }
         if (literal == tLlWhile)
         {
+            ifBody = false;
             whileBody = true;
         }
 
         // top is top value from the stack
         top = *(int *)(parserStack->stackTop);
+        if (top == tLlIf)
+        {
+
+            // printf("sadsas\n");
+            ifAloneCounter++;
+            char *print1 = (char *)malloc(100 * sizeof(char)); // Allocate enough memory
+            if (print1 == NULL)
+            {
+                // printf("Memory allocation failed\n");
+                exit(INTERNAL_ERROR); // Exit if malloc fails
+            }
+            sprintf(print1, "LABEL elseEnd%d\n", ifAloneCounter);
+            stackPush(&generatorStack, (void *)print1);
+            char *print = (char *)malloc(100 * sizeof(char)); // Allocate enough memory
+            if (print == NULL)
+            {
+                exit(INTERNAL_ERROR); // Exit if malloc fails
+            }
+            ifInsideCount++;
+            sprintf(print, "JUMP elseEnd%d\nLABEL else%d\n", ifAloneCounter, ifAloneCounter);
+            stackPush(&generatorStack, (void *)print);
+
+            // stackPrint(&generatorStack);
+            //  return;
+        }
+        else if (top == tLlElse)
+        {
+            // printf("LABEL else%d\n", ifAloneCounter);
+            elseCount++;
+
+            // printf("else\n");
+            //  stackPrint(&generatorStack);
+            //  printf("%s", ((char *)generatorStack.stackTop->value));
+        }
+        else if (top == tLlWhile)
+        {
+            printf("LABEL whileBegin%d\n", whileCounter);
+            char *print = (char *)malloc(100 * sizeof(char)); // Allocate enough memory
+            if (print == NULL)
+            {
+                exit(INTERNAL_ERROR); // Exit if malloc fails
+            }
+            sprintf(print, "JUMP whileBegin%d\nLABEL whileEnd%d\n", whileCounter, whileCounter);
+            stackPush(&generatorStack, (void *)print);
+        }
+
         // printf("som tu\n");
         // printf("top: %d\n", top);
         // printf("literal: %d\n", literal);
@@ -562,6 +610,8 @@ void parserIn(TStack *parserStack)
             {
                 stackPop(parserStack);
                 // printf("END");
+                generateFunctionReturn(functionIDCurrent);
+                usedVar(&symLocal);
                 defFunction(&symTree);
                 DSTRING *str = dStringCreate();
                 dStringAddString(str, "main");
@@ -578,6 +628,7 @@ void parserIn(TStack *parserStack)
                         exit(WRONG_ARGUMENTS_ERROR);
                     }
                 }
+
                 return;
             }
             else if (top == literal)
@@ -1013,6 +1064,11 @@ void parserIn(TStack *parserStack)
 
             if ((llTable[top % 100][literal]) == 5)
             {
+                if (functionIDCurrent != NULL)
+                {
+                    generateFunctionReturn(functionIDCurrent);
+                    usedVar(&symLocal);
+                }
 
                 symtableDispose(&symLocal);
             }
@@ -1088,38 +1144,47 @@ void parserIn(TStack *parserStack)
             }
             if ((llTable[top % 100][literal]) == 20)
             {
+                if (generatorStack.stackTop != NULL)
+                {
+
+                    printf("%s", ((char *)generatorStack.stackTop->value));
+                    stackPop(&generatorStack);
+                    // stackPrint(&generatorStack);
+
+                    // generateElse  stackPrint(&generatorStack);
+
+                    // stackPrint(&generatorStack);
+                    // return;
+                }
 
                 // printf("%d %d %d\n", elseCount, elseBody, ifInsideCount);
-                if (!ifBody && ifInsideCount == 0 && !elseBody && !whileBody)
-                {
-                    generateFunctionReturn(functionIDCurrent);
-                    usedVar(&symLocal);
-                }
-                else
-                {
-                    if (ifBody == false && ifInsideCount > 0 && elseBody)
-                    {
-                        // printf("else: %d, if: %d\n", elseCounter, ifCounter);
-                        printf("LABEL elseEnd%d%d\n", ifAloneCounter, ifInsideCount);
-                        elseCount--;
-                        ifInsideCount--;
-                        elseBody = false;
-                    }
-                    else if (elseCount == ifInsideCount && !elseBody && !whileBody)
-                    {
-                        printf("LABEL elseEnd%d%d\n", ifAloneCounter, ifInsideCount);
-                        elseCount--;
-                        ifInsideCount--;
-                        elseBody = false;
-                    }
-                    if (whileBody && !elseBody && !ifBody)
-                    {
-                        printf("JUMP whileBegin%d\n", whileCounter);
-                        printf("LABEL whileEnd%d\n", whileCounter);
-                        whileBody = false;
-                    }
-                    
-                }
+                // if (!ifBody && ifInsideCount == 0 && !elseBody && !whileBody)
+                // {
+                // }
+                // else
+                // {
+                //     if (ifBody == false && ifInsideCount > 0 && elseBody)
+                //     {
+                //         // printf("else: %d, if: %d\n", elseCounter, ifCounter);
+                //         //  printf("LABEL elseEnd%d%d\n", ifAloneCounter, ifInsideCount);
+                //         elseCount--;
+                //         ifInsideCount--;
+                //         elseBody = false;
+                //     }
+                //     else if (elseCount == ifInsideCount && !elseBody && !whileBody)
+                //     {
+                //         // printf("LABEL elseEnd%d%d\n", ifAloneCounter, ifInsideCount);
+                //         elseCount--;
+                //         ifInsideCount--;
+                //         elseBody = false;
+                //     }
+                //     if (whileBody && !elseBody && !ifBody)
+                //     {
+                //         // printf("JUMP whileBegin%d\n", whileCounter);
+                //         // printf("LABEL whileEnd%d\n", whileCounter);
+                //         whileBody = false;
+                //     }
+                // }
             }
 
             // if ((llTable[top % 100][literal]) == 31)
@@ -1155,11 +1220,11 @@ void parserIn(TStack *parserStack)
             paramTypeCounter = 0;
             // printf("counter je : %d\n", paramTypeCounter);
             TStack expStack;
-            if (whileBody && inFce)
-                {
-                    printf("LABEL whileBegin%d\n", whileCounter);
-                }
-            
+            // if (whileBody && inFce)
+            // {
+            //     printf("LABEL whileBegin%d\n", whileCounter);
+            // }
+
             analyzeExp(&expStack, token);
 
             if (state == nLlReturnList)
@@ -1207,10 +1272,10 @@ void parserIn(TStack *parserStack)
                 {
                     generateWhileBeginning(whileCounter);
                 }
-                else if (ifBody)
+                if (ifBody)
                 {
 
-                    generateIfBeginning(ifAloneCounter, ifInsideCount);
+                    generateIfBeginning(ifAloneCounter);
                 }
             }
 
