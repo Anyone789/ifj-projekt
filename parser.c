@@ -1224,7 +1224,7 @@ void parserIn(TStack *parserStack)
             // {
             //     printf("LABEL whileBegin%d\n", whileCounter);
             // }
-            printf("CAU");
+            //printf("CAU");
             analyzeExp(&expStack, token);
 
             if (state == nLlReturnList)
