@@ -3,7 +3,7 @@
 int dolarValue = tableDollar;
 // nastav premennu inFce na true ked sme vo while alebo v if inak bude false
 // bool inFce = false;
-bool lBracketInStack = false;
+int lBracketInStack = 0;
 int returnExpValue = I;
 
 bool inFce = false;
@@ -185,7 +185,11 @@ int analyzeExp(TStack *expStack, TOKEN *token)
     {
         exit(LEXICAL_ERROR);
     }
-
+    
+    //printf("lsdla%d", nextToken->type);
+    if(nextToken->type == T_L_BRACKET){
+        lBracketInStack++;
+    }
     char sign;
     while (1)
     {
@@ -240,6 +244,8 @@ int analyzeExp(TStack *expStack, TOKEN *token)
             stackPop(expStack);
             stackPush(expStack, newExp);
             nextToken = getToken();
+            lBracketInStack--;
+           // printf("%d", lBracketInStack);
             if (nextToken->type == 1)
             {
                 exit(LEXICAL_ERROR);
@@ -257,7 +263,7 @@ int analyzeExp(TStack *expStack, TOKEN *token)
                 bstSymtable *resul = symtableSearch(&symLocal, *((ElmExp *)(expStack->stackTop->value))->key);
                 if (resul == NULL)
                 {
-                    printf("saa");
+                    //printf("saa");
                     exit(UNDEFINED_VARIABLE_ERROR);
                 }
                 returnExpValue = ((varData *)resul->data)->dataType.type;
@@ -277,7 +283,7 @@ int analyzeExp(TStack *expStack, TOKEN *token)
         }
     }
     stackDispose(expStack);
-    lBracketInStack = false;
+    lBracketInStack = 0;
     return 0;
 }
 
@@ -289,7 +295,7 @@ char getSign(TStack *expStack)
     {
         stackTopValue = stackTopValue->next;
     }
-    printf("\nprec[%d][%d]\n", ((ElmExp *)(stackTopValue->value))->type, convertToIndex(stackInput));
+   // printf("\nprec[%d][%d]\n", ((ElmExp *)(stackTopValue->value))->type, convertToIndex(stackInput));
     return precTable[((ElmExp *)(stackTopValue->value))->type][convertToIndex(stackInput)];
 }
 
@@ -481,11 +487,11 @@ int convertToIndex(int value)
     case T_GE:
         return tableGreatEqual;
     case T_L_BRACKET:
-        lBracketInStack = true;
+        
         return tableLeftPar;
     case T_R_BRACKET:
         // treba odkomentovat
-        if (inFce == true && lBracketInStack == false)
+        if (inFce == true && lBracketInStack == 0)
         {
             return tableDollar;
         }
