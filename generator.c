@@ -19,19 +19,19 @@ void generateHeader()
     printf("DEFVAR GF@result\n");
     printf("JUMP main\n");
     // odkomentovat
-    // generateReadStr();
-    // generateReadInt();
-    // generateReadFloat();
-    // generateWrite();
-    // generateInt2Float();
-    // generateFloat2Int();
-    // generateString();
-    // generateLenght();
-    // generateConcat();
+    generateReadStr();
+    generateReadInt();
+    generateReadFloat();
+    generateWrite();
+    generateInt2Float();
+    generateFloat2Int();
+    generateString();
+    generateLenght();
+    generateConcat();
     // generateSubstring();
-    // generateStrCmp();
-    // generateOrd();
-    // generateChr();
+    generateStrCmp();
+    generateOrd();
+    generateChr();
 }
 
 void generateFunctionHead(bstSymtable *symtable)
@@ -88,34 +88,37 @@ void generateWhileBeginning(int whileCounter)
 // built in functions
 void generateReadStr()
 {
-    printf("LABEL readStr\n");
+    printf("LABEL readstr\n");
     printf("CREATEFRAME\n");
     printf("PUSHFRAME\n");
     printf("DEFVAR LF@str\n");
     printf("READ LF@str string\n");
     printf("PUSHS LF@str\n");
+    printf("POPFRAME\n");
     printf("RETURN\n");
 }
 
 void generateReadInt()
 {
-    printf("LABEL readInt\n");
+    printf("LABEL readi32\n");
     printf("CREATEFRAME\n");
     printf("PUSHFRAME\n");
     printf("DEFVAR LF@int\n");
     printf("READ LF@int int\n");
     printf("PUSHS LF@int\n");
+    printf("POPFRAME\n");
     printf("RETURN\n");
 }
 
 void generateReadFloat()
 {
-    printf("LABEL readFloat\n");
+    printf("LABEL readf64\n");
     printf("CREATEFRAME\n");
     printf("PUSHFRAME\n");
     printf("DEFVAR LF@float\n");
     printf("READ LF@float float\n");
     printf("PUSHS LF@float\n");
+    printf("POPFRAME\n");
     printf("RETURN\n");
 }
 
@@ -328,91 +331,210 @@ void generateSubstring()
 
 void generateStrCmp()
 {
-    printf("LABEL strcmp\n");
-    printf("CREATEFRAME\n");
-    printf("PUSHFRAME\n");
-    printf("DEFVAR LF@result\n");
-    printf("DEFVAR LF@i\n");
-    printf("DEFVAR LF@char_s1\n");
-    printf("DEFVAR LF@char_s2\n");
+printf("LABEL strcmp\n");
+printf("CREATEFRAME\n");
+printf("PUSHFRAME\n");
 
-    // Inicializace indexu
-    printf("DEFVAR LF@i\n");
-    printf("MOVE LF@i int@0\n");
+// Definice proměnných
+printf("DEFVAR LF@result\n");
+printf("DEFVAR LF@s1\n");
+printf("DEFVAR LF@s2\n");
+printf("DEFVAR LF@char_s1\n");
+printf("DEFVAR LF@char_s2\n");
+printf("DEFVAR LF@len1\n");
+printf("DEFVAR LF@len2\n");
+printf("DEFVAR LF@i\n");
 
-    // Smyčka pro porovnání
-    printf("LABEL strcmp_loop\n");
-    printf("GETCHAR LF@char_s1 LF@s1 LF@i\n");
-    printf("GETCHAR LF@char_s2 LF@s2 LF@i\n");
-    printf("JUMPIFNEQ strcmp_end\n");
+// Načtení parametrů ze zásobníku
+printf("POPS LF@s1\n");
+printf("POPS LF@s2\n");
 
-    // Pokud oba znaky jsou stejné, pokračuj
-    printf("ADD LF@i LF@i int@1\n");
-    printf("JUMP strcmp_loop\n");
+// Získání délek řetězců
+printf("STRLEN LF@len1 LF@s1\n");
+printf("STRLEN LF@len2 LF@s2\n");
 
-    // Pokud znaky nejsou stejné
-    printf("LABEL strcmp_end\n");
-    printf("JUMPIFGT LF@char_s1 LF@char_s2 THEN_GREATER\n");
-    printf("JUMPIFLT LF@char_s1 LF@char_s2 THEN_LESS\n");
+printf("PUSHS LF@len1\n");
+printf("PUSHS LF@len2\n");
+printf("LTS\n"); // LF@char_s1 < LF@char_s2?
+printf("PUSHS bool@true\n");
+printf("JUMPIFEQS THEN_GREATER\n");
 
-    // Pokud jsou znaky stejné, pokračujeme až do konce
-    printf("DEFVAR LF@result\n");
-    printf("MOVE LF@result int@0\n");
-    printf("RETURN\n");
+printf("PUSHS LF@len1\n");
+printf("PUSHS LF@len2\n");
+printf("GTS\n"); // LF@char_s1 < LF@char_s2?
+printf("PUSHS bool@true\n");
+printf("JUMPIFEQS THEN_LESS\n");
+// Inicializace indexu
+printf("MOVE LF@i int@0\n");
+printf("MOVE LF@result int@0\n");
 
-    printf("LABEL THEN_GREATER\n");
-    printf("MOVE LF@result int@1\n");
-    printf("RETURN\n");
+// Hlavní smyčka porovnávání
+printf("LABEL strcmp_loop\n");
+printf("PUSHS LF@i\n");
+printf("PUSHS LF@len1\n");
+printf("LTS\n");
+printf("PUSHS bool@false\n");
+printf("JUMPIFEQS strcmp_end\n"); // Pokud jsme na konci s1
 
-    printf("LABEL THEN_LESS\n");
-    printf("MOVE LF@result int@-1\n");
-    printf("RETURN\n");
+printf("PUSHS LF@i\n");
+printf("PUSHS LF@len2\n");
+printf("LTS\n");
+printf("PUSHS bool@false\n");
+printf("JUMPIFEQS strcmp_end\n"); // Pokud jsme na konci s2
+
+// Porovnání znaků
+printf("GETCHAR LF@char_s1 LF@s1 LF@i\n");
+printf("GETCHAR LF@char_s2 LF@s2 LF@i\n");
+printf("PUSHS LF@char_s1\n");
+printf("PUSHS LF@char_s2\n");
+printf("JUMPIFNEQS strcmp_char_diff\n"); // Pokud znaky nejsou stejné
+
+// Pokud jsou znaky stejné, pokračuj
+printf("ADD LF@i LF@i int@1\n");
+printf("JUMP strcmp_loop\n");
+
+// Pokud se znaky liší
+printf("LABEL strcmp_char_diff\n");
+printf("PUSHS LF@char_s1\n");
+printf("PUSHS LF@char_s2\n");
+printf("LTS\n"); // LF@char_s1 < LF@char_s2?
+printf("PUSHS bool@true\n");
+printf("JUMPIFEQS THEN_GREATER\n");
+
+printf("PUSHS LF@char_s1\n");
+printf("PUSHS LF@char_s2\n");
+printf("GTS\n"); // LF@char_s1 > LF@char_s2?
+printf("PUSHS bool@true\n");
+printf("JUMPIFEQS THEN_LESS\n");
+
+// Pokud jsou znaky stejné, pokračujeme až do konce
+printf("LABEL strcmp_end\n");
+printf("PUSHS LF@len1\n");
+printf("PUSHS LF@len2\n");
+printf("LTS\n");
+printf("PUSHS bool@true\n");
+printf("JUMPIFEQS strcmp_s1_shorter\n"); // s1 kratší
+
+printf("PUSHS LF@len1\n");
+printf("PUSHS LF@len2\n");
+printf("GTS\n");
+printf("PUSHS bool@true\n");
+printf("JUMPIFEQS strcmp_s2_shorter\n"); // s2 kratší
+
+printf("MOVE LF@result int@0\n"); // Pokud jsou stejně dlouhé
+printf("PUSHS LF@result\n");
+printf("POPFRAME\n");
+printf("RETURN\n");
+
+// s1 kratší
+printf("LABEL strcmp_s1_shorter\n");
+printf("MOVE LF@result int@-1\n");
+printf("PUSHS LF@result\n");
+printf("POPFRAME\n");
+printf("RETURN\n");
+
+// s2 kratší
+printf("LABEL strcmp_s2_shorter\n");
+printf("MOVE LF@result int@1\n");
+printf("PUSHS LF@result\n");
+printf("POPFRAME\n");
+printf("RETURN\n");
+
+// Pokud je s1 větší než s2
+printf("LABEL THEN_GREATER\n");
+printf("MOVE LF@result int@1\n");
+printf("PUSHS LF@result\n");
+printf("POPFRAME\n");
+printf("RETURN\n");
+
+// Pokud je s1 menší než s2
+printf("LABEL THEN_LESS\n");
+printf("MOVE LF@result int@-1\n");
+printf("PUSHS LF@result\n");
+printf("POPFRAME\n");
+printf("RETURN\n");
+
+
 }
 
-void generateOrd()
-{
+void generateOrd() {
     printf("LABEL ord\n");
     printf("CREATEFRAME\n");
     printf("PUSHFRAME\n");
-    printf("DEFVAR LF@char\n");
-    printf("DEFVAR LF@result\n");
 
-    // Získání znaku podle indexu
-    printf("GETCHAR LF@char LF@s LF@i\n");
+    // Definícia potrebných premenných v lokálnom rámci
+    printf("DEFVAR LF@result\n");      // Výsledok funkcie
+    printf("DEFVAR LF@len\n");         // Dĺžka reťazca
+    printf("DEFVAR LF@tmp_bool\n");    // Pomocná booleovská premenná
+    printf("DEFVAR LF@s\n");           // Reťazec
+    printf("DEFVAR LF@i\n");           // Index
 
-    // Kontrola platnosti indexu
-    printf("JUMPIFNULL ord_invalid\n");
+    // Načítanie parametrov zo zásobníka
+    printf("POPS LF@i\n"); // Reťazec
+    printf("POPS LF@s\n"); // Index
 
-    // Vrátíme ASCII hodnotu znaku
+    // Získanie dĺžky reťazca
     printf("STRLEN LF@len LF@s\n");
-    printf("JUMPIFLT ord_invalid LF@i LF@len\n");
 
-    printf("ORD LF@result LF@char\n");
-    printf("RETURN\n");
+    // Overenie, či je index >= 0
+    printf("LT LF@tmp_bool int@0 LF@i\n");  // tmp_bool = (0 > i)
+    printf("JUMPIFEQ ord_invalid LF@tmp_bool bool@false\n");
 
+    // Overenie, či je index < dĺžka reťazca
+    printf("LT LF@tmp_bool LF@i LF@len\n"); // tmp_bool = (i < len)
+    printf("JUMPIFEQ ord_continue LF@tmp_bool bool@true\n");
+
+    // Ak index nie je platný
     printf("LABEL ord_invalid\n");
     printf("MOVE LF@result int@0\n");
+    printf("PUSHS LF@result\n");
+    printf("POPFRAME\n");
+    printf("RETURN\n");
+
+    // Ak je index platný, pokračuj
+    printf("LABEL ord_continue\n");
+    printf("STRI2INT LF@result LF@s LF@i\n"); // Prevod znaku na ASCII hodnotu
+    printf("PUSHS LF@result\n");
+    // Návrat z funkcie
+    printf("POPFRAME\n");
     printf("RETURN\n");
 }
 
-void generateChr()
-{
+void generateChr() {
     printf("LABEL chr\n");
     printf("CREATEFRAME\n");
     printf("PUSHFRAME\n");
-    printf("DEFVAR LF@char\n");
-    printf("DEFVAR LF@result\n");
 
-    // Pokud je hodnota mimo platný rozsah (0-255), vrátíme null
-    printf("JUMPIFLT chr_invalid LF@i int@0\n");
-    printf("JUMPIFGT chr_invalid LF@i int@255\n");
+    // Definícia premenných v lokálnom rámci
+    printf("DEFVAR LF@i\n");          // Vstupná hodnota (ASCII hodnota)
+    printf("DEFVAR LF@char\n");       // Výsledný znak
+    printf("DEFVAR LF@result\n");     // Výsledok funkcie
+    printf("DEFVAR LF@tmp_bool\n");   // Pomocná booleovská premenná
 
-    // Vytvoření jednoznakového řetězce
-    printf("CHAR LF@char LF@i\n");
-    printf("MOVE LF@result LF@char\n");
-    printf("RETURN\n");
+    // Načítanie parametra zo zásobníka
+    printf("POPS LF@i\n");
 
+    // Kontrola: či je hodnota >= 0
+    printf("LT LF@tmp_bool LF@i int@0\n"); // tmp_bool = (i < 0)
+    printf("JUMPIFEQ chr_invalid LF@tmp_bool bool@true\n");
+
+    // Kontrola: či je hodnota <= 255
+    printf("LT LF@tmp_bool int@256 LF@i\n"); // tmp_bool = (256 > i)
+    printf("JUMPIFEQ chr_continue LF@tmp_bool bool@false\n");
+
+    // Ak je hodnota mimo rozsahu, nastav výsledok na nil
     printf("LABEL chr_invalid\n");
     printf("MOVE LF@result nil@nil\n");
+    printf("PUSHS LF@result\n");
+    printf("POPFRAME\n");
+    printf("RETURN\n");
+
+    // Ak je hodnota v platnom rozsahu, konvertuj ju na znak
+    printf("LABEL chr_continue\n");
+    printf("INT2CHAR LF@char LF@i\n");
+    printf("MOVE LF@result LF@char\n");
+    printf("PUSHS LF@result\n");
+    // Návrat z funkcie
+    printf("POPFRAME\n");
     printf("RETURN\n");
 }

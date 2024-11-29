@@ -1,15 +1,7 @@
 const ifj = @import("ifj24.zig");
 // Hlavni funkce
 pub fn main() void {
-    var a = (1  + 1);
-    a = foo(1);
-}
-
-pub fn foo(b: i32)i32{
-    if((b)){
-
-    }else{
-
-    }
-    return (b);
+var a : []u8 = "ahoj";
+    var c = ifj.strcmp(a, "Samo");
+        ifj.write(c);
 }

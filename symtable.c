@@ -412,14 +412,14 @@ void symtableInsertBuildInFce(bstSymtable **symTree)
     insertFunction(symTree, "i2f", (DATATYPE){false, false, T_FLOAT}, 1, true, true, false, varDatas);
     varDatas[0].dataType = (DATATYPE){false, false, T_FLOAT};
     insertFunction(symTree, "f2i", (DATATYPE){false, false, T_INT}, 1, true, true, false, varDatas);
-    varDatas[0].dataType = (DATATYPE){false, false, T_KEYWORD};
+    varDatas[0].dataType = (DATATYPE){false, false, T_STR};
     // Functions for string operations
     insertFunction(symTree, "string", (DATATYPE){false, false, T_STR}, 1, true, true, false, varDatas);
     varDatas[0].dataType = (DATATYPE){false, false, T_STR};
     insertFunction(symTree, "length", (DATATYPE){false, false, T_INT}, 1, true, true, false, varDatas);
     varDatas[0].dataType = (DATATYPE){false, false, T_STR};
     varDatas[1].dataType = (DATATYPE){false, false, T_STR};
-    insertFunction(symTree, "concat", (DATATYPE){false, false, T_STR}, 3, true, true, false, varDatas);
+    insertFunction(symTree, "concat", (DATATYPE){false, false, T_STR}, 2, true, true, false, varDatas);
     varDatas[0].dataType = (DATATYPE){false, false, T_STR};
     varDatas[1].dataType = (DATATYPE){false, false, T_INT};
     varDatas[2].dataType = (DATATYPE){false, false, T_INT};

@@ -320,6 +320,9 @@ int reduce(TStack *expStack)
 
             printf("PUSHS float@%a\n", ((ElmExp *)(stackItem->value))->valueFloat);
         }
+        else if(((ElmExp *)(stackItem->value))->dataType.type == T_STR){
+            printf("PUSHS string@%s\n", ((ElmExp *)(stackItem->value))->key->str);
+        }
         else
         {
 

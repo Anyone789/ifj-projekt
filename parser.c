@@ -1308,16 +1308,16 @@ int main(int argc, char **argv)
     symtableInsertBuildInFce(&symTree);
     parsIt(&parserStack);
     DSTRING *str = dStringCreate();
-    dStringAddString(str, "main");
-    bstSymtable *resLocal = symtableSearch(&symTree, *str);
-    if (resLocal != NULL)
-    {
-        // printf("\nFound in locals %d \n", ((fceData *)resLocal->data)->returnType.type);
-    }
-    else
-    {
-        // printf("Not found in locals\n");
-    }
+    dStringAddString(str, "c");
+    bstSymtable *resLocal = symtableSearch(&symLocal, *str);
+    // if (resLocal != NULL)
+    // {
+    //     printf("\nFound in locals \n");
+    // }
+    // else
+    // {
+    //     printf("Not found in locals\n");
+    // }
 
     return 0;
 }
