@@ -4,4 +4,7 @@ pub fn main() void {
 var a : []u8 = "ahoj";
     var c = ifj.strcmp(a, "Samo");
         ifj.write(c);
+        while(a) {
+            inp = "a";
+        }
 }

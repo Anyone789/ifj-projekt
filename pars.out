@@ -1,0 +1,273 @@
+.IFJcode24
+DEFVAR GF@op1
+DEFVAR GF@op2
+DEFVAR GF@result
+DEFVAR GF@nullValue
+JUMP main
+LABEL readstr
+CREATEFRAME
+PUSHFRAME
+DEFVAR LF@str
+READ LF@str string
+PUSHS LF@str
+POPFRAME
+RETURN
+LABEL readi32
+CREATEFRAME
+PUSHFRAME
+DEFVAR LF@int
+READ LF@int int
+PUSHS LF@int
+POPFRAME
+RETURN
+LABEL readf64
+CREATEFRAME
+PUSHFRAME
+DEFVAR LF@float
+READ LF@float float
+PUSHS LF@float
+POPFRAME
+RETURN
+LABEL write
+CREATEFRAME
+PUSHFRAME
+DEFVAR LF@term
+DEFVAR LF@type
+POPS LF@term
+TYPE LF@type LF@term
+JUMPIFEQ write_null LF@type string@nil
+JUMPIFEQ write_int LF@type string@int
+JUMPIFEQ write_float LF@type string@float
+JUMPIFEQ write_string LF@type string@string
+EXIT int@4
+LABEL write_null
+WRITE string@null
+JUMP write_end
+LABEL write_int
+WRITE LF@term
+JUMP write_end
+LABEL write_float
+WRITE LF@term
+JUMP write_end
+LABEL write_string
+WRITE LF@term
+JUMP write_end
+LABEL write_end
+POPFRAME
+RETURN
+LABEL i2f
+CREATEFRAME
+PUSHFRAME
+DEFVAR LF@int
+DEFVAR LF@float
+POPS LF@int
+INT2FLOAT LF@float LF@int
+PUSHS LF@float
+POPFRAME
+RETURN
+LABEL f2i
+CREATEFRAME
+PUSHFRAME
+DEFVAR LF@float
+DEFVAR LF@int
+POPS LF@float
+FLOAT2INT LF@int LF@float
+PUSHS LF@int
+POPFRAME
+RETURN
+LABEL string
+CREATEFRAME
+PUSHFRAME
+DEFVAR LF@term
+DEFVAR LF@result
+POPS LF@term
+MOVE LF@result LF@term
+PUSHS LF@result
+POPFRAME
+RETURN
+LABEL length
+CREATEFRAME
+PUSHFRAME
+DEFVAR LF@str
+DEFVAR LF@length
+POPS LF@str
+STRLEN LF@length LF@str
+PUSHS LF@length
+POPFRAME
+RETURN
+LABEL concat
+CREATEFRAME
+PUSHFRAME
+DEFVAR LF@str1
+DEFVAR LF@str2
+DEFVAR LF@result
+POPS LF@str2
+POPS LF@str1
+CONCAT LF@result LF@str1 LF@str2
+PUSHS LF@result
+POPFRAME
+RETURN
+LABEL strcmp
+CREATEFRAME
+PUSHFRAME
+DEFVAR LF@result
+DEFVAR LF@s1
+DEFVAR LF@s2
+DEFVAR LF@char_s1
+DEFVAR LF@char_s2
+DEFVAR LF@len1
+DEFVAR LF@len2
+DEFVAR LF@i
+POPS LF@s1
+POPS LF@s2
+STRLEN LF@len1 LF@s1
+STRLEN LF@len2 LF@s2
+PUSHS LF@len1
+PUSHS LF@len2
+LTS
+PUSHS bool@true
+JUMPIFEQS THEN_GREATER
+PUSHS LF@len1
+PUSHS LF@len2
+GTS
+PUSHS bool@true
+JUMPIFEQS THEN_LESS
+MOVE LF@i int@0
+MOVE LF@result int@0
+LABEL strcmp_loop
+PUSHS LF@i
+PUSHS LF@len1
+LTS
+PUSHS bool@false
+JUMPIFEQS strcmp_end
+PUSHS LF@i
+PUSHS LF@len2
+LTS
+PUSHS bool@false
+JUMPIFEQS strcmp_end
+GETCHAR LF@char_s1 LF@s1 LF@i
+GETCHAR LF@char_s2 LF@s2 LF@i
+PUSHS LF@char_s1
+PUSHS LF@char_s2
+JUMPIFNEQS strcmp_char_diff
+ADD LF@i LF@i int@1
+JUMP strcmp_loop
+LABEL strcmp_char_diff
+PUSHS LF@char_s1
+PUSHS LF@char_s2
+LTS
+PUSHS bool@true
+JUMPIFEQS THEN_GREATER
+PUSHS LF@char_s1
+PUSHS LF@char_s2
+GTS
+PUSHS bool@true
+JUMPIFEQS THEN_LESS
+LABEL strcmp_end
+PUSHS LF@len1
+PUSHS LF@len2
+LTS
+PUSHS bool@true
+JUMPIFEQS strcmp_s1_shorter
+PUSHS LF@len1
+PUSHS LF@len2
+GTS
+PUSHS bool@true
+JUMPIFEQS strcmp_s2_shorter
+MOVE LF@result int@0
+PUSHS LF@result
+POPFRAME
+RETURN
+LABEL strcmp_s1_shorter
+MOVE LF@result int@-1
+PUSHS LF@result
+POPFRAME
+RETURN
+LABEL strcmp_s2_shorter
+MOVE LF@result int@1
+PUSHS LF@result
+POPFRAME
+RETURN
+LABEL THEN_GREATER
+MOVE LF@result int@1
+PUSHS LF@result
+POPFRAME
+RETURN
+LABEL THEN_LESS
+MOVE LF@result int@-1
+PUSHS LF@result
+POPFRAME
+RETURN
+LABEL ord
+CREATEFRAME
+PUSHFRAME
+DEFVAR LF@result
+DEFVAR LF@len
+DEFVAR LF@tmp_bool
+DEFVAR LF@s
+DEFVAR LF@i
+POPS LF@i
+POPS LF@s
+STRLEN LF@len LF@s
+LT LF@tmp_bool int@0 LF@i
+JUMPIFEQ ord_invalid LF@tmp_bool bool@false
+LT LF@tmp_bool LF@i LF@len
+JUMPIFEQ ord_continue LF@tmp_bool bool@true
+LABEL ord_invalid
+MOVE LF@result int@0
+PUSHS LF@result
+POPFRAME
+RETURN
+LABEL ord_continue
+STRI2INT LF@result LF@s LF@i
+PUSHS LF@result
+POPFRAME
+RETURN
+LABEL chr
+CREATEFRAME
+PUSHFRAME
+DEFVAR LF@i
+DEFVAR LF@char
+DEFVAR LF@result
+DEFVAR LF@tmp_bool
+POPS LF@i
+LT LF@tmp_bool LF@i int@0
+JUMPIFEQ chr_invalid LF@tmp_bool bool@true
+LT LF@tmp_bool int@256 LF@i
+JUMPIFEQ chr_continue LF@tmp_bool bool@false
+LABEL chr_invalid
+MOVE LF@result nil@nil
+PUSHS LF@result
+POPFRAME
+RETURN
+LABEL chr_continue
+INT2CHAR LF@char LF@i
+MOVE LF@result LF@char
+PUSHS LF@result
+POPFRAME
+RETURN
+LABEL main
+CREATEFRAME
+PUSHFRAME
+DEFVAR LF@a
+PUSHS string@ahoj
+POPS LF@a
+DEFVAR LF@c
+PUSHS LF@a
+PUSHS string@Samo
+CALL strcmp
+POPS LF@c
+PUSHS LF@c
+CALL write
+LABEL whileBegin1
+PUSHS LF@a
+POPS GF@nullValue
+TYPE GF@result GF@nullValue
+JUMPIFEQ whileEnd1 GF@result string@nil
+JUMPIFEQ whileContinue1 GF@result string@bool
+JUMP inWhile1
+LABEL whileContinue1
+PUSHS GF@nullValue
+PUSHS bool@false
+JUMPIFEQS whileEnd1
+LABEL inWhile1

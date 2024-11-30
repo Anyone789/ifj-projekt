@@ -667,6 +667,10 @@ void parserIn(TStack *parserStack)
                             }
 
                             insertVariables(token->attribute.dStr->str, (DATATYPE){false, false, ((varData *)res->data)->dataType.type}, false, isConst, false, false, &symLocal);
+                            // pipe generator
+                            printf("PUSHS LF@%s\n",ID->str);
+                            printf("DEFVAR LF@%s\n", token->attribute.dStr->str);
+                            printf("POPS LF@%s\n", token->attribute.dStr->str);
                         }
                         else
                         {

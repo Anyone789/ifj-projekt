@@ -51,20 +51,17 @@ int initExpStack(TStack *expStack)
 
 void checkSem(ElmExp *lOperand, ElmExp *rOperand)
 {
+    if (lOperand->dataType.type == T_STR || rOperand->dataType.type == T_STR)
+    {
+        // printf("%d", INCOMPATIBLE_TYPE_ERROR);
+        exit(INCOMPATIBLE_TYPE_ERROR);
+    }
     if (lOperand->dataType.type != T_ID && rOperand->dataType.type != T_ID)
     {
 
         if (lOperand->dataType.type != rOperand->dataType.type)
         {
-            if (lOperand->dataType.type == T_STR || rOperand->dataType.type == T_STR)
-            {
-                // printf("%d", INCOMPATIBLE_TYPE_ERROR);
-                exit(INCOMPATIBLE_TYPE_ERROR);
-            }
-            else
-            {
-                lOperand->dataType.type = T_FLOAT;
-            }
+            lOperand->dataType.type = T_FLOAT;
         }
     }
     else
@@ -81,7 +78,7 @@ void checkSem(ElmExp *lOperand, ElmExp *rOperand)
             }
             else
             {
-                if (((varData *)result->data)->dataType.type != rOperand->dataType.type)
+                if (((varData *)result->data)->dataType.type != rOperand->dataType.type || ((varData *)result->data)->dataType.type == T_STR)
                 {
                     // printf("%d", INCOMPATIBLE_TYPE_ERROR);
                     // printf("NO");
@@ -104,7 +101,7 @@ void checkSem(ElmExp *lOperand, ElmExp *rOperand)
             }
             else
             {
-                if (((varData *)result->data)->dataType.type != lOperand->dataType.type)
+                if (((varData *)result->data)->dataType.type != lOperand->dataType.type || ((varData *)result->data)->dataType.type == T_STR)
                 {
                     // printf("%d", INCOMPATIBLE_TYPE_ERROR);
                     // printf("NO");
@@ -131,7 +128,7 @@ void checkSem(ElmExp *lOperand, ElmExp *rOperand)
             }
             else
             {
-                if (((varData *)lResult->data)->dataType.type != ((varData *)rResult->data)->dataType.type)
+                if (((varData *)lResult->data)->dataType.type != ((varData *)rResult->data)->dataType.type || ((varData *)lResult->data)->dataType.type == T_STR || ((varData *)rResult->data)->dataType.type == T_STR)
                 {
                     // printf("%d", INCOMPATIBLE_TYPE_ERROR);
                     // printf("NO");
@@ -185,9 +182,10 @@ int analyzeExp(TStack *expStack, TOKEN *token)
     {
         exit(LEXICAL_ERROR);
     }
-    
-    //printf("lsdla%d", nextToken->type);
-    if(nextToken->type == T_L_BRACKET){
+
+    // printf("lsdla%d", nextToken->type);
+    if (nextToken->type == T_L_BRACKET)
+    {
         lBracketInStack++;
     }
     char sign;
@@ -245,7 +243,7 @@ int analyzeExp(TStack *expStack, TOKEN *token)
             stackPush(expStack, newExp);
             nextToken = getToken();
             lBracketInStack--;
-           // printf("%d", lBracketInStack);
+            // printf("%d", lBracketInStack);
             if (nextToken->type == 1)
             {
                 exit(LEXICAL_ERROR);
@@ -263,7 +261,7 @@ int analyzeExp(TStack *expStack, TOKEN *token)
                 bstSymtable *resul = symtableSearch(&symLocal, *((ElmExp *)(expStack->stackTop->value))->key);
                 if (resul == NULL)
                 {
-                    //printf("saa");
+                    // printf("saa");
                     exit(UNDEFINED_VARIABLE_ERROR);
                 }
                 returnExpValue = ((varData *)resul->data)->dataType.type;
@@ -295,7 +293,7 @@ char getSign(TStack *expStack)
     {
         stackTopValue = stackTopValue->next;
     }
-   // printf("\nprec[%d][%d]\n", ((ElmExp *)(stackTopValue->value))->type, convertToIndex(stackInput));
+    // printf("\nprec[%d][%d]\n", ((ElmExp *)(stackTopValue->value))->type, convertToIndex(stackInput));
     return precTable[((ElmExp *)(stackTopValue->value))->type][convertToIndex(stackInput)];
 }
 
@@ -320,7 +318,8 @@ int reduce(TStack *expStack)
 
             printf("PUSHS float@%a\n", ((ElmExp *)(stackItem->value))->valueFloat);
         }
-        else if(((ElmExp *)(stackItem->value))->dataType.type == T_STR){
+        else if (((ElmExp *)(stackItem->value))->dataType.type == T_STR)
+        {
             printf("PUSHS string@%s\n", ((ElmExp *)(stackItem->value))->key->str);
         }
         else
@@ -370,7 +369,8 @@ int reduce(TStack *expStack)
         {
             return SYNTAX_ERROR;
         }
-        if(!inFce){
+        if (!inFce)
+        {
             exit(INCOMPATIBLE_TYPE_ERROR);
         }
         printf("EQS\n");
@@ -382,7 +382,8 @@ int reduce(TStack *expStack)
         {
             return SYNTAX_ERROR;
         }
-        if(!inFce){
+        if (!inFce)
+        {
             exit(INCOMPATIBLE_TYPE_ERROR);
         }
         printf("EQS\n");
@@ -395,7 +396,8 @@ int reduce(TStack *expStack)
         {
             return SYNTAX_ERROR;
         }
-        if(!inFce){
+        if (!inFce)
+        {
             exit(INCOMPATIBLE_TYPE_ERROR);
         }
         printf("LTS\n");
@@ -407,7 +409,8 @@ int reduce(TStack *expStack)
         {
             return SYNTAX_ERROR;
         }
-        if(!inFce){
+        if (!inFce)
+        {
             exit(INCOMPATIBLE_TYPE_ERROR);
         }
         printf("POPS GF@op1\n");
@@ -426,7 +429,8 @@ int reduce(TStack *expStack)
         {
             return SYNTAX_ERROR;
         }
-        if(!inFce){
+        if (!inFce)
+        {
             exit(INCOMPATIBLE_TYPE_ERROR);
         }
         printf("GTS\n");
@@ -439,7 +443,8 @@ int reduce(TStack *expStack)
         {
             return SYNTAX_ERROR;
         }
-        if(!inFce){
+        if (!inFce)
+        {
             exit(INCOMPATIBLE_TYPE_ERROR);
         }
         printf("POPS GF@op1\n");
@@ -490,7 +495,7 @@ int convertToIndex(int value)
     case T_GE:
         return tableGreatEqual;
     case T_L_BRACKET:
-        
+
         return tableLeftPar;
     case T_R_BRACKET:
         // treba odkomentovat
