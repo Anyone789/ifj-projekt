@@ -1,13 +1,17 @@
 // scanner.h
 // Interface for the scanner
 // Author(s): Václav Bergman, Tomáš Hrbáč
-// Last Edited: 19.11.2024
+// Last Edited: 30.11.2024
 
 #ifndef SCANNER_H
 #define SCANNER_H
 
 #include <stdio.h>
 #include "dstring.h"
+
+#define HORIZONTAL_TAB 9
+#define LINE_FEED 10
+#define CARRIAGE_RETURN 13
 
 // Enum of token types
 typedef enum tokenType
@@ -29,7 +33,7 @@ typedef enum states
 {
     INITIAL, IDENTIFIER, FX_IDENTIFIER, IMPORT, STRING_START, STRING_END, ESCAPE_SEQ,
     INTEGER, INT_ZERO, FLOAT_DP_START, FLOAT_DP_END, FLOAT_EX_START, FLOAT_EX_MID, FLOAT_EX_END, 
-    NOT_EQUAL, LESS_THAN, GREATER_THAN,
+    NOT_EQUAL, LESS_THAN, GREATER_THAN, ESCAPE_SEQ_HEX,
     ASSIGN, PLUS, MINUS, DIVIDE, MULTIPLY, SEMICOLON, COLON, LEFT_SQ_BRACKET, RIGHT_SQ_BRACKET,
     LEFT_BRACKET, RIGHT_BRACKET, LEFT_BRACE, RIGHT_BRACE, PIPE, DOT, COMMA, QUESTION_MARK, COMMENT,
     NO_LINEFEED, END_OF_FILE, ERROR

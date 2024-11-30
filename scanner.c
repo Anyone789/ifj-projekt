@@ -1,6 +1,6 @@
 // Module for lexical analyser
 // Author(s): Tomáš Hrbáč, Václav Bergman
-// Last Edit: 19.11.2024
+// Last Edit: 30.11.2024
 
 #include <stdbool.h>
 #include <stdio.h>
@@ -564,21 +564,27 @@ TOKEN *getToken()
             }
             case STRING_START:
             {
+                // Escape sequences, hash symbol and control characters (0 - 32) get converted
+                // to \XXX format
                 if (c == '\\')
                 {
                     state = ESCAPE_SEQ;
-                    dStringAddChar(token->attribute.dStr, c);
-                }
-                else if (c == '\"')
-                {
-                    tokenScanned = true;
                 }
                 // Dealing with unterminated string ending with EOF
-                else if (c == EOF)
+                // and with single line string split to multiple lines
+                else if (c == EOF || c == '\n')
                 {
                     token->type = T_ERROR;
                     token->current_attribute = NONE;
                     dStringDestroy(token->attribute.dStr);
+                    tokenScanned = true;
+                }
+                else if ((c >= 0 && c <= 32) || c == '#')
+                {
+                    dStringAddIntIFJcode24Format(token->attribute.dStr, c);
+                }
+                else if (c == '\"')
+                {
                     tokenScanned = true;
                 }
                 else
@@ -591,7 +597,113 @@ TOKEN *getToken()
             case ESCAPE_SEQ:
             {
                 state = STRING_START;
-                dStringAddChar(token->attribute.dStr, c);
+                
+                // If c is specified in hex format
+                if (c == 'x')
+                {
+                    state = ESCAPE_SEQ_HEX;
+                }
+                else
+                {
+                    // Allowed escape sequences
+                    if (c == 'n')
+                    {
+                        dStringAddIntIFJcode24Format(token->attribute.dStr, LINE_FEED);
+                    }
+                    else if (c == 'r')
+                    {
+                        dStringAddIntIFJcode24Format(token->attribute.dStr, CARRIAGE_RETURN);
+                    }
+                    else if (c == 't')
+                    {
+                        dStringAddIntIFJcode24Format(token->attribute.dStr, HORIZONTAL_TAB);
+                    }
+                    else if (c == '\\' || c == '\"' || c == '\'')
+                    {
+                        dStringAddIntIFJcode24Format(token->attribute.dStr, c);
+                    }
+                    else
+                    {
+                        token->type = T_ERROR;
+                        token->current_attribute = NONE;
+                        dStringDestroy(token->attribute.dStr);
+                        tokenScanned = true;
+                    }
+                }
+                
+                break;
+            }
+            case ESCAPE_SEQ_HEX:
+            {
+                // Variable for storing escape sequence in integer format
+                static int escapeSequence = -1;
+                
+                if (c >= '0' && c <= '9')
+                {
+                    // Converting c to int value 0 - 9
+                    c -= '0';
+                    // escapeSequence was not modified -> c contains hex value at position 16^1
+                    if (escapeSequence == -1)
+                    {
+                        // Setting c to escapeSequence multiplied by it's weight
+                        escapeSequence = c * 16;
+                    }
+                    // escape sequence was modified -> c contains hex value at position 16^0
+                    else
+                    {
+                        state = STRING_START;
+                        escapeSequence += c;
+                        
+                        // Returning converted escape sequence to source file
+                        ungetc(escapeSequence, src);
+                        if (\
+                        escapeSequence == 'n' || escapeSequence == 'r' || escapeSequence == 't' ||\
+                        escapeSequence == '\\' || escapeSequence == '\"' || escapeSequence == '\''\
+                        )
+                        {
+                            ungetc('\\', src);
+                        }
+                        // Resetting escape sequence variable
+                        escapeSequence = -1;
+                    }
+                    
+                }
+                else if ((c >= 'A' && c <= 'F') || (c >= 'a' && c <= 'f'))
+                {
+                    // Converting c to int value 10 - 15
+                    c = tolower(c) - 'a' + 10;
+                    // escapeSequence was not modified -> c contains hex value at position 16^1
+                    if (escapeSequence == -1)
+                    {
+                        // Setting c to escapeSequence multiplied by it's weight
+                        escapeSequence = c * 16;
+                    }
+                    // escape sequence was modified -> c contains hex value at position 16^0
+                    else
+                    {
+                        state = STRING_START;
+                        escapeSequence += c;
+                        // returning converted escape sequence to source file
+                        ungetc(escapeSequence, src);
+                        if (\
+                        escapeSequence == 'n' || escapeSequence == 'r' || escapeSequence == 't' ||\
+                        escapeSequence == '\\' || escapeSequence == '\"' || escapeSequence == '\''\
+                        )
+                        {
+                            ungetc('\\', src);
+                        }
+                        // Resetting escape sequence variable
+                        escapeSequence = -1;
+                    }
+                }
+                // c does not contain valid hex digit
+                else
+                {
+                    token->type = T_ERROR;
+                    token->current_attribute = NONE;
+                    dStringDestroy(token->attribute.dStr);
+                    tokenScanned = true;
+                }
 
                 break;
             }
