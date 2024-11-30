@@ -1,7 +1,7 @@
 // dstring.h
 // Module for manipulating with strings dynamically
 // Author(s): Václav Bergman, Tomáš Hrbáč
-// Last Edited: 18.11.2024
+// Last Edited: 30.11.2024
 
 #ifndef DSTRING_H
 #define DSTRING_H
@@ -12,7 +12,7 @@
 // Data type representing dynamic string
 typedef struct dstring
 {
-  char* str;		      // Pointer to a string
+  char* str;		    // Pointer to a string
   int length;	        // Current string length
   int allocSize;	    // Amount of bytes allocated
 } DSTRING;
@@ -101,5 +101,13 @@ int dStringToInt(DSTRING *dStr);
     @return double
 */
 double dStringToDouble(DSTRING *dStr);
+
+/*
+    @brief Appends integer to DSTRING in IFJcode24 format \xyz, where xyz is decimal number 000-255
+    @param *dStr pointer to a DSTRING
+    @param int integer to be added
+    @return NONE
+*/
+void dStringAddIntIFJcode24Format(DSTRING *dStr, int i);
 
 #endif

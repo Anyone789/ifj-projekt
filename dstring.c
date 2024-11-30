@@ -1,7 +1,7 @@
 // dstring.c
 // Module for manipulating with strings dynamically
 // Author(s): Václav Bergman, Tomáš Hrbáč
-// Last Edited: 18.11.2024
+// Last Edited: 30.11.2024
 
 #include <string.h>
 #include <stdlib.h>
@@ -110,4 +110,16 @@ int dStringToInt(DSTRING *dStr)
 double dStringToDouble(DSTRING *dStr)
 {
     return atof(dStr->str);
+}
+
+void dStringAddIntIFJcode24Format(DSTRING *dStr, int i)
+{
+    // Leading backslash
+    dStringAddChar(dStr, '\\');
+    // Digit at 10^2 position
+    dStringAddChar(dStr, ((i / 100) % 10) + '0');
+    // Digit at 10^1 position
+    dStringAddChar(dStr, ((i / 10) % 10) + '0');
+    // Digit at 10^0 position
+    dStringAddChar(dStr, (i % 10) + '0');
 }
