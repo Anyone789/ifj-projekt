@@ -10,6 +10,7 @@
 #include "scanner.h"
 #include <string.h>
 #include <math.h>
+#include <stdlib.h>
 typedef enum
 {
     var,

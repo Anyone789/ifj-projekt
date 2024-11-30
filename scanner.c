@@ -1,7 +1,6 @@
 // Module for lexical analyser
 // Author(s): Tomáš Hrbáč, Václav Bergman
-// Last Edit: 14.11.2024
-
+// Last Edit: 30.11.2024
 
 #include <stdbool.h>
 #include <stdio.h>
@@ -12,21 +11,11 @@
 #include "dstring.h"
 #include "errorCodes.h"
 
-FILE *src;
-TOKEN token;
+FILE *src;  // Pointer to a file to be scanned
 
-const char *importStr = "import";
+const char *importStr = "import";   // Auxiliary string for matching scanned token to import keyword
 
-const char *TOKEN_TYPE_STRING[] = {
-    "T_KEYWORD", "T_ERROR", "T_ID", "T_FX_ID", "T_BUILT_IN_FX_ID",
-    "T_INT", "T_STR", "T_FLOAT", 
-    "T_PLUS", "T_MINUS", "T_MUL", "T_DIV",
-    "T_EQ", "T_NE", "T_LT", "T_LE", "T_GT", "T_GE", "T_ASSIGN",
-    "T_SEMICOL", "T_COLON", "T_L_BRACE", "T_R_BRACE", "T_L_SQ_BRACKET", "T_R_SQ_BRACKET",
-    "T_L_BRACKET", "T_R_BRACKET", "T_QUESTION_MK", "T_PIPE", "T_DOT", "T_COMMA", "T_COM",
-    "T_IMPORT", "T_EOF", "T_UNDEFINED"
-};
-
+// Array of keywords
 const char* keywords[] = {
     "const", "else", "fn", "if", "i32", "f64", 
     "null", "pub", "return","u8", "[]u8", "var",
@@ -87,7 +76,7 @@ TOKEN *getToken()
 	while (!tokenScanned)
 	{
 		c = getc(src);
-
+ 
         switch (state)
         {
             case INITIAL:
@@ -209,7 +198,7 @@ TOKEN *getToken()
                 }
                 else if (isdigit(c))
                 {
-                    if (c == 0)
+                    if (c == '0')
                     {
                         state = INT_ZERO;
                     }
@@ -235,15 +224,17 @@ TOKEN *getToken()
                 }
                 else if (!isspace(c))
                 {
+                    state = ERROR;
                     token->type = T_ERROR;
                 }
-
+                
+                // Following states are terminal, no more scanning required to decide token type
                 if (\
                 state == LEFT_SQ_BRACKET || state == RIGHT_SQ_BRACKET || state == LEFT_BRACKET ||\
                 state == RIGHT_BRACKET || state == LEFT_BRACE || state == RIGHT_BRACE ||\
                 state == QUESTION_MARK || state == PIPE || state == DOT || state == COMMA ||\
                 state == SEMICOLON || state == COLON || state == PLUS || state == MINUS ||\
-                state == MULTIPLY || state == END_OF_FILE\
+                state == MULTIPLY || state == END_OF_FILE || state == ERROR\
                 )
                 {
                     tokenScanned = true;
@@ -376,7 +367,8 @@ TOKEN *getToken()
                 {
                     state = NO_LINEFEED;
                 }
-                else if (c == '\n')
+                // c == EOF for dealing with 'comment and EOF on the same line' edge case
+                else if (c == '\n' || c == EOF)
                 {
                     state = INITIAL;
                 }
@@ -385,6 +377,14 @@ TOKEN *getToken()
             }
             case NO_LINEFEED:
             {
+                if (c != '\n')
+                {
+                    ungetc(c, src);
+                }
+                state = COMMENT;
+
+                // Different code for handling '\' symbol in comment
+                /*
                 if (c == '\n')
                 {
                     state = COMMENT;
@@ -394,6 +394,7 @@ TOKEN *getToken()
                     token->type = T_ERROR;
                     tokenScanned = true;
                 }
+                */
 
                 break;
             }
@@ -563,10 +564,24 @@ TOKEN *getToken()
             }
             case STRING_START:
             {
+                // Escape sequences, hash symbol and control characters (0 - 32) get converted
+                // to \XXX format
                 if (c == '\\')
                 {
                     state = ESCAPE_SEQ;
-                    dStringAddChar(token->attribute.dStr, c);
+                }
+                // Dealing with unterminated string ending with EOF
+                // and with single line string split to multiple lines
+                else if (c == EOF || c == '\n')
+                {
+                    token->type = T_ERROR;
+                    token->current_attribute = NONE;
+                    dStringDestroy(token->attribute.dStr);
+                    tokenScanned = true;
+                }
+                else if ((c >= 0 && c <= 32) || c == '#')
+                {
+                    dStringAddIntIFJcode24Format(token->attribute.dStr, c);
                 }
                 else if (c == '\"')
                 {
@@ -582,7 +597,113 @@ TOKEN *getToken()
             case ESCAPE_SEQ:
             {
                 state = STRING_START;
-                dStringAddChar(token->attribute.dStr, c);
+                
+                // If c is specified in hex format
+                if (c == 'x')
+                {
+                    state = ESCAPE_SEQ_HEX;
+                }
+                else
+                {
+                    // Allowed escape sequences
+                    if (c == 'n')
+                    {
+                        dStringAddIntIFJcode24Format(token->attribute.dStr, LINE_FEED);
+                    }
+                    else if (c == 'r')
+                    {
+                        dStringAddIntIFJcode24Format(token->attribute.dStr, CARRIAGE_RETURN);
+                    }
+                    else if (c == 't')
+                    {
+                        dStringAddIntIFJcode24Format(token->attribute.dStr, HORIZONTAL_TAB);
+                    }
+                    else if (c == '\\' || c == '\"' || c == '\'')
+                    {
+                        dStringAddIntIFJcode24Format(token->attribute.dStr, c);
+                    }
+                    else
+                    {
+                        token->type = T_ERROR;
+                        token->current_attribute = NONE;
+                        dStringDestroy(token->attribute.dStr);
+                        tokenScanned = true;
+                    }
+                }
+                
+                break;
+            }
+            case ESCAPE_SEQ_HEX:
+            {
+                // Variable for storing escape sequence in integer format
+                static int escapeSequence = -1;
+                
+                if (c >= '0' && c <= '9')
+                {
+                    // Converting c to int value 0 - 9
+                    c -= '0';
+                    // escapeSequence was not modified -> c contains hex value at position 16^1
+                    if (escapeSequence == -1)
+                    {
+                        // Setting c to escapeSequence multiplied by it's weight
+                        escapeSequence = c * 16;
+                    }
+                    // escape sequence was modified -> c contains hex value at position 16^0
+                    else
+                    {
+                        state = STRING_START;
+                        escapeSequence += c;
+                        
+                        // Returning converted escape sequence to source file
+                        ungetc(escapeSequence, src);
+                        if (\
+                        escapeSequence == 'n' || escapeSequence == 'r' || escapeSequence == 't' ||\
+                        escapeSequence == '\\' || escapeSequence == '\"' || escapeSequence == '\''\
+                        )
+                        {
+                            ungetc('\\', src);
+                        }
+                        // Resetting escape sequence variable
+                        escapeSequence = -1;
+                    }
+                    
+                }
+                else if ((c >= 'A' && c <= 'F') || (c >= 'a' && c <= 'f'))
+                {
+                    // Converting c to int value 10 - 15
+                    c = tolower(c) - 'a' + 10;
+                    // escapeSequence was not modified -> c contains hex value at position 16^1
+                    if (escapeSequence == -1)
+                    {
+                        // Setting c to escapeSequence multiplied by it's weight
+                        escapeSequence = c * 16;
+                    }
+                    // escape sequence was modified -> c contains hex value at position 16^0
+                    else
+                    {
+                        state = STRING_START;
+                        escapeSequence += c;
+                        // returning converted escape sequence to source file
+                        ungetc(escapeSequence, src);
+                        if (\
+                        escapeSequence == 'n' || escapeSequence == 'r' || escapeSequence == 't' ||\
+                        escapeSequence == '\\' || escapeSequence == '\"' || escapeSequence == '\''\
+                        )
+                        {
+                            ungetc('\\', src);
+                        }
+                        // Resetting escape sequence variable
+                        escapeSequence = -1;
+                    }
+                }
+                // c does not contain valid hex digit
+                else
+                {
+                    token->type = T_ERROR;
+                    token->current_attribute = NONE;
+                    dStringDestroy(token->attribute.dStr);
+                    tokenScanned = true;
+                }
 
                 break;
             }
@@ -592,4 +713,3 @@ TOKEN *getToken()
 	
     return token;
 }
-

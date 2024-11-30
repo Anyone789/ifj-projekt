@@ -1,106 +1,42 @@
 // scanner.h
 // Interface for the scanner
 // Author(s): Václav Bergman, Tomáš Hrbáč
-// Last Edited: 14.11.2024
+// Last Edited: 30.11.2024
 
 #ifndef SCANNER_H
 #define SCANNER_H
 
+#include <stdio.h>
 #include "dstring.h"
-#include <stdio.h>
-#include <stdbool.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <ctype.h>
-#include <string.h>
-#include "errorCodes.h"
+
+#define HORIZONTAL_TAB 9
+#define LINE_FEED 10
+#define CARRIAGE_RETURN 13
 
 // Enum of token types
 typedef enum tokenType
 {
-    T_KEYWORD,
-    T_ERROR,
-    T_ID,
-    T_FX_ID,
-    T_BUILT_IN_FX_ID,
-    T_INT,
-    T_STR,
-    T_FLOAT,
-    T_PLUS,
-    T_MINUS,
-    T_MUL,
-    T_DIV,
-    T_EQ,
-    T_NE,
-    T_LT,
-    T_LE,
-    T_GT,
-    T_GE,
-    T_ASSIGN,
-    T_SEMICOL,
-    T_COLON,
-    T_L_BRACE,
-    T_R_BRACE,
-    T_L_SQ_BRACKET,
-    T_R_SQ_BRACKET,
-    T_L_BRACKET,
-    T_R_BRACKET,
-    T_QUESTION_MK,
-    T_PIPE,
-    T_DOT,
-    T_COMMA,
-    T_COM,
-    T_IMPORT,
-    T_EOF,
-    T_UNDEFINED
+    T_KEYWORD, T_ERROR, T_ID, T_FX_ID, T_BUILT_IN_FX_ID,
+    T_INT, T_STR, T_FLOAT, 
+    T_PLUS, T_MINUS, T_MUL, T_DIV,
+    T_EQ, T_NE, T_LT, T_LE, T_GT, T_GE, T_ASSIGN,
+    T_SEMICOL, T_COLON, T_L_BRACE, T_R_BRACE, T_L_SQ_BRACKET, T_R_SQ_BRACKET,
+    T_L_BRACKET, T_R_BRACKET, T_QUESTION_MK, T_PIPE, T_DOT, T_COMMA, T_COM,
+    T_EOF, T_UNDEFINED
 } TOKEN_TYPE;
 
-// String equivalents of token types
-extern const char *TOKEN_TYPE_STRING[];
-
 // Array of keywords
-extern const char *keywords[];
+extern const char* keywords[];
 
 // Enum of FSM states
 typedef enum states
 {
-    INITIAL,
-    IDENTIFIER,
-    FX_IDENTIFIER,
-    IMPORT,
-    STRING_START,
-    STRING_END,
-    ESCAPE_SEQ,
-    INTEGER,
-    INT_ZERO,
-    FLOAT_DP_START,
-    FLOAT_DP_END,
-    FLOAT_EX_START,
-    FLOAT_EX_MID,
-    FLOAT_EX_END,
-    NOT_EQUAL,
-    LESS_THAN,
-    GREATER_THAN,
-    ASSIGN,
-    PLUS,
-    MINUS,
-    DIVIDE,
-    MULTIPLY,
-    SEMICOLON,
-    COLON,
-    LEFT_SQ_BRACKET,
-    RIGHT_SQ_BRACKET,
-    LEFT_BRACKET,
-    RIGHT_BRACKET,
-    LEFT_BRACE,
-    RIGHT_BRACE,
-    PIPE,
-    DOT,
-    COMMA,
-    QUESTION_MARK,
-    COMMENT,
-    NO_LINEFEED,
-    END_OF_FILE
+    INITIAL, IDENTIFIER, FX_IDENTIFIER, IMPORT, STRING_START, STRING_END, ESCAPE_SEQ,
+    INTEGER, INT_ZERO, FLOAT_DP_START, FLOAT_DP_END, FLOAT_EX_START, FLOAT_EX_MID, FLOAT_EX_END, 
+    NOT_EQUAL, LESS_THAN, GREATER_THAN, ESCAPE_SEQ_HEX,
+    ASSIGN, PLUS, MINUS, DIVIDE, MULTIPLY, SEMICOLON, COLON, LEFT_SQ_BRACKET, RIGHT_SQ_BRACKET,
+    LEFT_BRACKET, RIGHT_BRACKET, LEFT_BRACE, RIGHT_BRACE, PIPE, DOT, COMMA, QUESTION_MARK, COMMENT,
+    NO_LINEFEED, END_OF_FILE, ERROR
 } STATES;
 
 // Enum for attribute type
@@ -108,10 +44,7 @@ typedef enum states
 // NONE indicates TOKEN_ATTRIBUTE is not set
 typedef enum attributeType
 {
-    NONE,
-    I,
-    F,
-    DSTR
+    NONE, I, F, DSTR
 } ATTRIBUTE_TYPE;
 
 // Union for storing token value

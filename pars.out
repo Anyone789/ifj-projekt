@@ -250,7 +250,7 @@ LABEL main
 CREATEFRAME
 PUSHFRAME
 DEFVAR LF@a
-PUSHS string@ahoj
+PUSHS string@ahoj\032serus\010
 POPS LF@a
 DEFVAR LF@c
 PUSHS LF@a
@@ -271,3 +271,12 @@ PUSHS GF@nullValue
 PUSHS bool@false
 JUMPIFEQS whileEnd1
 LABEL inWhile1
+PUSHS LF@a
+DEFVAR LF@inp
+POPS LF@inp
+PUSHS string@a
+POPS LF@inp
+JUMP whileBegin1
+LABEL whileEnd1
+POPFRAME
+EXIT int@0
