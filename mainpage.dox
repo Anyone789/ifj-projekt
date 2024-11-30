@@ -1,0 +1,14 @@
+/*! \mainpage Dokumentace projektu
+ *@section intro Úvod
+ *
+ * Vítejte na hlavní stránce naší dokumentace k projektu z předmětu Formální jazyky a překladače.\n
+ * \n Tento projekt je zaměřený na vývoj překladače jazyka IFJ24. Překladač generuje výsledný mezikód v cílovém jazyce IFJcode24 na standardní výstup. Jazyk IFJ24 je case-sensitive a je zjednodušenou podmnožinou jazyka Zig (ve verzi 0.13.0), což je moderní a silně typovaný jazyk navržený jako alternativa jazyka C, jehož cílem je zjednodušit vývoj robustního, znovupoužitelného, udržovatelného a bezpečného software. 
+ *
+ * @section authors Autoři:
+ * Tomáš Hrbáč (xhrbact00)\n
+ * Marián Šuľa (xsulama00)\n
+ * Václav Bergman (xbergmv00)\n
+ * Samuel Kundrát (xkundrs00)
+ *
+ * Pro více informací využijte jednotlivé záložky.
+ */
