@@ -98,7 +98,7 @@ void checkSem(ElmExp *lOperand, ElmExp *rOperand)
             }
             else
             {
-                if (((varData *)result->data)->dataType.type != rOperand->dataType.type || ((varData *)result->data)->dataType.type == T_STR)
+                if (rOperand->valueInt != 0 && (((varData *)result->data)->dataType.type != rOperand->dataType.type || ((varData *)result->data)->dataType.type == T_STR))
                 {
 
                     exit(INCOMPATIBLE_TYPE_ERROR);
@@ -107,6 +107,7 @@ void checkSem(ElmExp *lOperand, ElmExp *rOperand)
                 {
                     ((varData *)result->data)->use = true;
                 }
+                
             }
         }
         // Roperand is id check datatypes
@@ -120,7 +121,7 @@ void checkSem(ElmExp *lOperand, ElmExp *rOperand)
             }
             else
             {
-                if (((varData *)result->data)->dataType.type != lOperand->dataType.type || ((varData *)result->data)->dataType.type == T_STR)
+                if (lOperand->valueInt != 0 && (((varData *)result->data)->dataType.type != lOperand->dataType.type || ((varData *)result->data)->dataType.type == T_STR))
                 {
                     exit(INCOMPATIBLE_TYPE_ERROR);
                 }
