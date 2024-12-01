@@ -1,4 +1,4 @@
-// symtable.c
+// stack.c
 // Stack module
 // Author(s): Marián Šuľa
 // Last Edit: 16.11.2024

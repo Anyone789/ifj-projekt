@@ -1,3 +1,7 @@
+// expression.h
+// Interface for expression
+// Author(s):  Marián Šuľa
+// Last Edit: 1.12.2024
 #ifndef EXPRESSION_H
 #define EXPRESSION_H
 
@@ -10,7 +14,7 @@
 extern bool inFce;
 extern bstSymtable *symTree;
 extern bstSymtable *symLocal;
-
+// Enum of all symbols in table
 typedef enum
 {
 
@@ -34,24 +38,18 @@ typedef enum
 
 } tableItem;
 
-typedef enum
-{
-    KeyWord,
-    Term,
-    NonTerm
-} TermType;
-// pridat veci co mam v mobile
+// Structure of expression element
 typedef struct elmExpression
 {
 
-    int type; // Id
+    int type;
     DATATYPE dataType;
     bool terminal;
     DSTRING *key;
     int valueInt;
     float valueFloat;
 } ElmExp;
-
+// Functions used in c files
 int analyzeExp(TStack *expStack, TOKEN *token);
 int initExpStack(TStack *expStack);
 char getSign(TStack *expStack);
