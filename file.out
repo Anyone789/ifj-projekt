@@ -1,6 +1,8 @@
 .IFJcode24
 DEFVAR GF@op1
 DEFVAR GF@op2
+DEFVAR GF@typeOp1
+DEFVAR GF@typeOp2
 DEFVAR GF@result
 DEFVAR GF@nullValue
 JUMP main
@@ -299,6 +301,7 @@ POPS LF@vysl
 LABEL whileBegin1
 PUSHS LF@d
 PUSHS int@0
+CALL i2f
 GTS
 POPS GF@nullValue
 TYPE GF@result GF@nullValue

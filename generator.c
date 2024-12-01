@@ -16,6 +16,8 @@ void generateHeader()
     printf(".IFJcode24\n");
     printf("DEFVAR GF@op1\n");
     printf("DEFVAR GF@op2\n");
+    printf("DEFVAR GF@typeOp1\n");
+    printf("DEFVAR GF@typeOp2\n");
     printf("DEFVAR GF@result\n");
     printf("DEFVAR GF@nullValue\n");
     printf("JUMP main\n");

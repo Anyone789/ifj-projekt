@@ -33,7 +33,7 @@ char precTable[PrecTableSize][PrecTableSize] = {
 /**
  * @brief Initializes an expression stack.
  *
- * Initializes the stack and pushes an initial expression item with a terminal value 
+ * Initializes the stack and pushes an initial expression item with a terminal value
  * and type set to `tableDollar`. If the stack pointer is `NULL`, returns a syntax error.
  *
  * @param expStack A pointer to the expression stack to initialize.
@@ -82,6 +82,17 @@ void checkSem(ElmExp *lOperand, ElmExp *rOperand)
 
         if (lOperand->dataType.type != rOperand->dataType.type)
         {
+
+            if (lOperand->dataType.type == T_INT)
+            {
+                printf("POPS GF@op1\n");
+                printf("CALL i2f\n");
+                printf("PUSHS GF@op1\n");
+            }
+            else
+            {
+                printf("CALL i2f\n");
+            }
             lOperand->dataType.type = T_FLOAT;
         }
     }
@@ -106,8 +117,14 @@ void checkSem(ElmExp *lOperand, ElmExp *rOperand)
                 else
                 {
                     ((varData *)result->data)->use = true;
+                    if (((varData *)result->data)->dataType.type != rOperand->dataType.type)
+                    {
+                        if (rOperand->dataType.type == T_INT)
+                        {
+                            printf("CALL i2f\n");
+                        }
+                    }
                 }
-                
             }
         }
         // Roperand is id check datatypes
@@ -130,6 +147,15 @@ void checkSem(ElmExp *lOperand, ElmExp *rOperand)
                     lOperand->dataType.type = T_ID;
                     lOperand->key = rOperand->key;
                     ((varData *)result->data)->use = true;
+                    if (((varData *)result->data)->dataType.type != lOperand->dataType.type)
+                    {
+                        if (lOperand->dataType.type == T_INT)
+                        {
+                            printf("POPS GF@op1\n");
+                            printf("CALL i2f\n");
+                            printf("PUSHS GF@op1\n");
+                        }
+                    }
                 }
             }
         }
@@ -162,7 +188,7 @@ void checkSem(ElmExp *lOperand, ElmExp *rOperand)
 /**
  * @brief Validates operands and operator for a binary operation.
  *
- * Ensures that the operands are identifiers, the operator matches the expected type, 
+ * Ensures that the operands are identifiers, the operator matches the expected type,
  * and checks their semantic compatibility. Exits on syntax errors.
  *
  * @param expStack A pointer to the expression stack.
@@ -194,7 +220,7 @@ int binCheck(TStack *expStack, int operator)
 /**
  * @brief Analyzes and processes an expression from the token stream.
  *
- * This function analyzes an expression by pushing tokens onto the stack, performing reductions, 
+ * This function analyzes an expression by pushing tokens onto the stack, performing reductions,
  * and checking semantic and syntax errors. It processes the tokens until the end of the expression is reached.
  *
  * @param expStack A pointer to the expression stack.
@@ -273,7 +299,6 @@ int analyzeExp(TStack *expStack, TOKEN *token)
             {
                 exit(LEXICAL_ERROR);
             }
-
         }
         // End of expression
         else if (sign == '#')
@@ -310,7 +335,7 @@ int analyzeExp(TStack *expStack, TOKEN *token)
 /**
  * @brief Analyzes and processes an expression from the token stream.
  *
- * This function analyzes an expression by pushing tokens onto the stack, performing reductions, 
+ * This function analyzes an expression by pushing tokens onto the stack, performing reductions,
  * and checking semantic and syntax errors. It processes the tokens until the end of the expression is reached.
  *
  * @param expStack A pointer to the expression stack.

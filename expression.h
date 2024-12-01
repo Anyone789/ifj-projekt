@@ -9,6 +9,7 @@
 #include "stack.h"
 #include "errorCodes.h"
 #include "symtable.h"
+#include "generator.h"
 #define PrecTableSize 14
 
 extern bool inFce;
