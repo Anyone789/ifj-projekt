@@ -1,4 +1,7 @@
-// inicializacia zasobnika
+// stack.h
+// Interface for stack
+// Author(s):  Marián Šuľa
+// Last Edit: 15.11.2024
 #ifndef STACK_H
 #define STACK_H
 
@@ -6,32 +9,25 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-// struktura prvku v zasobniku, zatial bude value int, predpokladam, ze to bude asi nejaka struktura
-
+// Structure of item in stack
 typedef struct stackItemStructure
 {
     void *value;
     struct stackItemStructure *next;
 } TStackItem;
 
-// struktura zasobinka
-
+// Structure of stack
 typedef struct stackStructure
 {
     TStackItem *stackTop;
     int stackSize;
 } TStack;
 
-// deklaracia funkcii
+// Functions used in c files
 void stackInit(TStack *stack);
 void stackPush(TStack *stack, void *value);
 void stackPop(TStack *stack);
 int *stackTop(TStack *stack);
 bool stackIsEmpty(TStack *stack);
 void stackDispose(TStack *stack);
-/*
-    @brief  support function for parser to visualize stack printing from TOP to BOTTOM
-    @param *stack The stack
- */
-void stackPrint(TStack *stack);
 #endif
