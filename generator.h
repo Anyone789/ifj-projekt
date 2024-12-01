@@ -9,17 +9,60 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <stdlib.h>
-
+/**
+ * @brief Generates a variable declaration in the local frame.
+ *
+ * @param name Pointer to a DSTRING containing the variable name.
+ */
 void generateVariables(DSTRING *name);
+/**
+ * @brief Assigns a value to a local frame variable by popping the top stack value.
+ *
+ * @param name Pointer to a DSTRING containing the variable name.
+ */
 void assigneVariables(DSTRING *name);
+/**
+ * @brief Generates the header and global variable declarations for the program.
+ *        Initializes required built-in functions.
+ */
 void generateHeader();
+/**
+ * @brief Generates the header for a function, including variable initialization for parameters.
+ *
+ * @param symtable Pointer to the symbol table entry of the function.
+ */
 void generateFunctionHead(bstSymtable *symtable);
+/**
+ * @brief Generates the return logic for a function or the main program exit.
+ *
+ * @param functionID Pointer to a DSTRING containing the function ID.
+ */
 void generateFunctionReturn(DSTRING *functionID);
-void generateFunctionEnd(bstSymtable *symtable);
-void generateFunctionCall(bstSymtable *symtableGlobal, bstSymtable *symtableLocal);
+/**
+ * @brief Generates the beginning of an IF statement with necessary labels and conditions.
+ *
+ * @param ifAloneCounter Unique identifier for the IF statement.
+ */
 void generateIfBeginning(int ifAloneCounter);
+/**
+ * @brief Generates the end of an IF statement with labels for ELSE branching.
+ *
+ * @param ifAloneCounter Unique identifier for the IF statement.
+ * @param ifInsideCount Unique identifier for nested IF statements inside the ELSE branch.
+ */
 void generateIfEnd(int ifAloneCounter, int ifInsideCount);
+/**
+ * @brief Generates the ELSE branch of an IF statement.
+ *
+ * @param ifAloneCounter Unique identifier for the IF statement.
+ * @param ifInsideCount Unique identifier for nested IF statements inside the ELSE branch.
+ */
 void generateElse(int ifAloneCounter, int ifInsideCount);
+/**
+ * @brief Generates the beginning of a WHILE loop with necessary labels and conditions.
+ *
+ * @param whileCounter Unique identifier for the WHILE loop.
+ */
 void generateWhileBeginning(int whileCounter);
 // built in functions
 

@@ -94,29 +94,36 @@ typedef enum
 
 } NonTerminals;
 
-// structure for single rule for LL1 table
-//  nonTerminal -> rightSide of rule
-// example nLlProgram ->  <nLlPrologue> <nLlProgramBody>
+/*
+    structure for single rule for LL1 table
+    nonTerminal -> rightSide of rule
+    example nLlProgram ->  <nLlPrologue> <nLlProgramBody>
+ */
 typedef struct
 {
     NonTerminals nonTerminal;
     char production[MAX_RULE_ITEMS];
 } ProductionRule;
 
-/*
-    @brief that pushes right side of the rule to the stack
-    @param *parserStack  stack to push
-    @param rule  index of rule in LL1 table
-    @return void This function does not return a value.
-*/
-void pushRule(TStack *parserStack, int rule);
-/*
-    @brief  function that converts token from scanner to index in LL table and adds specific tokens to symtebl for semantic analysis
-    @param *token token to convert to index in
-    @return index of token in LL table based on enumrator,
-    @return -6 when TOKEN = T_KEYWOR.atribute = import
-    @return -8 when TOKEN  = T_DO
+/**
+ * @brief Pushes the right-hand side of a grammar rule onto the parser stack.
+ *
+ * @param *parserStack Pointer to the stack where the rule's right side will be pushed.
+ * @param rule Index of the rule in the LL(1) table.
+ * @return void This function does not return a value.
  */
+
+void pushRule(TStack *parserStack, int rule);
+/**
+ * @brief Converts a token from the scanner into an index in the LL(1) table
+ *        and handles specific tokens by adding them to the symbol table for semantic analysis.
+ *
+ * @param *token Pointer to the token to be converted to an index in the LL table.
+ * @return Index of the token in the LL table based on its enumerator.
+ * @return -6 If TOKEN is T_KEYWORD and its attribute is "import".
+ * @return -8 If TOKEN is T_DOT.
+ */
+
 int convertTokenToIndex(TOKEN *token);
 /**
  * @brief Parses tokens from the input and processes them based on LL(1) grammar rules.

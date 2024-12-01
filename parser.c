@@ -4,6 +4,7 @@
 // Last Edit: 1.12.2024
 #include "parser.h"
 
+// global variables definitions
 bool nullType = false;
 bool isConst = false;
 bool assign = false;
@@ -15,7 +16,11 @@ int ifAloneCounter = 0;
 int ifInsideCount = 0;
 int whileCounter = 0;
 
-// PARSING RULES
+/**
+ * @brief Parsing rules for the IFJ24 compiler.
+ * @see documentation.pdf, section "LL Table"
+ * @note each line represents single rule in our language
+ */
 ProductionRule llRules[] =
     {
         {nLlProgram, {nLlPrologue, nLlProgramBody, EOF}},
@@ -67,7 +72,10 @@ ProductionRule llRules[] =
         {nLlType, {tLlString}},
 };
 
-// 2D array of LL1 table for ifj24 compile
+/**
+ * @brief 2D array representing the LL(1) table for the IFJ24 compiler.
+ * @see documentation.pdf, section "LL Table"
+ */
 int llTable[NON_TERMINAL_COUNT][TERMINAL_COUNT] = {
     //                           c   p   f   F   I   i   f   s  if   w   r   v   ,   (   )   =   ;   {   }   e   :   $   |  ifj  [   ]  v null
     /* <program>             */ {0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1},
@@ -427,6 +435,7 @@ int convertTokenToIndex(TOKEN *token)
     case T_STR:
         return tLlString;
         break;
+    // opytat sa ne meeting ************************************************
     case T_PLUS:
     case T_MINUS:
     case T_MUL:
@@ -439,7 +448,7 @@ int convertTokenToIndex(TOKEN *token)
     case T_EQ:
         exit(SYNTAX_ERROR);
     case T_ASSIGN:
-        return tLlEqual; // equel = "=" not "==" name isnt the best but it is what it is
+        return tLlEqual; // equel = "=" not "=="
         break;
     case T_SEMICOL:
         return tLlSemicolon;
@@ -489,7 +498,7 @@ int convertTokenToIndex(TOKEN *token)
 
 void parserIn(TStack *parserStack)
 {
-
+    // declarations and definitions of necessary variables
     DSTRING *ID;
     ID = dStringCreate();
     TStack generatorStack;
@@ -517,8 +526,9 @@ void parserIn(TStack *parserStack)
     bool ifBody = false;
     bool elseBody = false;
 
-    // loop for whole parsing phaze, loops till EOF or error
+    // generates 3-address code for progeamm start and all of the built in functions
     generateHeader();
+    // loop for whole parsing phaze, loops till EOF or error
     while (literal != EOF)
     {
 
@@ -567,16 +577,20 @@ void parserIn(TStack *parserStack)
 
         // top is top value from the stack
         top = *(int *)(parserStack->stackTop);
+        // 3-address code generation for if statement
         if (top == tLlIf)
         {
 
             ifAloneCounter++;
+            // malloc for 3-address code generation
             char *print1 = (char *)malloc(100 * sizeof(char));
             if (print1 == NULL)
             {
                 exit(INTERNAL_ERROR);
             }
+            // print to print1
             sprintf(print1, "LABEL elseEnd%d\n", ifAloneCounter);
+            // pushes print1 to stack
             stackPush(&generatorStack, (void *)print1);
             char *print = (char *)malloc(100 * sizeof(char));
             if (print == NULL)
@@ -588,6 +602,7 @@ void parserIn(TStack *parserStack)
             stackPush(&generatorStack, (void *)print);
         }
 
+        // 3-address code generation for while loop
         else if (top == tLlWhile)
         {
             printf("LABEL whileBegin%d\n", whileCounter);
@@ -617,26 +632,19 @@ void parserIn(TStack *parserStack)
             }
         }
 
-        // printf("==================76==========\n");
-
         // terminal part
         if ((top >= 0 && top <= TERMINAL_COUNT - 1) || (top <= -1 && top >= -8))
         {
-
-            // printf("NA VSTUPE JE TERMINAL\n");
-            // printf("top: %d\n", top);
-            // printf("literal: %d\n", literal);
-            // END OF PARSING
-            // Sets isReturn to true
             if (literal == tLlReturn)
             {
                 isReturn = true;
             }
 
+            // END OF PARSING
+            // Sets isReturn to true
             if (top == -1 && literal == 21)
             {
                 stackPop(parserStack);
-                // printf("END");
                 // Generate
                 generateFunctionReturn(functionIDCurrent);
                 // Checks if vars were used
@@ -671,6 +679,7 @@ void parserIn(TStack *parserStack)
                 exit(SYNTAX_ERROR);
             }
 
+            // next token getter
             token = getToken();
             literal = convertTokenToIndex(token);
 
@@ -766,6 +775,7 @@ void parserIn(TStack *parserStack)
                         printf("POPS LF@%s\n", currentID->str);
                     }
                 }
+                // reset of all variables
                 paramCount = 0;
                 assign = false;
                 ifj = false;
@@ -802,28 +812,22 @@ void parserIn(TStack *parserStack)
         // none terminal phaze, pops nonterminal from stack and pushes right side of specific rule to it
         else if (top >= 100 && top <= 122)
         {
-            // printf("-------------top: %d\n", top);
-            // printf("literal: %d\n", literal);
-
             // null type part
             // printf("pravidlo bude: %d\n", (llTable[top % 100][literal]));
             // this condition checks if there is ? before data type and sets global variable nullType to true to let semantic analizator let know
             if (top == 105 && literal == 28)
             {
                 nullType = true;
-                // printf("ID moze byt aj NULL\n");
                 token = getToken();
                 literal = convertTokenToIndex(token);
                 // checker if user isnt using null or void with null typr indicator
                 if (literal == 26 || literal == 27)
                 {
-                    // printf("void alebo null nemoze byt null");
                     exit(SYNTAX_ERROR);
                 }
             }
             else
             {
-                // printf("ID moze byt aj NULL v else\n");
                 nullType = false;
             }
             // Checks if varaible is in local symtable in initialization
@@ -903,6 +907,7 @@ void parserIn(TStack *parserStack)
                             {
                                 exit(WRONG_ARGUMENTS_ERROR);
                             }
+                            // 3-address code genartion for variables
                             if (token->type == T_INT)
                             {
                                 printf("PUSHS int@%d\n", token->attribute.i);
@@ -940,6 +945,7 @@ void parserIn(TStack *parserStack)
 
                         varDatas[0].dataType = (DATATYPE){nullType, false, token->type};
                         insertFunction(&symTree, functionID->str, (DATATYPE){nullType, false, token->type}, paramCountList + 1, false, false, true, varDatas);
+                        // 3-address code generation for variables
                         if (token->type == T_INT)
                         {
                             printf("PUSHS int@%d\n", token->attribute.i);
@@ -1062,7 +1068,7 @@ void parserIn(TStack *parserStack)
             {
                 if (functionIDCurrent != NULL)
                 {
-                    // Generate 
+                    // Generate
                     generateFunctionReturn(functionIDCurrent);
                     // Checks variable usage
                     usedVar(&symLocal);
@@ -1084,7 +1090,6 @@ void parserIn(TStack *parserStack)
 
                 if (resFce == NULL || res == NULL)
                 {
-
                 }
                 else
                 {
@@ -1116,7 +1121,6 @@ void parserIn(TStack *parserStack)
                     {
                         exit(WRONG_ARGUMENTS_ERROR);
                     }
-
                 }
             }
             // Sets paramTypeCounter to 0
