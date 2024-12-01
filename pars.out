@@ -249,34 +249,111 @@ RETURN
 LABEL main
 CREATEFRAME
 PUSHFRAME
-DEFVAR LF@a
-PUSHS string@ahoj\032serus\010
-POPS LF@a
-DEFVAR LF@c
-PUSHS LF@a
-PUSHS string@Samo
-CALL strcmp
-POPS LF@c
-PUSHS LF@c
+PUSHS string@Zadejte\032cislo\032pro\032vypocet\032faktorialu:\032
 CALL write
-LABEL whileBegin1
-PUSHS LF@a
+DEFVAR LF@inp
+CALL readi32
+POPS LF@inp
+PUSHS LF@inp
 POPS GF@nullValue
 TYPE GF@result GF@nullValue
-JUMPIFEQ whileEnd1 GF@result string@nil
-JUMPIFEQ whileContinue1 GF@result string@bool
-JUMP inWhile1
-LABEL whileContinue1
+JUMPIFEQ else1 GF@result string@nil
+JUMPIFEQ ifContinue1 GF@result string@bool
+JUMP inIf1
+LABEL ifContinue1
 PUSHS GF@nullValue
-PUSHS bool@false
-JUMPIFEQS whileEnd1
-LABEL inWhile1
-PUSHS LF@a
-DEFVAR LF@inp
-POPS LF@inp
-PUSHS string@a
-POPS LF@inp
-JUMP whileBegin1
-LABEL whileEnd1
+PUSHS bool@true
+JUMPIFNEQS else1
+LABEL inIf1
+PUSHS LF@inp
+DEFVAR LF@INP
+POPS LF@INP
+PUSHS LF@INP
+PUSHS int@0
+LTS
+POPS GF@nullValue
+TYPE GF@result GF@nullValue
+JUMPIFEQ else2 GF@result string@nil
+JUMPIFEQ ifContinue2 GF@result string@bool
+JUMP inIf2
+LABEL ifContinue2
+PUSHS GF@nullValue
+PUSHS bool@true
+JUMPIFNEQS else2
+LABEL inIf2
+PUSHS string@Faktorial\032nelze\032spocitat!\010
+CALL write
+JUMP elseEnd2
+LABEL else2
+DEFVAR LF@vysl
+PUSHS LF@INP
+CALL factorial
+POPS LF@vysl
+PUSHS string@Vysledek:\032
+CALL write
+PUSHS LF@vysl
+CALL write
+LABEL elseEnd2
+JUMP elseEnd1
+LABEL else1
+PUSHS string@Chyba\032pri\032nacitani\032celeho\032cisla!\010
+CALL write
+LABEL elseEnd1
 POPFRAME
 EXIT int@0
+LABEL decrement
+CREATEFRAME
+PUSHFRAME
+DEFVAR LF@m
+POPS LF@m
+DEFVAR LF@n
+POPS LF@n
+PUSHS LF@n
+PUSHS LF@m
+SUBS
+POPFRAME
+RETURN
+LABEL factorial
+CREATEFRAME
+PUSHFRAME
+DEFVAR LF@n
+POPS LF@n
+DEFVAR LF@result
+PUSHS int@0
+PUSHS int@1
+SUBS
+POPS LF@result
+PUSHS LF@n
+PUSHS int@2
+LTS
+POPS GF@nullValue
+TYPE GF@result GF@nullValue
+JUMPIFEQ else3 GF@result string@nil
+JUMPIFEQ ifContinue3 GF@result string@bool
+JUMP inIf3
+LABEL ifContinue3
+PUSHS GF@nullValue
+PUSHS bool@true
+JUMPIFNEQS else3
+LABEL inIf3
+PUSHS int@1
+POPS LF@result
+JUMP elseEnd3
+LABEL else3
+DEFVAR LF@decremented_n
+PUSHS LF@n
+PUSHS int@1
+CALL decrement
+POPS LF@decremented_n
+DEFVAR LF@temp_result
+PUSHS LF@decremented_n
+CALL factorial
+POPS LF@temp_result
+PUSHS LF@n
+PUSHS LF@temp_result
+MULS
+POPS LF@result
+LABEL elseEnd3
+PUSHS LF@result
+POPFRAME
+RETURN
