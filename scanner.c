@@ -1,6 +1,6 @@
 // Module for lexical analyser
 // Author(s): Tomáš Hrbáč, Václav Bergman
-// Last Edit: 30.11.2024
+// Last Edit: 01.12.2024
 
 #include <stdbool.h>
 #include <stdio.h>
@@ -212,7 +212,7 @@ TOKEN *getToken()
                 }
                 else if (c == '\"')
                 {
-                    state = STRING_START;
+                    state = STRING;
                     token->type = T_STR;
                     token->current_attribute = DSTR;
                     token->attribute.dStr = dStringCreate();
@@ -562,7 +562,7 @@ TOKEN *getToken()
 
                 break;
             }
-            case STRING_START:
+            case STRING:
             {
                 // Escape sequences, hash symbol and control characters (0 - 32) get converted
                 // to \XXX format
@@ -596,7 +596,7 @@ TOKEN *getToken()
             }
             case ESCAPE_SEQ:
             {
-                state = STRING_START;
+                state = STRING;
                 
                 // If c is specified in hex format
                 if (c == 'x')
@@ -651,7 +651,7 @@ TOKEN *getToken()
                     // escape sequence was modified -> c contains hex value at position 16^0
                     else
                     {
-                        state = STRING_START;
+                        state = STRING;
                         escapeSequence += c;
                         
                         // Returning converted escape sequence to source file
@@ -681,7 +681,7 @@ TOKEN *getToken()
                     // escape sequence was modified -> c contains hex value at position 16^0
                     else
                     {
-                        state = STRING_START;
+                        state = STRING;
                         escapeSequence += c;
                         // returning converted escape sequence to source file
                         ungetc(escapeSequence, src);
