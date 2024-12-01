@@ -1037,14 +1037,15 @@ void parserIn(TStack *parserStack)
 
                     if (res == NULL)
                     {
-                        exit(80);
+                        exit(INTERNAL_ERROR);
                     }
                     else
                     {
                         if (!((fceData *)res->data)->returnType.isNull)
                         {
-                            exit(90);
+                            exit(INCORRECT_RETURN_ERROR);
                         }
+                        printf("PUSHS nil@nil\n");
                     }
                 }
                 else
@@ -1052,14 +1053,16 @@ void parserIn(TStack *parserStack)
                     bstSymtable *res = symtableSearch(&symLocal, *ID);
                     if (res == NULL)
                     {
-                        exit(80);
+                        exit(INTERNAL_ERROR);
                     }
                     else
                     {
                         if (!((varData *)res->data)->dataType.isNull)
                         {
-                            exit(90);
+                            exit(INCOMPATIBLE_TYPE_ERROR);
                         }
+                        printf("PUSHS nil@nil\n");
+                        printf("POPS LF@%s\n", ID->str);
                     }
                 }
             }
