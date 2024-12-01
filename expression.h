@@ -50,6 +50,7 @@ typedef struct elmExpression
     float valueFloat;
 } ElmExp;
 // Functions used in c files
+
 int analyzeExp(TStack *expStack, TOKEN *token);
 int initExpStack(TStack *expStack);
 char getSign(TStack *expStack);

@@ -524,7 +524,6 @@ int reduce(TStack *expStack)
  * @param value The token type (e.g., operator, identifier).
  * @return An index representing the token type for processing.
  */
-
 int convertToIndex(int value)
 {
     switch (value)

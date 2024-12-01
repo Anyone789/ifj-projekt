@@ -62,6 +62,7 @@ typedef struct fce
     bstSymtable **locals;
 } fceData;
 // Functions used in c files
+
 void symtableInit(bstSymtable **symTree);
 bstSymtable *symtableSearch(bstSymtable **symTree, DSTRING key);
 void symtableInsertVar(bstSymtable **symTree, DSTRING key, void *data);

@@ -24,6 +24,7 @@ typedef struct stackStructure
 } TStack;
 
 // Functions used in c files
+
 void stackInit(TStack *stack);
 void stackPush(TStack *stack, void *value);
 void stackPop(TStack *stack);

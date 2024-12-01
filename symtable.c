@@ -286,7 +286,6 @@ void symtableInsertFce(bstSymtable **symTree, DSTRING key, void *data)
  * @param dstr Pointer to the dynamic string.
  * @param str Null-terminated C-string to append.
  */
-
 void dStringAddString(DSTRING *dstr, const char *str)
 {
     while (*str)

@@ -1,8 +1,7 @@
-// heafer file for parser for ifj24
-// authors: Samuel Kundrat
-// created: 11.11.2024
-// edited: 17.11.2024
-
+// parser.h
+// Interface for parser
+// Author(s): Samuel Kundrat
+// Last Edit: 17.11.2024
 #ifndef PARSER_H
 #define PARSER_H
 
