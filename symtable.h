@@ -1,16 +1,19 @@
 // symtable.h
 // Interface for symbol table module
-// Author(s): Václav Bergman, Marián Šuľa
-// Last Edit: 13.11.2024
+// Author(s):  Marián Šuľa
+// Last Edit: 20.11.2024
 
 #ifndef SYMTABLE_H
 #define SYMTABLE_H
 
 #include <stdbool.h>
 #include "scanner.h"
+#include "errorCodes.h"
 #include <string.h>
 #include <math.h>
 #include <stdlib.h>
+
+// enum for function and variable
 typedef enum
 {
     var,
@@ -19,47 +22,46 @@ typedef enum
 
 extern const char *TOKEN_TYPE_STRING[];
 
-// Array of keywords
 extern const char *keywords[];
 
-// Uzel stromu
+// Structure of node
 typedef struct symtable
 {
-    char *key;              // klíč
-    void *data;             // hodnota
-    int height;             // vyska stromu
-    nodeType dataType;      // typ uzla
-    struct symtable *left;  // levý potomek
-    struct symtable *right; // pravý potomek
+    char *key;
+    void *data;
+    int height;
+    nodeType dataType;    
+    struct symtable *left;  
+    struct symtable *right; 
 } bstSymtable;
-
+// Structure of datatype 
 typedef struct dataType
 {
     bool isNull;
     bool isVoid;
     TOKEN_TYPE type;
 } DATATYPE;
-// struktura premennej
+// Structure of variable in nodes
 typedef struct var
 {
     DATATYPE dataType;
     char *name;
     bool initialized;
-    bool constant; // If variable is const type
-    bool isPar;    // If variable is function parameter (const == true)
-    bool use;      // If variable is used during run time
+    bool constant; 
+    bool isPar;  
+    bool use;    
 } varData;
-
+// Structure of function in nodes
 typedef struct fce
 {
-    DATATYPE returnType; // return value
-    int paramCount;      // param caunt
-    bool isDefined;      // is function defined
+    DATATYPE returnType; 
+    int paramCount;     
+    bool isDefined;     
     bool buildIn;
     varData *params;
     bstSymtable **locals;
 } fceData;
-
+// Functions used in c files
 void symtableInit(bstSymtable **symTree);
 bstSymtable *symtableSearch(bstSymtable **symTree, DSTRING key);
 void symtableInsertVar(bstSymtable **symTree, DSTRING key, void *data);
