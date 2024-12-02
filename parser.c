@@ -15,7 +15,7 @@ bstSymtable *symLocal;
 int ifAloneCounter = 0;
 int ifInsideCount = 0;
 int whileCounter = 0;
-
+int functionCounter = 0;
 /**
  * @brief Parsing rules for the IFJ24 compiler.
  * @see documentation.pdf, section "LL Table"
@@ -120,13 +120,19 @@ int parsIt(TStack *parserStack)
  */
 void usedVar(bstSymtable **symTree)
 {
+    
     if (*symTree != NULL)
     {
         if (((varData *)(*symTree)->data)->use == false)
         {
             exit(UNUSED_VARIABLE_ERROR);
         }
-
+        if (((varData *)(*symTree)->data)->isPar == false)
+        {
+            generateVariables(&(*symTree)->key);
+            /* code */
+        }
+        
         usedVar(&(*symTree)->left);
         usedVar(&(*symTree)->right);
     }
@@ -198,6 +204,7 @@ void processFunction(bstSymtable *res, bstSymtable *resFce, DSTRING *functionID,
             }
             varDatas[0].dataType = (DATATYPE){nullType, false, type};
             varDatas[0].name = res->key;
+            ((varData *)(res->data))->isPar = true;
             insertFunction(&symTree, functionID->str, (DATATYPE){nullType, false, type}, *paramCount + 1, true, false, true, varDatas);
             (*paramCount)++;
             paramCountGlob = *paramCount;
@@ -215,6 +222,7 @@ void processFunction(bstSymtable *res, bstSymtable *resFce, DSTRING *functionID,
                     exit(WRONG_ARGUMENTS_ERROR);
                 }
                 ((fceData *)(resFce->data))->params[*paramCount].name = res->key;
+                ((varData *)(res->data))->isPar = true;
             }
 
             (*paramCount)++;
@@ -238,7 +246,10 @@ void setFunctionReturnType(bstSymtable *resFce, int type)
         ((fceData *)resFce->data)->returnType.type = type;
         ((fceData *)resFce->data)->returnType.isNull = nullType;
         ((fceData *)(resFce->data))->isDefined = true;
+        functionCounter++;
         generateFunctionHead(resFce);
+        printf("JUMP GENVARS%d\n", functionCounter);
+        printf("LABEL FUNCTIONSTART%d\n", functionCounter);
     }
 }
 /**
@@ -647,9 +658,11 @@ void parserIn(TStack *parserStack)
                 stackPop(parserStack);
                 // Generate
                 generateFunctionReturn(functionIDCurrent);
+                printf("LABEL GENVARS%d\n", functionCounter);
                 // Checks if vars were used
                 usedVar(&symLocal);
                 // Checks if all used funtions were defined
+                printf("JUMP FUNCTIONSTART%d\n", functionCounter);
                 defFunction(&symTree);
                 // Checks if main was in the file with right arguments and return value
                 DSTRING *str = dStringCreate();
@@ -701,7 +714,7 @@ void parserIn(TStack *parserStack)
                             insertVariables(token->attribute.dStr->str, (DATATYPE){false, false, ((varData *)res->data)->dataType.type}, false, isConst, false, false, &symLocal);
                             // generate
                             printf("PUSHS LF@%s\n", ID->str);
-                            printf("DEFVAR LF@%s\n", token->attribute.dStr->str);
+                            //printf("DEFVAR LF@%s\n", token->attribute.dStr->str);
                             printf("POPS LF@%s\n", token->attribute.dStr->str);
                         }
                         else
@@ -711,7 +724,7 @@ void parserIn(TStack *parserStack)
                             if (strcmp(token->attribute.dStr->str, "ifj") != 0 && (state != nLlParams && state != nLlFunctDef))
                             {
                                 // generate
-                                generateVariables(token->attribute.dStr);
+                                //generateVariables(token->attribute.dStr);
                             }
                         }
                     }
@@ -1073,8 +1086,10 @@ void parserIn(TStack *parserStack)
                 {
                     // Generate
                     generateFunctionReturn(functionIDCurrent);
+                    printf("LABEL GENVARS%d\n", functionCounter);
                     // Checks variable usage
                     usedVar(&symLocal);
+                    printf("JUMP FUNCTIONSTART%d\n", functionCounter);
                 }
                 // dispose local symtable
                 symtableDispose(&symLocal);

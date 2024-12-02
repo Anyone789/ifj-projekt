@@ -251,9 +251,10 @@ RETURN
 LABEL main
 CREATEFRAME
 PUSHFRAME
+JUMP GENVARS1
+LABEL FUNCTIONSTART1
 PUSHS string@Zadejte\032cislo\032pro\032vypocet\032faktorialu\010
 CALL write
-DEFVAR LF@a
 CALL readi32
 POPS LF@a
 PUSHS LF@a
@@ -268,7 +269,6 @@ PUSHS bool@true
 JUMPIFNEQS else1
 LABEL inIf1
 PUSHS LF@a
-DEFVAR LF@val
 POPS LF@val
 PUSHS LF@val
 PUSHS int@0
@@ -291,11 +291,9 @@ PUSHS string@\032nelze\032spocitat\010
 CALL write
 JUMP elseEnd2
 LABEL else2
-DEFVAR LF@d
 PUSHS LF@val
 CALL i2f
 POPS LF@d
-DEFVAR LF@vysl
 PUSHS float@0x1p+0
 POPS LF@vysl
 LABEL whileBegin1
@@ -329,7 +327,6 @@ PUSHS LF@vysl
 CALL write
 PUSHS string@\032=\032
 CALL write
-DEFVAR LF@vysl_i32
 PUSHS LF@vysl
 CALL f2i
 POPS LF@vysl_i32
@@ -345,3 +342,10 @@ CALL write
 LABEL elseEnd1
 POPFRAME
 EXIT int@0
+LABEL GENVARS1
+DEFVAR LF@d
+DEFVAR LF@a
+DEFVAR LF@vysl
+DEFVAR LF@val
+DEFVAR LF@vysl_i32
+JUMP FUNCTIONSTART1
