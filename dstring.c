@@ -9,6 +9,7 @@
 #include <stdbool.h>
 #include <errno.h>
 #include <limits.h>
+#include <math.h>
 #include "dstring.h"
 #include "errorCodes.h"
 
@@ -125,9 +126,22 @@ bool dStringToInt(DSTRING *dStr, int *i)
     return true;
 }
 
-double dStringToDouble(DSTRING *dStr)
+bool dStringToDouble(DSTRING *dStr, double *d)
 {
-    return atof(dStr->str);
+    errno = 0;
+    // Converting DSTRING contents to long
+    (*d) = strtod(dStr->str, NULL);
+
+    // Checking if number is in range
+    if (\
+    (((*d) == HUGE_VAL || -(*d) == HUGE_VAL) && errno == ERANGE) ||\
+    ((*d) == 0 && errno == ERANGE)\
+    )
+    {
+        return false;
+    }
+
+    return true;
 }
 
 void dStringAddIntIFJcode24Format(DSTRING *dStr, int i)

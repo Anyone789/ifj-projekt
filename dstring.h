@@ -91,7 +91,7 @@ int dStringGetLength(DSTRING *dStr);
 /*
     @brief Returns contents of a DSTRING converted to int
     @param *dStr pointer to a DSTRING
-    @param *i pointer to int
+    @param *i pointer to an int
     @return true on succes\
     @return false on failure
 */
@@ -100,9 +100,11 @@ bool dStringToInt(DSTRING *dStr, int *i);
 /*
     @brief Returns contents of a DSTRING converted to double
     @param *dStr pointer to a DSTRING
-    @return double
+    @param *d pointer to a double
+    @return true on succes\
+    @return false on failure
 */
-double dStringToDouble(DSTRING *dStr);
+bool dStringToDouble(DSTRING *dStr, double *d);
 
 /*
     @brief Appends integer to DSTRING in IFJcode24 format \xyz, where xyz is decimal number 000-255
