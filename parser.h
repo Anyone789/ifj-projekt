@@ -19,11 +19,8 @@
 #define NON_TERMINAL_COUNT 26
 #define MAX_RULE_ITEMS 12
 
-// #define tLlZigImport -5
 #define tLlImport -6
-// #define EPS -7
 #define tLlDot -8
-// #define tLlComm -9
 #define EXP -10
 
 // global variable to let know sematic alysis that variable can be also null
@@ -90,7 +87,6 @@ typedef enum
     nLlNoNullBody,
     nLlFunctId,
     nLlDefType,
-    // nLlNull,
 
 } NonTerminals;
 
