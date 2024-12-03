@@ -1,6 +1,6 @@
 // Module for lexical analyser
 // Author(s): Tomáš Hrbáč, Václav Bergman
-// Last Edit: 01.12.2024
+// Last Edit: 03.12.2024
 
 #include <stdbool.h>
 #include <stdio.h>
@@ -458,11 +458,20 @@ TOKEN *getToken()
                 }
                 else
                 {
-                    int dStrInt = dStringToInt(token->attribute.dStr);
-                    dStringDestroy(token->attribute.dStr);
-                    token->current_attribute = I;
-                    token->attribute.i = dStrInt;
-                    ungetc(c, src);
+                    int dStrInt;
+                    if(dStringToInt(token->attribute.dStr, &dStrInt))
+                    {
+                        dStringDestroy(token->attribute.dStr);
+                        token->current_attribute = I;
+                        token->attribute.i = dStrInt;
+                        ungetc(c, src);
+                    }
+                    else
+                    {
+                        dStringDestroy(token->attribute.dStr);
+                        token->type = T_ERROR;
+                    }
+
                     tokenScanned = true;
                 }
 
