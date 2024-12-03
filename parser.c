@@ -120,7 +120,7 @@ int parsIt(TStack *parserStack)
  */
 void usedVar(bstSymtable **symTree)
 {
-    
+
     if (*symTree != NULL)
     {
         if (((varData *)(*symTree)->data)->use == false)
@@ -132,7 +132,7 @@ void usedVar(bstSymtable **symTree)
             generateVariables(&(*symTree)->key);
             /* code */
         }
-        
+
         usedVar(&(*symTree)->left);
         usedVar(&(*symTree)->right);
     }
@@ -714,7 +714,7 @@ void parserIn(TStack *parserStack)
                             insertVariables(token->attribute.dStr->str, (DATATYPE){false, false, ((varData *)res->data)->dataType.type}, false, isConst, false, false, &symLocal);
                             // generate
                             printf("PUSHS LF@%s\n", ID->str);
-                            //printf("DEFVAR LF@%s\n", token->attribute.dStr->str);
+                            // printf("DEFVAR LF@%s\n", token->attribute.dStr->str);
                             printf("POPS LF@%s\n", token->attribute.dStr->str);
                         }
                         else
@@ -724,7 +724,7 @@ void parserIn(TStack *parserStack)
                             if (strcmp(token->attribute.dStr->str, "ifj") != 0 && (state != nLlParams && state != nLlFunctDef))
                             {
                                 // generate
-                                //generateVariables(token->attribute.dStr);
+                                // generateVariables(token->attribute.dStr);
                             }
                         }
                     }
@@ -826,7 +826,6 @@ void parserIn(TStack *parserStack)
         else if (top >= 100 && top <= 122)
         {
             // null type part
-            // printf("pravidlo bude: %d\n", (llTable[top % 100][literal]));
             // this condition checks if there is ? before data type and sets global variable nullType to true to let semantic analizator let know
             if (top == 105 && literal == 28)
             {
@@ -1041,7 +1040,7 @@ void parserIn(TStack *parserStack)
                     }
                 }
             }
-            // netusim ?????
+            // return is null or variable is null
             if ((llTable[top % 100][literal]) == 34)
             {
                 if (isReturn)

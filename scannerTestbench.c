@@ -7,15 +7,14 @@
 #include <stdlib.h>
 #include "scanner.h"
 
-
 int main(int argc, char **argv)
 {
-    if(argc > 2)
+    if (argc > 2)
     {
         fprintf(stderr, "Too many arguments!");
         exit(0);
     }
-    if(argc == 1)
+    if (argc == 1)
     {
         fprintf(stderr, "Few arguments!");
         exit(0);
@@ -23,7 +22,7 @@ int main(int argc, char **argv)
     else
     {
         FILE *src;
-        
+
         if ((src = fopen(argv[1], "r")) == NULL)
         {
             fprintf(stderr, "The file cannot be opened.");
@@ -40,30 +39,31 @@ int main(int argc, char **argv)
         {
             token = getToken();
             printf("Token No: %d Type: %s Attribute: ", tokenCnt, TOKEN_TYPE_STRING[token->type]);
-            
+
             switch (token->current_attribute)
             {
-                case DSTR:
-                {
-                    printf("%s\n", dStringGetStr(token->attribute.dStr));
-                    break;
-                }
-                case I:
-                {
-                    printf("%d\n", token->attribute.i);
-                    break;
-                }
-                case F:
-                {
-                    printf("%f\n", token->attribute.f);
-                    break;
-                }
-                case NONE:
-                {
-                    printf("NONE\n");
-                    break;
-                }
-                default: break;
+            case DSTR:
+            {
+                printf("%s\n", dStringGetStr(token->attribute.dStr));
+                break;
+            }
+            case I:
+            {
+                printf("%d\n", token->attribute.i);
+                break;
+            }
+            case F:
+            {
+                printf("%f\n", token->attribute.f);
+                break;
+            }
+            case NONE:
+            {
+                printf("NONE\n");
+                break;
+            }
+            default:
+                break;
             }
 
             if (token->type == T_ERROR || token->type == T_EOF)
@@ -75,7 +75,7 @@ int main(int argc, char **argv)
 
             tokenCnt++;
 
-        }while (!stop);
+        } while (!stop);
 
         fclose(src);
     }
