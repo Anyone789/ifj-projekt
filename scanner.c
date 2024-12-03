@@ -506,11 +506,20 @@ TOKEN *getToken()
                 }
                 else
                 {
-                    double dStrDouble = dStringToDouble(token->attribute.dStr);
-                    dStringDestroy(token->attribute.dStr);
-                    token->current_attribute = F;
-                    token->attribute.f = dStrDouble;
-                    ungetc(c, src);
+                    double dStrDouble;
+                    if(dStringToDouble(token->attribute.dStr, &dStrDouble))
+                    {
+                        dStringDestroy(token->attribute.dStr);
+                        token->current_attribute = F;
+                        token->attribute.f = dStrDouble;
+                        ungetc(c, src);
+                    }
+                    else
+                    {
+                        dStringDestroy(token->attribute.dStr);
+                        token->type = T_ERROR;
+                    }
+
                     tokenScanned = true;
                 }
 
@@ -561,11 +570,20 @@ TOKEN *getToken()
                 }
                 else
                 {
-                    double dStrDouble = dStringToDouble(token->attribute.dStr);
-                    dStringDestroy(token->attribute.dStr);
-                    token->current_attribute = F;
-                    token->attribute.f = dStrDouble;
-                    ungetc(c, src);
+                    double dStrDouble;
+                    if(dStringToDouble(token->attribute.dStr, &dStrDouble))
+                    {
+                        dStringDestroy(token->attribute.dStr);
+                        token->current_attribute = F;
+                        token->attribute.f = dStrDouble;
+                        ungetc(c, src);
+                    }
+                    else
+                    {
+                        dStringDestroy(token->attribute.dStr);
+                        token->type = T_ERROR;
+                    }
+
                     tokenScanned = true;
                 }
 
