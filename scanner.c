@@ -1,6 +1,6 @@
 // Module for lexical analyser
 // Author(s): Tomáš Hrbáč, Václav Bergman
-// Last Edit: 03.12.2024
+// Last Edit: 04.12.2024
 
 #include <stdbool.h>
 #include <stdio.h>
@@ -213,6 +213,13 @@ TOKEN *getToken()
                 else if (c == '\"')
                 {
                     state = STRING;
+                    token->type = T_STR;
+                    token->current_attribute = DSTR;
+                    token->attribute.dStr = dStringCreate();
+                }
+                else if (c == '\\')
+                {
+                    state = MULTILINE_STRING_START;
                     token->type = T_STR;
                     token->current_attribute = DSTR;
                     token->attribute.dStr = dStringCreate();
@@ -732,6 +739,57 @@ TOKEN *getToken()
                     tokenScanned = true;
                 }
 
+                break;
+            }
+            case MULTILINE_STRING_START:
+            {
+                if (c == '\\')
+                {
+                    state = MULTILINE_STRING_MID;
+                }
+                else
+                {
+                    token->type = T_ERROR;
+                    token->current_attribute = NONE;
+                    dStringDestroy(token->attribute.dStr);
+                    tokenScanned = true;
+                }
+
+                break;
+            }
+            case MULTILINE_STRING_MID:
+            {
+                if (c == '\n')
+                {
+                    state = MULTILINE_STRING_END;
+                }
+                else if ((c >= 0 && c <= 32) || c == '#' || c == '\\' || c == '\"')
+                {
+                    if (c == '\"')
+                    {
+                        dStringAddIntIFJcode24Format(token->attribute.dStr, '\\');
+                    }
+                    dStringAddIntIFJcode24Format(token->attribute.dStr, c);
+                }
+                else
+                {
+                    dStringAddChar(token->attribute.dStr, c);
+                }
+
+                break;
+            }
+            case MULTILINE_STRING_END:
+            {
+                if (c == '\\')
+                {
+                    state = MULTILINE_STRING_START;
+                    dStringAddIntIFJcode24Format(token->attribute.dStr, LINE_FEED);
+                }
+                else if (!isspace(c))
+                {
+                    ungetc(c, src);
+                    tokenScanned = true;
+                }
                 break;
             }
             default: break;
