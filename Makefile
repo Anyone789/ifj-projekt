@@ -1,15 +1,21 @@
-# Makefile - test makefile for scanner
+TARGET = program
 
+# Kompilátor a príznaky kompilátora
 CC = gcc
-CFLAGS = -g -std=c11 -pedantic -Wall -Wextra
-DEPS = scanner.h dstring.h
-OBJ = scannerTestbench.o scanner.o dstring.o 
+CFLAGS = -Wall -Wextra -std=c11
 
-%.o: %.c $(DEPS)
-	$(CC) $(CFLAGS) -c -o $@ $< 
+# Zoznam zdrojových súborov a objektových súborov
+SRC = stack.c scanner.c dstring.c expression.c  symtable.c generator.c parser.c
+OBJ = $(SRC:.c=.o)
 
-testBench: $(OBJ)
-	$(CC) $(CFLAGS) -o $@ $^ 
+# Výchozí cieľ - preklad kompletného programu
+$(TARGET): $(OBJ)
+	$(CC) $(CFLAGS) -o $(TARGET) $(OBJ)
 
+# Pravidlo pre preklad každého .c súboru na .o
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
+# Clean-up rule to remove object files and the target
 clean:
-	rm $(OBJ)
+	rm -f $(OBJ) $(TARGET)

@@ -1,5 +1,0 @@
-** this file holds all links to resources used during project completion **
-
-syntax: resource description : link
-
-grammar diagram : https://www.youtube.com/watch?v=eF9qWbuQLuw

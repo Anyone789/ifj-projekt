@@ -33,7 +33,7 @@ int main(int argc, char **argv)
     else
     {
         FILE *src;
-        
+
         if ((src = fopen(argv[1], "r")) == NULL)
         {
             fprintf(stderr, "The file cannot be opened.");

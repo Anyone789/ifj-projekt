@@ -798,4 +798,3 @@ TOKEN *getToken()
 	
     return token;
 }
-
