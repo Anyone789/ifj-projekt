@@ -1,3 +1,7 @@
+// generator.c
+// Interface for the generator module
+// Author(s): Samuel Kundrat, Marián Šuľa
+// Last Edit: 1.12.2024
 #ifndef GENERATOR_H
 #define GENERATOR_H
 

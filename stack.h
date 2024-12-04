@@ -1,5 +1,5 @@
 // stack.h
-// Interface for stack
+// Interface for the stack module
 // Author(s):  Marián Šuľa
 // Last Edit: 15.11.2024
 #ifndef STACK_H

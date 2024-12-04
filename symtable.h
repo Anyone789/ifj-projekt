@@ -1,5 +1,5 @@
 // symtable.h
-// Interface for symbol table module
+// Interface for the symbol table module
 // Author(s):  Marián Šuľa
 // Last Edit: 20.11.2024
 

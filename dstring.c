@@ -3,13 +3,7 @@
 // Author(s): Václav Bergman, Tomáš Hrbáč
 // Last Edited: 03.12.2024
 
-#include <string.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include <stdbool.h>
-#include <errno.h>
-#include <limits.h>
-#include <math.h>
+
 #include "dstring.h"
 #include "errorCodes.h"
 

@@ -1,3 +1,7 @@
+// generator.c
+// Generator module
+// Author(s): Samuel Kundrat, Marián Šuľa
+// Last Edit: 1.12.2024
 #include "generator.h"
 
 void generateVariables(DSTRING *name)

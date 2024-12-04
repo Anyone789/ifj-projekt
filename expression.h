@@ -1,5 +1,5 @@
 // expression.h
-// Interface for expression
+// Interface for the expression module
 // Author(s):  Marián Šuľa
 // Last Edit: 1.12.2024
 #ifndef EXPRESSION_H

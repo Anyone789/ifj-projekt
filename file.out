@@ -253,54 +253,33 @@ CREATEFRAME
 PUSHFRAME
 JUMP GENVARS1
 LABEL FUNCTIONSTART1
-PUSHS string@Zadejte\032cislo\032pro\032vypocet\032faktorialu\010
+PUSHS string@Toto\032je\032text\032v\032programu\032jazyka\032IFJ24
+CALL string
+POPS LF@str1
+PUSHS string@,\032ktery\032jeste\032trochu\032obohatime
+CALL string
+POPS LF@str2
+PUSHS LF@str1
+PUSHS LF@str2
+CALL concat
+POPS LF@str2
+PUSHS LF@str1
 CALL write
-CALL readi32
-POPS LF@a
-PUSHS LF@a
-POPS GF@nullValue
-TYPE GF@result GF@nullValue
-JUMPIFEQ else1 GF@result string@nil
-JUMPIFEQ ifContinue1 GF@result string@bool
-JUMP inIf1
-LABEL ifContinue1
-PUSHS GF@nullValue
-PUSHS bool@true
-JUMPIFNEQS else1
-LABEL inIf1
-PUSHS LF@a
-POPS LF@val
-PUSHS LF@val
-PUSHS int@0
-LTS
-POPS GF@nullValue
-TYPE GF@result GF@nullValue
-JUMPIFEQ else2 GF@result string@nil
-JUMPIFEQ ifContinue2 GF@result string@bool
-JUMP inIf2
-LABEL ifContinue2
-PUSHS GF@nullValue
-PUSHS bool@true
-JUMPIFNEQS else2
-LABEL inIf2
-PUSHS string@Faktorial\032
+PUSHS string@\010
 CALL write
-PUSHS LF@val
+PUSHS LF@str2
 CALL write
-PUSHS string@\032nelze\032spocitat\010
+PUSHS string@\010
 CALL write
-JUMP elseEnd2
-LABEL else2
-PUSHS LF@val
-CALL i2f
-POPS LF@d
-PUSHS float@0x1p+0
-POPS LF@vysl
+PUSHS string@Zadejte\032serazenou\032posloupnost\032malych\032pismen\032a-h:\010
+CALL write
+CALL readstr
+POPS LF@newInput
+PUSHS string@
+CALL string
+POPS LF@all
 LABEL whileBegin1
-PUSHS LF@d
-PUSHS int@0
-CALL i2f
-GTS
+PUSHS LF@newInput
 POPS GF@nullValue
 TYPE GF@result GF@nullValue
 JUMPIFEQ whileEnd1 GF@result string@nil
@@ -311,41 +290,55 @@ PUSHS GF@nullValue
 PUSHS bool@false
 JUMPIFEQS whileEnd1
 LABEL inWhile1
-PUSHS LF@vysl
-PUSHS LF@d
-MULS
-POPS LF@vysl
-PUSHS LF@d
-PUSHS float@0x1p+0
-SUBS
-POPS LF@d
-JUMP whileBegin1
-LABEL whileEnd1
-PUSHS string@Vysledek:\032
+PUSHS LF@newInput
+POPS LF@inpOK
+PUSHS string@abcdefgh
+CALL string
+POPS LF@abcdefgh
+PUSHS LF@inpOK
+PUSHS LF@abcdefgh
+CALL strcmp
+POPS LF@strcmpResult
+PUSHS LF@strcmpResult
+PUSHS int@0
+EQS
+POPS GF@nullValue
+TYPE GF@result GF@nullValue
+JUMPIFEQ else1 GF@result string@nil
+JUMPIFEQ ifContinue1 GF@result string@bool
+JUMP inIf1
+LABEL ifContinue1
+PUSHS GF@nullValue
+PUSHS bool@true
+JUMPIFNEQS else1
+LABEL inIf1
+PUSHS string@Spravne\032zadano!\010
 CALL write
-PUSHS LF@vysl
+PUSHS LF@all
 CALL write
-PUSHS string@\032=\032
-CALL write
-PUSHS LF@vysl
-CALL f2i
-POPS LF@vysl_i32
-PUSHS LF@vysl_i32
-CALL write
-PUSHS string@\010
-CALL write
-LABEL elseEnd2
+PUSHS nil@nil
+POPS LF@newInput
 JUMP elseEnd1
 LABEL else1
-PUSHS string@Faktorial\032pro\032null\032nelze\032spocitat\010
+PUSHS string@Spatne\032zadana\032posloupnost,\032zkuste\032znovu:\010
 CALL write
+PUSHS LF@all
+PUSHS LF@inpOK
+CALL concat
+POPS LF@all
+CALL readstr
+POPS LF@newInput
 LABEL elseEnd1
+JUMP whileBegin1
+LABEL whileEnd1
 POPFRAME
 EXIT int@0
 LABEL GENVARS1
-DEFVAR LF@d
-DEFVAR LF@a
-DEFVAR LF@vysl
-DEFVAR LF@val
-DEFVAR LF@vysl_i32
+DEFVAR LF@inpOK
+DEFVAR LF@all
+DEFVAR LF@abcdefgh
+DEFVAR LF@str1
+DEFVAR LF@newInput
+DEFVAR LF@str2
+DEFVAR LF@strcmpResult
 JUMP FUNCTIONSTART1
