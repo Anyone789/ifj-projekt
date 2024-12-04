@@ -1,11 +1,15 @@
 // dstring.c
 // Module for manipulating with strings dynamically
 // Author(s): Václav Bergman, Tomáš Hrbáč
-// Last Edited: 30.11.2024
+// Last Edited: 03.12.2024
 
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <stdbool.h>
+#include <errno.h>
+#include <limits.h>
+#include <math.h>
 #include "dstring.h"
 #include "errorCodes.h"
 
@@ -102,14 +106,42 @@ int dStringGetLength(DSTRING *dStr)
    return dStr->length;
 }
 
-int dStringToInt(DSTRING *dStr)
+bool dStringToInt(DSTRING *dStr, int *i)
 {
-    return atoi(dStr->str);
+    errno = 0;
+    // Converting DSTRING contents to long
+    long l = strtol(dStr->str, NULL, 10);
+
+    // Checking if number is in range
+    if (\
+    l > INT_MAX || (errno == ERANGE && l == LONG_MAX) ||\
+    l < INT_MIN || (errno == ERANGE && l == LONG_MIN)\
+    )
+    {
+        return false;
+    }
+
+    *i = l;  
+    
+    return true;
 }
 
-double dStringToDouble(DSTRING *dStr)
+bool dStringToDouble(DSTRING *dStr, double *d)
 {
-    return atof(dStr->str);
+    errno = 0;
+    // Converting DSTRING contents to long
+    (*d) = strtod(dStr->str, NULL);
+
+    // Checking if number is in range
+    if (\
+    (((*d) == HUGE_VAL || -(*d) == HUGE_VAL) && errno == ERANGE) ||\
+    ((*d) == 0 && errno == ERANGE)\
+    )
+    {
+        return false;
+    }
+
+    return true;
 }
 
 void dStringAddIntIFJcode24Format(DSTRING *dStr, int i)

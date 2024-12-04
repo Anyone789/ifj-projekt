@@ -1,7 +1,7 @@
 // dstring.h
 // Module for manipulating with strings dynamically
 // Author(s): Václav Bergman, Tomáš Hrbáč
-// Last Edited: 30.11.2024
+// Last Edited: 03.12.2024
 
 #ifndef DSTRING_H
 #define DSTRING_H
@@ -91,16 +91,20 @@ int dStringGetLength(DSTRING *dStr);
 /*
     @brief Returns contents of a DSTRING converted to int
     @param *dStr pointer to a DSTRING
-    @return int
+    @param *i pointer to an int
+    @return true on succes\
+    @return false on failure
 */
-int dStringToInt(DSTRING *dStr);
+bool dStringToInt(DSTRING *dStr, int *i);
 
 /*
     @brief Returns contents of a DSTRING converted to double
     @param *dStr pointer to a DSTRING
-    @return double
+    @param *d pointer to a double
+    @return true on succes\
+    @return false on failure
 */
-double dStringToDouble(DSTRING *dStr);
+bool dStringToDouble(DSTRING *dStr, double *d);
 
 /*
     @brief Appends integer to DSTRING in IFJcode24 format \xyz, where xyz is decimal number 000-255

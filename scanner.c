@@ -1,6 +1,6 @@
 // Module for lexical analyser
 // Author(s): Tomáš Hrbáč, Václav Bergman
-// Last Edit: 30.11.2024
+// Last Edit: 04.12.2024
 
 #include <stdbool.h>
 #include <stdio.h>
@@ -212,7 +212,14 @@ TOKEN *getToken()
                 }
                 else if (c == '\"')
                 {
-                    state = STRING_START;
+                    state = STRING;
+                    token->type = T_STR;
+                    token->current_attribute = DSTR;
+                    token->attribute.dStr = dStringCreate();
+                }
+                else if (c == '\\')
+                {
+                    state = MULTILINE_STRING_START;
                     token->type = T_STR;
                     token->current_attribute = DSTR;
                     token->attribute.dStr = dStringCreate();
@@ -458,11 +465,20 @@ TOKEN *getToken()
                 }
                 else
                 {
-                    int dStrInt = dStringToInt(token->attribute.dStr);
-                    dStringDestroy(token->attribute.dStr);
-                    token->current_attribute = I;
-                    token->attribute.i = dStrInt;
-                    ungetc(c, src);
+                    int dStrInt;
+                    if(dStringToInt(token->attribute.dStr, &dStrInt))
+                    {
+                        dStringDestroy(token->attribute.dStr);
+                        token->current_attribute = I;
+                        token->attribute.i = dStrInt;
+                        ungetc(c, src);
+                    }
+                    else
+                    {
+                        dStringDestroy(token->attribute.dStr);
+                        token->type = T_ERROR;
+                    }
+
                     tokenScanned = true;
                 }
 
@@ -497,11 +513,20 @@ TOKEN *getToken()
                 }
                 else
                 {
-                    double dStrDouble = dStringToDouble(token->attribute.dStr);
-                    dStringDestroy(token->attribute.dStr);
-                    token->current_attribute = F;
-                    token->attribute.f = dStrDouble;
-                    ungetc(c, src);
+                    double dStrDouble;
+                    if(dStringToDouble(token->attribute.dStr, &dStrDouble))
+                    {
+                        dStringDestroy(token->attribute.dStr);
+                        token->current_attribute = F;
+                        token->attribute.f = dStrDouble;
+                        ungetc(c, src);
+                    }
+                    else
+                    {
+                        dStringDestroy(token->attribute.dStr);
+                        token->type = T_ERROR;
+                    }
+
                     tokenScanned = true;
                 }
 
@@ -552,17 +577,26 @@ TOKEN *getToken()
                 }
                 else
                 {
-                    double dStrDouble = dStringToDouble(token->attribute.dStr);
-                    dStringDestroy(token->attribute.dStr);
-                    token->current_attribute = F;
-                    token->attribute.f = dStrDouble;
-                    ungetc(c, src);
+                    double dStrDouble;
+                    if(dStringToDouble(token->attribute.dStr, &dStrDouble))
+                    {
+                        dStringDestroy(token->attribute.dStr);
+                        token->current_attribute = F;
+                        token->attribute.f = dStrDouble;
+                        ungetc(c, src);
+                    }
+                    else
+                    {
+                        dStringDestroy(token->attribute.dStr);
+                        token->type = T_ERROR;
+                    }
+
                     tokenScanned = true;
                 }
 
                 break;
             }
-            case STRING_START:
+            case STRING:
             {
                 // Escape sequences, hash symbol and control characters (0 - 32) get converted
                 // to \XXX format
@@ -596,7 +630,7 @@ TOKEN *getToken()
             }
             case ESCAPE_SEQ:
             {
-                state = STRING_START;
+                state = STRING;
                 
                 // If c is specified in hex format
                 if (c == 'x')
@@ -651,7 +685,7 @@ TOKEN *getToken()
                     // escape sequence was modified -> c contains hex value at position 16^0
                     else
                     {
-                        state = STRING_START;
+                        state = STRING;
                         escapeSequence += c;
                         
                         // Returning converted escape sequence to source file
@@ -681,7 +715,7 @@ TOKEN *getToken()
                     // escape sequence was modified -> c contains hex value at position 16^0
                     else
                     {
-                        state = STRING_START;
+                        state = STRING;
                         escapeSequence += c;
                         // returning converted escape sequence to source file
                         ungetc(escapeSequence, src);
@@ -707,9 +741,61 @@ TOKEN *getToken()
 
                 break;
             }
+            case MULTILINE_STRING_START:
+            {
+                if (c == '\\')
+                {
+                    state = MULTILINE_STRING_MID;
+                }
+                else
+                {
+                    token->type = T_ERROR;
+                    token->current_attribute = NONE;
+                    dStringDestroy(token->attribute.dStr);
+                    tokenScanned = true;
+                }
+
+                break;
+            }
+            case MULTILINE_STRING_MID:
+            {
+                if (c == '\n')
+                {
+                    state = MULTILINE_STRING_END;
+                }
+                else if ((c >= 0 && c <= 32) || c == '#' || c == '\\' || c == '\"')
+                {
+                    if (c == '\"')
+                    {
+                        dStringAddIntIFJcode24Format(token->attribute.dStr, '\\');
+                    }
+                    dStringAddIntIFJcode24Format(token->attribute.dStr, c);
+                }
+                else
+                {
+                    dStringAddChar(token->attribute.dStr, c);
+                }
+
+                break;
+            }
+            case MULTILINE_STRING_END:
+            {
+                if (c == '\\')
+                {
+                    state = MULTILINE_STRING_START;
+                    dStringAddIntIFJcode24Format(token->attribute.dStr, LINE_FEED);
+                }
+                else if (!isspace(c))
+                {
+                    ungetc(c, src);
+                    tokenScanned = true;
+                }
+                break;
+            }
             default: break;
         }
     }
 	
     return token;
 }
+
